@@ -1,67 +1,42 @@
 package main;
 
-import main.geometry.Line;
-import main.geometry.Point;
-import main.geometry.Point3D;
-
-import java.util.List;
-
-import org.kabeja.parser.ParseException;
-
-import io.DXFReader;
+import graph.Face;
+import graph.Point;
+import graph.Vector;
 
 public class Main {
 
-	private final static int W = 10;
-	
 	public static void main(String[] args) {
-		try {
-			List<Line> list = DXFReader.getAutocadFile("C:/Users/Peter/Documents/Coding/Bell/BeLL/res/Haus_Johann.dxf");
-			for (int i = 0; i < list.size(); i++) {
-				System.out.println(list.get(i).get()[0] + ", " + list.get(i).get()[0][1] + ", " + list.get(i).get()[1][0] + ", " + list.get(i).get()[1][1]);
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@SuppressWarnings("unused")
-	private void script() {
-		Point[] gr = { new Point(), new Point(0, 100), new Point(200, 100), new Point(200, 0) };
-
-		Point3D[] outerHedron = new Point3D[gr.length * 2];
-		for (int i = 0; i < gr.length; i++) {
-			outerHedron[i] = new Point3D(gr[i].getX(), gr[i].getY(), 0);
-		}
-		for (int i = 0; i < gr.length; i++) {
-			outerHedron[i + gr.length] = new Point3D(gr[i].getX(), gr[i].getY(), 100);
-		}
 		
-		Point3D[] innerHedron = new Point3D[gr.length * 2];
-		for (int i = 0; i < gr.length; i++) {
-			innerHedron[i] = new Point3D((gr[i].getX() == 0 ? W : gr[i].getX() - W), (gr[i].getY() == 0 ? W : gr[i].getY() - W), W);
+		Point A = new Point(0, 0);
+		Point B = new Point(1, 0);
+		Point C = new Point(1, 1);
+		Point D = new Point(0, 1);
+		Point E = new Point(-1, 0);
+		Point F = new Point(-1, 1);
+		
+		Vector a = new Vector(A, B);
+		Vector b = new Vector(B, C);
+		Vector c = new Vector(C, D);
+		Vector d = new Vector(D, A);
+		Vector e = new Vector(A, E);
+		Vector f = new Vector(E, F);
+		Vector g = new Vector(F, D);
+		
+		Face face = new Face();
+		face.getEdges().add(a);
+		face.getEdges().add(b);
+		face.getEdges().add(c);
+		face.getEdges().add(d);
+		face.getEdges().add(e);
+		face.getEdges().add(f);
+		face.getEdges().add(g);
+		
+		face.markQuantities();
+		
+		for (int i = 0; i < face.getPoints().size(); i++) {
+			System.out.println(face.getPoints().get(i) + " | " + face.getQuan().get(i));
 		}
-		for (int i = 0; i < gr.length; i++) {
-			innerHedron[i + gr.length] = new Point3D((gr[i].getX() == 0 ? W : gr[i].getX() - W), (gr[i].getY() == 0 ? W : gr[i].getY() - W), 100);
-		}
-
-		String cnctd = "outerCube = [";
-		for (Point3D p : outerHedron) {
-			if (p != null) {
-				cnctd += p.toString() + ", ";
-			}
-		}
-		cnctd = cnctd.substring(0, cnctd.length() - 2);
-		cnctd += "];\ninnerCube = [";
-		for (Point3D p : innerHedron) {
-			if (p != null) {
-				cnctd += p.toString() + ", ";
-			}
-		}
-		cnctd = cnctd.substring(0, cnctd.length() - 2);
-		cnctd += "];\n\ndifference(){\n\tpolyhedron(outerCube,Faces);\n\tpolyhedron(innerCube,Faces);\n}";
-
-		System.out.println(cnctd);
 	}
 
 }
