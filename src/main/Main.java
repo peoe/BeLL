@@ -1,5 +1,7 @@
 package main;
 
+import java.util.ArrayList;
+
 import graph.Face;
 import graph.Point;
 import graph.Vector;
@@ -34,8 +36,14 @@ public class Main {
 		
 		face.markQuantities();
 		
-		for (int i = 0; i < face.getPoints().size(); i++) {
-			System.out.println(face.getPoints().get(i) + " | " + face.getQuan().get(i));
+//		for (int i = 0; i < face.getPoints().size(); i++) {
+//			System.out.println(face.getPoints().get(i) + " | " + face.getQuan().get(i));
+//		}
+		
+		ArrayList<Double> ang = Face.anglesBetweenVectors(face.getVectorsByPoint(D));
+		
+		for (Double dou : ang) {
+			System.out.println(">" + dou.toString());
 		}
 	}
 

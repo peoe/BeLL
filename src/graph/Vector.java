@@ -18,11 +18,11 @@ public class Vector {
 	}
 	
 	public double getDifferenceX() {
-		return getP1().getX() - getP2().getX();
+		return getP2().getX() - getP1().getX();
 	}
 	
 	public double getDifferenceY() {
-		return getP1().getY() - getP2().getY();
+		return getP2().getY() - getP1().getY();
 	}
 	
 	public static Vector add(Vector v1, Vector v2) {
