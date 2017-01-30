@@ -41,6 +41,20 @@ public class Vector {
 	public boolean contains(Point p) {
 		return (getP1() == p || getP2() == p ? true : false);
 	}
+	
+	public Vector getComplementaryVector () {
+		return new Vector(this.getP2(), this.getP1());
+	}
+	
+	public boolean equals(Vector v) {
+		boolean result = false;
+		
+		if (v.getP1() == getP1() && v.getP2() == getP2()) {
+			result = true;
+		}
+		
+		return result;
+	}
 
 	public Point getP1() {
 		return p1;

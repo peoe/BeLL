@@ -34,16 +34,12 @@ public class Main {
 		face.getEdges().add(f);
 		face.getEdges().add(g);
 		
-		face.markQuantities();
+		ArrayList<Face> faces = face.decomposeFace();
 		
-//		for (int i = 0; i < face.getPoints().size(); i++) {
-//			System.out.println(face.getPoints().get(i) + " | " + face.getQuan().get(i));
-//		}
+//		System.out.println(Face.anglesOfVectors(face.getVectorsPointingAway(D)));
 		
-		ArrayList<Double> ang = Face.anglesBetweenVectors(face.getVectorsByPoint(D));
-		
-		for (Double dou : ang) {
-			System.out.println(">" + dou.toString());
+		for (int i = 0; i < faces.size(); i++) {
+			System.out.println(faces.get(i).getEdges().toString());
 		}
 	}
 
