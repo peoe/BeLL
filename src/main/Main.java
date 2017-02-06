@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import graph.Face;
 import graph.Point;
@@ -9,7 +10,6 @@ import graph.Vector;
 public class Main {
 
 	public static void main(String[] args) {
-		
 		Point A = new Point(0, 0);
 		Point B = new Point(1, 0);
 		Point C = new Point(1, 1);
@@ -42,9 +42,10 @@ public class Main {
 		face.getEdges().add(j);
 
 		ArrayList<Face> faces = face.decomposeFace();
-		System.out.println(faces.get(0).getEdges().get(0));
 		
-		ArrayList<Point> p = faces.get(0).getPoints();
+//		for (Face fc : faces) {
+//			System.out.println(fc);
+//		}
 	}
 
 }

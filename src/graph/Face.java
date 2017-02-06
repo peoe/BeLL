@@ -42,40 +42,6 @@ public class Face {
 	}
 
 	/**
-	 * Returns an ArrayList of all vectors from the given ArrayList.
-	 * 
-	 * @param vs
-	 *            ArrayList of vectors
-	 * @return ArrayList of angles, corresponding to the vector ArrayList
-	 */
-//	public static ArrayList<Double> anglesOfVectors(ArrayList<Vector> vs) {
-//		ArrayList<Double> angles = new ArrayList<>();
-//
-//		Point p = getCommonPoint(vs);
-//
-//		for (Vector v : vs) {
-//			double ang = 0.0;
-////			if (v.getP1() == p) {
-////				ang = Math.toDegrees(Math.atan2(p.getY() - v.getP2().getY(), p.getX() - v.getP2().getX()));
-////			} else {
-////				ang = Math.toDegrees(Math.atan2(p.getY() - v.getP1().getY(), p.getX() - v.getP1().getX()));
-////			}
-//			ang = Math.toDegrees(Math.atan2(v.getP2().getY()-v.getP1().getY(), v.getP2().getX()-v.getP1().getX()));
-//
-////			if (ang == 0.0) {
-////				angles.add(180.0);
-////			} else if (ang == 180.0) {
-////				angles.add(0.0);
-////			} else {
-//			angles.add(ang);
-////			}
-//		}
-//
-//		return angles;
-//	}
-
-
-	/**
 	 * Returns the Point which all vectors in the ArrayList have in common.
 	 * 
 	 * @param vs
@@ -148,8 +114,8 @@ public class Face {
 	}
 
 	/**
-	 * Returns the vector which is closest to the original vector counter
-	 * anti clockwise.
+	 * Returns the vector which is closest to the original vector counter anti
+	 * clockwise.
 	 * 
 	 * @param v
 	 *            the vector from which the closest vector is to be determined
@@ -158,7 +124,7 @@ public class Face {
 	public Vector getClosestVector(Vector v) {
 		ArrayList<Vector> vs = getVectorsPointingAway(v.getP2());
 		ArrayList<Double> doubles = new ArrayList<>();
-		for (Vector vec : vs){
+		for (Vector vec : vs) {
 			doubles.add(v.angleTo(vec));
 		}
 		return vs.get(doubles.indexOf(Collections.min(doubles)));
@@ -179,7 +145,6 @@ public class Face {
 		ArrayList<Vector> vs = new ArrayList<>();
 
 		while (getEdges().size() != 0) {
-			System.out.println(getEdges().size());
 			if (vs.size() != 0) {
 				vs.clear();
 			}
@@ -199,35 +164,51 @@ public class Face {
 			}
 			removeVectors(vs);
 			faces.add(f);
+			
 			System.out.println("added " + f);
 		}
 
-		System.out.println("returning");
+		System.out.println("decomposed, deleting inf. face");
+
+		ArrayList<Double> max = new ArrayList<>();
+		
+		for (int i = 0; i < faces.size(); i++) {
+			max.add(faces.get(i).getArea());
+		}
+		
+		// Inhalt des zu entfernenden Elements
+		Double tbr = Collections.max(max);
+		
+		faces.remove(max.indexOf(tbr));
+		
+		System.out.println("removed index: " + max.indexOf(tbr));
+		
 		return faces;
 	}
 
 	/**
 	 * Removes all vectors given in the ArrayList from edges of the Face.
 	 * 
-	 * @param vs vectors to be removed from edges
+	 * @param vs
+	 *            vectors to be removed from edges
 	 */
 	private void removeVectors(ArrayList<Vector> vs) {
 		for (Vector v : vs) {
 			getEdges().remove(v);
 		}
 	}
-	
-	public String toString(){
+
+	public String toString() {
 		String s = "[";
-		for (int i=0;i<getEdges().size();i++){
+		for (int i = 0; i < getEdges().size(); i++) {
 			s = s.concat(getEdges().get(i).toString());
-			if (i!=getEdges().size()-1){
-				s=s.concat(",");
+			if (i != getEdges().size() - 1) {
+				s = s.concat(",");
 			}
 		}
 		return s.concat("]");
 	}
-	
+
 	/**
 	 * Function that returns all points a face contains
 	 * 
@@ -235,48 +216,52 @@ public class Face {
 	 */
 	public ArrayList<Point> getPoints() {
 		ArrayList<Point> p = new ArrayList<>();
-		
+
 		for (int i = 0; i < getEdges().size(); i++) {
 			p.add(getEdges().get(i).getP1());
 			p.add(getEdges().get(i).getP2());
 		}
-		
-		//System.out.println("Duplicate: " + p);
-		
+
+		// System.out.println("Duplicate: " + p);
+
 		// p.clone anstatt p, da sonst als Pointer verwendet wird
+		@SuppressWarnings("unchecked")
 		ArrayList<Point> pts = (ArrayList<Point>) p.clone();
-		
+
 		// Entfernen von Duplikaten aus p
-	    for (Point pt : pts) {
-	    	if (p.indexOf(pt) != p.lastIndexOf(pt)) {
-	    		p.remove(p.lastIndexOf(pt));
-	    	}
-	    }
-	    
-	    //System.out.println("Distinct: " + p);
-		
+		for (Point pt : pts) {
+			if (p.indexOf(pt) != p.lastIndexOf(pt)) {
+				p.remove(p.lastIndexOf(pt));
+			}
+		}
+
+		// System.out.println("Distinct: " + p);
+
 		return p;
 	}
-	
+
 	/**
-	 * Function that returns the area of a face using shoelace
-	 * formula (Gausssche Trapezformel).
+	 * Function that returns the area of a face using shoelace formula
+	 * (Gausssche Trapezformel).
 	 * 
 	 * @return area of specific face
 	 */
 	public Double getArea() {
 		ArrayList<Point> points = getPoints();
-		
-		for (int i = 0; i < points.size(); i++) {
-			// bei leeren Elementen abbrechen
-			if (points.get(0) == null) {
-				return 0.0;
-			}
-			
-			
+
+		Double area = 0.0;
+
+		// bei leeren Elementen oder einem zu kleinen Face abbrechen
+		if (points.get(0) == null || points.size() < 3) {
+			return 0.0;
 		}
-		
-		return null;
+
+		for (int i = 0; i < points.size(); i++) {
+			area += (points.get(i).getY() + points.get((i + 1) % points.size()).getY())
+					* (points.get(i).getX() - points.get((i + 1) % points.size()).getX());
+		}
+
+		return Math.abs(area / 2.0);
 	}
 
 }
