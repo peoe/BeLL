@@ -1,10 +1,14 @@
 package main;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import graph.Face;
 import graph.Point;
 import graph.Vector;
+import rend.ScadObject;
+import rend.objects.*;
 
 public class Main {
 
@@ -49,6 +53,17 @@ public class Main {
 //		for (int i = 0; i < faces.size(); i++) {
 //			System.out.println(faces.get(i).getEdges().toString());
 //		}
+		Cylinder test = new Cylinder(5,10,10);
+		Cube test2 = new Cube(10,5,10);
+		ArrayList<ScadObject> t = new ArrayList<>();
+		t.add(test);
+		t.add(test2);
+		t.add(test);
+		t.add(test2);
+		Difference tr1test = new Difference(t);
+//		System.out.println(tr1test.getObject().printcommand());
+		System.out.println(tr1test.printcommand());
+		
 	}
 
 }
