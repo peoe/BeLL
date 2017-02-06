@@ -1,11 +1,12 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import graph.Face;
 import graph.Point;
 import graph.Vector;
-import rend.ScadObject;
+import rend.*;
 import rend.objects.*;
 
 public class Main {
@@ -44,14 +45,22 @@ public class Main {
 
 		ArrayList<Face> faces = face.decomposeFace();
 		
-		Cube t1 = new Cube(10, 11, 11);
+		Cube t1 = new Cube(10, 11, 11, true);
 		Cube t2 = new Cube(12, 12, 12);
 		Translate tr1 = new Translate(t1, 1, 1, 1);
 		ArrayList<ScadObject> in1 = new ArrayList<>();
 		in1.add(t2);
 		in1.add(tr1);
 		Difference in = new Difference(in1);
-		System.out.println(in.printcommand());
+		Rotate r1 = new Rotate(t1, 45, 0, 0, 1);
+		System.out.println(r1.printcommand());
+		System.out.println(in.printcommand()); 
+		System.out.println(j);
+		
+		System.out.println((new Wall(j.multiply(100))).printcommand());
+		
+		Corner test = new Corner(A, new ArrayList<>(Arrays.asList(B,D,E)), 10);
+		System.out.println(test.printcommand());
 		
 		
 //		for (Face fc : faces) {
