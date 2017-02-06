@@ -49,7 +49,7 @@ public class Pole {
 		
 		String finalstring = "";
 		finalstring=finalstring.concat("//Generated pole point " + getP());
-		finalstring=finalstring.concat(String.format(addcyl, getHeight(),(double)radius));
+	//	finalstring=finalstring.concat(String.format(addcyl, getHeight(),(double)radius));
 		
 		
 		return finalstring;
