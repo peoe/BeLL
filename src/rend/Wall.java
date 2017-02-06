@@ -38,10 +38,13 @@ public class Wall implements ScadObject {
 		diftemp.add(r1MinusTile);
 		diftemp.add(tr2MinusTile);
 		Difference finalWall = new Difference(diftemp);
+		Translate result = new Translate(finalWall, (new Vector(w.getP1())), 0);
+		
+		System.out.println("\n" + w + "\n");
 		
 		
 //		return Unionwalltemp.printcommand();
-		return finalWall.printcommand();
+		return result.printcommand();
 	}
 
 }

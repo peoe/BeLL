@@ -20,6 +20,9 @@ public class Main {
 		Point F = new Point(-1, 1);
 		Point G = new Point(0,-1);
 		
+		Point H = new Point(-100,0);
+		Point I = new Point(0,100);
+		
 		Vector a = new Vector(A, B);
 		Vector b = new Vector(B, C);
 		Vector c = new Vector(C, D);
@@ -56,11 +59,11 @@ public class Main {
 		System.out.println(r1.printcommand());
 		System.out.println(in.printcommand()); 
 		System.out.println(j);
+		Wall w = new Wall(new Vector(H, I));
+		System.out.println(w.printcommand());
 		
-		System.out.println((new Wall(j.multiply(100))).printcommand());
-		
-		Corner test = new Corner(A, new ArrayList<>(Arrays.asList(B,D,E)), 10);
-		System.out.println(test.printcommand());
+//		Corner test = new Corner(A, new ArrayList<>(Arrays.asList(B,D,E)), 10);
+//		System.out.println(test.printcommand());
 		
 		
 //		for (Face fc : faces) {
