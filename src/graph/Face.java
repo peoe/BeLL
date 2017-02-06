@@ -2,7 +2,6 @@ package graph;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.stream.Collectors;
 
 public class Face {
 
@@ -229,6 +228,11 @@ public class Face {
 		return s.concat("]");
 	}
 	
+	/**
+	 * Function that returns all points a face contains
+	 * 
+	 * @return all points contained in a face
+	 */
 	public ArrayList<Point> getPoints() {
 		ArrayList<Point> p = new ArrayList<>();
 		
@@ -237,27 +241,39 @@ public class Face {
 			p.add(getEdges().get(i).getP2());
 		}
 		
-		System.out.println("Duplicate: " + p);
+		//System.out.println("Duplicate: " + p);
 		
+		// p.clone anstatt p, da sonst als Pointer verwendet wird
 		ArrayList<Point> pts = (ArrayList<Point>) p.clone();
+		
+		// Entfernen von Duplikaten aus p
 	    for (Point pt : pts) {
 	    	if (p.indexOf(pt) != p.lastIndexOf(pt)) {
 	    		p.remove(p.lastIndexOf(pt));
 	    	}
 	    }
 	    
-	    System.out.println("Distinct: " + p);
+	    //System.out.println("Distinct: " + p);
 		
 		return p;
 	}
 	
+	/**
+	 * Function that returns the area of a face using shoelace
+	 * formula (Gausssche Trapezformel).
+	 * 
+	 * @return area of specific face
+	 */
 	public Double getArea() {
 		ArrayList<Point> points = getPoints();
 		
 		for (int i = 0; i < points.size(); i++) {
+			// bei leeren Elementen abbrechen
 			if (points.get(0) == null) {
 				return 0.0;
 			}
+			
+			
 		}
 		
 		return null;
