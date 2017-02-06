@@ -1,22 +1,17 @@
 package rend.objects;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import rend.ScadObject;
 
-public class ScadGroup implements ScadObject{
+public class Intersection implements ScadObject{
 	
 	private ArrayList<ScadObject> objects;
-
-	public ScadGroup(ArrayList<ScadObject> objects) {
+	
+	public Intersection(ArrayList<ScadObject> objects) {
 		super();
 		this.objects = objects;
-	}
-	
-	public ScadGroup(ScadObject object) {
-		super();
-		this.objects =new ArrayList<>();
-		this.objects.add(object);
 	}
 
 	public ArrayList<ScadObject> getObjects() {
@@ -26,15 +21,17 @@ public class ScadGroup implements ScadObject{
 	public void setObjects(ArrayList<ScadObject> objects) {
 		this.objects = objects;
 	}
-	
 
 	@Override
 	public String printcommand() {
-		String s = "";
+		String objectsprint = "";
 		for (ScadObject o : objects){
-		s = s.concat(o.printcommand());
+			objectsprint =  objectsprint.concat("\t" + o.printcommand());
 		}
+		String s = String.format(Locale.UK, intersection, objectsprint );
 		return s;
 	}
+	
+	
 
 }

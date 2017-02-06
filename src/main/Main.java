@@ -7,6 +7,7 @@ import java.util.Arrays;
 import graph.Face;
 import graph.Point;
 import graph.Vector;
+import rend.ScadObject;
 import rend.objects.*;
 
 public class Main {
@@ -54,8 +55,12 @@ public class Main {
 //		}
 		Cylinder test = new Cylinder(5,10,10);
 		Cube test2 = new Cube(10,5,10);
-		ScadGroup t = new ScadGroup(ArrayList<ScadObject>(test,test2));
-		Translate tr1test = new Translate(test, 1, 20, 30);
+		ArrayList<ScadObject> t = new ArrayList<>();
+		t.add(test);
+		t.add(test2);
+		t.add(test);
+		t.add(test2);
+		Difference tr1test = new Difference(t);
 //		System.out.println(tr1test.getObject().printcommand());
 		System.out.println(tr1test.printcommand());
 		
