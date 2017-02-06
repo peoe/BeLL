@@ -55,6 +55,27 @@ public class Vector {
 		
 		return result;
 	}
+	/**
+	 * 
+	 * @param v2 
+	 * Vector starting at end point of Vector which called the function
+	 * @return
+	 * angle between the two vector 
+	 * positive value >=0 and <360
+	 */
+	public double angleTo(Vector v2){
+		if (this.p2!=v2.p1){
+			System.out.println("Error at angleto function: Condition not fulfilled");
+			return 1337.0;
+		}
+		Vector v1 = this.getComplementaryVector();
+		double angle = Math.atan2(v2.getDifferenceY(), v2.getDifferenceX())-Math.atan2(v1.getDifferenceY(), v1.getDifferenceX());
+		if(angle<=0){
+			angle=angle+2*Math.PI;
+		}
+		return angle;
+	}
+	
 
 	public Point getP1() {
 		return p1;

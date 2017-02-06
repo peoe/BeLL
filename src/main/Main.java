@@ -16,6 +16,7 @@ public class Main {
 		Point D = new Point(0, 1);
 		Point E = new Point(-1, 0);
 		Point F = new Point(-1, 1);
+		Point G = new Point(0,-1);
 		
 		Vector a = new Vector(A, B);
 		Vector b = new Vector(B, C);
@@ -24,6 +25,9 @@ public class Main {
 		Vector e = new Vector(A, E);
 		Vector f = new Vector(E, F);
 		Vector g = new Vector(F, D);
+		Vector h = new Vector(A, G);
+		Vector i = new Vector(B, G);
+		Vector j = new Vector(E, G);
 		
 		Face face = new Face();
 		face.getEdges().add(a);
@@ -33,14 +37,18 @@ public class Main {
 		face.getEdges().add(e);
 		face.getEdges().add(f);
 		face.getEdges().add(g);
-		
+		face.getEdges().add(h);
+		face.getEdges().add(i);
+		face.getEdges().add(j);
+		//System.out.println((face.getClosestVector(c)));
 		ArrayList<Face> faces = face.decomposeFace();
+		System.out.println(faces.get(0).getEdges().get(0));
+		//System.out.println(a.angleto(c));
+		//System.out.println(Face.anglesOfVectors(face.getVectorsPointingAway(D)));
 		
-//		System.out.println(Face.anglesOfVectors(face.getVectorsPointingAway(D)));
-		
-		for (int i = 0; i < faces.size(); i++) {
-			System.out.println(faces.get(i).getEdges().toString());
-		}
+		//for (int i = 0; i < faces.size(); i++) {
+			//System.out.println(faces.get(i).getEdges().toString());
+		//}
 	}
 
 }
