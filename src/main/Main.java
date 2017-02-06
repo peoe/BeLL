@@ -40,15 +40,11 @@ public class Main {
 		face.getEdges().add(h);
 		face.getEdges().add(i);
 		face.getEdges().add(j);
-		//System.out.println((face.getClosestVector(c)));
+
 		ArrayList<Face> faces = face.decomposeFace();
 		System.out.println(faces.get(0).getEdges().get(0));
-		//System.out.println(a.angleto(c));
-		//System.out.println(Face.anglesOfVectors(face.getVectorsPointingAway(D)));
 		
-		//for (int i = 0; i < faces.size(); i++) {
-			//System.out.println(faces.get(i).getEdges().toString());
-		//}
+		ArrayList<Point> p = faces.get(0).getPoints();
 	}
 
 }

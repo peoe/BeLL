@@ -2,10 +2,7 @@ package graph;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
-import javax.annotation.Generated;
-
-import org.omg.Messaging.SyncScopeHelper;
+import java.util.stream.Collectors;
 
 public class Face {
 
@@ -230,6 +227,40 @@ public class Face {
 			}
 		}
 		return s.concat("]");
+	}
+	
+	public ArrayList<Point> getPoints() {
+		ArrayList<Point> p = new ArrayList<>();
+		
+		for (int i = 0; i < getEdges().size(); i++) {
+			p.add(getEdges().get(i).getP1());
+			p.add(getEdges().get(i).getP2());
+		}
+		
+		System.out.println("Duplicate: " + p);
+		
+		ArrayList<Point> pts = (ArrayList<Point>) p.clone();
+	    for (Point pt : pts) {
+	    	if (p.indexOf(pt) != p.lastIndexOf(pt)) {
+	    		p.remove(p.lastIndexOf(pt));
+	    	}
+	    }
+	    
+	    System.out.println("Distinct: " + p);
+		
+		return p;
+	}
+	
+	public Double getArea() {
+		ArrayList<Point> points = getPoints();
+		
+		for (int i = 0; i < points.size(); i++) {
+			if (points.get(0) == null) {
+				return 0.0;
+			}
+		}
+		
+		return null;
 	}
 
 }
