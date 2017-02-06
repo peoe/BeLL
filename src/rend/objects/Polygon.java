@@ -29,6 +29,7 @@ public class Polygon implements ScadObject {
 		Points = points;
 	}
 	
+
 	@Override
 	public String printcommand() {
 		String s = String.format(Locale.UK, polygon, Points.toString(),Paths.toString());
