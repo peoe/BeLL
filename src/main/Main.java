@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import graph.Face;
 import graph.Point;
 import graph.Vector;
+import rend.ScadObject;
+import rend.objects.*;
 
 public class Main {
 
@@ -41,6 +43,16 @@ public class Main {
 		face.getEdges().add(j);
 
 		ArrayList<Face> faces = face.decomposeFace();
+		
+		Cube t1 = new Cube(10, 11, 11);
+		Cube t2 = new Cube(12, 12, 12);
+		Translate tr1 = new Translate(t1, 1, 1, 1);
+		ArrayList<ScadObject> in1 = new ArrayList<>();
+		in1.add(t2);
+		in1.add(tr1);
+		Difference in = new Difference(in1);
+		System.out.println(in.printcommand());
+		
 		
 //		for (Face fc : faces) {
 //			System.out.println(fc);
