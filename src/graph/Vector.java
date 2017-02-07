@@ -94,14 +94,10 @@ public class Vector {
 		return angle;
 	}
 	
-	public double angleToPV(Vector v2){ //--> Position Vector = Ortsvektor
+	public double angle(){ //--> Position Vector = Ortsvektor
 		//Vector v1 = this.getComplementaryVector();
-		Vector v1 = this;
-		double angle = Math.atan2(v2.getDifferenceY(), v2.getDifferenceX())-Math.atan2(v1.getDifferenceY(), v1.getDifferenceX());
-		if(angle<=0){
-			angle=angle+2*Math.PI;
-		}
-		return angle;
+		double angle = Math.atan2(this.getDifferenceY(), this.getDifferenceX());
+		return Math.toDegrees(angle);
 	}
 	
 

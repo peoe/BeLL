@@ -18,7 +18,7 @@ public class Wall implements ScadObject {
 	public String printcommand() {
 		Vector vcube = new Vector(w.getLength(),0);
 		Cube temp = new Cube(w.getLength(), 6, 1, true);
-		double angle = Math.toDegrees(vcube.angleToPV(w));
+		double angle = w.angle();
 		Rotate rtemp = new Rotate(temp, angle, 0, 0, 1);
 		Vector trv = w.multiply(0.5);
 		Translate walltemp = new Translate(rtemp, trv, 0);
@@ -38,13 +38,14 @@ public class Wall implements ScadObject {
 		diftemp.add(r1MinusTile);
 		diftemp.add(tr2MinusTile);
 		Difference finalWall = new Difference(diftemp);
-		Translate result = new Translate(finalWall, (new Vector(w.getP1())), 0);
+		//Translate result = new Translate(finalWall, (new Vector(w.getP1())), 0);
 		
-		System.out.println("\n" + w + "\n");
+		System.out.println("MinusTile\n" + MinusTile.printcommand());
+		System.out.println("CMinusTile\n" + MinusTileCorner.printcommand());
 		
 		
 //		return Unionwalltemp.printcommand();
-		return result.printcommand();
+		return finalWall.printcommand();
 	}
 
 }
