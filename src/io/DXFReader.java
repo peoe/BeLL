@@ -41,10 +41,6 @@ public class DXFReader {
 							round2(dxfline.getEndPoint().getY())));
 
 			vcs.add(v);
-			
-//			if (index == lst.size() - 1) {
-//				Vector 
-//			}
 		}
 
 		return vcs;
