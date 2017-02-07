@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import graph.Vector;
 import rend.ScadObject;
 
 public class Translate implements ScadObject{
@@ -26,6 +27,15 @@ public class Translate implements ScadObject{
 		this.objects.add(object);
 		this.x = x;
 		this.y = y;
+		this.z = z;
+	}
+	
+	public Translate(ScadObject object, Vector v, double z) {
+		super();
+		this.objects = new ArrayList<>();
+		this.objects.add(object);
+		this.x = v.getDifferenceX();
+		this.y = v.getDifferenceY();
 		this.z = z;
 	}
 

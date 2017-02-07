@@ -65,7 +65,15 @@ public class Vector {
 
 		return result;
 	}
-
+	
+	public double getLength(){
+		return (Math.sqrt(Math.pow(getDifferenceX(),2)+Math.pow(getDifferenceY(), 2)));
+	}
+	
+	public Vector changeLength(double len){
+		return (this.multiply(len/this.getLength()));
+	}
+	
 	/**
 	 * 
 	 * @param v2
@@ -87,6 +95,16 @@ public class Vector {
 			angle = angle + 2 * Math.PI;
 		}
 		
+		return angle;
+	}
+	
+	public double angleToPV(Vector v2){ //--> Position Vector = Ortsvektor
+		//Vector v1 = this.getComplementaryVector();
+		Vector v1 = this;
+		double angle = Math.atan2(v2.getDifferenceY(), v2.getDifferenceX())-Math.atan2(v1.getDifferenceY(), v1.getDifferenceX());
+		if(angle<=0){
+			angle=angle+2*Math.PI;
+		}
 		return angle;
 	}
 

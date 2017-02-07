@@ -28,7 +28,7 @@ public class Union implements ScadObject{
 		for (ScadObject o : objects){
 			objectsprint =  objectsprint.concat("\t" + o.printcommand());
 		}
-		String s = String.format(Locale.UK, difference, objectsprint );
+		String s = String.format(Locale.UK, union, objectsprint );
 		return s;
 	}
 	
