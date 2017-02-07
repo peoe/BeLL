@@ -9,12 +9,22 @@ public class Vector {
 		this.p2 = p2;
 	}
 
+	public Vector (Point p) {
+		this.p1 = new Point(0,0);
+		this.p2 = p;
+	}
+	
+	public Vector (double dx, double dy) {
+		this.p1 = new Point(0,0);
+		this.p2 = new Point(dx,dy);
+	}
+	
 	public void add(Vector v) {
 		setP2(new Point(getDifferenceX() + v.getDifferenceX(), getDifferenceY() + v.getDifferenceY()));
 	}
-
-	public void multiply(double f) {
-		setP2(new Point(getP1().getX() + f * getDifferenceX(), getP1().getY() + f * getDifferenceY()));
+	
+	public Vector multiply(double f) {
+		return (new Vector(getP1(),(new Point(getP1().getX() + f * getDifferenceX(), getP1().getY() + f * getDifferenceY()))));
 	}
 
 	public double getDifferenceX() {
