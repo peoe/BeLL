@@ -7,6 +7,7 @@ import rend.ScadObject;
 public class Cube implements ScadObject{
 
 	private double x, y, z;
+	private boolean center;
 	
 	public double getX() {
 		return x;
@@ -32,14 +33,23 @@ public class Cube implements ScadObject{
 		this.z = z;
 	}
 
+	public Cube(double X, double Y, double Z, boolean Center){
+		this.x=X;
+		this.y=Y;
+		this.z=Z;
+		this.center=Center;
+	}
+	
 	public Cube(double X, double Y, double Z){
 		this.x=X;
 		this.y=Y;
 		this.z=Z;
+		this.center=false;
 	}
+	
 	@Override
 	public String printcommand() {
-		return (String.format(Locale.UK, cube, x, y, z)); //Locale.UK benötigt für die Punktdarstellung
+		return (String.format(Locale.UK, cube, x, y, z, center)); //Locale.UK benötigt für die Punktdarstellung
 	}
 
 	

@@ -7,12 +7,22 @@ import rend.ScadObject;
 public class Cylinder implements ScadObject{
 	
 	private double height, bottomRadius, topRadius;
+	private boolean center;
 	
 	public Cylinder(double height, double innerRadius, double outerRadius) {
 		super();
 		this.height = height;
 		this.bottomRadius = innerRadius;
 		this.topRadius = outerRadius;
+		this.center = false;
+	}
+	
+	public Cylinder(double height, double innerRadius, double outerRadius, boolean Center) {
+		super();
+		this.height = height;
+		this.bottomRadius = innerRadius;
+		this.topRadius = outerRadius;
+		this.center=Center;
 	}
 	
 	public double getBottomRadius() {
@@ -41,7 +51,7 @@ public class Cylinder implements ScadObject{
 
 	@Override
 	public String printcommand() {
-		return (String.format(Locale.UK, cylinder, height, bottomRadius, topRadius));
+		return (String.format(Locale.UK, cylinder, height, bottomRadius, topRadius, center));
 	}
 	
 }

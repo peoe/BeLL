@@ -9,12 +9,22 @@ public class Vector {
 		this.p2 = p2;
 	}
 	
+	public Vector (Point p) {
+		this.p1 = new Point(0,0);
+		this.p2 = p;
+	}
+	
+	public Vector (double dx, double dy) {
+		this.p1 = new Point(0,0);
+		this.p2 = new Point(dx,dy);
+	}
+	
 	public void add(Vector v) {
 		setP2(new Point(getDifferenceX() + v.getDifferenceX(), getDifferenceY() + v.getDifferenceY()));
 	}
 	
-	public void multiply(double f) {
-		setP2(new Point(getP1().getX() + f * getDifferenceX(), getP1().getY() + f * getDifferenceY()));
+	public Vector multiply(double f) {
+		return (new Vector(getP1(),(new Point(getP1().getX() + f * getDifferenceX(), getP1().getY() + f * getDifferenceY()))));
 	}
 	
 	public double getDifferenceX() {
@@ -55,6 +65,14 @@ public class Vector {
 		
 		return result;
 	}
+	
+	public double getLength(){
+		return (Math.sqrt(Math.pow(getDifferenceX(),2)+Math.pow(getDifferenceY(), 2)));
+	}
+	
+	public Vector changeLength(double len){
+		return (this.multiply(len/this.getLength()));
+	}
 	/**
 	 * 
 	 * @param v2 
@@ -69,6 +87,16 @@ public class Vector {
 			return 1337.0;
 		}
 		Vector v1 = this.getComplementaryVector();
+		double angle = Math.atan2(v2.getDifferenceY(), v2.getDifferenceX())-Math.atan2(v1.getDifferenceY(), v1.getDifferenceX());
+		if(angle<=0){
+			angle=angle+2*Math.PI;
+		}
+		return angle;
+	}
+	
+	public double angleToPV(Vector v2){ //--> Position Vector = Ortsvektor
+		//Vector v1 = this.getComplementaryVector();
+		Vector v1 = this;
 		double angle = Math.atan2(v2.getDifferenceY(), v2.getDifferenceX())-Math.atan2(v1.getDifferenceY(), v1.getDifferenceX());
 		if(angle<=0){
 			angle=angle+2*Math.PI;
