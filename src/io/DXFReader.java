@@ -18,7 +18,7 @@ import graph.Vector;
 
 public class DXFReader {
 
-	public static final String URI = "C:/Users/Peter/Documents/Coding/Bell/BeLL/res/Zeichnung1.dxf";
+	public static final String URI = "C:/Users/Peter/Documents/Coding/Bell/BeLL/res/umsetzung_gr.dxf";
 
 	@SuppressWarnings({ "rawtypes" })
 	public static ArrayList<Vector> getAutocadFile(String filePath) throws ParseException {
