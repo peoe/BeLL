@@ -246,7 +246,7 @@ public class Face {
 		double yp = 0.0; 
 		
 		for (int i=0;i<points.size()-1;i++){
-			xp += (points.get(i).getX()+points.get(i+1).getX())*(points.get(i).getX()*points.get(i+1).getY()-points.get(i+1).getX()*points.get(i).getY());
+			xp += (points.get(i).getX() + points.get(i+1).getX()) * (points.get(i).getX() * points.get(i+1).getY()-points.get(i+1).getX()*points.get(i).getY());
 			yp += (points.get(i).getY()+points.get(i+1).getY())*(points.get(i).getX()*points.get(i+1).getY()-points.get(i+1).getX()*points.get(i).getY());
 		}
 		xp = xp*(1.0/(6.0*getArea()));

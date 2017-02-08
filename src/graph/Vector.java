@@ -95,8 +95,16 @@ public class Vector {
 	}
 	
 	public double angle(){ //--> Position Vector = Ortsvektor
-		//Vector v1 = this.getComplementaryVector();
 		double angle = Math.atan2(this.getDifferenceY(), this.getDifferenceX());
+		return Math.toDegrees(angle);
+	}
+	
+	public double angletoPV(Vector v2){
+		Vector v1 = this;
+		double angle = Math.atan2(v2.getDifferenceY(), v2.getDifferenceX())-Math.atan2(v1.getDifferenceY(), v1.getDifferenceX());
+		if(angle<=0){
+			angle=angle+2*Math.PI;
+		}
 		return Math.toDegrees(angle);
 	}
 	

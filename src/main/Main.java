@@ -25,6 +25,7 @@ public class Main {
 		Point H = new Point(-100,0);
 		Point I = new Point(0,100);
 		
+		
 		Vector a = new Vector(A, B);
 		Vector b = new Vector(B, C);
 		Vector c = new Vector(C, D);
@@ -44,7 +45,7 @@ public class Main {
 		face.getEdges().add(e);
 		face.getEdges().add(f);
 		face.getEdges().add(g);
-		//face.getEdges().add(h);
+		face.getEdges().add(h);
 		face.getEdges().add(i);
 		face.getEdges().add(j);
 
@@ -52,7 +53,7 @@ public class Main {
 		
 		for (int iter=0; iter<faces.size();iter++){
 		System.out.println("\nFACE:\n" + faces.get(iter));
-		System.out.println("\nSchwerpunkt\n" + faces.get(iter).getArea() + "\n");
+		System.out.println("\nSchwerpunkt\n" + faces.get(iter).getPoints() + "\n");
 		}
 		
 		
@@ -67,9 +68,9 @@ public class Main {
 		System.out.println(r1.printcommand());
 		System.out.println(in.printcommand()); 
 		System.out.println(j);
-		Wall w = new Wall(new Vector(H, I));
+		RawWall w = new RawWall(new Vector(H, I));
 		System.out.println(w.printcommand());
-		Corner test = new Corner(I, new ArrayList<>(Arrays.asList(H)), 10);
+		Corner test = new Corner(I, new ArrayList<>(Arrays.asList(H, A)), 75);
 		System.out.println(test.printcommand());
 		
 		
