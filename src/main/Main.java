@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.kabeja.parser.ParseException;
 
