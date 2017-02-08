@@ -55,6 +55,7 @@ public class Main {
 		System.out.println("\nSchwerpunkt\n" + faces.get(iter).getArea() + "\n");
 		}
 		
+		
 		Cube t1 = new Cube(10, 11, 11, true);
 		Cube t2 = new Cube(12, 12, 12);
 		Translate tr1 = new Translate(t1, 1, 1, 1);
