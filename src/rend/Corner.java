@@ -59,17 +59,19 @@ public class Corner implements ScadObject{
 
 	@Override
 	public String printcommand() {
-		Wall w;
-		Translate t;
-		Rotate r;
+		//First part Wall fitting segment
 		ArrayList<ScadObject> DifferenceAL = new ArrayList<>();
-		Vector dummy = new Vector(1,0);
+		Vector v;
 		DifferenceAL.add(Base);
 		for (int i=0;i<Corners.size();i++){
+			v = new Vector(p, Corners.get(i));
 			DifferenceAL.add(new Wall(new Vector(p, Corners.get(i))));
-			DifferenceAL.add(new Rotate(MinusTileCorner,dummy.angleToPV(new Vector(p, Corners.get(i))), 0, 0, 1));
+			DifferenceAL.add(new Rotate(MinusTileCorner,v.angle(), 0, 0, 1));
 		}
 		Difference finalDifference = new Difference(DifferenceAL);
+		//Second part base plate fitting segment
+		
+		
 		
 		return finalDifference.printcommand();
 	}

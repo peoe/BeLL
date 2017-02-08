@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.kabeja.parser.ParseException;
 
+import javax.transaction.TransactionRequiredException;
+
 import graph.Face;
 import graph.Point;
 import graph.Vector;
@@ -44,11 +46,17 @@ public class Main {
 		face.getEdges().add(e);
 		face.getEdges().add(f);
 		face.getEdges().add(g);
-		face.getEdges().add(h);
+		//face.getEdges().add(h);
 		face.getEdges().add(i);
 		face.getEdges().add(j);
 
 		ArrayList<Face> faces = face.decomposeFace();
+		
+		for (int iter=0; iter<faces.size();iter++){
+		System.out.println("\nFACE:\n" + faces.get(iter));
+		System.out.println("\nSchwerpunkt\n" + faces.get(iter).getArea() + "\n");
+		}
+		
 		
 		Cube t1 = new Cube(10, 11, 11, true);
 		Cube t2 = new Cube(12, 12, 12);
@@ -63,6 +71,10 @@ public class Main {
 		System.out.println(j);
 		Wall w = new Wall(new Vector(H, I));
 		System.out.println(w.printcommand());
+		Corner test = new Corner(I, new ArrayList<>(Arrays.asList(H)), 10);
+		System.out.println(test.printcommand());
+		
+		
 		
 //		Corner test = new Corner(A, new ArrayList<>(Arrays.asList(B,D,E)), 10);
 //		System.out.println(test.printcommand());
