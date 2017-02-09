@@ -65,15 +65,36 @@ public class Corner implements ScadObject{
 		DifferenceAL.add(Base);
 		for (int i=0;i<Corners.size();i++){
 			v = new Vector(p, Corners.get(i));
-			DifferenceAL.add(new Wall(new Vector(p, Corners.get(i))));
+			DifferenceAL.add(new RawWall(new Vector(p, Corners.get(i))));
 			DifferenceAL.add(new Rotate(MinusTileCorner,v.angle(), 0, 0, 1));
 		}
 		Difference finalDifference = new Difference(DifferenceAL);
 		//Second part base plate fitting segment
+		Vector v2;
+		Translate trtemp;
+		Rotate rtemp;
+		ArrayList<ScadObject> UnionAL = new ArrayList<>();
+		for (int i=0;i<Corners.size();i++){
+			v = new Vector(p, Corners.get(i));
+			v2 = new Vector(p, Corners.get((i+1) % Corners.size()));
+			trtemp = new Translate(PinPositive, 3.4375+9.5,0,0);
+			rtemp = new Rotate(trtemp, v.angletoPV(v2)*0.5+v.angle(), 0, 0, 1);
+			UnionAL.add(rtemp);
+			System.out.println(v.angletoPV(v2)*0.5+v.angle());
+		}
+		UnionAL.add(Base);
+		UnionAL.add(new Translate(Base2, 0, 0,2.5*-(1.0/6.0)));
+		
+		Union Unionbottom = new Union(UnionAL);
+		Scale su = new Scale(Unionbottom, 1, 1, 6);
+		Scale sd = new Scale(finalDifference, 1, 1, this.height-6);
+		Translate rsd = new Translate(sd, 0, 0, 3+(this.height-6)/2);
+		Union finalUnion = new Union(new ArrayList<ScadObject>(Arrays.asList(su,rsd)));
+		Translate result = new Translate(finalUnion, new Vector(p), 3);
 		
 		
 		
-		return finalDifference.printcommand();
+		return result.printcommand();
 	}
 	
 	
