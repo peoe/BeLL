@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import graph.*;
 import rend.objects.*;
 
-public class Wall implements ScadObject {
+public class RawWall implements ScadObject {
 	
 	private Vector w;
 
-	public Wall(Vector w) {
+	public RawWall(Vector w) {
 		super();
 		this.w = w;
 	}
@@ -38,11 +38,7 @@ public class Wall implements ScadObject {
 		diftemp.add(r1MinusTile);
 		diftemp.add(tr2MinusTile);
 		Difference finalWall = new Difference(diftemp);
-		//Translate result = new Translate(finalWall, (new Vector(w.getP1())), 0);
-		
-		System.out.println("MinusTile\n" + MinusTile.printcommand());
-		System.out.println("CMinusTile\n" + MinusTileCorner.printcommand());
-		
+
 		
 //		return Unionwalltemp.printcommand();
 		return finalWall.printcommand();
