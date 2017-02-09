@@ -102,7 +102,7 @@ public class Vector {
 		double angle = Math.atan2(this.getDifferenceY(), this.getDifferenceX());
 		return Math.toDegrees(angle);
 	}
-  
+	
 	public double angletoPV(Vector v2){
 		Vector v1 = this;
 		double angle = Math.atan2(v2.getDifferenceY(), v2.getDifferenceX())-Math.atan2(v1.getDifferenceY(), v1.getDifferenceX());
