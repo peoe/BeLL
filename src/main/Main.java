@@ -3,11 +3,14 @@ package main;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.kabeja.parser.ParseException;
+
 import javax.transaction.TransactionRequiredException;
 
 import graph.Face;
 import graph.Point;
 import graph.Vector;
+import io.DXFReader;
 import rend.*;
 import rend.objects.*;
 
@@ -82,6 +85,26 @@ public class Main {
 //		for (Face fc : faces) {
 //			System.out.println(fc);
 //		}
+		
+		try {
+			ArrayList<Vector> vcs = DXFReader.getAutocadFile(DXFReader.URI);
+
+			Face f1 = new Face();
+			
+			for (int ind = 0; ind < vcs.size(); ind++) {
+				//System.out.println(vcs.get(ind));
+				f1.getEdges().add(vcs.get(ind));
+			}
+			
+			ArrayList<Face> fcs = new ArrayList<>();
+			fcs = f1.decomposeFace();
+			
+			for (int ind = 0; ind < fcs.size(); ind++) {
+				System.out.println(fcs.get(ind));
+			}
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 }
