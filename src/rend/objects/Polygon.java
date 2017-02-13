@@ -9,23 +9,23 @@ import graph.*;
 
 public class Polygon implements ScadObject {
 
-	private ArrayList<Point> Points;
-	private ArrayList<Point> Paths;
+	private ArrayList<Vector> Points;
+	private ArrayList<Vector> Paths;
 	private double height;
 	
-	public ArrayList<Point> getPoints() {
+	public ArrayList<Vector> getPoints() {
 		return Points;
 	}
 
-	public ArrayList<Point> getPaths() {
+	public ArrayList<Vector> getPaths() {
 		return Paths;
 	}
 
-	public void setPaths(ArrayList<Point> paths) {
+	public void setPaths(ArrayList<Vector> paths) {
 		Paths = paths;
 	}
 
-	public void setPoints(ArrayList<Point> points) {
+	public void setPoints(ArrayList<Vector> points) {
 		Points = points;
 	}
 	
