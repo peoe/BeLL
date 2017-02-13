@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import graph.Vector;
+import graph.Line;
 import rend.ScadObject;
 
 public class Translate implements ScadObject{
@@ -30,7 +30,7 @@ public class Translate implements ScadObject{
 		this.z = z;
 	}
 	
-	public Translate(ScadObject object, Vector v, double z) {
+	public Translate(ScadObject object, Line v, double z) {
 		super();
 		this.objects = new ArrayList<>();
 		this.objects.add(object);
