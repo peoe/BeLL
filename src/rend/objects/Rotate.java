@@ -33,10 +33,10 @@ public class Rotate implements ScadObject{
 	}
 
 	@Override
-	public String printcommand() {
+	public String printCommand() {
 		String objectsprint = "";
 		for (ScadObject o : objects){
-			objectsprint =  objectsprint.concat("\t" + o.printcommand());
+			objectsprint =  objectsprint.concat("\t" + o.printCommand());
 		}
 		String s = String.format(Locale.UK, rotate, a, x, y, z, objectsprint );
 		return s;

@@ -11,13 +11,23 @@ public class Corner implements ScadObject{
 	private Point p;
 	private ArrayList<Point> Corners;
 	private double height;
-	private Difference MinusTile;
-	
-	
+	//private Difference MinusTile;
 	
 	public Corner(Point P, ArrayList<Point> C, double H){
 		p=P;
 		Corners=C;
+		height=H;
+	}
+	
+	public Corner(Point P, Face f, double H){
+		p=P;
+		Corners = new ArrayList<>();
+		ArrayList<Vector> vtemp = f.getVectorsPointingAway(p);
+		System.out.println("\nvtemp:\n" + vtemp + "\n");
+		for (int i=0;i<vtemp.size();i++){
+			Corners.add(vtemp.get(i).getP2());
+			System.out.println("\nCorner added:\n" + Corners.get(i) + "\n");
+		}
 		height=H;
 	}
 
@@ -58,14 +68,14 @@ public class Corner implements ScadObject{
 //	
 
 	@Override
-	public String printcommand() {
+	public String printCommand() {
 		//First part Wall fitting segment
 		ArrayList<ScadObject> DifferenceAL = new ArrayList<>();
 		Vector v;
 		DifferenceAL.add(Base);
 		for (int i=0;i<Corners.size();i++){
 			v = new Vector(p, Corners.get(i));
-			DifferenceAL.add(new RawWall(new Vector(p, Corners.get(i))));
+			DifferenceAL.add(new Translate(new Wall(new Vector(p, Corners.get(i))),new Vector(-p.getX(),-p.getY()),0));
 			DifferenceAL.add(new Rotate(MinusTileCorner,v.angle(), 0, 0, 1));
 		}
 		Difference finalDifference = new Difference(DifferenceAL);
@@ -74,6 +84,7 @@ public class Corner implements ScadObject{
 		Translate trtemp;
 		Rotate rtemp;
 		ArrayList<ScadObject> UnionAL = new ArrayList<>();
+		System.out.println("\n" + finalDifference.printCommand() + "\n");
 		for (int i=0;i<Corners.size();i++){
 			v = new Vector(p, Corners.get(i));
 			v2 = new Vector(p, Corners.get((i+1) % Corners.size()));
@@ -94,7 +105,7 @@ public class Corner implements ScadObject{
 		
 		
 		
-		return result.printcommand();
+		return result.printCommand();
 	}
 	
 	

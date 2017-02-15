@@ -28,7 +28,11 @@ public class Point extends Point2D {
 	}
 	
 	public String toString () {
-		return "(" + getX() + "," + getY() + ")";
+		return "[" + getX() + "," + getY() + "]";
+	}
+	
+	public String toOpenScad(){
+		return "[" + getX() + "," + getY() + "]";
 	}
 
 }
