@@ -34,5 +34,13 @@ public class Point extends Point2D {
 	public String toOpenScad(){
 		return "[" + getX() + "," + getY() + "]";
 	}
+	
+	public Boolean equals (Point p) {
+		if (p.getX() == getX() && p.getY() == getY()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 }

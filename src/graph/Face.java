@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Face {
+	
+	/*
+	 * Die System.out.prinln(...); sind für Debugging
+	 * und Überprüfen der Ausgaben vor einer weiteren Verarbeitung.
+	 */
 
 	// a list of all vectors + corresponding vectors
 	private ArrayList<Vector> edges;
@@ -73,7 +78,7 @@ public class Face {
 			}
 
 			if (!done) {
-				System.out.println("Error occured while determining common point");
+				//System.out.println("Error occured while determining common point");
 				return null;
 			} else {
 				return p;
@@ -102,11 +107,15 @@ public class Face {
 	 * @return ArrayList of vectors pointing away from p
 	 */
 	public ArrayList<Vector> getVectorsPointingAway(Point p) {
+		//System.out.println("comp: " + p);
+		
 		ArrayList<Vector> vs = new ArrayList<>();
 
-		for (int i = 0; i < getEdges().size(); i++) {
-			if (getEdges().get(i).getP1() == p) {
+		for (int i = 0; i < getEdges().size(); i++) {			
+			if (getEdges().get(i).getP1().equals(p)) {				
 				vs.add(getEdges().get(i));
+				
+				//System.out.println("add: " + getEdges().get(i));
 			}
 		}
 
@@ -127,6 +136,9 @@ public class Face {
 		for (Vector vec : vs) {
 			doubles.add(v.angleTo(vec));
 		}
+		
+		//System.out.println(Collections.min(doubles) + " | " + vs.get(doubles.indexOf(Collections.min(doubles))));
+		
 		return vs.get(doubles.indexOf(Collections.min(doubles)));
 	}
 
@@ -138,6 +150,10 @@ public class Face {
 	 */
 	public ArrayList<Face> decomposeFace() {
 		generateComplementaryEdges();
+		
+//		for (int i = 0; i < getEdges().size(); i++) {
+//			System.out.println(getEdges().get(i));
+//		}
 
 		ArrayList<Face> faces = new ArrayList<>();
 		Vector ov = null;
@@ -150,11 +166,20 @@ public class Face {
 			}
 
 			ov = getEdges().get(0);
+			
 			vs.add(ov);
+			
+			//System.out.println("ov: " + ov);
+			
 			v = getClosestVector(ov);
+			
+			//System.out.println("v: " + v);
+			
 			while (!ov.equals(v)) {
 				vs.add(v);
 				v = getClosestVector(v);
+				
+				//System.out.println("v: " + v);
 			}
 
 			Face f = new Face();
@@ -165,10 +190,10 @@ public class Face {
 			removeVectors(vs);
 			faces.add(f);
 			
-			System.out.println("added " + f);
+			//System.out.println("added " + f);
 		}
 
-		System.out.println("decomposed, deleting inf. face");
+		//System.out.println("decomposed, deleting inf. face");
 
 		ArrayList<Double> max = new ArrayList<>();
 		
@@ -181,7 +206,7 @@ public class Face {
 		
 		faces.remove(max.indexOf(tbr));
 		
-		System.out.println("removed index: " + max.indexOf(tbr));
+		//System.out.println("removed index: " + max.indexOf(tbr));
 		
 		return faces;
 	}
@@ -222,7 +247,7 @@ public class Face {
 			p.add(getEdges().get(i).getP2());
 		}
 
-		// System.out.println("Duplicate: " + p);
+		//System.out.println("Duplicate: " + p);
 
 		// p.clone anstatt p, da sonst als Pointer verwendet wird
 		@SuppressWarnings("unchecked")
@@ -235,7 +260,7 @@ public class Face {
 			}
 		}
 
-		// System.out.println("Distinct: " + p);
+		//System.out.println("Distinct: " + p);
 
 		return p;
 	}

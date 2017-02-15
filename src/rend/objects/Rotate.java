@@ -3,8 +3,6 @@ package rend.objects;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import com.sun.accessibility.internal.resources.accessibility;
-
 import rend.ScadObject;
 
 public class Rotate implements ScadObject{
