@@ -13,16 +13,16 @@ import org.kabeja.parser.ParseException;
 import org.kabeja.parser.Parser;
 import org.kabeja.parser.ParserBuilder;
 
-import graph.Point;
 import graph.Vector;
+import graph.Line;
 
 public class DXFReader {
 
-	public static final String URI = "C:/Users/Peter/Documents/Coding/Bell/BeLL/res/umsetzung_gr.dxf";
+	public static final String URI = "C:/Users/Peter/Documents/Coding/Bell/BeLL/res/umsetzung_gr_3.dxf";
 
 	@SuppressWarnings({ "rawtypes" })
-	public static ArrayList<Vector> getAutocadFile(String filePath) throws ParseException {
-		ArrayList<Vector> vcs = new ArrayList<>();
+	public static ArrayList<Line> getAutocadFile(String filePath) throws ParseException {
+		ArrayList<Line> vcs = new ArrayList<>();
 
 		Parser parser = ParserBuilder.createDefaultParser();
 		parser.parse(filePath, DXFParser.DEFAULT_ENCODING);
@@ -34,10 +34,10 @@ public class DXFReader {
 		for (int index = 0; index < lst.size(); index++) {
 			DXFLine dxfline = (DXFLine) lst.get(index);
 
-			Vector v = new Vector(
-					new Point(round2(dxfline.getStartPoint().getX()),
+			Line v = new Line(
+					new Vector(round2(dxfline.getStartPoint().getX()),
 							round2(dxfline.getStartPoint().getY())),
-					new Point(round2(dxfline.getEndPoint().getX()),
+					new Vector(round2(dxfline.getEndPoint().getX()),
 							round2(dxfline.getEndPoint().getY())));
 
 			vcs.add(v);

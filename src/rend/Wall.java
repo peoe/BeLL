@@ -7,20 +7,29 @@ import rend.objects.*;
 
 public class Wall implements ScadObject {
 	
-	private Vector w;
+	private Line w;
 
+<<<<<<< HEAD:src/rend/Wall.java
 	public Wall(Vector w) {
+=======
+	public RawWall(Line w) {
+>>>>>>> refs/remotes/origin/master:src/rend/RawWall.java
 		super();
 		this.w = w;
 	}
 
 	@Override
+<<<<<<< HEAD:src/rend/Wall.java
 	public String printCommand() {
 		Vector vcube = new Vector(w.getLength(),0);
+=======
+	public String printcommand() {
+		Line vcube = new Line(w.getLength(),0);
+>>>>>>> refs/remotes/origin/master:src/rend/RawWall.java
 		Cube temp = new Cube(w.getLength(), 6, 1, true);
 		double angle = w.angle();
 		Rotate rtemp = new Rotate(temp, angle, 0, 0, 1);
-		Vector trv = w.multiply(0.5);
+		Line trv = w.multiply(0.5);
 		Translate walltemp = new Translate(rtemp, trv, 0);
 		//Union
 //		Rotate Unioncube1 = new Rotate(UnionTile, angle, 0, 0, 1);

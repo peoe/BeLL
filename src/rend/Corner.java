@@ -8,12 +8,12 @@ import rend.objects.*;
 
 public class Corner implements ScadObject{
 	
-	private Point p;
-	private ArrayList<Point> Corners;
+	private Vector p;
+	private ArrayList<Vector> Corners;
 	private double height;
 	//private Difference MinusTile;
 	
-	public Corner(Point P, ArrayList<Point> C, double H){
+	public Corner(Vector P, ArrayList<Vector> C, double H){
 		p=P;
 		Corners=C;
 		height=H;
@@ -31,19 +31,19 @@ public class Corner implements ScadObject{
 		height=H;
 	}
 
-	public Point getP() {
+	public Vector getP() {
 		return p;
 	}
 
-	public void setP(Point p) {
+	public void setP(Vector p) {
 		this.p = p;
 	}
 
-	public ArrayList<Point> getCorners() {
+	public ArrayList<Vector> getCorners() {
 		return Corners;
 	}
 
-	public void setCorners(ArrayList<Point> corners) {
+	public void setCorners(ArrayList<Vector> corners) {
 		Corners = corners;
 	}
 	
@@ -71,23 +71,28 @@ public class Corner implements ScadObject{
 	public String printCommand() {
 		//First part Wall fitting segment
 		ArrayList<ScadObject> DifferenceAL = new ArrayList<>();
-		Vector v;
+		Line v;
 		DifferenceAL.add(Base);
 		for (int i=0;i<Corners.size();i++){
+<<<<<<< HEAD
 			v = new Vector(p, Corners.get(i));
 			DifferenceAL.add(new Translate(new Wall(new Vector(p, Corners.get(i))),new Vector(-p.getX(),-p.getY()),0));
+=======
+			v = new Line(p, Corners.get(i));
+			DifferenceAL.add(new RawWall(new Line(p, Corners.get(i))));
+>>>>>>> refs/remotes/origin/master
 			DifferenceAL.add(new Rotate(MinusTileCorner,v.angle(), 0, 0, 1));
 		}
 		Difference finalDifference = new Difference(DifferenceAL);
 		//Second part base plate fitting segment
-		Vector v2;
+		Line v2;
 		Translate trtemp;
 		Rotate rtemp;
 		ArrayList<ScadObject> UnionAL = new ArrayList<>();
 		System.out.println("\n" + finalDifference.printCommand() + "\n");
 		for (int i=0;i<Corners.size();i++){
-			v = new Vector(p, Corners.get(i));
-			v2 = new Vector(p, Corners.get((i+1) % Corners.size()));
+			v = new Line(p, Corners.get(i));
+			v2 = new Line(p, Corners.get((i+1) % Corners.size()));
 			trtemp = new Translate(PinPositive, 3.4375+9.5,0,0);
 			rtemp = new Rotate(trtemp, v.angletoPV(v2)*0.5+v.angle(), 0, 0, 1);
 			UnionAL.add(rtemp);
@@ -101,7 +106,7 @@ public class Corner implements ScadObject{
 		Scale sd = new Scale(finalDifference, 1, 1, this.height-6);
 		Translate rsd = new Translate(sd, 0, 0, 3+(this.height-6)/2);
 		Union finalUnion = new Union(new ArrayList<ScadObject>(Arrays.asList(su,rsd)));
-		Translate result = new Translate(finalUnion, new Vector(p), 3);
+		Translate result = new Translate(finalUnion, new Line(p), 3);
 		
 		
 		
