@@ -78,10 +78,10 @@ public class Translate implements ScadObject{
 
 
 	@Override
-	public String printcommand() {
+	public String printCommand() {
 		String objectsprint = "";
 		for (ScadObject o : objects){
-			objectsprint =  objectsprint.concat("\t" + o.printcommand());
+			objectsprint =  objectsprint.concat("\t" + o.printCommand());
 		}
 		String s = String.format(Locale.UK, translate, x, y, z, objectsprint );
 		return s;

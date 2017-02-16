@@ -58,7 +58,7 @@ public class Cylinder implements ScadObject{
 	}
 
 	@Override
-	public String printcommand() {
+	public String printCommand() {
 		int a = 100;
 		double a2 = 1.0/a;
 		String s = String.format(Locale.UK, scale, a2, a2, a2, this.multiply(a).Cylinderprintcommand());

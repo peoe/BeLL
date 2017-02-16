@@ -48,7 +48,7 @@ public class Cube implements ScadObject{
 	}
 	
 	@Override
-	public String printcommand() {
+	public String printCommand() {
 		return (String.format(Locale.UK, cube, x, y, z, center)); //Locale.UK benötigt für die Punktdarstellung
 	}
 
