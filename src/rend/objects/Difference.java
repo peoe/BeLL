@@ -9,6 +9,8 @@ public class Difference implements ScadObject{
 	
 	private ArrayList<ScadObject> objects;
 	
+	final static String difference = "difference(){\n%s}";
+	
 	public Difference(ArrayList<ScadObject> objects) {
 		super();
 		this.objects = objects;
@@ -23,10 +25,10 @@ public class Difference implements ScadObject{
 	}
 
 	@Override
-	public String printcommand() {
+	public String printCommand() {
 		String objectsprint = "";
 		for (ScadObject o : objects){
-			objectsprint =  objectsprint.concat("\t" + o.printcommand());
+			objectsprint =  objectsprint.concat("\t" + o.printCommand());
 		}
 		String s = String.format(Locale.UK, difference, objectsprint );
 		return s;

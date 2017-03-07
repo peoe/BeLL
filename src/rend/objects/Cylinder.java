@@ -9,6 +9,9 @@ public class Cylinder implements ScadObject{
 	private double height, bottomRadius, topRadius;
 	private boolean center;
 	
+	final static String cylinder = "cylinder(%1$.3f,%2$.3f,%3$.3f, %4$s);\n";
+	final static String scale = "scale([%1$.3f, %2$.3f, %3$.3f]){\n%4$s}";
+	
 	public Cylinder(double height, double bottomRadius, double topRadius) {
 		super();
 		this.height = height;
@@ -58,7 +61,7 @@ public class Cylinder implements ScadObject{
 	}
 
 	@Override
-	public String printcommand() {
+	public String printCommand() {
 		int a = 100;
 		double a2 = 1.0/a;
 		String s = String.format(Locale.UK, scale, a2, a2, a2, this.multiply(a).Cylinderprintcommand());

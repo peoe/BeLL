@@ -19,14 +19,6 @@ public class Line {
 		this.p2 = new Vector(dx,dy);
 	}
 	
-	public void add(Line v) {
-		setP2(new Vector(getDifferenceX() + v.getDifferenceX(), getDifferenceY() + v.getDifferenceY()));
-	}
-	
-	public Line multiply(double f) {
-		return (new Line(getP1(),(new Vector(getP1().getX() + f * getDifferenceX(), getP1().getY() + f * getDifferenceY()))));
-	}
-
 	public double getDifferenceX() {
 		return getP2().getX() - getP1().getX();
 	}
@@ -35,10 +27,10 @@ public class Line {
 		return getP2().getY() - getP1().getY();
 	}
 
-	public static Line add(Line v1, Line v2) {
-		v1.add(v2);
-		return v1;
-	}
+//	public static Line add(Line v1, Line v2) {
+//		v1.add(v2);
+//		return v1;
+//	}
 
 	public boolean isSimilar(Line v) {
 		if (getP1() == v.getP1() || getP1() == v.getP2() || getP2() == v.getP1() || getP2() == v.getP2()) {
@@ -52,7 +44,7 @@ public class Line {
 		return (getP1() == p || getP2() == p ? true : false);
 	}
 
-	public Line getComplementaryVector() {
+	public Line getComplementaryLine() {
 		return new Line(this.getP2(), this.getP1());
 	}
 
@@ -66,13 +58,9 @@ public class Line {
 		return result;
 	}
 	
-	public double getLength(){
-		return (Math.sqrt(Math.pow(getDifferenceX(),2)+Math.pow(getDifferenceY(), 2)));
-	}
 	
-	public Line changeLength(double len){
-		return (this.multiply(len/this.getLength()));
-	}
+	
+	
 	
 	/**
 	 * 
@@ -86,10 +74,9 @@ public class Line {
 			System.out.println("Error at angleto function: vec not starting at this.p2");
 			return 1337.0;
 		}
-
-		Line v1 = this.getComplementaryVector();
-		double angle = Math.atan2(v2.getDifferenceY(), v2.getDifferenceX())
-				- Math.atan2(v1.getDifferenceY(), v1.getDifferenceX());
+		
+		double angle = v2.toVector().angle()
+				- this.getComplementaryLine().toVector().angle();
 
 		if (angle <= 0) {
 			angle = angle + 2 * Math.PI;
@@ -98,19 +85,9 @@ public class Line {
 		return angle;
 	}
 	
-	public double angle(){ //--> Position Vector = Ortsvektor
-		double angle = Math.atan2(this.getDifferenceY(), this.getDifferenceX());
-		return Math.toDegrees(angle);
-	}
+	
   
-	public double angletoPV(Line v2){
-		Line v1 = this;
-		double angle = Math.atan2(v2.getDifferenceY(), v2.getDifferenceX())-Math.atan2(v1.getDifferenceY(), v1.getDifferenceX());
-		if(angle<=0){
-			angle=angle+2*Math.PI;
-		}
-		return Math.toDegrees(angle);
-	}
+	
 
 	public Vector getP1() {
 		return p1;
@@ -130,6 +107,10 @@ public class Line {
 
 	public String toString() {
 		return "[(" + getP1().getX() + "," + getP1().getY() + "),(" + getP2().getX() + "," + getP2().getY() + ")]";
+	}
+	
+	public Vector toVector(){
+		return (new Vector(this.getDifferenceX(),this.getDifferenceY()));
 	}
 
 }

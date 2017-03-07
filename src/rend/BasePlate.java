@@ -3,7 +3,7 @@ package rend;
 public class BasePlate implements ScadObject{
 
 	@Override
-	public String printcommand() {
+	public String printCommand() {
 		// TODO Auto-generated method stub
 		return null;
 	}
