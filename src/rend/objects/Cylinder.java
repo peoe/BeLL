@@ -127,19 +127,39 @@ public class Cylinder implements ScadObject {
 		this.height = height;
 	}
 
+	// scalar multiplication of a Cylinder
+	/**
+	 * Returns a Cylinder which has been created through scalar multiplication
+	 * of the old Cylinder with a specified factor.
+	 * 
+	 * @param a
+	 *            the factor used for multiplication
+	 * @return the multiplied Cylinder
+	 */
 	public Cylinder multiply(int a) {
 		return (new Cylinder(height * a, bottomRadius * a, topRadius * a, center));
 	}
 
-	public String Cylinderprintcommand() {
+	// prints the original instance of the Cylinder
+	/**
+	 * Prints a String used for creating the Cylinder.
+	 * 
+	 * @return the String for creating the Cylinder
+	 */
+	private String cylinderPrintCommand() {
 		return (String.format(Locale.UK, cylinder, height, bottomRadius, topRadius, center));
 	}
 
+	// prints the command for creating the Cylinder
+	/**
+	 * Returns a String which can be used to create the Cylinder.
+	 */
 	@Override
 	public String printCommand() {
 		int a = 100;
 		double a2 = 1.0 / a;
-		String s = String.format(Locale.UK, scale, a2, a2, a2, this.multiply(a).Cylinderprintcommand());
+		// by scaling a larger Cylinder you get a higher resolution
+		String s = String.format(Locale.UK, scale, a2, a2, a2, this.multiply(a).cylinderPrintCommand());
 		return s;
 	}
 
