@@ -9,6 +9,8 @@ public class Difference implements ScadObject{
 	
 	private ArrayList<ScadObject> objects;
 	
+	final static String difference = "difference(){\n%s}";
+	
 	public Difference(ArrayList<ScadObject> objects) {
 		super();
 		this.objects = objects;

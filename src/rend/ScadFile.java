@@ -1,11 +1,37 @@
 package rend;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import rend.objects.*;
+
 public class ScadFile implements ScadObject {
 	private String Filetext;
+	private double e, cornerRadius, pinMinLength, pinNWidth, pinNRadius, pinDistance, height, pinHeight;
+
 	
-	final String addcyl = " cylinder(%1$.3f,%2$.3f,%2$.3f);"; 
-	final String translate = " translate([%1$.3f,%2$.3f,%3$.3f]){%s}";
-	final String comment = "/*%s*/";
+	public double calculateD(double a){
+		return((pinDistance+pinNRadius)/Math.sin(a/2)-pinNRadius);
+	}
+	
+	public ScadObject getPinPositive(double a){
+		double d = calculateD(a);
+		if (d<(pinNRadius+pinMinLength)){
+			d=pinNRadius+pinMinLength;
+		}
+		Cube c1 = new Cube(d, pinNWidth, 1, true);
+		Cylinder cyl1 = new Cylinder(1, pinNRadius-e, pinNRadius-e, true);
+		Translate tcyl1 = new Translate(cyl1, (0.5*d+pinNRadius-e), 0, 0);
+		
+		Cube fill = new Cube(1, pinNWidth, 1, true);
+		Translate tfill = new Translate(fill, d*0.5, 0, 0);
+		Union pinUnion = new Union(new ArrayList<>(Arrays.asList(c1,tcyl1,tfill)));
+		Translate result = new Translate(pinUnion, -(pinNRadius-e), 0, 0);
+		
+		
+		return result;
+	}
+	
 
 	public String getFiletext() {
 		return Filetext;
@@ -13,10 +39,6 @@ public class ScadFile implements ScadObject {
 
 	public void setFiletext(String filetext) {
 		Filetext = filetext;
-	}
-	
-	public void comment(String s){
-		s=String.format(comment, s);
 	}
 
 	@Override

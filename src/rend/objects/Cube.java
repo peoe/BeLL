@@ -9,6 +9,8 @@ public class Cube implements ScadObject{
 	private double x, y, z;
 	private boolean center;
 	
+	final static String cube = "cube([%1$.2f,%2$.2f,%3$.2f], %4$s);\n";
+	
 	public double getX() {
 		return x;
 	}

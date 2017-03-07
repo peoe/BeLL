@@ -10,6 +10,8 @@ public class Rotate implements ScadObject{
 	private ArrayList<ScadObject> objects;
 	private double a;
 	private int x, y, z;
+	
+	final static String rotate = "rotate(%1$.2f,[%2$d,%3$d,%4$d]){\n%5$s}";
 
 	public Rotate(ArrayList<ScadObject> objects, double a, int x, int y, int z) {
 		super();

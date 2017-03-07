@@ -63,7 +63,7 @@ public class Graph {
 
 		// adding the complementary lines
 		for (int i = 0; i < amount; i++) {
-			getLines().add(getLines().get(i).getComplementaryVector());
+			getLines().add(getLines().get(i).getComplementaryLine());
 		}
 	}
 
@@ -103,7 +103,7 @@ public class Graph {
 	 * @param p the specified point
 	 * @return ArrayList of lines point away from the given point
 	 */
-	private ArrayList<Line> getLinesPointingAway(Vector p) {
+	public ArrayList<Line> getLinesPointingAway(Vector p) {
 		ArrayList<Line> ls = new ArrayList<>();
 
 		// adding all lines where the starting point is equal to the given point
@@ -122,7 +122,7 @@ public class Graph {
 	 * @param l the specified line
 	 * @return the line closest to the given line
 	 */
-	private Line getClosestVector(Line l) {
+	private Line getClosestLine(Line l) {
 		ArrayList<Line> ls = getLinesPointingAway(l.getP2());
 		ArrayList<Double> doubles = new ArrayList<>();
 		
@@ -190,11 +190,11 @@ public class Graph {
 
 			ol = ols.get(0);
 			ls.add(ol);
-			l = getClosestVector(ol);
+			l = getClosestLine(ol);
 
 			while (!ol.equals(l)) {
 				ls.add(l);
-				l = getClosestVector(l);
+				l = getClosestLine(l);
 			}
 
 			Face f = new Face();

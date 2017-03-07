@@ -10,6 +10,8 @@ public class Scale implements ScadObject{
 	private ArrayList<ScadObject> objects;
 	private double x, y, z;
 	
+	final static String scale = "scale([%1$.3f, %2$.3f, %3$.3f]){\n%4$s}";
+	
 	public Scale(ArrayList<ScadObject> objects, double x, double y, double z) {
 		super();
 		this.objects = objects;
