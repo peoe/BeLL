@@ -55,11 +55,23 @@ public class Main {
 		face1.getEdges().add(i);
 		face1.getEdges().add(j);
 		
-		Graph main1 = new Graph(face1.getEdges());
+		Graph gr = new Graph(face1.getEdges());
 		
-		System.out.println(face1);
-		Corner test = new Corner(G, main1, 75.0);
-		System.out.println(test.printCommand());
+		ParameterController.setParams(0.25, 10, 2,  3, 4, 4, 300, 4);
+		//System.out.println(ScadObject.PinPositive.printCommand());
+//		System.out.println(Corner.getPinPositive(Math.PI).printCommand());
+//		Wall test = new Wall(a);
+//		System.out.println(test.printCommand());
+		Corner cor1 = new Corner(B,gr,10.0);
+		System.out.println(cor1.printCommand());
+//		for (int counter=1;counter<9;counter++){
+//			System.out.println("Angle: " + Math.PI/4*counter + " D: " + Corner.calculateD(Math.PI/4*counter));
+//		}
+//		Graph main1 = new Graph(face1.getEdges());
+//		
+//		System.out.println(face1);
+//		Corner test = new Corner(G, main1, 75.0);
+//		System.out.println(test.printCommand());
 //		System.out.println(test.printCommand());
 //		Wall w1 = new Wall(j);
 //		System.out.println(w1.printCommand());
