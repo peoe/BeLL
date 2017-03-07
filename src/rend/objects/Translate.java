@@ -1,16 +1,17 @@
 package rend.objects;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import graph.Line;
+import graph.Vector;
 import rend.ScadObject;
 
 public class Translate implements ScadObject{
 	
 	private ArrayList<ScadObject> objects;
 	private double x,y,z;
+	
+	final static String translate = "translate([%1$.2f, %2$.2f, %3$.2f]){\n%4$s}";
 	
 
 	public Translate(ArrayList<ScadObject> object, double x, double y, double z) {
@@ -30,12 +31,12 @@ public class Translate implements ScadObject{
 		this.z = z;
 	}
 	
-	public Translate(ScadObject object, Line v, double z) {
+	public Translate(ScadObject object, Vector v, double z) {
 		super();
 		this.objects = new ArrayList<>();
 		this.objects.add(object);
-		this.x = v.getDifferenceX();
-		this.y = v.getDifferenceY();
+		this.x = v.getX();
+		this.y = v.getY();
 		this.z = z;
 	}
 

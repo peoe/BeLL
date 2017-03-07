@@ -9,6 +9,8 @@ public class Union implements ScadObject{
 	
 	private ArrayList<ScadObject> objects;
 	
+	final static String union = "union(){\n%s}";
+	
 	public Union(ArrayList<ScadObject> objects) {
 		super();
 		this.objects = objects;

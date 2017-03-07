@@ -9,6 +9,9 @@ public class Cylinder implements ScadObject{
 	private double height, bottomRadius, topRadius;
 	private boolean center;
 	
+	final static String cylinder = "cylinder(%1$.3f,%2$.3f,%3$.3f, %4$s);\n";
+	final static String scale = "scale([%1$.3f, %2$.3f, %3$.3f]){\n%4$s}";
+	
 	public Cylinder(double height, double bottomRadius, double topRadius) {
 		super();
 		this.height = height;

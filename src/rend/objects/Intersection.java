@@ -9,6 +9,8 @@ public class Intersection implements ScadObject{
 	
 	private ArrayList<ScadObject> objects;
 	
+	final static String intersection = "intersection(){\n%s}";
+	
 	public Intersection(ArrayList<ScadObject> objects) {
 		super();
 		this.objects = objects;
