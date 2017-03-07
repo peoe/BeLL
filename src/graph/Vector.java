@@ -86,7 +86,7 @@ public class Vector {
 	public Line toLine(){
 		return(new Line(new Vector(0,0), this));
 	}
-	
+  
 	// checking if two vectors are equal
 	/**
 	 * Checks if two Vectors are equal.
