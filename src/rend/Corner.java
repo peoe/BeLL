@@ -59,18 +59,28 @@ public class Corner implements ScadObject{
 	}
 	
 	public Vector getClosestVector(Vector v){
-		if (Corners.contains(v)){
-			System.out.println("Corner not contained");
-			return null;
+		
+		v= new Vector(p,v);
+		System.out.println(v);
+		System.out.println(Corners);
+		
+//		if (!Corners.contains(v)){
+//			System.out.println("Corner not contained");
+//			return null;
+//		}
+		ArrayList<Vector> vs = new ArrayList<>();
+		
+		for (Vector vecs : Corners){
+			vs.add(new Vector(p,vecs));
 		}
 		
 		ArrayList<Double> doubles = new ArrayList<>();
 		
-		for (Vector vec : Corners){
+		for (Vector vec : vs){
 //		doubles.add(new Double(vs.get(i).angle(),5));
 		doubles.add(v.angletoVector(vec));
 		}
-		return Corners.get((doubles.indexOf(Collections.min(doubles))));
+		return vs.get((doubles.indexOf(Collections.min(doubles))));
 	}
 
 //	public void generateMinusTile(){
@@ -137,7 +147,9 @@ public class Corner implements ScadObject{
 		DifferenceAL.add(Base);
 		for (int i=0;i<Corners.size();i++){
 			v = new Vector(p,Corners.get(i));
-			DifferenceAL.add(new Wall(new Line(p, Corners.get(i))));
+			System.out.println("Vector to Line: " + v.toLine());
+			System.out.println(new Wall(v.toLine()).printCommand());
+			DifferenceAL.add(new Wall(v.toLine()));
 			DifferenceAL.add(new Rotate(getMinusTileCorner(),v.angleD(), 0, 0, 1));
 			System.out.println("\nangle to: " + Corners.get(i) + " is " + v.angleD() + "\n" );
 		}
@@ -147,13 +159,13 @@ public class Corner implements ScadObject{
 		Translate trtemp;
 		Rotate rtemp;
 		ArrayList<ScadObject> UnionAL = new ArrayList<>();
-		for (int i=0;i<Corners.size();i++){
-			v = new Vector(p, Corners.get(i));
-			v2 = this.getClosestVector(v);
-			trtemp = new Translate(getPinPositive(v.angletoVector(v2)), 3.4375+9.5,0,0);
-			rtemp = new Rotate(trtemp, v.angletoVectorD(v2)*0.5+v.angleD(), 0, 0, 1);
+		for (Vector vec : Corners){
+			v2 = this.getClosestVector(vec);
+			System.out.println("closest Vector of" + vec + " is " + v2);
+			trtemp = new Translate(getPinPositive(vec.angletoVector(v2)), 3.4375+9.5,0,0);
+			rtemp = new Rotate(trtemp, vec.angletoVectorD(v2)*0.5+vec.angleD(), 0, 0, 1);
 			UnionAL.add(rtemp);
-			System.out.println("\n angle of" + v + " to " +v2 + " is " + v.bisectorOfAngleTo(v2) + "\n");
+			System.out.println("\n angle of" + vec+ " to " +v2 + " is " + vec.bisectorOfAngleTo(v2) + "\n");
 		}
 		UnionAL.add(Base);
 		UnionAL.add(new Translate(Base2, 0, 0,2.5*-(1.0/6.0)));

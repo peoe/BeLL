@@ -79,6 +79,14 @@ public class Vector {
 		return "(" + getX() + "," + getY() + ")";
 	}
 
+	/**
+	 * Converts a vector to a line
+	 * @return line  with P1 = (0|0) and P2 = Vector
+	 */
+	public Line toLine(){
+		return(new Line(new Vector(0,0), this));
+	}
+  
 	// checking if two vectors are equal
 	/**
 	 * Checks if two Vectors are equal.

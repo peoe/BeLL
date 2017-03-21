@@ -135,7 +135,7 @@ public class Cylinder implements ScadObject {
 	 * @param a
 	 *            the factor used for multiplication
 	 * @return the multiplied Cylinder
-	 */
+   */
 	public Cylinder multiply(int a) {
 		return (new Cylinder(height * a, bottomRadius * a, topRadius * a, center));
 	}
