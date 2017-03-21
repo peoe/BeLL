@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import graph.*;
+import io.ClipboardCopier;
 import rend.objects.*;
 
 public class Wall implements ScadObject {

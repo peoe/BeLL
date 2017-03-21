@@ -11,6 +11,7 @@ import graph.Face;
 import graph.Graph;
 import graph.Vector;
 import graph.Line;
+import io.ClipboardCopier;
 import io.DXFReader;
 import io.ScadPrinter;
 import rend.*;
@@ -57,13 +58,14 @@ public class Main {
 		
 		Graph gr = new Graph(face1.getEdges());
 		
-		ParameterController.setParams(0.25, 10, 2,  3, 4, 4, 300, 4);
+		ParameterController.setParams(0.25, 10, 2,  3, 4, 2, 75, 4, 6, 1);
 		//System.out.println(ScadObject.PinPositive.printCommand());
 //		System.out.println(Corner.getPinPositive(Math.PI).printCommand());
 //		Wall test = new Wall(a);
 //		System.out.println(test.printCommand());
 		Corner cor1 = new Corner(B,gr,10.0);
-		System.out.println(cor1.printCommand());
+		ClipboardCopier.copyToClipboard(cor1.printCommand());
+		//ClipboardCopier.copyToClipboard(cor1.printCommand());
 //		for (int counter=1;counter<9;counter++){
 //			System.out.println("Angle: " + Math.PI/4*counter + " D: " + Corner.calculateD(Math.PI/4*counter));
 //		}
