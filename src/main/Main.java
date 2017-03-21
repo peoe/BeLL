@@ -11,6 +11,7 @@ import graph.Face;
 import graph.Graph;
 import graph.Vector;
 import graph.Line;
+import io.ClipboardCopier;
 import io.DXFReader;
 import io.ScadPrinter;
 import rend.*;
@@ -56,11 +57,11 @@ public class Main {
 		face1.getEdges().add(j);
 		
 		Graph gr = new Graph(face1.getEdges());
-		
-		ParameterController.setParams(0.25, 10, 2,  3, 4, 4, 300, 4);
 
+		ParameterController.setParams(0.25, 10, 2,  3, 4, 2, 75, 4, 6, 1);
+		
 		Corner cor1 = new Corner(B,gr,10.0);
-		System.out.println(cor1.printCommand());
+		ClipboardCopier.copyToClipboard(cor1.printCommand());
 	}
 
 }

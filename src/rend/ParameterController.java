@@ -14,7 +14,7 @@ public class ParameterController {
 	 * height - the height of the corner 
 	 * pinHeight - the height of the pin
 	 */
-	private static double e, cornerRadius, pinMinLength, pinNWidth, pinNRadius, pinPWidth, pinPRadius, pinDistance, height, pinHeight;
+	private static double e, cornerRadius, pinMinLength, pinNWidth, pinNRadius, pinPWidth, pinPRadius, pinDistance, height, pinHeight, basePlateHeight, basePlatePinCircleHeight;
 
 	// the constant for defining the width of all walls
 	private static final double wallWidth = 6.0;
@@ -118,7 +118,15 @@ public class ParameterController {
 	public static double getWallwidth() {
 		return wallWidth;
 	}
+  
+  public static double getBasePlatePinCircleHeight() {
+		return basePlatePinCircleHeight;
+	}
 	
+	public static double getBasePlateHeight() {
+		return basePlateHeight;
+	}
+
 	// setting all params
 	/**
 	 * Sets all the params to the given values.
@@ -131,7 +139,7 @@ public class ParameterController {
 	 * @param Height the value for the height parameter
 	 * @param PinHeight the value for the pin height parameter
 	 */
-	public static void setParams(double E, double CornerRadius, double PinMinLength, double PinNWidth, double PinNRadius, double PinDistance, double Height, double PinHeight){
+	public static void setParams(double E, double CornerRadius, double PinMinLength, double PinNWidth, double PinNRadius, double PinDistance, double Height, double PinHeight, double BasePlateHeight, double BasePlatePinCircleHeight){
 		e = E;
 		cornerRadius = CornerRadius;
 		pinMinLength = PinMinLength;
@@ -142,6 +150,8 @@ public class ParameterController {
 		pinHeight = PinHeight;
 		pinPRadius = pinNRadius - e;
 		pinPWidth = pinNWidth - 2*e;
+		basePlateHeight = BasePlateHeight;
+		basePlatePinCircleHeight = BasePlatePinCircleHeight;
 		
 	}
 
