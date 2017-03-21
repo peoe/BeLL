@@ -156,6 +156,26 @@ public class Line {
 		return angle;
 	}
 
+	// function for intersecting two Lines
+	/**
+	 * Returns the x value of an intersection of the Line with another
+	 * horizontal Line specified by the y value.
+	 * 
+	 * @param y
+	 *            the y value of the horizontal Line
+	 * @return the x value of the intersection
+	 */
+	public double intersect(double y) {
+		// declaring variables
+		double xA, xB, yA, yB;
+		xA = this.getP1().getX();
+		xB = this.getP2().getX();
+		yA = this.getP1().getY();
+		yB = this.getP2().getY();
+		
+		return (xA * y - xA*yB - xB * y + xB * yA) / (yA - yB);
+	}
+
 	// returns the first point of the Line
 	/**
 	 * Returns the position vector of the Lines starting point.

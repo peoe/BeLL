@@ -1,6 +1,9 @@
 package graph;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import main.ArrayUtils;
 
 public class Face {
 
@@ -105,7 +108,7 @@ public class Face {
 					* (points.get(i).getX() - points.get((i + 1) % points.size()).getX());
 		}
 
-		return Math.abs(area / 2.0);
+		return (area / 2.0);
 	}
 
 	// create an identical copy of a Face
@@ -121,6 +124,83 @@ public class Face {
 		}
 
 		return nf;
+	}
+
+	// check if a point is within the face
+	/**
+	 * Takes a Vector and checks if the Vector is within the Face. Returns true
+	 * if this condition is fulfilled, false if otherwise.
+	 * 
+	 * @param v
+	 *            the Vector to be checked
+	 * @return the boolean stating if the Vector is within the Face
+	 */
+	public Boolean checkPosition(Vector v) {
+		
+		// the x and y coordinates of the Vector
+		double xP, yP;
+		xP = v.getX();
+		yP = v.getY();
+
+		// getting all the Lines which contain the y value of yP
+		// always checking all Lines again can be avoided this way
+		ArrayList<Line> lns = getLinesWithYValue(yP);
+
+		// intersecting all Lines with a Line a: y = yP
+		double[] xValues = new double[lns.size()];
+		for (int i = 0; i < lns.size(); i++) {
+			xValues[i] = lns.get(i).intersect(yP);
+		}
+
+		System.out.println(xValues[0] + ", " + xValues[1]);
+		
+		// sorting all x values
+		Arrays.sort(xValues);
+
+		// getting the previous index where the x value if the Vector is bigger
+		int index = ArrayUtils.sortInValue(xValues, xP);
+		
+		System.out.println(index);
+		
+		// if index is even, return true
+		if (index % 2 == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// getting all Lines which contain a certain y value
+	/**
+	 * Returns an ArrayList with all Lines where either condition is true: y1 <
+	 * y < y2 or y2 < y < y1.
+	 * 
+	 * @param y
+	 *            the y value
+	 * @return the ArrayList of Lines which contain the y value
+	 */
+	private ArrayList<Line> getLinesWithYValue(double y) {
+		ArrayList<Line> lns = new ArrayList<>();
+
+		for (int i = 0; i < getEdges().size(); i++) {
+			// saving the points of the Line
+			Vector p1 = getEdges().get(i).getP1();
+			Vector p2 = getEdges().get(i).getP2();
+			
+			System.out.println(p1 + ", " + p2 + ", " + y);
+
+			// first condition: y1 < y < y2
+			if (p1.getY() < y && p2.getY() > y) {
+				lns.add(getEdges().get(i));
+			}
+			
+			// second condition: y1 > y > y2
+			if (p1.getY() > y && p2.getY() < y) {
+				lns.add(getEdges().get(i));
+			}
+		}
+
+		return lns;
 	}
 
 }

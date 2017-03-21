@@ -55,7 +55,7 @@ public class Main {
 		face1.getEdges().add(i);
 		face1.getEdges().add(j);
 		
-		Graph gr = new Graph(face1.getEdges());
+		Graph gr = new Graph(face1.getEdges());			
 		
 		ParameterController.setParams(0.25, 10, 2,  3, 4, 4, 300, 4);
 
