@@ -7,8 +7,9 @@ import rend.objects.*;
 
 public class ScadFile implements ScadObject {
 	private String Filetext;
-	private double e, cornerRadius, pinMinLength, pinNWidth, pinNRadius, pinDistance, height, pinHeight;
+	
 
+	
 	
 	public double calculateD(double a){
 		return((pinDistance+pinNRadius)/Math.sin(a/2)-pinNRadius);
