@@ -8,8 +8,14 @@ import rend.objects.*;
 
 public class Wall implements ScadObject {
 	
+	// the Line object for the Wall to be based upon
 	private Line w;
 
+	// constructor
+	/**
+	 * Creates a new Wall object based upon the given Line object.
+	 * @param w the given Line object
+	 */
 	public Wall(Line w) {
 		super();
 		this.w = w;
@@ -17,7 +23,11 @@ public class Wall implements ScadObject {
 	
 	//final Difference MinusTile = new Difference(new ArrayList<>(Arrays.asList(new Cube(20,10,1, true),new Translate(), 10.25, 0, 0))));
 
-	
+	// getting the negative tile
+	/**
+	 * Returns the minus tile of the wall.
+	 * @return the minus tile
+	 */
 	private ScadObject getMinusTile(){
 	 Cube c1 = new Cube(ParameterController.getCornerRadius(),ParameterController.getWallwidth()/2-2*ParameterController.getE(),1, true);
 	 Translate tc1 = new Translate(c1,ParameterController.getCornerRadius()+ParameterController.getE(),0,0);
@@ -28,7 +38,10 @@ public class Wall implements ScadObject {
 	 return (new Difference(dif));
 	}
 	
-	
+	// printing the command for creating the Wall object
+	/**
+	 * Prints a String which can be used to create the Wall object.
+	 */
 	@Override
 	public String printCommand() {
 		Vector wVec = w.toVector();
@@ -39,6 +52,7 @@ public class Wall implements ScadObject {
 		Rotate rtemp = new Rotate(temp, angle, 0, 0, 1);
 		Vector trv = wVec.multiply(0.5);
 		Translate walltemp = new Translate(rtemp, trv, 0);
+		
 		//Intersection
 		Rotate r1MinusTile = new Rotate(getMinusTile(),angle, 0, 0, 1);
 		Translate tr2MinusTile = new Translate(new Rotate(getMinusTile(),angle+180, 0, 0, 1), wVec, 0);
@@ -47,9 +61,8 @@ public class Wall implements ScadObject {
 		diftemp.add(r1MinusTile);
 		diftemp.add(tr2MinusTile);
 		Difference finalWall = new Difference(diftemp);
-
 		
-//		return Unionwalltemp.printcommand();
+		// return Unionwalltemp.printcommand();
 		return finalWall.printCommand();
 	}
 
