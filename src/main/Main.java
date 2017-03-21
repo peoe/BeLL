@@ -57,86 +57,11 @@ public class Main {
 		face1.getEdges().add(j);
 		
 		Graph gr = new Graph(face1.getEdges());
-		
+
 		ParameterController.setParams(0.25, 10, 2,  3, 4, 2, 75, 4, 6, 1);
-		//System.out.println(ScadObject.PinPositive.printCommand());
-//		System.out.println(Corner.getPinPositive(Math.PI).printCommand());
-//		Wall test = new Wall(a);
-//		System.out.println(test.printCommand());
+		
 		Corner cor1 = new Corner(B,gr,10.0);
 		ClipboardCopier.copyToClipboard(cor1.printCommand());
-		//ClipboardCopier.copyToClipboard(cor1.printCommand());
-//		for (int counter=1;counter<9;counter++){
-//			System.out.println("Angle: " + Math.PI/4*counter + " D: " + Corner.calculateD(Math.PI/4*counter));
-//		}
-//		Graph main1 = new Graph(face1.getEdges());
-//		
-//		System.out.println(face1);
-//		Corner test = new Corner(G, main1, 75.0);
-//		System.out.println(test.printCommand());
-//		System.out.println(test.printCommand());
-//		Wall w1 = new Wall(j);
-//		System.out.println(w1.printCommand());
-//	//	ArrayList<Face> faces = face.decomposeFace();
-//
-////		ArrayList<Face> faces = face.decomposeFace();
-////		}
-//		
-////		Polygon poly1 = new Polygon(faces.get(0));
-////		System.out.println(poly1.printcommand());
-//		
-//		
-//		Cube t1 = new Cube(10, 11, 11, true);
-//		Cube t2 = new Cube(12, 12, 12, true);
-//		Translate tr1 = new Translate(t1, 1, 1, 1);
-//		ArrayList<ScadObject> in1 = new ArrayList<>();
-//		in1.add(t2);
-//		in1.add(tr1);
-//		Difference in = new Difference(in1);
-//		Rotate r1 = new Rotate(t1, 45, 0, 0, 1);
-////		System.out.println(r1.printcommand());
-//		System.out.println(in.printCommand()); 
-////		System.out.println(j);
-////		RawWall w = new RawWall(new Vector(H, I));
-////		System.out.println(w.printcommand());
-////		Corner test = new Corner(I, new ArrayList<>(Arrays.asList(H, A)), 75);
-////		System.out.println(test.printcommand());
-//		
-//		
-//		
-//		System.out.println(face1);
-//		
-		
-//		for (Face fc : faces) {
-//			System.out.println(fc);
-//		
-//		
-//		Cube t1 = new Cube(10, 11, 11, true);
-//		Cube t2 = new Cube(12, 12, 12);
-//		Translate tr1 = new Translate(t1, 1, 1, 1);
-//		ArrayList<ScadObject> in1 = new ArrayList<>();
-//		in1.add(t2);
-//		in1.add(tr1);
-//		Difference in = new Difference(in1);
-//		Rotate r1 = new Rotate(t1, 45, 0, 0, 1);
-//		System.out.println(r1.printcommand());
-//		System.out.println(in.printcommand()); 
-//		System.out.println(j);
-//		RawWall w = new RawWall(new Line(H, I));
-//		System.out.println(w.printcommand());
-//		Corner test = new Corner(I, new ArrayList<>(Arrays.asList(H, A)), 75);
-//		System.out.println(test.printcommand());
-//		
-//		
-//		
-////		Corner test = new Corner(A, new ArrayList<>(Arrays.asList(B,D,E)), 10);
-////		System.out.println(test.printcommand());
-//		
-//		
-////		for (Face fc : faces) {
-////			System.out.println(fc);
-////		}
-		
 	}
 
 }
