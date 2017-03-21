@@ -11,16 +11,7 @@ import rend.objects.Translate;
 import rend.objects.Union;
 
 public interface ScadObject {
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	final Cylinder Base = new Cylinder(1, 10, 10, true);
 	final Cylinder Base2 = new Cylinder((1.0/6.0), 20, 20, true);
 	final Cube UnionTile = new Cube(20,10,1,true);

@@ -11,6 +11,9 @@ public class Graph {
 	private ArrayList<Vector> points = new ArrayList<>();
 	// list of lines
 	private ArrayList<Line> lines = new ArrayList<>();
+	
+	// infinte Face
+	private Face infFace = new Face();
 
 	// constructor takes list of lines, decomposes, generates pts
 	/**
@@ -213,8 +216,11 @@ public class Graph {
 			max.add(faces.get(i).getArea());
 		}
 
-		// Inhalt des zu entfernenden Elements
+		// area of the Face to be removed
 		Double tbr = Collections.max(max);
+		
+		// cloning the infinite Face before removing it
+		infFace = faces.get(max.indexOf(tbr)).clone();
 
 		faces.remove(max.indexOf(tbr));
 	}
@@ -244,6 +250,14 @@ public class Graph {
 	 */
 	public ArrayList<Line> getLines() {
 		return lines;
+	}
+	
+	public Face getInfiniteFace() {
+		if (infFace != null) {
+			return infFace;
+		} else {
+			return new Face();
+		}
 	}
 	
 	// function for cloning the graph
