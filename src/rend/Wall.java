@@ -39,6 +39,13 @@ public class Wall implements ScadObject {
 	 return (new Difference(dif));
 	}
 	
+	//getting a Wall Tile which is not used for differences
+	public ScadObject getPresentationWall(){
+		Scale s1 = new Scale(this,1,1,ParameterController.getHeight()-ParameterController.getBasePlateHeight());
+		Translate t1 = new Translate(s1, 0, 0, ParameterController.getBasePlateHeight()+(ParameterController.getHeight()-ParameterController.getBasePlateHeight())/2 );
+		return t1;
+	}
+	
 	// printing the command for creating the Wall object
 	/**
 	 * Prints a String which can be used to create the Wall object.

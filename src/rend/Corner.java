@@ -3,6 +3,7 @@ package rend;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.concurrent.SynchronousQueue;
 
 import graph.*;
 import rend.objects.*;
@@ -11,15 +12,14 @@ public class Corner implements ScadObject {
 
 	private Vector p;
 	private ArrayList<Vector> Corners;
-	private double height;
+	private Face infFace;
 
 	public Corner(Vector P, ArrayList<Vector> C, double H) {
 		p = P;
 		Corners = C;
-		height = H;
 	}
 
-	public Corner(Vector P, Graph f, double H) {
+	public Corner(Vector P, Graph f) {
 		p = P;
 		Corners = new ArrayList<>();
 		ArrayList<Line> vtemp = f.getLinesPointingAway(P);
@@ -28,7 +28,7 @@ public class Corner implements ScadObject {
 			Corners.add(vtemp.get(i).getP2());
 			// System.out.println("\nCorner added:\n" + Corners.get(i) + "\n");
 		}
-		height = H;
+		infFace = f.getInfiniteFace();
 	}
 
 	public Vector getP() {
@@ -45,14 +45,6 @@ public class Corner implements ScadObject {
 
 	public void setCorners(ArrayList<Vector> corners) {
 		Corners = corners;
-	}
-
-	public double getHeight() {
-		return height;
-	}
-
-	public void setHeight(double height) {
-		this.height = height;
 	}
 
 	public Vector getClosestVector(Vector v) {
@@ -101,17 +93,17 @@ public class Corner implements ScadObject {
 	// ArrayList<>(Arrays.asList(new Cube(3,1.5,1, true),new Translate(), 5, 0,
 	// 0)))), -3.4375, 0, 0);
 	
-	private static ScadObject getBaseTile(){
-		return(new Cylinder(1,ParameterController.getCornerRadius(), ParameterController.getCornerRadius(), true));
+	private static ScadObject getBaseTile(double height, boolean center){
+		return(new Cylinder(height,ParameterController.getCornerRadius(), ParameterController.getCornerRadius(), center));
 	}
 	
 	private static ScadObject getBaseTileLow(double l){
-		return(new Cylinder(ParameterController.getBasePlatePinCircleHeight(), ParameterController.getCornerRadius()+l, ParameterController.getCornerRadius()+l, true));
+		return(new Cylinder(ParameterController.getBasePlatePinCircleHeight(), ParameterController.getCornerRadius()+l, ParameterController.getCornerRadius()+l, false));
 	}
 
 	private static double calculateD(double a) {
-		return ((ParameterController.getPinDistance() + ParameterController.getPinNRadius()) / Math.sin(a / 2)
-				- ParameterController.getPinPRadius());
+		return ((ParameterController.getPinDistance() + ParameterController.getPinNRadius()+ParameterController.getWallwidth()) / Math.sin(a / 2)
+				- ParameterController.getPinPRadius()-ParameterController.getCornerRadius());
 	}
 
 	private static ScadObject getPinPositive(double a) {
@@ -154,41 +146,48 @@ public class Corner implements ScadObject {
 		// First part Wall fitting segment
 		ArrayList<ScadObject> DifferenceAL = new ArrayList<>();
 		Vector v;
-		DifferenceAL.add(getBaseTile());
+		DifferenceAL.add(getBaseTile(1,true));
+		
 		for (int i = 0; i < Corners.size(); i++) {
 			v = new Vector(p, Corners.get(i));
 			// System.out.println("Vector to Line: " + v.toLine());
-			 System.out.println(new Wall(v.toLine()).printCommand());
+			 System.out.println(new Wall(v.toLine()).getPresentationWall().printCommand());
 			DifferenceAL.add(new Wall(v.toLine()));
 			DifferenceAL.add(new Rotate(getMinusTileCorner(), v.angleD(), 0, 0, 1));
 			// System.out.println("\nangle to: " + Corners.get(i) + " is " +
 			// v.angleD() + "\n" );
 		}
-		Difference finalDifference = new Difference(DifferenceAL);
+		
+		ScadObject finalDifference = new Translate(new Scale(new Difference(DifferenceAL), 1, 1, ParameterController.getHeight()-ParameterController.getBasePlateHeight()), 0, 0, 0.5*(ParameterController.getHeight()-ParameterController.getBasePlateHeight()));
 		// Second part base plate fitting segment
 		Vector v2;
 		Translate ttemp;
 		Rotate rttemp;
 		ArrayList<ScadObject> UnionAL = new ArrayList<>();
 		ArrayList<Double> maxPinLength = new ArrayList<>();
+	
 		for (Vector vec : Corners) {
 			v2 = this.getClosestVector(vec);
-			System.out.println("closest Vector of" + vec + " is " + v2);
+			
+			if(!(infFace.contains(vec) && infFace.contains(v2) && infFace.contains(p))){
 			ttemp = new Translate(getPinPositive(vec.angletoVector(v2)), ParameterController.getCornerRadius()
 					+ 0.5 * calculateD(vec.angletoVector(v2)) + ParameterController.getPinPRadius(), 0, 0);
+			
 			maxPinLength.add(ParameterController.getPinPRadius()*2 + calculateD(vec.angletoVector(v2)));
 			rttemp = new Rotate(ttemp, vec.bisectorOfAngleTo(v2), 0, 0, 1);
 			UnionAL.add(rttemp);
-			System.out.println("\n angle of" + vec + " to " + v2 + " is " + vec.bisectorOfAngleTo(v2) + "\n");
+			}
 		}
-		UnionAL.add(new Translate(new Scale(getBaseTile(),1,1,ParameterController.getBasePlateHeight()),0,0,ParameterController.getBasePlateHeight()/2));
-		UnionAL.add(new Translate(getBaseTileLow(Collections.max(maxPinLength)), 0, 0,0.5*ParameterController.getBasePlatePinCircleHeight()));
+		
+		UnionAL.add(getBaseTile(ParameterController.getBasePlateHeight(),false));
+		UnionAL.add(getBaseTileLow(Collections.max(maxPinLength)));
 
 		Union Unionbottom = new Union(UnionAL);
-		Translate sd = new Translate(new Scale(finalDifference, 1, 1,ParameterController.getHeight()-ParameterController.getBasePlateHeight()),0,0,ParameterController.getHeight()/2);
+		System.out.println(Unionbottom.printCommand());
+		//Translate sd = new Translate(new Scale(finalDifference, 1, 1,ParameterController.getHeight()-ParameterController.getBasePlateHeight()),0,0,ParameterController.getHeight()/2);
 
-		Union finalUnion = new Union(new ArrayList<ScadObject>(Arrays.asList(Unionbottom, sd)));
-		Translate result = new Translate(finalUnion, p, 0);
+		Union finalUnion = new Union(new ArrayList<ScadObject>(Arrays.asList(Unionbottom, finalDifference)));
+		Translate result = new Translate(finalUnion, 0, 0, 0);
 
 		return result.printCommand();
 		// return null;

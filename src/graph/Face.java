@@ -107,7 +107,7 @@ public class Face {
 
 		return Math.abs(area / 2.0);
 	}
-
+	
 	// create an identical copy of a Face
 	/**
 	 * Creates an identical copy of the Face without using a Pointer.
@@ -121,6 +121,21 @@ public class Face {
 		}
 
 		return nf;
+	}
+	
+	//Checks if Face contains a specific point/vector
+	/**
+	 * Checks if the given Vector is contained by the face
+	 * @param p Point(Vector)
+	 * @return Boolean
+	 */
+	public boolean contains(Vector p){
+		for (Vector vec : getPoints()){
+			if(p.equals(vec)){
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
