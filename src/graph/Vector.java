@@ -87,22 +87,7 @@ public class Vector {
 		return(new Line(new Vector(0,0), this));
 	}
   
-	// checking if two vectors are equal
-	/**
-	 * Checks if two Vectors are equal.
-	 * 
-	 * @param v
-	 *            the vector to be compared
-	 * @return a boolean stating if the two Vectors are equal
-	 */
-	public Boolean equals(Vector v) {
-		// just simple comparison
-		if (v.getX() == getX() && v.getY() == getY()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+	
 
 	// changing the length of the Vector
 	/**

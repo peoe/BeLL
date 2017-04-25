@@ -3,41 +3,88 @@ package graph;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+
 public class Graph {
 
 	// list of faces used for decomposition
 	private ArrayList<Face> faces = new ArrayList<>();
 	// list of points
-	private ArrayList<Vector> points = new ArrayList<>();
-	// list of lines
-	private ArrayList<Line> lines = new ArrayList<>();
-	
-	// infinte Face
-	private Face infFace = new Face();
+	private ArrayList<Node> nodes = new ArrayList<>();
+	// list of edges
+	private ArrayList<Edge> edges = new ArrayList<>();
 
-	// constructor takes list of lines, decomposes, generates pts
-	/**
-	 * Constructor for the Graph class. Takes an ArrayList of lines to generate
-	 * all contained faces and points.
-	 * 
-	 * @see Face, Line
-	 * 
-	 * @param vs
-	 *            ArrayList of lines
-	 */
+	// // list of faces used for decomposition
+	// private ArrayList<Face> faces = new ArrayList<>();
+	// // list of points
+	// private ArrayList<Vector> points = new ArrayList<>();
+	// // list of lines
+	// private ArrayList<Line> lines = new ArrayList<>();
+	//
+	// // infinte Face
+	// private Face infFace = new Face();
+	//
+	// // constructor takes list of lines, decomposes, generates pts
+	// /**
+	// * Constructor for the Graph class. Takes an ArrayList of lines to
+	// generate
+	// * all contained faces and points.
+	// *
+	// * @see Face, Line
+	// *
+	// * @param vs
+	// * ArrayList of lines
+	// */
 	public Graph(ArrayList<Line> ls) {
-		computeEdges(ls);
-		computeComplementaryLines();
-		computePoints();
-		cloneLines();
-		computeFaces();
+		processData(ls);
+		computeTwins();
+		completeEdges();
+		// computeEdges(ls);
+		// computeComplementaryLines();
+		// computePoints();
+		// cloneLines();
+		// computeFaces();
 	}
-	
+
 	// constructor for cloning graphs
 	/**
 	 * Constructor used for the purpose of cloning graphs.
 	 */
 	private Graph() {
+	}
+
+	// Creates Nodes and Edges out of the given Line ArrayList
+	/**
+	 * Creates Nodes and Edges out of the given Lines and stores them in the
+	 * specific field in the graph class
+	 * 
+	 * @param ls
+	 *            the list of lines
+	 */
+	private void processData(ArrayList<Line> ls) {
+		for (Line l : ls) {
+			edges.add(new Edge(createNode(l.getP1()),createNode(l.getP2())));
+		}
+
+	}
+
+	// function for creating a node using a point if this specific node hasn't
+	// been created yet
+	/**
+	 * Creates a node out of the given point if this node does not already exist
+	 * in the Graph class
+	 * 
+	 * @param p
+	 *            Point which needs to be converted into node
+	 */
+	private Node createNode(Vector p) {
+		for (Node n : nodes) {
+			if (n.getOrigin() == p) {
+				return n;
+			}
+		}
+			nodes.add(new Node(p));
+			return (nodes.get(nodes.size()-1));
 	}
 
 	// function for adding all given lines to the lines list
@@ -60,15 +107,85 @@ public class Graph {
 	 * Generates the complementary lines for the entirety of the already
 	 * existing lines.
 	 */
-	private void computeComplementaryLines() {
-		// getting the amount of lines to be added (size of getLines is going to be changed -> needs to be saved for later reuse)
-		int amount = getLines().size();
+	private void computeTwins() {
+		// getting the amount of lines to be added (size of getLines is going to
+		// be changed -> needs to be saved for later reuse)
+		int amount = edges.size();
 
 		// adding the complementary lines
 		for (int i = 0; i < amount; i++) {
-			getLines().add(getLines().get(i).getComplementaryLine());
+			edges.add(edges.get(i).generateTwin());
+			edges.get(i).setTwin(edges.get(edges.size() - 1));
+			edges.get(edges.size() - 1).setTwin(edges.get(i));
+			;
 		}
 	}
+
+	private void completeEdges() {
+		System.out.println(nodes.size());
+		ArrayList<ArrayList<Edge>> nodeEdges = new ArrayList<>(nodes.size());
+		for(int i = 0; i < nodes.size(); i++){
+			nodeEdges.add(new ArrayList<Edge>());
+		}
+		System.out.println(nodeEdges.size());
+		for(Edge e : edges){
+			nodeEdges.get(nodes.indexOf(e.getN1())).add(e);
+		}
+		
+		sortEdges(nodeEdges);
+		
+		System.out.println(nodes);
+		System.out.println(nodeEdges);
+		
+		for(ArrayList<Edge> e : nodeEdges){
+			for(int i=0; i<e.size();i++){
+				e.get(i).setPrev(e.get((i + 1) % e.size()).getTwin());
+				System.out.println(e.size());
+				System.out.println(Math.floorMod((i-1), e.size()));
+				e.get(i).getTwin().setNext(e.get(Math.floorMod((i - 1), e.size())));
+			}
+			
+		
+		}
+		
+		for(Edge e : edges){
+			System.out.println(e.getFaceEdges());
+		}
+//			setPointers(e);
+//			
+//			System.out.println(e);
+//			System.out.println(e);
+//			System.out.println(getClosestEdge(e));
+//			System.out.println(getFurthestEdge(e));
+//			System.out.println("\n");
+		
+	}
+	
+	private void sortEdges(ArrayList<ArrayList<Edge>> e){
+		//getAngles
+		ArrayList<Double> doubles = new ArrayList<>();
+		for(ArrayList<Edge> eList : e){
+			doubles.clear();
+		for (Edge edg: eList){
+			doubles.add(edg.toVector().angle());
+			double temp = 0.0;
+			Edge tempEdg = null;
+			for(int i=0; i< doubles.size()-1; i++){
+				for(int j=i+1; j<doubles.size();j++){
+				if(doubles.get(i) > doubles.get(j)){
+					temp = doubles.get(i);
+					doubles.set(i, doubles.get(j));
+					doubles.set(j,temp);
+					tempEdg = eList.get(i);
+					eList.set(i, eList.get(j));
+					eList.set(j, tempEdg);
+				}}
+			}
+		}
+		}
+		
+	}
+	
 
 	// function for computing all the points contained in the graph
 	/**
@@ -93,72 +210,106 @@ public class Graph {
 				p.remove(p.lastIndexOf(pt));
 			}
 		}
-		
+
 		// adding all points to the point list
 		for (int i = 0; i < p.size(); i++) {
 			getPoints().add(p.get(i));
 		}
 	}
-	
-	// function for getting all the lines pointing away from a certain point
+
+	// function for getting all the lines pointing away from a certain node
 	/**
 	 * Returns an ArrayList of all lines pointing away from the specified point.
-	 * @param p the specified point
-	 * @return ArrayList of lines point away from the given point
+	 * 
+	 * @param n
+	 *            the specified node
+	 * @return ArrayList of edges pointing away from the given node
 	 */
-	public ArrayList<Line> getLinesPointingAway(Vector p) {
-		ArrayList<Line> ls = new ArrayList<>();
+	public ArrayList<Edge> getEdgesPointingAway(Node n) {
+		ArrayList<Edge> edgs = new ArrayList<>();
 
-		// adding all lines where the starting point is equal to the given point
-		for (int i = 0; i < getLines().size(); i++) {			
-			if (getLines().get(i).getP1().equals(p)) {				
-				ls.add(getLines().get(i));
+		// adding all edges where the starting node is equal to the given node
+		for (int i = 0; i < edges.size(); i++) {
+			if (edges.get(i).getN1() == n) {
+				edgs.add(edges.get(i));
 			}
 		}
 
-		return ls;
+		return edgs;
 	}
-	
+
 	// function for calculating the closest line
 	/**
 	 * Returns the line that is closest to the specified line.
-	 * @param l the specified line
+	 * 
+	 * @param e
+	 *            the specified line
 	 * @return the line closest to the given line
 	 */
-	private Line getClosestLine(Line l) {
-		ArrayList<Line> ls = getLinesPointingAway(l.getP2());
+	private Edge getClosestEdge(Edge e) {
+		ArrayList<Edge> edgs = getEdgesPointingAway(e.getN2());
 		ArrayList<Double> doubles = new ArrayList<>();
-		
+
 		// calculating all angles
-		for (Line line : ls) {
-			doubles.add(l.angleTo(line));
+		for (Edge edg : edgs) {
+			doubles.add(e.angleTo(edg, true));
 		}
-		
+
 		// returning only the line with the smallest angle
-		return ls.get(doubles.indexOf(Collections.min(doubles)));
+		return edgs.get(doubles.indexOf(Collections.min(doubles)));
+	}
+
+	// function for calculating the closest line
+	/**
+	 * Returns the line that is closest to the specified line.
+	 * 
+	 * @param e
+	 *            the specified line
+	 * @return the line closest to the given line
+	 */
+	private Edge getFurthestEdge(Edge e) {
+		ArrayList<Edge> edgs = getEdgesPointingAway(e.getN2());
+		ArrayList<Double> doubles = new ArrayList<>();
+
+		// calculating all angles
+		for (Edge edg : edgs) {
+			doubles.add(e.angleTo(edg, false));
+		}
+
+		// returning only the line with the smallest angle
+		return edgs.get(doubles.indexOf(Collections.max(doubles)));
 	}
 	
+	private void setPointers(Edge e){
+		e.setNext(getFurthestEdge(e));
+		e.getTwin().setPrev(getClosestEdge(e).getTwin());
+	}
+
 	// function for cloning the list containing all lines
 	/**
 	 * Returns an identical copy of the lines list.
+	 * 
 	 * @return a copy of the lines list
 	 */
 	private ArrayList<Line> cloneLines() {
 		ArrayList<Line> ls = new ArrayList<>();
-		
+
 		// cloning all elements of the lines list
 		for (int i = 0; i < getLines().size(); i++) {
 			ls.add(getLines().get(i));
 		}
-		
+
 		return ls;
 	}
-	
+
 	// function for removing the specified lines from the specified list
 	/**
 	 * Removes all specified lines from the target list.
-	 * @param target the list being targeted
-	 * @param lines  the list of lines to be removed
+	 * 
+	 * @param target
+	 *            the list being targeted
+	 * @param lines
+	 *            the list of lines to be removed
 	 * @return target list without the specified lines
 	 */
 	private ArrayList<Line> removeVectors(ArrayList<Line> target, ArrayList<Line> lines) {
@@ -166,11 +317,11 @@ public class Graph {
 		for (Line l : lines) {
 			target.remove(l);
 		}
-		
+
 		// returning the target list
 		return target;
 	}
-	
+
 	// function for dissecting/decomposing the graph into its individual faces
 	/**
 	 * Computes all the faces contained in the graph and adds them to the list
@@ -193,11 +344,11 @@ public class Graph {
 
 			ol = ols.get(0);
 			ls.add(ol);
-			l = getClosestLine(ol);
+			l = getClosestEdge(ol);
 
 			while (!ol.equals(l)) {
 				ls.add(l);
-				l = getClosestLine(l);
+				l = getClosestEdge(l);
 			}
 
 			Face f = new Face();
@@ -205,7 +356,7 @@ public class Graph {
 			for (int i = 0; i < ls.size(); i++) {
 				f.getEdges().add(ls.get(i));
 			}
-			
+
 			removeVectors(ols, ls);
 			faces.add(f);
 		}
@@ -218,7 +369,7 @@ public class Graph {
 
 		// area of the Face to be removed
 		Double tbr = Collections.max(max);
-		
+
 		// cloning the infinite Face before removing it
 		infFace = faces.get(max.indexOf(tbr)).clone();
 
@@ -228,6 +379,7 @@ public class Graph {
 	// getter for faces list
 	/**
 	 * Returns the ArrayList containing all faces of the graph.
+	 * 
 	 * @return ArrayList of the graphs faces
 	 */
 	public ArrayList<Face> getFaces() {
@@ -237,6 +389,7 @@ public class Graph {
 	// getter for points list
 	/**
 	 * Returns the ArrayList containing all points of the graph.
+	 * 
 	 * @return ArrayList of the graphs points
 	 */
 	public ArrayList<Vector> getPoints() {
@@ -246,12 +399,13 @@ public class Graph {
 	// getter for lines list
 	/**
 	 * Returns the ArrayList containing all lines of the graph.
+	 * 
 	 * @return ArrayList of the graphs lines
 	 */
 	public ArrayList<Line> getLines() {
 		return lines;
 	}
-	
+
 	public Face getInfiniteFace() {
 		if (infFace != null) {
 			return infFace;
@@ -259,31 +413,40 @@ public class Graph {
 			return new Face();
 		}
 	}
-	
+
 	// function for cloning the graph
 	/**
 	 * Returns an exact copy of the graph.
 	 */
 	public Graph clone() {
 		Graph g = new Graph();
-		
+
 		// adding all faces
 		for (int i = 0; i < getFaces().size(); i++) {
 			g.getFaces().add(getFaces().get(i));
 		}
-		
+
 		// adding all points
 		for (int i = 0; i < getPoints().size(); i++) {
 			g.getPoints().add(getPoints().get(i));
 		}
-		
+
 		// adding all lines
 		for (int i = 0; i < getLines().size(); i++) {
 			g.getLines().add(getLines().get(i));
 		}
-		
+
 		// returning fully cloned graph
 		return g;
+	}
+
+	public Node getNodeByPoint(Vector v) {
+		for (int i = 0; i < nodes.size(); i++) {
+			if (nodes.get(i).getOrigin() == v) {
+				return nodes.get(i);
+			}
+		}
+		return null;
 	}
 
 }

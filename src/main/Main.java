@@ -58,13 +58,13 @@ public class Main {
 		
 		Graph gr = new Graph(face1.getEdges());
 
-		ParameterController.setParams(0.25, 10, 2,  3, 4, 2, 75, 4, 6, 1);
-		
-		Corner cor1 = new Corner(B,gr);
-		Cylinder cyl1 = new Cylinder(6,ParameterController.getPinPRadius(),ParameterController.getPinPRadius(), false);
-		Cylinder cyl2 = new Cylinder(1,ParameterController.getPinPRadius()+10,ParameterController.getPinPRadius()+10, false);
-		
-		ClipboardCopier.copyToClipboard(cor1.printCommand());
+//		ParameterController.setParams(0.25, 10, 2,  3, 4, 2, 75, 4, 6, 1);
+//		
+//		Corner cor1 = new Corner(B,gr);
+//		Cylinder cyl1 = new Cylinder(6,ParameterController.getPinPRadius(),ParameterController.getPinPRadius(), false);
+//		Cylinder cyl2 = new Cylinder(1,ParameterController.getPinPRadius()+10,ParameterController.getPinPRadius()+10, false);
+//		
+//		ClipboardCopier.copyToClipboard(cor1.printCommand());
 	}
 
 }

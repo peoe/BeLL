@@ -22,7 +22,7 @@ public class Corner implements ScadObject {
 	public Corner(Vector P, Graph f) {
 		p = P;
 		Corners = new ArrayList<>();
-		ArrayList<Line> vtemp = f.getLinesPointingAway(P);
+		ArrayList<Line> vtemp = f.getEdgesPointingAway(P);
 		System.out.println("\nvtemp:\n" + vtemp + "\n");
 		for (int i = 0; i < vtemp.size(); i++) {
 			Corners.add(vtemp.get(i).getP2());
