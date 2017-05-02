@@ -5,14 +5,23 @@ import java.util.ArrayList;
 public class Face {
 
 	// a list of all edge vectors
-	private ArrayList<Line> edges;
+	//private ArrayList<Line> edges;
+	private Edge incidentEdge;
+
+	public Edge getIncidentEdge() {
+		return incidentEdge;
+	}
+
+	public void setIncidentEdge(Edge incidentEdge) {
+		this.incidentEdge = incidentEdge;
+	}
 
 	// constructor
 	/**
 	 * Creates a new instance of the Face class.
 	 */
-	public Face() {
-		setEdges(new ArrayList<>());
+	public Face(Edge e) {
+		incidentEdge = e;
 	}
 
 	// get - set
@@ -22,19 +31,8 @@ public class Face {
 	 * 
 	 * @return ArrayList of all edges
 	 */
-	public ArrayList<Line> getEdges() {
-		return edges;
-	}
-
-	// setEdges
-	/**
-	 * Overrides the already existent ArrayList with a new one.
-	 * 
-	 * @param edges
-	 *            the ArrayList used to override
-	 */
-	public void setEdges(ArrayList<Line> edges) {
-		this.edges = edges;
+	public ArrayList<Edge> getEdges() {
+		return incidentEdge.getFaceEdges();
 	}
 
 	// printing all edges
@@ -59,28 +57,28 @@ public class Face {
 	 * 
 	 * @return all points contained in a face
 	 */
-	public ArrayList<Vector> getPoints() {
-		ArrayList<Vector> p = new ArrayList<>();
-
-		// adding all points
-		for (int i = 0; i < getEdges().size(); i++) {
-			p.add(getEdges().get(i).getP1());
-			p.add(getEdges().get(i).getP2());
-		}
-
-		// p.clone instead of p to avoid using pointers
-		@SuppressWarnings("unchecked")
-		ArrayList<Vector> pts = (ArrayList<Vector>) p.clone();
-
-		// removing of duplicates
-		for (Vector pt : pts) {
-			if (p.indexOf(pt) != p.lastIndexOf(pt)) {
-				p.remove(p.lastIndexOf(pt));
-			}
-		}
-
-		return p;
-	}
+//	public ArrayList<Vector> getPoints() {
+//		ArrayList<Vector> p = new ArrayList<>();
+//
+//		// adding all points
+//		for (int i = 0; i < getEdges().size(); i++) {
+//			p.add(getEdges().get(i).getP1());
+//			p.add(getEdges().get(i).getP2());
+//		}
+//
+//		// p.clone instead of p to avoid using pointers
+//		@SuppressWarnings("unchecked")
+//		ArrayList<Vector> pts = (ArrayList<Vector>) p.clone();
+//
+//		// removing of duplicates
+//		for (Vector pt : pts) {
+//			if (p.indexOf(pt) != p.lastIndexOf(pt)) {
+//				p.remove(p.lastIndexOf(pt));
+//			}
+//		}
+//
+//		return p;
+//	}
 
 	// calculate the area of a face using all points
 	/**
@@ -90,38 +88,37 @@ public class Face {
 	 * @return area of specific face
 	 */
 	public Double getArea() {
-		ArrayList<Vector> points = getPoints();
 
 		Double area = 0.0;
 
 		// stop if the face has to few points (e.g.: <= 2)
-		if (points.get(0) == null || points.size() < 3) {
-			return 0.0;
-		}
+//		if (points.get(0) == null || points.size() < 3) {
+//			return 0.0;
+//		}
 
 		// this is where the magic happens
-		for (int i = 0; i < points.size(); i++) {
-			area += (points.get(i).getY() + points.get((i + 1) % points.size()).getY())
-					* (points.get(i).getX() - points.get((i + 1) % points.size()).getX());
+		for (int i = 0; i < getEdges().size(); i++) {
+			area += (getEdges().get(i).getN1().getOrigin().getY() + getEdges().get(i).getNext().getN1().getOrigin().getY())
+					* (getEdges().get(i).getN1().getOrigin().getX() - getEdges().get(i).getNext().getN1().getOrigin().getX());
 		}
 
-		return Math.abs(area / 2.0);
+		return area / 2.0;
 	}
 	
 	// create an identical copy of a Face
 	/**
 	 * Creates an identical copy of the Face without using a Pointer.
 	 */
-	public Face clone() {
-		Face nf = new Face();
-
-		// clone all the edges
-		for (int i = 0; i < getEdges().size(); i++) {
-			nf.getEdges().add(getEdges().get(i));
-		}
-
-		return nf;
-	}
+//	public Face clone() {
+//		Face nf = new Face();
+//
+//		// clone all the edges
+//		for (int i = 0; i < getEdges().size(); i++) {
+//			nf.getEdges().add(getEdges().get(i));
+//		}
+//
+//		return nf;
+//	}
 	
 	//Checks if Face contains a specific point/vector
 	/**
@@ -129,13 +126,13 @@ public class Face {
 	 * @param p Point(Vector)
 	 * @return Boolean
 	 */
-	public boolean contains(Vector p){
-		for (Vector vec : getPoints()){
-			if(p.equals(vec)){
-				return true;
-			}
-		}
-		return false;
-	}
+//	public boolean contains(Vector p){
+//		for (Vector vec : getPoints()){
+//			if(p.equals(vec)){
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
 
 }

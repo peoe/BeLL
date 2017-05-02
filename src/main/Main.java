@@ -44,19 +44,22 @@ public class Main {
 		Line i = new Line(B, G);
 		Line j = new Line(E, G);
 		
-		Face face1 = new Face();
-		face1.getEdges().add(a);
-		face1.getEdges().add(b);
-		face1.getEdges().add(c);
-		face1.getEdges().add(d);
-		face1.getEdges().add(e);
-		face1.getEdges().add(f);
-		face1.getEdges().add(g);
-		face1.getEdges().add(h);
-		face1.getEdges().add(i);
-		face1.getEdges().add(j);
 		
-		Graph gr = new Graph(face1.getEdges());
+		ArrayList<Line> lines = new ArrayList<>();
+		
+		//Face face1 = new Face();
+		lines.add(a);
+		lines.add(b);
+		lines.add(c);
+		lines.add(d);
+		lines.add(e);
+		lines.add(f);
+		lines.add(g);
+		lines.add(h);
+		lines.add(i);
+		lines.add(j);
+		
+		Graph gr = new Graph(lines);
 
 //		ParameterController.setParams(0.25, 10, 2,  3, 4, 2, 75, 4, 6, 1);
 //		
