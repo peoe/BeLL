@@ -68,6 +68,10 @@ public class Edge {
 	public Vector toVector() {
 		return new Vector(n1.getOrigin(), n2.getOrigin());
 	}
+	
+	public double angleToEdge(Edge e){
+		return(this.toVector().angletoVector(e.toVector()));
+	}
 
 	// calculates the angle to another Line
 	/**

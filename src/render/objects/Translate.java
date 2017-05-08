@@ -1,10 +1,10 @@
-package rend.objects;
+package render.objects;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
 import graph.Vector;
-import rend.ScadObject;
+import render.ScadObject;
 
 public class Translate implements ScadObject {
 

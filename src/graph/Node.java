@@ -1,5 +1,7 @@
 package graph;
 
+import java.util.ArrayList;
+
 public class Node {
 
 	private Vector origin;
@@ -28,6 +30,18 @@ public class Node {
 
 	public String toString() {
 		return "(" + origin.getX() + "," + origin.getY() + ")";
+	}
+	
+	public ArrayList<Edge> getAdjacentEdges(){
+		ArrayList<Edge> adjacentEdges = new ArrayList<>();
+		Edge e = incidentEdge;
+		Edge edge = e;
+		do{
+			adjacentEdges.add(edge);
+			edge = edge.getTwin().getNext();
+			
+		} while( edge != incidentEdge);
+		return adjacentEdges;
 	}
 
 	// checking if two nodes are equal

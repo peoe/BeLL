@@ -1,11 +1,10 @@
-package rend.objects;
-
-import rend.ScadObject;
+package render.objects;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
 import graph.*;
+import render.ScadObject;
 
 public class Polygon implements ScadObject {
 

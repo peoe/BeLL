@@ -155,9 +155,8 @@ public class Vector {
 	 * @return the angle of the Vector in degree measure
 	 * @see Math
 	 */
-	public double angleD() { // normal atan2
-		double angle = Math.atan2(this.y, this.x);
-		return Math.toDegrees(angle);
+	public double angleInDegrees() { // normal atan2
+		return Math.toDegrees(angle());
 	}
 
 	// calculates the angle to another Vector in radian measure
@@ -187,11 +186,7 @@ public class Vector {
 	 * @return the angle of the old Vector to the given Vector anticlockwise
 	 */
 	public double angletoVectorD(Vector v2) {
-		double angle = v2.angle() - this.angle();
-		if (angle <= 0) {
-			angle = angle + 2 * Math.PI;
-		}
-		return Math.toDegrees(angle);
+		return Math.toDegrees(this.angletoVector(v2));
 	}
 
 	// calculates the bisector of the angle
@@ -203,7 +198,7 @@ public class Vector {
 	 * @return the bisector of the angle
 	 */
 	public double bisectorOfAngleTo(Vector v) {
-		return (this.angleD() + 0.5 * this.angletoVectorD(v));
+		return (this.angleInDegrees() + 0.5 * this.angletoVectorD(v));
 	}
 
 }

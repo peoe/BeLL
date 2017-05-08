@@ -1,4 +1,4 @@
-package rend;
+package render;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,21 +6,18 @@ import java.util.Collections;
 import java.util.concurrent.SynchronousQueue;
 
 import graph.*;
-import rend.objects.*;
+import render.objects.*;
 
 public class Corner implements ScadObject {
 
-	private Vector p;
-	private ArrayList<Vector> Corners;
-	private Face infFace;
+	private Node n;
 
-	public Corner(Vector P, ArrayList<Vector> C, double H) {
-		p = P;
-		Corners = C;
+	public Corner(Node N) {
+		n = N;
 	}
 
-	public Corner(Vector P, Graph f) {
-		p = P;
+	/*public Corner(Vector P, Graph f) {
+		n = P;
 		Corners = new ArrayList<>();
 		ArrayList<Line> vtemp = f.getEdgesPointingAway(P);
 		System.out.println("\nvtemp:\n" + vtemp + "\n");
@@ -29,27 +26,19 @@ public class Corner implements ScadObject {
 			// System.out.println("\nCorner added:\n" + Corners.get(i) + "\n");
 		}
 		infFace = f.getInfiniteFace();
-	}
+	}*/
 
-	public Vector getP() {
-		return p;
-	}
-
-	public void setP(Vector p) {
-		this.p = p;
-	}
-
-	public ArrayList<Vector> getCorners() {
+	/*public ArrayList<Vector> getCorners() {
 		return Corners;
 	}
 
 	public void setCorners(ArrayList<Vector> corners) {
 		Corners = corners;
-	}
+	} */
 
 	public Vector getClosestVector(Vector v) {
 		System.out.println("Original point" + v);
-		v = new Vector(p, v);
+		v = new Vector(n, v);
 		System.out.println("Vector out of point" + v);
 		System.out.println(Corners);
 
@@ -61,7 +50,7 @@ public class Corner implements ScadObject {
 
 		for (Vector vecs : Corners) {
 			if (!vecs.equals(v)) {
-				vs.add(new Vector(p, vecs));
+				vs.add(new Vector(n, vecs));
 			}
 		}
 
@@ -73,7 +62,7 @@ public class Corner implements ScadObject {
 		}
 		Vector min = vs.get((doubles.indexOf(Collections.min(doubles))));
 
-		return (min.add(p));
+		return (min.add(n));
 
 	}
 
@@ -98,12 +87,13 @@ public class Corner implements ScadObject {
 	}
 	
 	private static ScadObject getBaseTileLow(double l){
-		return(new Cylinder(ParameterController.getBasePlatePinCircleHeight(), ParameterController.getCornerRadius()+l, ParameterController.getCornerRadius()+l, false));
+		double h = l;
+		return(new Cylinder(ParameterController.getBasePlatePinCircleHeight(), h, h, false));
 	}
 
 	private static double calculateD(double a) {
-		return ((ParameterController.getPinDistance() + ParameterController.getPinNRadius()+ParameterController.getWallwidth()) / Math.sin(a / 2)
-				- ParameterController.getPinPRadius()-ParameterController.getCornerRadius());
+		return (((ParameterController.getPinDistance() + ParameterController.getPinNRadius()+0.5*ParameterController.getWallwidth()) / Math.sin(a / 2))
+				- ParameterController.getPinPRadius() + ParameterController.getCornerRadius());
 	}
 
 	private static ScadObject getPinPositive(double a) {
@@ -111,22 +101,23 @@ public class Corner implements ScadObject {
 		// ParameterController.getPinPRadius(), true);
 		// Translate tc1 = new Translate(c1, )
 		double d = calculateD(a);
-		if (d < (2 * ParameterController.getPinPRadius() + ParameterController.getPinMinLength())) {
-			d = 2 * ParameterController.getPinPRadius() + ParameterController.getPinMinLength();
+		double min = ParameterController.getPinMinLength() + ParameterController.getCornerRadius();
+		if (d < min) {
+			d = min;
 		}
-		Cube c1 = new Cube(d, ParameterController.getPinPWidth(), ParameterController.getBasePlateHeight()-ParameterController.getBasePlatePinCircleHeight(), true);
-		Cylinder cyl1 = new Cylinder(ParameterController.getBasePlateHeight()-ParameterController.getBasePlatePinCircleHeight(), ParameterController.getPinPRadius(), ParameterController.getPinPRadius(), true);
-		Translate tcyl1 = new Translate(cyl1, (0.5 * d + ParameterController.getPinPRadius()), 0, 0);
+		Cube baseCube = new Cube(d, ParameterController.getPinPWidth(), ParameterController.getBasePlateHeight()-ParameterController.getBasePlatePinCircleHeight(), true);
+		Cylinder pinCylinder = new Cylinder(ParameterController.getBasePlateHeight()-ParameterController.getBasePlatePinCircleHeight(), ParameterController.getPinPRadius(), ParameterController.getPinPRadius(), true);
+		Translate tPinCylinder = new Translate(pinCylinder, (0.5 * d + ParameterController.getPinPRadius()), 0, 0);
 
-		Cube fill = new Cube(1, ParameterController.getPinPWidth(), ParameterController.getBasePlateHeight()-ParameterController.getBasePlatePinCircleHeight(), true);
-		Translate tfill = new Translate(fill, d * 0.5, 0, 0);
-		Union pinUnion = new Union(new ArrayList<>(Arrays.asList(c1, tcyl1, tfill)));
-		Translate result = new Translate(pinUnion, -(ParameterController.getPinPRadius()), 0, 0.5*(ParameterController.getBasePlateHeight()-ParameterController.getBasePlatePinCircleHeight()));
-
+		Cube fillCube = new Cube(1, ParameterController.getPinPWidth(), ParameterController.getBasePlateHeight()-ParameterController.getBasePlatePinCircleHeight(), true);
+		Translate tFillCube = new Translate(fillCube, d * 0.5, 0, 0);
+		Union pinUnion = new Union(new ArrayList<>(Arrays.asList(baseCube, tPinCylinder, tFillCube)));
+		Translate result = new Translate(pinUnion, 0.5*d, 0, 0.5*(ParameterController.getBasePlateHeight()+ParameterController.getBasePlatePinCircleHeight()));
+		
 		return result;
 	}
 
-	private static ScadObject getMinusTileCorner() {// r=10 w=3 e=0.25
+	private static ScadObject getMinusTileCorner(double angle) {// r=10 w=3 e=0.25
 		double r = ParameterController.getCornerRadius();
 		double w = ParameterController.getWallwidth() / 2;
 		double e = ParameterController.getE();
@@ -138,51 +129,51 @@ public class Corner implements ScadObject {
 		temp.add(tc1);
 		temp.add(tc2);
 
-		return (new Difference(temp));
+		return (new Rotate(new Difference(temp),angle, 0, 0, 1));
 	}
 
 	@Override
 	public String printCommand() {
 		// First part Wall fitting segment
-		ArrayList<ScadObject> DifferenceAL = new ArrayList<>();
-		Vector v;
-		DifferenceAL.add(getBaseTile(1,true));
-		
-		for (int i = 0; i < Corners.size(); i++) {
-			v = new Vector(p, Corners.get(i));
+		ArrayList<ScadObject> cornerBaseDifference = new ArrayList<>();
+		cornerBaseDifference.add(getBaseTile(1,true));
+		ArrayList<Edge> cornerEdges = n.getAdjacentEdges();
+		for (Edge cornerEdge : cornerEdges){ 
 			// System.out.println("Vector to Line: " + v.toLine());
-			 System.out.println(new Wall(v.toLine()).getPresentationWall().printCommand());
-			DifferenceAL.add(new Wall(v.toLine()));
-			DifferenceAL.add(new Rotate(getMinusTileCorner(), v.angleD(), 0, 0, 1));
+//			 System.out.println("//Wall of " + cornerEdge + "\n" +(new Wall(cornerEdge)).printCommand());
+			cornerBaseDifference.add(new Wall(cornerEdge));
+			cornerBaseDifference.add(getMinusTileCorner(cornerEdge.toVector().angleInDegrees()));
 			// System.out.println("\nangle to: " + Corners.get(i) + " is " +
 			// v.angleD() + "\n" );
 		}
 		
-		ScadObject finalDifference = new Translate(new Scale(new Difference(DifferenceAL), 1, 1, ParameterController.getHeight()-ParameterController.getBasePlateHeight()), 0, 0, 0.5*(ParameterController.getHeight()-ParameterController.getBasePlateHeight()));
+		ScadObject finalDifference = new Translate(new Scale(new Difference(cornerBaseDifference), 1, 1, ParameterController.getHeight()-ParameterController.getBasePlateHeight()), 0, 0, 0.5*(ParameterController.getHeight()-ParameterController.getBasePlateHeight()));
+
 		// Second part base plate fitting segment
-		Vector v2;
-		Translate ttemp;
+		ScadObject ttemp;
 		Rotate rttemp;
-		ArrayList<ScadObject> UnionAL = new ArrayList<>();
+		ArrayList<ScadObject> unionArrayList = new ArrayList<>();
 		ArrayList<Double> maxPinLength = new ArrayList<>();
 	
-		for (Vector vec : Corners) {
-			v2 = this.getClosestVector(vec);
+		for (Edge cornerEdge : cornerEdges) {
+			//v2 = this.getClosestVector(vec);
+			Edge prevEdge = cornerEdge.getPrev().getTwin();
+			if(!(cornerEdge.getFace().getArea()<0)){
+			double edgeAngel = cornerEdge.angleToEdge(prevEdge);
+			ttemp = getPinPositive(edgeAngel);
+			System.out.println(edgeAngel);
+			System.out.println("TILE length should be:  " + calculateD(edgeAngel) + "\n" + ttemp.printCommand()  );
 			
-			if(!(infFace.contains(vec) && infFace.contains(v2) && infFace.contains(p))){
-			ttemp = new Translate(getPinPositive(vec.angletoVector(v2)), ParameterController.getCornerRadius()
-					+ 0.5 * calculateD(vec.angletoVector(v2)) + ParameterController.getPinPRadius(), 0, 0);
-			
-			maxPinLength.add(ParameterController.getPinPRadius()*2 + calculateD(vec.angletoVector(v2)));
-			rttemp = new Rotate(ttemp, vec.bisectorOfAngleTo(v2), 0, 0, 1);
-			UnionAL.add(rttemp);
+			maxPinLength.add(2*ParameterController.getPinPRadius()+ calculateD(edgeAngel));
+			rttemp = new Rotate(ttemp, cornerEdge.toVector().bisectorOfAngleTo(prevEdge.toVector()), 0, 0, 1);
+			unionArrayList.add(rttemp);
 			}
 		}
 		
-		UnionAL.add(getBaseTile(ParameterController.getBasePlateHeight(),false));
-		UnionAL.add(getBaseTileLow(Collections.max(maxPinLength)));
+		unionArrayList.add(getBaseTile(ParameterController.getBasePlateHeight(),false));
+		unionArrayList.add(getBaseTileLow(Collections.max(maxPinLength)));
 
-		Union Unionbottom = new Union(UnionAL);
+		Union Unionbottom = new Union(unionArrayList);
 		System.out.println(Unionbottom.printCommand());
 		//Translate sd = new Translate(new Scale(finalDifference, 1, 1,ParameterController.getHeight()-ParameterController.getBasePlateHeight()),0,0,ParameterController.getHeight()/2);
 
@@ -190,7 +181,7 @@ public class Corner implements ScadObject {
 		Translate result = new Translate(finalUnion, 0, 0, 0);
 
 		return result.printCommand();
-		// return null;
+		// return null; 
 	}
 
 }

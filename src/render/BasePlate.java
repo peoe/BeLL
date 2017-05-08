@@ -1,4 +1,4 @@
-package rend;
+package render;
 
 public class BasePlate implements ScadObject{
 

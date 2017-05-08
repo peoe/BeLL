@@ -1,9 +1,9 @@
-package rend.objects;
+package render.objects;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
-import rend.ScadObject;
+import render.ScadObject;
 
 public class Rotate implements ScadObject {
 

@@ -1,8 +1,8 @@
-package rend.objects;
+package render.objects;
 
 import java.util.Locale;
 
-import rend.ScadObject;
+import render.ScadObject;
 
 public class Cube implements ScadObject {
 

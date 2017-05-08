@@ -14,8 +14,8 @@ import graph.Line;
 import io.ClipboardCopier;
 import io.DXFReader;
 import io.ScadPrinter;
-import rend.*;
-import rend.objects.*;
+import render.*;
+import render.objects.*;
 
 public class Main {
 
@@ -60,8 +60,13 @@ public class Main {
 		lines.add(j);
 		
 		Graph gr = new Graph(lines);
+		System.out.println(gr.getNodes().get(0) + "\n" + gr.getNodes().get(0).getAdjacentEdges());
+		
+		ParameterController.setParams(0.25, 10, 2,  3, 4, 2, 75, 4, 6, 1);
+		ClipboardCopier.copyToClipboard(gr.outputCorners().printCommand());
+		//ClipboardCopier.copyToClipboard(new Corner(gr.getNodes().get(1)).printCommand());
 
-//		ParameterController.setParams(0.25, 10, 2,  3, 4, 2, 75, 4, 6, 1);
+		
 //		
 //		Corner cor1 = new Corner(B,gr);
 //		Cylinder cyl1 = new Cylinder(6,ParameterController.getPinPRadius(),ParameterController.getPinPRadius(), false);

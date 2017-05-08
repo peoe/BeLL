@@ -1,14 +1,14 @@
-package rend;
+package render;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import rend.objects.Cube;
-import rend.objects.Cylinder;
-import rend.objects.Difference;
-import rend.objects.Scale;
-import rend.objects.Translate;
-import rend.objects.Union;
+import render.objects.Cube;
+import render.objects.Cylinder;
+import render.objects.Difference;
+import render.objects.Scale;
+import render.objects.Translate;
+import render.objects.Union;
 
 public interface ScadObject {
 

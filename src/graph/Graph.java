@@ -5,6 +5,9 @@ import java.util.Collections;
 
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 
+import render.*;
+import render.objects.*;
+
 public class Graph {
 
 	// list of faces used for decomposition
@@ -58,6 +61,7 @@ public class Graph {
 		computeTwins();
 		completeEdges();
 		completeFaces();
+		completeNodes();
 		// computeEdges(ls);
 		// computeComplementaryLines();
 		// computePoints();
@@ -197,6 +201,17 @@ public class Graph {
 		for (Face f : faces)
 			System.out.println("test:" + f.getIncidentEdge().getFaceEdges() + " area: " + f.getIncidentEdge().getFace().getArea());
 
+	}
+	
+	public void completeNodes(){
+		for(Node n : nodes){
+			for(Edge e: edges){
+				if(n==e.getN1()){
+					n.setIncidentEdge(e);
+					break;
+				}
+			}
+		}
 	}
 
 	private void sortEdges(ArrayList<ArrayList<Edge>> e) {
@@ -441,6 +456,18 @@ public class Graph {
 //		// returning fully cloned graph
 //		return g;
 //	}
+	
+	public ScadObject outputCorners(){
+		ArrayList<ScadObject> objectList = new ArrayList<>();
+		for(Node n : nodes){
+			objectList.add(new Translate(new Corner(n),n.getOrigin(),0));
+		}
+		for(Edge e : edges){
+			objectList.add(new Wall(e).getPresentationWall());
+		}
+		return (new Union(objectList));
+		
+	}
 
 	public Node getNodeByPoint(Vector v) {
 		for (int i = 0; i < nodes.size(); i++) {

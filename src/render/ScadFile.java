@@ -1,9 +1,9 @@
-package rend;
+package render;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import rend.objects.*;
+import render.objects.*;
 
 public class ScadFile implements ScadObject {
 	private String Filetext;
