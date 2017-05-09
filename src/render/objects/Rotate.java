@@ -77,11 +77,11 @@ public class Rotate implements ScadObject {
 	 * Prints the String used for creating the Rotate object.
 	 */
 	@Override
-	public String printCommand() {
+	public String toString() {
 		String objectsprint = "";
 		// rotate every ScadObject in the ArrayList
 		for (ScadObject o : objects) {
-			objectsprint = objectsprint.concat("\t" + o.printCommand());
+			objectsprint = objectsprint.concat("\t" + o.toString());
 		}
 		String s = String.format(Locale.UK, rotate, a, x, y, z, objectsprint);
 		return s;

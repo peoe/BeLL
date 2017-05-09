@@ -105,6 +105,14 @@ public class Face {
 		return area / 2.0;
 	}
 	
+	public ArrayList<Node> getNodes() {
+		ArrayList<Node> returnNodes = new ArrayList<>();
+		ArrayList<Edge> faceEdges = getIncidentEdge().getFaceEdges();
+		for (Edge e : faceEdges){
+			returnNodes.add(e.getN1());
+		}
+		return returnNodes;
+	}
 	// create an identical copy of a Face
 	/**
 	 * Creates an identical copy of the Face without using a Pointer.

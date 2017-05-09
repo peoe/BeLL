@@ -11,14 +11,11 @@ public class Polygon implements ScadObject {
 	// the ArrayList of Points used by the Polygon
 	private ArrayList<Vector> points;
 
-	// the height of the Polygon
-	private double height;
-
 	// the layout String for creating the Polygon
 	final static String polygon = "polygon(%1s,10);\n";
 
 	// the layout String for extruding the Polygon
-	final static String linear_extrude = "linear_extrude(%1$.2f){\n%s}";
+	final static String linear_extrude = "linear_extrude(%1$.2f, center = true){\n%2$s}";
 
 	// constructor using ArrayList of points
 	/**
@@ -29,6 +26,14 @@ public class Polygon implements ScadObject {
 	 */
 	public Polygon(ArrayList<Vector> points) {
 		this.points = points;
+	}
+	
+	public Polygon(Edge e){
+		points = new ArrayList<>();
+		ArrayList<Node> nodes = e.getFace().getNodes();
+		for(Node n : nodes){
+			getPoints().add(n.getOrigin());
+		}
 	}
 
 	// getter - setter
@@ -58,10 +63,18 @@ public class Polygon implements ScadObject {
 	 * Prints a String used for creating the Polygon.
 	 */
 	@Override
-	public String printCommand() {
-		String s = String.format(Locale.UK, polygon, points.toString());
-
-		return (String.format(Locale.UK, linear_extrude, height, s));
+	public String toString() {
+		String s= "[";
+		for (Vector p : points){
+		s = s.concat(p.toScadString() + ", ");
+		}
+		s = s.substring(0,s.length()-2);
+		s = s.concat("]");
+		
+		
+		 s = String.format(Locale.UK, polygon, s);
+		
+		return (String.format(Locale.UK, linear_extrude, 1.0, s));
 	}
 
 }

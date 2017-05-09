@@ -53,12 +53,12 @@ public class Intersection implements ScadObject {
 	 * Prints a String used for creating the Intersection.
 	 */
 	@Override
-	public String printCommand() {
+	public String toString() {
 		String objectsprint = "";
 		// enlists all ScadObjects from the ArrayList
 		// Intersects all objects from the first
 		for (ScadObject o : objects) {
-			objectsprint = objectsprint.concat("\t" + o.printCommand());
+			objectsprint = objectsprint.concat("\t" + o.toString());
 		}
 		String s = String.format(Locale.UK, intersection, objectsprint);
 		return s;

@@ -53,11 +53,11 @@ public class Union implements ScadObject {
 	 * Prints a String used for creating the Union object.
 	 */
 	@Override
-	public String printCommand() {
+	public String toString() {
 		String objectsprint = "";
 		// adds all the ScadObjects to the Union object
 		for (ScadObject o : objects) {
-			objectsprint = objectsprint.concat("\t" + o.printCommand());
+			objectsprint = objectsprint.concat("\t" + o.toString());
 		}
 		String s = String.format(Locale.UK, union, objectsprint);
 		return s;

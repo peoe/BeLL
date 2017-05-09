@@ -1,6 +1,6 @@
 package render;
 
-public class ParameterController {
+public class Params {
 
 	/*
 	 * e - epsilon, the distance used for measuring the distance in between objects
@@ -139,16 +139,16 @@ public class ParameterController {
 	 * @param Height the value for the height parameter
 	 * @param PinHeight the value for the pin height parameter
 	 */
-	public static void setParams(double E, double CornerRadius, double PinMinLength, double PinNWidth, double PinNRadius, double PinDistance, double Height, double PinHeight, double BasePlateHeight, double BasePlatePinCircleHeight){
+	public static void setParams(double E, double CornerRadius, double PinMinLength, double PinNWidth, double PinPRadius, double PinDistance, double Height, double PinHeight, double BasePlateHeight, double BasePlatePinCircleHeight){
 		e = E;
 		cornerRadius = CornerRadius;
-		pinMinLength = PinMinLength;
+		pinMinLength = PinMinLength+CornerRadius;
 		pinNWidth = PinNWidth;
-		pinNRadius = PinNRadius;
+		pinNRadius = PinPRadius + e;
 		pinDistance = PinDistance;
 		height = Height;
 		pinHeight = PinHeight;
-		pinPRadius = pinNRadius - e;
+		pinPRadius = PinPRadius;
 		pinPWidth = pinNWidth - 2*e;
 		basePlateHeight = BasePlateHeight;
 		basePlatePinCircleHeight = BasePlatePinCircleHeight;

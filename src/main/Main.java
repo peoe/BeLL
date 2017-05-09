@@ -60,19 +60,14 @@ public class Main {
 		lines.add(j);
 		
 		Graph gr = new Graph(lines);
-		System.out.println(gr.getNodes().get(0) + "\n" + gr.getNodes().get(0).getAdjacentEdges());
+		Params.setParams(0.75, 10, 2,  3, 4, 2, 75, 4, 4, 1);
+		//ClipboardCopier.copyToClipboard(gr.outputCorners().printCommand());
+	//	ClipboardCopier.copyToClipboard(new Corner(gr.getNodes().get(1)).toString());
+		ClipboardCopier.copyToClipboard(new PinPositive(gr.getEdges().get(0)).getPinObject(true).toString());
 		
-		ParameterController.setParams(0.25, 10, 2,  3, 4, 2, 75, 4, 6, 1);
-		ClipboardCopier.copyToClipboard(gr.outputCorners().printCommand());
-		//ClipboardCopier.copyToClipboard(new Corner(gr.getNodes().get(1)).printCommand());
-
-		
-//		
-//		Corner cor1 = new Corner(B,gr);
-//		Cylinder cyl1 = new Cylinder(6,ParameterController.getPinPRadius(),ParameterController.getPinPRadius(), false);
-//		Cylinder cyl2 = new Cylinder(1,ParameterController.getPinPRadius()+10,ParameterController.getPinPRadius()+10, false);
-//		
-//		ClipboardCopier.copyToClipboard(cor1.printCommand());
+//		Cylinder cube1 = new Cylinder(5,5,5, true);
+//		System.out.println(cube1.printCommand());
+//		System.out.println(cube1.resizeCylinder(2,5,1).printCommand());
 	}
 
 }

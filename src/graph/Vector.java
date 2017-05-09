@@ -78,6 +78,14 @@ public class Vector {
 	public String toString() {
 		return "(" + getX() + "," + getY() + ")";
 	}
+	
+	// printing the position vector scad definition
+		/**
+		 * Returns a String describing the Vector.
+		 */
+		public String toScadString() {
+			return "[" + getX() + "," + getY() + "]";
+		}
 
 	/**
 	 * Converts a vector to a line

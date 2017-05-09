@@ -43,7 +43,7 @@ public class ScadFile implements ScadObject {
 	}
 
 	@Override
-	public String printCommand() {
+	public String toString() {
 		// TODO Auto-generated method stub
 		return null;
 	}

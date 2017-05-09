@@ -118,13 +118,18 @@ public class Cube implements ScadObject {
 		this.z = Z;
 		this.center = false;
 	}
+	
+	//Add margins to the sides of a cube
+	public ScadObject resize(double xn, double xp, double yn, double yp, double zn, double zp){
+		return (new Translate(new Cube(this.getX()+xn+xp,this.getY()+yn+yp,this.getZ()+zn+zp,true), 0.5*xp-0.5*xn, 0.5*yp-0.5*yn, 0.5*zp-0.5*zn));
+	}
 
 	// printing the command for creating the cube
 	/**
 	 * Returns a String which can be used to create the Cube.
 	 */
 	@Override
-	public String printCommand() {
+	public String toString() {
 		// Locale.UK is required to obtain the '.' as the decimal indicator
 		return (String.format(Locale.UK, cube, x, y, z, center));
 	}

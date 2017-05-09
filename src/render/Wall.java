@@ -30,9 +30,9 @@ public class Wall implements ScadObject {
 	 * @return the minus tile
 	 */
 	private ScadObject getMinusTile(boolean angle){
-	 Cube baseCube = new Cube(ParameterController.getCornerRadius(),ParameterController.getWallwidth()/2-2*ParameterController.getE(),1, true);
-	 Translate tBaseCube = new Translate(baseCube,ParameterController.getCornerRadius()+ParameterController.getE(),0,0);
-	 Cube subtractCube = new Cube(2*ParameterController.getCornerRadius(),ParameterController.getCornerRadius(),1,true);
+	 Cube baseCube = new Cube(Params.getCornerRadius(),Params.getWallwidth()/2-2*Params.getE(),1, true);
+	 Translate tBaseCube = new Translate(baseCube,Params.getCornerRadius()+Params.getE(),0,0);
+	 Cube subtractCube = new Cube(2*Params.getCornerRadius(),Params.getCornerRadius(),1,true);
 	 ArrayList<ScadObject> cubeDifference = new ArrayList<>();
 	 cubeDifference.add(subtractCube);
 	 cubeDifference.add(tBaseCube);
@@ -45,8 +45,8 @@ public class Wall implements ScadObject {
 	
 	//getting a Wall Tile which is not used for differences
 	public ScadObject getPresentationWall(){
-		Scale s1 = new Scale(this,1,1,ParameterController.getHeight()-ParameterController.getBasePlateHeight());
-		Translate t1 = new Translate(s1, e.getN1().getOrigin(), ParameterController.getBasePlateHeight()+(ParameterController.getHeight()-ParameterController.getBasePlateHeight())/2 );
+		Scale s1 = new Scale(this,1,1,Params.getHeight()-Params.getBasePlateHeight());
+		Translate t1 = new Translate(s1, e.getN1().getOrigin(), Params.getBasePlateHeight()+(Params.getHeight()-Params.getBasePlateHeight())/2 );
 		return t1;
 	}
 	
@@ -55,10 +55,10 @@ public class Wall implements ScadObject {
 	 * Prints a String which can be used to create the Wall object.
 	 */
 	@Override
-	public String printCommand() {
+	public String toString() {
 		Vector wallVector = e.toVector();
 		//Vector vcube = new Vector(wVec.getLength(),0);
-		Cube rawWallCube = new Cube(wallVector.getLength(), ParameterController.getWallwidth(), 1, true);
+		Cube rawWallCube = new Cube(wallVector.getLength(), Params.getWallwidth(), 1, true);
 		
 		double wallAngle = wallVector.angleInDegrees();
 		//Rotate rtemp = new Rotate(temp, angle, 0, 0, 1);
@@ -77,7 +77,7 @@ public class Wall implements ScadObject {
 		Translate trFinalWall = new Translate(rFinalWall, wallVector.multiply(0.5), 0);
 		
 		// return Unionwalltemp.printcommand();
-		return trFinalWall.printCommand();
+		return trFinalWall.toString();
 	}
 
 }

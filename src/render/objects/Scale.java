@@ -67,11 +67,11 @@ public class Scale implements ScadObject {
 	 * Prints a String used for creating the Scale object.
 	 */
 	@Override
-	public String printCommand() {
+	public String toString() {
 		String objectsprint = "";
 		// adds all ScadObjects to the Scale
 		for (ScadObject o : objects) {
-			objectsprint = objectsprint.concat("\t" + o.printCommand());
+			objectsprint = objectsprint.concat("\t" + o.toString());
 		}
 		String s = String.format(Locale.UK, scale, x, y, z, objectsprint);
 		return s;

@@ -176,11 +176,11 @@ public class Translate implements ScadObject {
 	 * Prints the String used for creating the Translate object.
 	 */
 	@Override
-	public String printCommand() {
+	public String toString() {
 		String objectsprint = "";
 		// adds all the ScadObjects to the Translation
 		for (ScadObject o : objects) {
-			objectsprint = objectsprint.concat("\t" + o.printCommand());
+			objectsprint = objectsprint.concat("\t" + o.toString());
 		}
 		String s = String.format(Locale.UK, translate, x, y, z, objectsprint);
 		return s;
