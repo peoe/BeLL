@@ -60,10 +60,10 @@ public class Main {
 		lines.add(j);
 		
 		Graph gr = new Graph(lines);
-		Params.setParams(0.75, 10, 2,  3, 4, 2, 75, 4, 4, 1);
+		Params.setParams(0.75, 10, 2,  4, 4, 2, 75, 4, 4, 1);
 		//ClipboardCopier.copyToClipboard(gr.outputCorners().printCommand());
 	//	ClipboardCopier.copyToClipboard(new Corner(gr.getNodes().get(1)).toString());
-		ClipboardCopier.copyToClipboard(new PinPositive(gr.getEdges().get(0)).getPinObject(true).toString());
+		ClipboardCopier.copyToClipboard(new Pin(gr.getEdges().get(0), 0).getPinObject().toString());
 		
 //		Cylinder cube1 = new Cylinder(5,5,5, true);
 //		System.out.println(cube1.printCommand());

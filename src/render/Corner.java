@@ -16,37 +16,6 @@ public class Corner implements ScadObject {
 		n = N;
 	}
 
-	/*
-	 * public Corner(Vector P, Graph f) { n = P; Corners = new ArrayList<>();
-	 * ArrayList<Line> vtemp = f.getEdgesPointingAway(P);
-	 * System.out.println("\nvtemp:\n" + vtemp + "\n"); for (int i = 0; i <
-	 * vtemp.size(); i++) { Corners.add(vtemp.get(i).getP2()); //
-	 * System.out.println("\nCorner added:\n" + Corners.get(i) + "\n"); }
-	 * infFace = f.getInfiniteFace(); }
-	 */
-
-	/*
-	 * public ArrayList<Vector> getCorners() { return Corners; }
-	 * 
-	 * public void setCorners(ArrayList<Vector> corners) { Corners = corners; }
-	 */
-
-	// public void generateMinusTile(){
-	// Cube c1 = new Cube(20,10,1, true);
-	// Cube c2 = new Cube(10,9.5,1, true);
-	// Translate tc2 = new Translate(Cube c2 = new Cube(10,9.5,1, true), 10, 0,
-	// 0)
-	// ArrayList<ScadObject> temp = new ArrayList<>();
-	// temp.add(c1);
-	// temp.add(tc2);
-	// MinusTile = new Difference(temp);
-	// }
-	//
-	//
-	// final Translate PinPositive = new Translate(new Union(new
-	// ArrayList<>(Arrays.asList(new Cube(3,1.5,1, true),new Translate(), 5, 0,
-	// 0)))), -3.4375, 0, 0);
-
 	private static ScadObject getBaseTile(double height, boolean center) {
 		return (new Cylinder(height, Params.getCornerRadius(), 
 				center));
@@ -74,12 +43,7 @@ public class Corner implements ScadObject {
 		cornerBaseDifference.add(getBaseTile(1, true));
 		ArrayList<Edge> cornerEdges = n.getAdjacentEdges();
 		for (Edge cornerEdge : cornerEdges) {
-			// System.out.println("Vector to Line: " + v.toLine());
-			// System.out.println("//Wall of " + cornerEdge + "\n" +(new
-			// Wall(cornerEdge)).printCommand());
 			cornerBaseDifference.add(getMinusTileCorner(cornerEdge.toVector().angleInDegrees()));
-			// System.out.println("\nangle to: " + Corners.get(i) + " is " +
-			// v.angleD() + "\n" );
 		}
 
 		ScadObject finalDifference = new Translate(
@@ -93,7 +57,7 @@ public class Corner implements ScadObject {
 		
 		ArrayList<ScadObject> unionArrayList = new ArrayList<>();
 		for (Edge cornerEdge : cornerEdges) {
-			unionArrayList.add(new PinPositive(cornerEdge));
+			unionArrayList.add(new Pin(cornerEdge, 0.0));
 		}
 		unionArrayList.add(getBaseTile(Params.getBasePlateHeight(), false));
 
