@@ -61,7 +61,8 @@ public class Main {
 		
 		Graph gr = new Graph(lines);
 		Params.setParams(0.75, 10, 2,  4, 4, 2, 75, 4, 4, 1);
-		ClipboardCopier.copyToClipboard(new Corner(gr.getNodes().get(0)).toString());
+		System.out.println(gr.getEdges().get(2));
+		ClipboardCopier.copyToClipboard(gr.outputCorners().toString());
 		
 	}
 

@@ -211,7 +211,7 @@ public class Graph {
 			objectList.add(new Translate(new Corner(n),n.getOrigin(),0));
 		}
 		for(Edge e : edges){
-			objectList.add(new Wall(e).getPresentationWall());
+			objectList.add(new Wall(e));
 		}
 		return (new Union(objectList));
 		
