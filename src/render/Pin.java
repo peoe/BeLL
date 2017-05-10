@@ -45,6 +45,7 @@ public class Pin implements ScadObject {
 		this.epsilon = epsilon;
 
 	}
+
 	
 	//calculates the angle to the next Edge anti-clockwise
 	private double calculateAngle(){
@@ -67,7 +68,7 @@ public class Pin implements ScadObject {
 		//minumum length
 		double min = Params.getPinMinLength() + Params.getCornerRadius();
 		//length calculated through trigonometry 
-		double d = ((Params.getPinDistance() + Params.getPinPRadius() + getEpsilon()
+		double d = ((Params.getPinDistance() + Params.getPinPRadius() + Params.getE()
 				+ 0.5 * Params.getWallwidth()) / Math.sin(calculateAngle() / 2)) - Params.getPinPRadius()
 				+ Params.getCornerRadius();
 		if (d < min) {
@@ -145,6 +146,9 @@ public class Pin implements ScadObject {
 			unionArrayList.add(new Difference(pinIntersection));
 		}
 		//return of the Union of all pre-defined tiles
+		
+		//adds the cylinder of the cornerTile
+		unionArrayList.add(new Translate(new CornerBaseTile(Params.getBasePlateHeight(),getEpsilon()), 0, 0, 0.5*Params.getBasePlateHeight()));
 		return (new Union(unionArrayList));
 	}
 	
