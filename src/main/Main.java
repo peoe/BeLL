@@ -61,13 +61,8 @@ public class Main {
 		
 		Graph gr = new Graph(lines);
 		Params.setParams(0.75, 10, 2,  4, 4, 2, 75, 4, 4, 1);
-		//ClipboardCopier.copyToClipboard(gr.outputCorners().printCommand());
-	//	ClipboardCopier.copyToClipboard(new Corner(gr.getNodes().get(1)).toString());
-		ClipboardCopier.copyToClipboard(new Corner(gr.getNodes().get(0), Params.getE()).toString());
+		ClipboardCopier.copyToClipboard(new Corner(gr.getNodes().get(0)).toString());
 		
-//		Cylinder cube1 = new Cylinder(5,5,5, true);
-//		System.out.println(cube1.printCommand());
-//		System.out.println(cube1.resizeCylinder(2,5,1).printCommand());
 	}
 
 }
