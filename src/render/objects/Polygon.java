@@ -11,11 +11,17 @@ public class Polygon implements ScadObject {
 	// the ArrayList of Points used by the Polygon
 	private ArrayList<Vector> points;
 
+	// delta value for offset used in basePlate calculation
+	private double delta;
+
 	// the layout String for creating the Polygon
 	final static String polygon = "polygon(%1s,10);\n";
 
 	// the layout String for extruding the Polygon
 	final static String linear_extrude = "linear_extrude(%1$.2f, center = true){\n%2$s}";
+
+	// scad string for the delta offset
+	final static String OFFSET = "offset(%1$.3f){%2$s}";
 
 	// constructor using ArrayList of points
 	/**
@@ -27,13 +33,23 @@ public class Polygon implements ScadObject {
 	public Polygon(ArrayList<Vector> points) {
 		this.points = points;
 	}
-	
-	public Polygon(Edge e){
+
+	public Polygon(Edge e) {
 		points = new ArrayList<>();
 		ArrayList<Node> nodes = e.getFace().getNodes();
-		for(Node n : nodes){
+		for (Node n : nodes) {
 			getPoints().add(n.getOrigin());
 		}
+		this.delta = 0.0;
+	}
+
+	public Polygon(Edge e, double delta) {
+		points = new ArrayList<>();
+		ArrayList<Node> nodes = e.getFace().getNodes();
+		for (Node n : nodes) {
+			getPoints().add(n.getOrigin());
+		}
+		this.delta = delta;
 	}
 
 	// getter - setter
@@ -58,22 +74,33 @@ public class Polygon implements ScadObject {
 		this.points = points;
 	}
 
+	public double getDelta() {
+		return delta;
+	}
+
+	public void setDelta(double delta) {
+		this.delta = delta;
+	}
+
 	// printing the String to create the Polygon
 	/**
 	 * Prints a String used for creating the Polygon.
 	 */
 	@Override
 	public String toString() {
-		String s= "[";
-		for (Vector p : points){
-		s = s.concat(p.toScadString() + ", ");
+		String s = "[";
+		for (Vector p : points) {
+			s = s.concat(p.toScadString() + ", ");
 		}
-		s = s.substring(0,s.length()-2);
+		s = s.substring(0, s.length() - 2);
 		s = s.concat("]");
-		
-		
-		 s = String.format(Locale.UK, polygon, s);
-		
+		//polygon string
+		s = String.format(Locale.UK, polygon, s);
+		//offset string
+		if(getDelta() != 0.0){
+		s = String.format(Locale.UK, OFFSET ,getDelta(), s);
+		}
+		//extrude string
 		return (String.format(Locale.UK, linear_extrude, 1.0, s));
 	}
 

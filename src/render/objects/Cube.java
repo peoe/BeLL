@@ -13,7 +13,7 @@ public class Cube implements ScadObject {
 	private boolean center;
 
 	// the layout for the String used to generate a Cube
-	final static String cube = "cube([%1$.2f,%2$.2f,%3$.2f], %4$s);\n";
+	final static String CUBE = "cube([%1$.2f,%2$.2f,%3$.2f], %4$s);\n";
 
 	// getter - setter
 	// getting the x coordinate
@@ -131,7 +131,7 @@ public class Cube implements ScadObject {
 	@Override
 	public String toString() {
 		// Locale.UK is required to obtain the '.' as the decimal indicator
-		return (String.format(Locale.UK, cube, x, y, z, center));
+		return (String.format(Locale.UK, CUBE, x, y, z, center));
 	}
 
 }

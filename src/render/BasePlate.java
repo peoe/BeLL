@@ -1,11 +1,39 @@
 package render;
+import java.util.ArrayList;
+
+import graph.*;
+import render.objects.*;
 
 public class BasePlate implements ScadObject{
+	
+	//face of base plate
+	private Face f;
+
+	public Face getF() {
+		return f;
+	}
+
+	public void setF(Face f) {
+		this.f = f;
+	}
+	
+	public BasePlate(Face f){
+		this.f = f;
+	}
+	
+	private ScadObject getBasePlateObject(){
+		ArrayList<ScadObject> differenceCorners = new ArrayList<>();
+		differenceCorners.add(new Translate(new Scale(new Polygon(getF().getIncidentEdge(), -0.5*Params.getE()), 1, 1, Params.getBasePlateHeight()), 0, 0, 0.5*Params.getBasePlateHeight()));
+		
+		for(Edge e: getF().getEdges()){
+			differenceCorners.add(new Translate(new Pin(e, Params.getE()), e.getN1().getOrigin(), 0));
+		}
+		return new Difference(differenceCorners);
+	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return getBasePlateObject().toString();
 	}
 
 }

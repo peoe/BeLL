@@ -62,6 +62,7 @@ public class Main {
 		Graph gr = new Graph(lines);
 		Params.setParams(0.75, 10, 2,  4, 4, 2, 75, 4, 4, 1);
 		System.out.println(gr.getEdges().get(2));
+		//ClipboardCopier.copyToClipboard(new BasePlate(gr.getFaces().get(3)).toString());
 		ClipboardCopier.copyToClipboard(gr.outputCorners().toString());
 		
 	}
