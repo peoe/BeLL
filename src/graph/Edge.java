@@ -4,15 +4,18 @@ import java.util.ArrayList;
 
 public class Edge {
 
+	// define the next, prev and twin edge
 	private Edge twin, prev, next;
+	// defines both nodes of edge
 	private Node n1, n2;
+	// defines adjacent face of the adge
 	private Face face;
 
 	public Edge(Node node1, Node node2) {
 		n1 = node1;
 		n2 = node2;
 	}
-
+	//getters and setter
 	public Edge getTwin() {
 		return twin;
 	}
@@ -60,15 +63,27 @@ public class Edge {
 	public void setFace(Face face) {
 		this.face = face;
 	}
-
+	/**
+	 * 
+	 * @return generates twin of edge
+	 */
 	public Edge generateTwin() {
 		return (new Edge(n2, n1));
 	}
-
+	
+	/**
+	 * 
+	 * @return vector between both nodes of the edge
+	 */
 	public Vector toVector() {
 		return new Vector(n1.getOrigin(), n2.getOrigin());
 	}
 	
+	/**
+	 * 
+	 * @param e
+	 * @return angle between this edge and e 
+	 */
 	public double angleToEdge(Edge e){
 		return(this.toVector().angletoVector(e.toVector()));
 	}
@@ -102,18 +117,6 @@ public class Edge {
 		}
 
 		return angle;
-	}
-	
-	public ArrayList<Edge> getFaceEdges(){
-		Edge e = this;
-		ArrayList<Edge> f = new ArrayList<>();
-		f.add(e);
-		Edge c = e.getNext();
-		while(c != e){
-			f.add(c);
-			c = c.getNext();
-		}
-		return f;
 	}
 
 	public String toString() {

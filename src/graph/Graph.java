@@ -97,26 +97,19 @@ public class Graph {
 	}
 
 	private void completeEdges() {
-		System.out.println(nodes.size());
 		ArrayList<ArrayList<Edge>> nodeEdges = new ArrayList<>();
 		for (int i = 0; i < nodes.size(); i++) {
 			nodeEdges.add(new ArrayList<Edge>());
 		}
-		System.out.println(nodeEdges.size());
 		for (Edge e : edges) {
 			nodeEdges.get(nodes.indexOf(e.getN1())).add(e);
 		}
 
 		sortEdges(nodeEdges);
 
-		System.out.println(nodes);
-		System.out.println(nodeEdges);
-
 		for (ArrayList<Edge> e : nodeEdges) {
 			for (int i = 0; i < e.size(); i++) {
 				e.get(i).setPrev(e.get((i + 1) % e.size()).getTwin());
-				System.out.println(e.size());
-				System.out.println(Math.floorMod((i - 1), e.size()));
 				e.get(i).getTwin().setNext(e.get(Math.floorMod((i - 1), e.size())));
 			}
 
@@ -142,9 +135,6 @@ public class Graph {
 				e = e.getNext();
 			}
 		}
-		for (Face f : faces)
-			System.out.println("test:" + f.getIncidentEdge().getFaceEdges() + " area: " + f.getIncidentEdge().getFace().getArea());
-
 	}
 	
 	public void completeNodes(){
