@@ -40,10 +40,14 @@ public class Corner implements ScadObject {
 		Epsilon = 0.0;
 	}
 	
+	/**
+	 * returns whole corner object consisting of CornerCylinder and CornerPin
+	 * @return the Corner ScadObject
+	 */
 	public ScadObject getCorner(){
 		ArrayList<ScadObject> cornerObjects = new ArrayList<>();
 		for(Edge e : getN().getAdjacentEdges()){
-			cornerObjects.add(new Pin(e, getEpsilon()));
+			cornerObjects.add(new CornerPin(e, getEpsilon()));
 		}
 		cornerObjects.add(new CornerCylinder(getN(), getEpsilon()));
 		return new Union(cornerObjects);

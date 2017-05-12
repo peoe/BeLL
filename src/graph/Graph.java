@@ -16,7 +16,8 @@ public class Graph {
 	private ArrayList<Node> nodes = new ArrayList<>();
 	// list of edges
 	private ArrayList<Edge> edges = new ArrayList<>();
-
+	
+	//getter und setter
 	public ArrayList<Node> getNodes() {
 		return nodes;
 	}
@@ -34,7 +35,12 @@ public class Graph {
 	public ArrayList<Face> getFaces() {
 		return faces;
 	}
-
+	
+	/**
+	 * Constructor of Graph class which creates DCEL
+	 * @param ls
+	 * 
+	 */
 	public Graph(ArrayList<Line> ls) {
 		processData(ls);
 		computeTwins();
@@ -96,6 +102,9 @@ public class Graph {
 		}
 	}
 
+	/**
+	 * finishes all Edges in DCEL
+	 */
 	private void completeEdges() {
 		ArrayList<ArrayList<Edge>> nodeEdges = new ArrayList<>();
 		for (int i = 0; i < nodes.size(); i++) {
@@ -115,7 +124,9 @@ public class Graph {
 
 		}
 	}
-
+	/**
+	 * finsihes faces in DCEL
+	 */
 	private void completeFaces() {
 
 		ArrayList<Boolean> edgeStatus = new ArrayList<>();
@@ -136,7 +147,9 @@ public class Graph {
 			}
 		}
 	}
-	
+	/**
+	 * finishes nodes in DCEL (adds incident edges)
+	 */
 	public void completeNodes(){
 		for(Node n : nodes){
 			for(Edge e: edges){
@@ -148,6 +161,12 @@ public class Graph {
 		}
 	}
 
+	/**
+	 * 
+	 * @param ArrayList of ArrayList of Edge e (adjacentEdges of nodes) 
+	 * 
+	 * @return sorted adjacentEdges of nodes
+	 */
 	private void sortEdges(ArrayList<ArrayList<Edge>> e) {
 		// getAngles
 		ArrayList<Double> doubles = new ArrayList<>();
@@ -220,7 +239,12 @@ public class Graph {
 		objectList.add(new BasePlate(f));
 		return new Union(objectList);
 	}
-
+	
+	/**
+	 * 
+	 * @param v Vector
+	 * @return Node with Origin = v and incidentEdge = null
+	 */
 	public Node getNodeByPoint(Vector v) {
 		for (int i = 0; i < nodes.size(); i++) {
 			if (nodes.get(i).getOrigin() == v) {

@@ -31,6 +31,10 @@ public class CornerBaseTile implements ScadObject {
 	}
 
 	// returns the corner cylinder
+	/**
+	 * Returns a primitive cylinder with calculated epsilon difference
+	 * @return
+	 */
 	public ScadObject getBaseTile() {
 		return new Cylinder(getHeight(), Params.getCornerRadius(), true).resize(0, 0, getEpsilon());
 	}

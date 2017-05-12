@@ -5,7 +5,7 @@ public class Line {
 	// the two position vectors used to describe the line
 	private Vector p1, p2;
 
-	// construcors
+	// Constructors
 	// using two position vectors
 	/**
 	 * Creates a new Line object using two position vectors of the starting

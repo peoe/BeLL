@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Face {
 
-	// a list of all edge vectors
-	// private ArrayList<Line> edges;
+	// incident edge of face
 	private Edge incidentEdge;
 
+	//getter and setter
 	public Edge getIncidentEdge() {
 		return incidentEdge;
 	}
@@ -83,7 +83,10 @@ public class Face {
 
 		return area / 2.0;
 	}
-
+	/**
+	 * 
+	 * @return all nodes of face
+	 */
 	public ArrayList<Node> getNodes() {
 		ArrayList<Node> returnNodes = new ArrayList<>();
 		ArrayList<Edge> faceEdges = getEdges();

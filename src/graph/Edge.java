@@ -118,7 +118,7 @@ public class Edge {
 
 		return angle;
 	}
-
+	//returns vector coordinates of n1 and n2
 	public String toString() {
 		return "[(" + n1.getOrigin().getX() + "," + n1.getOrigin().getY() + "),(" + n2.getOrigin().getX() + ","
 				+ n2.getOrigin().getY() + /*"[prev: " + prev.getN1() + ", " + prev.getN2() + ", next: " + next.getN1() + ", " + next.getN2() + ")]"*/

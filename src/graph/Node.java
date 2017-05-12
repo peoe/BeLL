@@ -3,10 +3,13 @@ package graph;
 import java.util.ArrayList;
 
 public class Node {
-
+	
+	//origin(coordinates) of Node
 	private Vector origin;
+	//incident Edge
 	private Edge incidentEdge;
 
+	//constructor out of Vector (incidentEdge will be set after)
 	public Node(Vector v) {
 		origin = v;
 		incidentEdge = null;
@@ -31,7 +34,10 @@ public class Node {
 	public String toString() {
 		return "(" + origin.getX() + "," + origin.getY() + ")";
 	}
-	
+	/**
+	 * calculates all adjacent outgoing Edges of the Node
+	 * @return ArrayList<Edge>
+	 */
 	public ArrayList<Edge> getAdjacentEdges(){
 		ArrayList<Edge> adjacentEdges = new ArrayList<>();
 		Edge e = incidentEdge;

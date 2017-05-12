@@ -21,12 +21,16 @@ public class BasePlate implements ScadObject{
 		this.f = f;
 	}
 	
+	/**
+	 * Calculates the Object consisting of Differences between a polygon and the negative corner elements
+	 * @return the basePlate ScadObject
+	 */
 	private ScadObject getBasePlateObject(){
 		ArrayList<ScadObject> differenceCorners = new ArrayList<>();
 		differenceCorners.add(new Translate(new Scale(new Polygon(getF().getIncidentEdge(), -0.5*Params.getE()), 1, 1, Params.getBasePlateHeight()), 0, 0, 0.5*Params.getBasePlateHeight()));
 		
 		for(Edge e: getF().getEdges()){
-			differenceCorners.add(new Translate(new Pin(e, Params.getE()), e.getN1().getOrigin(), 0));
+			differenceCorners.add(new Translate(new CornerPin(e, Params.getE()), e.getN1().getOrigin(), 0));
 		}
 		return new Difference(differenceCorners);
 	}

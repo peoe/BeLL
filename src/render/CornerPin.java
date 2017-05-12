@@ -7,7 +7,7 @@ import graph.*;
 import render.objects.*;
 import render.*;
 
-public class Pin implements ScadObject {
+public class CornerPin implements ScadObject {
 	
 	//incident Edge with defines the pin completely
 	private Edge cornerEdge;
@@ -40,7 +40,7 @@ public class Pin implements ScadObject {
 		this.cornerEdge = cornerEdge;
 	}
 	//constructor
-	public Pin(Edge e, double epsilon) {
+	public CornerPin(Edge e, double epsilon) {
 		cornerEdge = e;
 		this.epsilon = epsilon;
 
