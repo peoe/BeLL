@@ -24,11 +24,7 @@ public class CornerBaseTile implements ScadObject {
 	public void setEpsilon(double epsilon) {
 		this.epsilon = epsilon;
 	}
-	/**
-	 * constructor for cornerBaseTile
-	 * @param height the height of the cornerBaseTile
-	 * @param epsilon distance between negative and positive tile
-	 */
+
 	public CornerBaseTile(double height, double epsilon) {
 		this.height = height;
 		this.epsilon = epsilon;

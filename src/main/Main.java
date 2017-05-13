@@ -7,8 +7,6 @@ import java.util.Arrays;
 
 import javax.transaction.TransactionRequiredException;
 
-import org.kabeja.parser.ParseException;
-
 import graph.Face;
 import graph.Graph;
 import graph.Vector;
@@ -21,7 +19,7 @@ import render.objects.*;
 
 public class Main {
 
-	public static void main(String[] args) throws ParseException {
+	public static void main(String[] args) {
 
 		Vector A = new Vector(0, 0);
 		Vector B = new Vector(100, 0);
@@ -33,6 +31,7 @@ public class Main {
 		
 		Vector H = new Vector(-100,0);
 		Vector I = new Vector(0,100);
+		
 		
 		Line a = new Line(A, B);
 		Line b = new Line(B, C);
@@ -60,9 +59,9 @@ public class Main {
 		lines.add(i);
 		lines.add(j);
 		
+		Graph gr = new Graph(lines);
 		Params.setParams(0.75, 10, 2,  4, 4, 2, 75, 4, 4, 1);
-		Graph gr = new Graph(DXFReader.getAutocadFile("C:\\Users\\Johann\\Documents\\GitHub\\BeLL\\res\\Zeichnung1.dxf"));
-		
+		System.out.println(gr.getEdges().get(2));
 		//ClipboardCopier.copyToClipboard(new BasePlate(gr.getFaces().get(3)).toString());
 		ClipboardCopier.copyToClipboard(gr.outputCorners().toString());
 		

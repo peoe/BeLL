@@ -1,10 +1,6 @@
 package graph;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
-
-import org.kabeja.dxf.DXFLine;
 
 public class Edge {
 
@@ -18,24 +14,6 @@ public class Edge {
 	public Edge(Node node1, Node node2) {
 		n1 = node1;
 		n2 = node2;
-	}
-	
-	/**
-	 * Returns rounded numbers to only contain two decimals.
-	 * 
-	 * @param val
-	 *            the number to be rounded
-	 * @return the rounded number
-	 */
-	public static Double round2(Double val) {
-		return new BigDecimal(val.toString()).setScale(2, RoundingMode.HALF_UP).doubleValue();
-	}
-	
-	public Edge(DXFLine dxfline){
-		n1 = new Node(
-				new Vector(round2(dxfline.getStartPoint().getX()), round2(dxfline.getStartPoint().getY())));
-		n2 = new Node(
-				new Vector(round2(dxfline.getEndPoint().getX()), round2(dxfline.getEndPoint().getY())));
 	}
 	//getters and setter
 	public Edge getTwin() {
