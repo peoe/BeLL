@@ -1,9 +1,10 @@
 package graph;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.Collections;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+import org.kabeja.dxf.DXFLine;
 
 import render.*;
 import render.objects.*;
@@ -17,7 +18,7 @@ public class Graph {
 	// list of edges
 	private ArrayList<Edge> edges = new ArrayList<>();
 	
-	//getter und setter
+	//getter and setter
 	public ArrayList<Node> getNodes() {
 		return nodes;
 	}
@@ -41,7 +42,7 @@ public class Graph {
 	 * @param ls
 	 * 
 	 */
-	public Graph(ArrayList<Line> ls) {
+	public Graph(ArrayList<DXFLine> ls) {
 		processData(ls);
 		computeTwins();
 		completeEdges();
@@ -49,6 +50,17 @@ public class Graph {
 		completeNodes();
 	}
 
+	/**
+	 * Returns rounded numbers to only contain two decimals.
+	 * 
+	 * @param val
+	 *            the number to be rounded
+	 * @return the rounded number
+	 */
+	public static Double round2(Double val) {
+		return new BigDecimal(val.toString()).setScale(2, RoundingMode.HALF_UP).doubleValue();
+	}
+	
 	// Creates Nodes and Edges out of the given Line ArrayList
 	/**
 	 * Creates Nodes and Edges out of the given Lines and stores them in the
@@ -57,11 +69,14 @@ public class Graph {
 	 * @param ls
 	 *            the list of lines
 	 */
-	private void processData(ArrayList<Line> ls) {
-		for (Line l : ls) {
-			edges.add(new Edge(createNode(l.getP1()), createNode(l.getP2())));
-		}
 
+	private void processData(ArrayList<DXFLine> ls) {
+		for (DXFLine dxfline : ls) {
+			edges.add(
+					new Edge(createNode(new Vector(round2(dxfline.getStartPoint().getX()), round2(dxfline.getStartPoint().getY()))), createNode(new Vector(round2(dxfline.getEndPoint().getX()), round2(dxfline.getEndPoint().getY()))))
+					);
+		}
+		System.out.println(edges);
 	}
 
 	// function for creating a node using a point if this specific node hasn't
@@ -125,7 +140,7 @@ public class Graph {
 		}
 	}
 	/**
-	 * finsihes faces in DCEL
+	 * Finishes faces in DCEL
 	 */
 	private void completeFaces() {
 
@@ -230,18 +245,9 @@ public class Graph {
 		return (new Union(objectList));
 		
 	}
-	//prints one face with corners
-	public ScadObject printFace(Face f){
-		ArrayList<ScadObject> objectList = new ArrayList<>();
-		for(Node n : f.getNodes()){
-			objectList.add(new Translate(new Corner(n),n.getOrigin(),0));
-		}
-		objectList.add(new BasePlate(f));
-		return new Union(objectList);
-	}
 	
 	/**
-	 * 
+	 * returns a node object referring to a vector coordinate as origin
 	 * @param v Vector
 	 * @return Node with Origin = v and incidentEdge = null
 	 */
