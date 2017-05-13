@@ -7,6 +7,9 @@ import java.util.Arrays;
 
 import javax.transaction.TransactionRequiredException;
 
+import org.kabeja.parser.ParseException;
+
+import graph.Edge;
 import graph.Face;
 import graph.Graph;
 import graph.Vector;
@@ -19,7 +22,7 @@ import render.objects.*;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 
 		Vector A = new Vector(0, 0);
 		Vector B = new Vector(100, 0);
@@ -47,21 +50,29 @@ public class Main {
 		
 		ArrayList<Line> lines = new ArrayList<>();
 		
+		
 		//Face face1 = new Face();
 		lines.add(a);
 		lines.add(b);
 		lines.add(c);
 		lines.add(d);
-		lines.add(e);
-		lines.add(f);
-		lines.add(g);
-		lines.add(h);
-		lines.add(i);
-		lines.add(j);
+//		lines.add(e);
+//		lines.add(f);
+//		lines.add(g);
+//		lines.add(h);
+//		lines.add(i);
+//		lines.add(j);
+		
+		for(Line line: lines){
+			line.setP1(line.getP1().add(C));
+			line.setP2(line.getP2().add(C));
+		}
 		
 		Graph gr = new Graph(lines);
 		Params.setParams(0.75, 10, 2,  4, 4, 2, 75, 4, 4, 1);
-		System.out.println(gr.getEdges().get(2));
+		for(Edge edg : gr.getEdges()){
+			System.out.println(edg);
+		}
 		//ClipboardCopier.copyToClipboard(new BasePlate(gr.getFaces().get(3)).toString());
 		ClipboardCopier.copyToClipboard(gr.outputCorners().toString());
 		
