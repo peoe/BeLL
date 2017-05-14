@@ -59,7 +59,9 @@ public class Graph {
 	 */
 	private void processData(ArrayList<Line> ls) {
 		for (Line l : ls) {
-			edges.add(new Edge(createNode(l.getP1()), createNode(l.getP2())));
+			Node n1 = createNode(l.getP1());
+			Node n2 = createNode(l.getP2());
+			edges.add(new Edge(n1, n2));
 		}
 
 	}
@@ -75,7 +77,7 @@ public class Graph {
 	 */
 	private Node createNode(Vector p) {
 		for (Node n : nodes) {
-			if (n.getOrigin() == p) {
+			if (n.getOrigin().equals(p)) {
 				return n;
 			}
 		}

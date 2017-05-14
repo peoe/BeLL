@@ -208,5 +208,14 @@ public class Vector {
 	public double bisectorOfAngleTo(Vector v) {
 		return (this.angleInDegrees() + 0.5 * this.angletoVectorD(v));
 	}
+	
+	//test for equality of two vector
+	public Boolean equals(Vector v){
+		if ((this.getX() == v.getX()) && (this.getY() == v.getY())){
+			return true;
+		}
+		return false;
+	}
+	
 
 }
