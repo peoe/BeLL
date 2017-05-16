@@ -50,7 +50,7 @@ public class CornerCylinder implements ScadObject {
 
 		double cornerRadius = Params.getCornerRadius();
 		double wallWidth = Params.getWallwidth() / 2 - 2 * getEpsilon();
-		Cube tileCube = new Cube(cornerRadius, wallWidth, 1, true);
+		Cube tileCube = new Cube(cornerRadius, wallWidth, 2, true);
 		Translate tTileCube = new Translate(tileCube, cornerRadius + getEpsilon(), 0, 0);
 
 		return (new Rotate(tTileCube, angle, 0, 0, 1));

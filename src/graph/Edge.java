@@ -118,6 +118,16 @@ public class Edge {
 
 		return angle;
 	}
+	
+	public Node getCommonNode(Edge e){
+		if(this.getN1().equals(e.n1) || this.getN1().equals(e.n2)){
+			return this.getN1();
+		}
+		if(this.getN2().equals(e.n1) || this.getN2().equals(e.n2)){
+			return this.getN2();
+		}
+		return null;
+	}
 	//returns vector coordinates of n1 and n2
 	public String toString() {
 		return "[(" + n1.getOrigin().getX() + "," + n1.getOrigin().getY() + "),(" + n2.getOrigin().getX() + ","

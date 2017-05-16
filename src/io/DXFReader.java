@@ -67,7 +67,7 @@ public class DXFReader {
 	 * @return the rounded number
 	 */
 	public static Double round2(Double val) {
-		return new BigDecimal(val.toString()).setScale(0, RoundingMode.HALF_UP).doubleValue();
+		return new BigDecimal(val.toString()).setScale(2, RoundingMode.HALF_UP).doubleValue();
 	}
 
 }

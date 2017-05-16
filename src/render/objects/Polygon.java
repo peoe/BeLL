@@ -10,6 +10,9 @@ public class Polygon implements ScadObject {
 
 	// the ArrayList of Points used by the Polygon
 	private ArrayList<Vector> points;
+	
+	//incident Edge
+	private Edge incidentEdge;
 
 	// delta value for offset used in basePlate calculation
 	private double delta;
@@ -21,7 +24,7 @@ public class Polygon implements ScadObject {
 	final static String linear_extrude = "linear_extrude(%1$.2f, center = true){\n%2$s}";
 
 	// scad string for the delta offset
-	final static String OFFSET = "offset(%1$.3f){%2$s}";
+	final static String OFFSET = "offset(delta = %1$.3f){%2$s}";
 
 	// constructor using ArrayList of points
 	/**
@@ -30,11 +33,13 @@ public class Polygon implements ScadObject {
 	 * @param points
 	 *            the ArrayList of position vectors
 	 */
-	public Polygon(ArrayList<Vector> points) {
+	public Polygon(ArrayList<Vector> points, double delta) {
 		this.points = points;
+		this.delta = delta;
 	}
 
 	public Polygon(Edge e) {
+		incidentEdge = e;
 		points = new ArrayList<>();
 		ArrayList<Node> nodes = e.getFace().getNodes();
 		for (Node n : nodes) {
@@ -44,6 +49,7 @@ public class Polygon implements ScadObject {
 	}
 
 	public Polygon(Edge e, double delta) {
+		incidentEdge = e;
 		points = new ArrayList<>();
 		ArrayList<Node> nodes = e.getFace().getNodes();
 		for (Node n : nodes) {
@@ -80,6 +86,14 @@ public class Polygon implements ScadObject {
 
 	public void setDelta(double delta) {
 		this.delta = delta;
+	}
+
+	public Edge getIncidentEdge() {
+		return incidentEdge;
+	}
+
+	public void setIncidentEdge(Edge incidentEdge) {
+		this.incidentEdge = incidentEdge;
 	}
 
 	// printing the String to create the Polygon

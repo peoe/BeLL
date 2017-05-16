@@ -56,25 +56,27 @@ public class Main {
 		lines.add(b);
 		lines.add(c);
 		lines.add(d);
-//		lines.add(e);
-//		lines.add(f);
-//		lines.add(g);
-//		lines.add(h);
-//		lines.add(i);
-//		lines.add(j);
+		lines.add(e);
+		lines.add(f);
+		lines.add(g);
+		lines.add(h);
+		lines.add(i);
+		lines.add(j);
 		
 		for(Line line: lines){
 			line.setP1(line.getP1().add(C));
 			line.setP2(line.getP2().add(C));
 		}
 		
+//		Graph gr = new Graph(DXFReader.getAutocadFile("C:\\Users\\Johann\\Documents\\GitHub\\BeLL\\res\\Zeichnung1.dxf"));
 		Graph gr = new Graph(lines);
 		Params.setParams(0.75, 10, 2,  4, 4, 2, 75, 4, 4, 1);
 		for(Edge edg : gr.getEdges()){
 			System.out.println(edg);
 		}
-		//ClipboardCopier.copyToClipboard(new BasePlate(gr.getFaces().get(3)).toString());
 		ClipboardCopier.copyToClipboard(gr.outputCorners().toString());
+//		ClipboardCopier.copyToClipboard(new CornerPin(gr.getEdges().get(3), Params.getE()).toString());
+
 		
 	}
 

@@ -49,7 +49,7 @@ public class Node {
 		} while( edge != incidentEdge);
 		return adjacentEdges;
 	}
-
+	
 	// checking if two nodes are equal
 	/**
 	 * Checks if two nodes are equal.

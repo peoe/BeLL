@@ -1,5 +1,7 @@
 package graph;
 
+import io.DXFReader;
+
 public class Vector {
 
 	// x and y coordinates
@@ -210,11 +212,25 @@ public class Vector {
 	}
 	
 	//test for equality of two vector
+	/**
+	 * checks if this vector is equal to a given vector
+	 * @param v comparison vector
+	 * @return true/false whether vectors are equal or not
+	 */
 	public Boolean equals(Vector v){
 		if ((this.getX() == v.getX()) && (this.getY() == v.getY())){
 			return true;
 		}
 		return false;
+	}
+	//rotates a vector
+	/**
+	 * rotates vector by given amount 
+	 * @param phi rotation angle
+	 * @return rotated Vector
+	 */
+	public Vector rotate(double phi){
+		return new Vector(DXFReader.round2(getX() * Math.cos(phi) - getY() * Math.sin(phi)), DXFReader.round2(getX() * Math.sin(phi) + getY() * Math.cos(phi)));
 	}
 	
 
