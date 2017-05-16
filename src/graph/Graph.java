@@ -1,9 +1,6 @@
 package graph;
 
 import java.util.ArrayList;
-import java.util.Collections;
-
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 
 import render.*;
 import render.objects.*;

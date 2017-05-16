@@ -46,6 +46,8 @@ public class Main {
 		Line h = new Line(A, G);
 		Line i = new Line(B, G);
 		Line j = new Line(E, G);
+		Line k = new Line(A, C);
+		Line l = new Line(A, F);
 		
 		
 		ArrayList<Line> lines = new ArrayList<>();
@@ -55,13 +57,15 @@ public class Main {
 		lines.add(a);
 		lines.add(b);
 		lines.add(c);
-		lines.add(d);
+		//lines.add(d);
 		lines.add(e);
 		lines.add(f);
 		lines.add(g);
 		lines.add(h);
 		lines.add(i);
 		lines.add(j);
+		lines.add(k);
+		lines.add(l);
 		
 		for(Line line: lines){
 			line.setP1(line.getP1().add(C));

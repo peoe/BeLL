@@ -1,7 +1,5 @@
 package graph;
 
-import java.util.ArrayList;
-
 public class Edge {
 
 	// define the next, prev and twin edge

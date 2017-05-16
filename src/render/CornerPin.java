@@ -5,7 +5,6 @@ import java.util.Arrays;
 
 import graph.*;
 import render.objects.*;
-import render.*;
 
 public class CornerPin implements ScadObject {
 

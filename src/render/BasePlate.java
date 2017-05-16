@@ -40,8 +40,15 @@ public class BasePlate implements ScadObject{
 	private static Vector getCornerPoint(Edge e, Edge e2){
 		Vector vE = e.toVector();
 		Vector vE2 = e2.toVector();
-		Vector epsilon = e.toVector().rotate(-0.5*Math.PI).changeLength(Params.getE() + Params.getWallwidth()*0.5);
-		return vE.multiply(((epsilon.getX() * vE2.getY() - epsilon.getY() * vE2.getX())/(-vE.getX() * vE2.getY() + vE.getY() * vE2.getX()))).add(epsilon);
+		Vector epsilonVec = e.toVector().rotate(-0.5*Math.PI).changeLength(Params.getE() + Params.getWallwidth()*0.5);
+		double determinantDivisor = -vE.getX() * vE2.getY() + vE.getY() * vE2.getX();
+		if (determinantDivisor != 0){
+		return vE.multiply((epsilonVec.getX() * vE2.getY() - epsilonVec.getY() * vE2.getX())/determinantDivisor).add(epsilonVec);
+		}
+		else {
+			return epsilonVec;
+		}
+		
 		
 		
 	}
