@@ -137,7 +137,7 @@ public class CornerPin implements ScadObject {
 		pinBottom.add(getBaseTileLow(pinLength));
 		//translates the point of the face to the calculation area (0,0) and adds it to the intersection
 		pinBottom
-				.add(new Translate(new Scale(new Polygon(cornerEdge, getEpsilon()), 1, 1, 100),
+				.add(new Translate(new Scale(new Polygon(cornerEdge, getEpsilon()), 1, 1, Params.getBasePlateHeight()*2),
 						cornerEdge.getN1().getOrigin().multiply(-1), 0));
 		//whether the face is the infinite one or not a difference or an intersection must be created
 			if (faceArea > 0) {
