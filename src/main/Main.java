@@ -52,6 +52,8 @@ public class Main {
 		
 		ArrayList<Line> lines = new ArrayList<>();
 		
+		
+		//Face face1 = new Face();
 		lines.add(a);
 		lines.add(b);
 		lines.add(c);
