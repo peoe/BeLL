@@ -1,9 +1,6 @@
 package graph;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import main.ArrayUtils;
 
 public class Face {
 
