@@ -1,0 +1,60 @@
+package render;
+
+import java.util.ArrayList;
+
+import graph.*;
+import render.objects.*;
+
+public class Wall implements ScadObject {
+
+	// the Line object for the Wall to be based upon
+	private Edge e;
+
+	// constructor
+	/**
+	 * Creates a new Wall object based upon the given Line object.
+	 * 
+	 * @param w
+	 *            the given Line object
+	 */
+	public Wall(Edge e) {
+		this.e = e;
+	}
+
+	public Edge getE() {
+		return e;
+	}
+
+	public void setE(Edge e) {
+		this.e = e;
+	}
+
+	// printing the command for creating the Wall object
+	/**
+	 * Prints a String which can be used to create the Wall object.
+	 */
+	@Override
+	public String toString() {
+		Vector wallVector = e.toVector();
+
+		Cube rawWallCube = new Cube(wallVector.getLength(), Params.getWallwidth(), 1, true);
+
+		double wallAngle = wallVector.angleInDegrees();
+
+		ArrayList<ScadObject> wallDifference = new ArrayList<>();
+		wallDifference.add(new Rotate(rawWallCube, wallAngle, 0, 0, 1));
+
+		wallDifference.add(new Translate(new CornerCylinder(getE().getN1(), Params.getE()), wallVector.multiply(-0.5),
+				-0.5 * Params.getHeight()));
+		wallDifference.add(new Translate(new CornerCylinder(getE().getN2(), Params.getE()), wallVector.multiply(0.5),
+				-0.5 * Params.getHeight()));
+		// Difference of pre-defined objects -> rotate to wall position -> Scale
+		// it to height -> Translate it to wall position -> output toString()
+		return new Translate(
+				new Scale(new Difference(wallDifference), 1.0, 1.0, Params.getHeight() - Params.getBasePlateHeight() - Params.getE()),
+				wallVector.multiply(0.5).add(getE().getN1().getOrigin()),
+				Params.getBasePlateHeight() + 0.5 * Params.getE() + 0.5 * (Params.getHeight() - Params.getBasePlateHeight())).toString();
+
+	}
+
+}

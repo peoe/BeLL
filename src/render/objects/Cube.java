@@ -1,8 +1,8 @@
-package rend.objects;
+package render.objects;
 
 import java.util.Locale;
 
-import rend.ScadObject;
+import render.ScadObject;
 
 public class Cube implements ScadObject {
 
@@ -13,7 +13,7 @@ public class Cube implements ScadObject {
 	private boolean center;
 
 	// the layout for the String used to generate a Cube
-	final static String cube = "cube([%1$.2f,%2$.2f,%3$.2f], %4$s);\n";
+	final static String CUBE = "cube([%1$.2f,%2$.2f,%3$.2f], %4$s);\n";
 
 	// getter - setter
 	// getting the x coordinate
@@ -119,14 +119,37 @@ public class Cube implements ScadObject {
 		this.center = false;
 	}
 
+	// Add margins to the sides of a cube
+	/**
+	 * Resizes all faces of cube to specified amount
+	 * 
+	 * @param xn
+	 *            negative x resizing
+	 * @param xp
+	 *            positive x resizing
+	 * @param yn
+	 *            negative y resizing
+	 * @param yp
+	 *            positive y resizing
+	 * @param zn
+	 *            negative z resizing
+	 * @param zp
+	 *            positive z resizing
+	 * @return ScadObject with applied transformations
+	 */
+	public ScadObject resize(double xn, double xp, double yn, double yp, double zn, double zp) {
+		return (new Translate(new Cube(this.getX() + xn + xp, this.getY() + yn + yp, this.getZ() + zn + zp, true),
+				0.5 * xp - 0.5 * xn, 0.5 * yp - 0.5 * yn, 0.5 * zp - 0.5 * zn));
+	}
+
 	// printing the command for creating the cube
 	/**
 	 * Returns a String which can be used to create the Cube.
 	 */
 	@Override
-	public String printCommand() {
+	public String toString() {
 		// Locale.UK is required to obtain the '.' as the decimal indicator
-		return (String.format(Locale.UK, cube, x, y, z, center));
+		return (String.format(Locale.UK, CUBE, x, y, z, center));
 	}
 
 }

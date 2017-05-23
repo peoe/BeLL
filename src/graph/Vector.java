@@ -1,5 +1,7 @@
 package graph;
 
+import io.DXFReader;
+
 public class Vector {
 
 	// x and y coordinates
@@ -78,6 +80,14 @@ public class Vector {
 	public String toString() {
 		return "(" + getX() + "," + getY() + ")";
 	}
+	
+	// printing the position vector scad definition
+		/**
+		 * Returns a String describing the Vector.
+		 */
+		public String toScadString() {
+			return "[" + getX() + "," + getY() + "]";
+		}
 
 	/**
 	 * Converts a vector to a line
@@ -87,22 +97,7 @@ public class Vector {
 		return(new Line(new Vector(0,0), this));
 	}
   
-	// checking if two vectors are equal
-	/**
-	 * Checks if two Vectors are equal.
-	 * 
-	 * @param v
-	 *            the vector to be compared
-	 * @return a boolean stating if the two Vectors are equal
-	 */
-	public Boolean equals(Vector v) {
-		// just simple comparison
-		if (v.getX() == getX() && v.getY() == getY()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+	
 
 	// changing the length of the Vector
 	/**
@@ -170,9 +165,8 @@ public class Vector {
 	 * @return the angle of the Vector in degree measure
 	 * @see Math
 	 */
-	public double angleD() { // normal atan2
-		double angle = Math.atan2(this.y, this.x);
-		return Math.toDegrees(angle);
+	public double angleInDegrees() { // normal atan2
+		return Math.toDegrees(angle());
 	}
 
 	// calculates the angle to another Vector in radian measure
@@ -202,11 +196,7 @@ public class Vector {
 	 * @return the angle of the old Vector to the given Vector anticlockwise
 	 */
 	public double angletoVectorD(Vector v2) {
-		double angle = v2.angle() - this.angle();
-		if (angle <= 0) {
-			angle = angle + 2 * Math.PI;
-		}
-		return Math.toDegrees(angle);
+		return Math.toDegrees(this.angletoVector(v2));
 	}
 
 	// calculates the bisector of the angle
@@ -218,7 +208,30 @@ public class Vector {
 	 * @return the bisector of the angle
 	 */
 	public double bisectorOfAngleTo(Vector v) {
-		return (this.angleD() + 0.5 * this.angletoVectorD(v));
+		return (this.angleInDegrees() + 0.5 * this.angletoVectorD(v));
 	}
+	
+	//test for equality of two vector
+	/**
+	 * checks if this vector is equal to a given vector
+	 * @param v comparison vector
+	 * @return true/false whether vectors are equal or not
+	 */
+	public Boolean equals(Vector v){
+		if ((this.getX() == v.getX()) && (this.getY() == v.getY())){
+			return true;
+		}
+		return false;
+	}
+	//rotates a vector
+	/**
+	 * rotates vector by given amount 
+	 * @param phi rotation angle
+	 * @return rotated Vector
+	 */
+	public Vector rotate(double phi){
+		return new Vector(DXFReader.round2(getX() * Math.cos(phi) - getY() * Math.sin(phi)), DXFReader.round2(getX() * Math.sin(phi) + getY() * Math.cos(phi)));
+	}
+	
 
 }

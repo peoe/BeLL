@@ -5,7 +5,7 @@ public class Line {
 	// the two position vectors used to describe the line
 	private Vector p1, p2;
 
-	// construcors
+	// Constructors
 	// using two position vectors
 	/**
 	 * Creates a new Line object using two position vectors of the starting
@@ -111,49 +111,6 @@ public class Line {
 	 */
 	public Line getComplementaryLine() {
 		return new Line(this.getP2(), this.getP1());
-	}
-
-	// checks if two Lines ar equal
-	/**
-	 * Checks if two Lines are equal to each other.
-	 * 
-	 * @param l
-	 *            the Line to be compared to
-	 * @return a boolean stating if the two Lines are equal
-	 */
-	public boolean equals(Line l) {
-		boolean result = false;
-
-		if (l.getP1() == getP1() && l.getP2() == getP2()) {
-			result = true;
-		}
-
-		return result;
-	}
-
-	// calculates the angle to another Line
-	/**
-	 * Returns the angle to another Line in an anticlockwise manner.
-	 * 
-	 * @param l
-	 *            the line to calculate the angle to
-	 * @return the angle to the given line anticlockwise
-	 */
-	public double angleTo(Line l) {
-		// checking if the second Line is starting at the ending point of the
-		// first Line
-		if (!this.p2.equals(l.p1)) {
-			System.out.println("Error at angleto function: vec not starting at this.p2");
-			return 1337.0;
-		}
-
-		// MAGIC, never touch a running system
-		double angle = l.toVector().angle() - this.getComplementaryLine().toVector().angle();
-		if (angle <= 0) {
-			angle = angle + 2 * Math.PI;
-		}
-
-		return angle;
 	}
 
 	// returns the first point of the Line

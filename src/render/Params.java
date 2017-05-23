@@ -1,6 +1,6 @@
-package rend;
+package render;
 
-public class ParameterController {
+public class Params {
 
 	/*
 	 * e - epsilon, the distance used for measuring the distance in between objects
@@ -14,7 +14,7 @@ public class ParameterController {
 	 * height - the height of the corner 
 	 * pinHeight - the height of the pin
 	 */
-	private static double e, cornerRadius, pinMinLength, pinNWidth, pinNRadius, pinPWidth, pinPRadius, pinDistance, height, pinHeight, basePlateHeight, basePlatePinCircleHeight;
+	private static double e, cornerRadius, pinMinLength, pinPWidth, pinPRadius, pinDistance, height, pinHeight, basePlateHeight, basePlatePinCircleHeight;
 
 	// the constant for defining the width of all walls
 	private static final double wallWidth = 6.0;
@@ -65,24 +65,6 @@ public class ParameterController {
 		return pinMinLength;
 	}
 
-	// pinNWidth
-	/**
-	 * Returns the parameter corresponding to the negative pin width.
-	 * @return the negative pin width
-	 */
-	public static double getPinNWidth() {
-		return pinNWidth;
-	}
-
-	// pinNRadius
-	/**
-	 * Returns the parameter corresponding to the negative pin radius.
-	 * @return the negative pin radius
-	 */
-	public static double getPinNRadius() {
-		return pinNRadius;
-	}
-
 	// pinDistance
 	/**
 	 * Returns the parameter corresponding to the pin distance.
@@ -129,27 +111,27 @@ public class ParameterController {
 
 	// setting all params
 	/**
-	 * Sets all the params to the given values.
-	 * @param E the value for the epsilon parameter
-	 * @param CornerRadius the value for the corner radius parameter
-	 * @param PinMinLength the value for the minimum pin length parameter
-	 * @param PinNWidth the value for the negativ epin width parameter
-	 * @param PinNRadius the value for the negative pin radius parameter
-	 * @param PinDistance the value for the pin distance parameter
-	 * @param Height the value for the height parameter
-	 * @param PinHeight the value for the pin height parameter
+	 * 
+	 * @param E
+	 * @param CornerRadius
+	 * @param PinMinLength
+	 * @param PinPWidth
+	 * @param PinPRadius
+	 * @param PinDistance
+	 * @param Height
+	 * @param PinHeight
+	 * @param BasePlateHeight
+	 * @param BasePlatePinCircleHeight
 	 */
-	public static void setParams(double E, double CornerRadius, double PinMinLength, double PinNWidth, double PinNRadius, double PinDistance, double Height, double PinHeight, double BasePlateHeight, double BasePlatePinCircleHeight){
+	public static void setParams(double E, double CornerRadius, double PinMinLength, double PinPWidth, double PinPRadius, double PinDistance, double Height, double PinHeight, double BasePlateHeight, double BasePlatePinCircleHeight){
 		e = E;
 		cornerRadius = CornerRadius;
-		pinMinLength = PinMinLength;
-		pinNWidth = PinNWidth;
-		pinNRadius = PinNRadius;
+		pinMinLength = PinMinLength+CornerRadius;
 		pinDistance = PinDistance;
 		height = Height;
 		pinHeight = PinHeight;
-		pinPRadius = pinNRadius - e;
-		pinPWidth = pinNWidth - 2*e;
+		pinPRadius = PinPRadius;
+		pinPWidth = PinPWidth;
 		basePlateHeight = BasePlateHeight;
 		basePlatePinCircleHeight = BasePlatePinCircleHeight;
 		

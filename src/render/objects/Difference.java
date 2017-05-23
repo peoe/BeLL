@@ -1,9 +1,9 @@
-package rend.objects;
+package render.objects;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
-import rend.ScadObject;
+import render.ScadObject;
 
 public class Difference implements ScadObject {
 
@@ -53,12 +53,12 @@ public class Difference implements ScadObject {
 	 * Prints the String used to create the Difference Object.
 	 */
 	@Override
-	public String printCommand() {
+	public String toString() {
 		String objectsprint = "";
 		// enlists all objects within the Difference
 		// all objects ar ebeing substracted by the first
 		for (ScadObject o : objects) {
-			objectsprint = objectsprint.concat("\t" + o.printCommand());
+			objectsprint = objectsprint.concat("\t" + o.toString());
 		}
 		String s = String.format(Locale.UK, difference, objectsprint);
 		return s;
