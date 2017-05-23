@@ -38,6 +38,10 @@ public class Polygon implements ScadObject {
 		this.delta = delta;
 	}
 
+	/**
+	 * Constructor of Polygon class using a DCEL Edge
+	 * @param e DCEL Edge
+	 */
 	public Polygon(Edge e) {
 		incidentEdge = e;
 		points = new ArrayList<>();
@@ -48,6 +52,11 @@ public class Polygon implements ScadObject {
 		this.delta = 0.0;
 	}
 
+	/**
+	 * Constructor of Polygon class using a DCEL Edge and a delta Offset
+	 * @param e DCEL Edge
+	 * @param delta Offset
+	 */
 	public Polygon(Edge e, double delta) {
 		incidentEdge = e;
 		points = new ArrayList<>();

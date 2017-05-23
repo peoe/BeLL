@@ -35,12 +35,17 @@ public class CornerCylinder implements ScadObject {
 	}
 
 	//constructor
+	/**
+	 * Constructor of CornerCylinder class
+	 * @param n DCEL Node of CornerCylinder
+	 * @param epsilon Epsilon margin
+	 */
 	public CornerCylinder(Node n, double epsilon) {
 		this.epsilon = epsilon;
 		this.n = n;
 	}
 
-	// returns the tile which is cut out for walls
+	// returns the difference tile for wall cuttings
 	/**
 	 * returns rotated cube used for difference in the corner cylinder
 	 * @param angle

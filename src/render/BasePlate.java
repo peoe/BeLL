@@ -20,8 +20,13 @@ public class BasePlate implements ScadObject{
 	public BasePlate(Face f){
 		this.f = f;
 	}
-	//needs clean up
-	public static Polygon modifyPolygon(Polygon p, double epsilon){
+	//modifies a polygon if its edges appear outside
+	/**
+	 * Modifies outer Polygons
+	 * @param p Polygon
+	 * @return Polygon Modified Polygon 
+	 */
+	public static Polygon modifyPolygon(Polygon p){
 		ArrayList<Vector> newPoints = new ArrayList<>();
 		for (Vector v : p.getPoints()){
 			newPoints.add(v);
@@ -37,6 +42,12 @@ public class BasePlate implements ScadObject{
 		return new Polygon(newPoints, p.getDelta());
 	}
 	
+	/**
+	 * Calculates necessary translation of a point of outer Polygons
+	 * @param e first Edge
+	 * @param e2 second Edge
+	 * @return Vector Translation Vector for the point
+	 */
 	private static Vector getCornerPoint(Edge e, Edge e2){
 		Vector vE = e.toVector();
 		Vector vE2 = e2.toVector();
@@ -59,7 +70,7 @@ public class BasePlate implements ScadObject{
 	 */
 	private ScadObject getBasePlateObject(){
 		ArrayList<ScadObject> differenceCorners = new ArrayList<>();
-		differenceCorners.add(new Translate(new Scale(BasePlate.modifyPolygon(new Polygon(getF().getIncidentEdge(), -0.5 * Params.getE()), 0.5 * Params.getWallwidth() + 0.5 * Params.getE()), 1, 1, Params.getBasePlateHeight()), 0, 0, 0.5*Params.getBasePlateHeight()));
+		differenceCorners.add(new Translate(new Scale(BasePlate.modifyPolygon(new Polygon(getF().getIncidentEdge(), -0.5 * Params.getE())), 1, 1, Params.getBasePlateHeight()), 0, 0, 0.5*Params.getBasePlateHeight()));
 		
 		for(Edge e: getF().getEdges()){
 			differenceCorners.add(new Translate(new CornerPin(e, Params.getE()), e.getN1().getOrigin(), 0));

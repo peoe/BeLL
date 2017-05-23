@@ -26,11 +26,21 @@ public class Corner implements ScadObject {
 		Epsilon = epsilon;
 	}
 
+	/**
+	 * Constructor of Corner class using a Node and an epsilon margin
+	 * @param n DCEL Node of Corner
+	 * @param epsilon margin amount
+	 */
 	public Corner(Node n, double epsilon) {
 		this.n = n;
 		Epsilon = epsilon;
 	}
 	
+	/**
+	 * Constructor of Corner class using a Node and epsilon margin = 0
+	 * @param n DCEL Node of Corner
+	 * 
+	 */
 	public Corner(Node n) {
 		this.n = n;
 		Epsilon = 0.0;

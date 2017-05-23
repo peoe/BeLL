@@ -13,7 +13,7 @@ public class CornerPin implements ScadObject {
 	// distance between a positive and a negative pin = EPSILON
 	private double epsilon;
 
-	// Getter und Setter
+	// Getters and Setters
 	/**
 	 * 
 	 * @return epsilon value of pin
@@ -40,6 +40,11 @@ public class CornerPin implements ScadObject {
 	}
 
 	// constructor
+	/**
+	 * Constructor of CornerPin class
+	 * @param e DCEL Edge which defines the angle of the pin
+	 * @param epsilon Epsilon margin
+	 */
 	public CornerPin(Edge e, double epsilon) {
 		cornerEdge = e;
 		this.epsilon = epsilon;
@@ -47,12 +52,21 @@ public class CornerPin implements ScadObject {
 	}
 
 	// calculates the angle to the next Edge anti-clockwise
+	/**
+	 * Calculates angle of pin
+	 * @return double value of angle
+	 */
 	private double calculateAngle() {
 		return cornerEdge.angleToEdge(cornerEdge.getPrev().getTwin());
 	}
 
 	// returns lowerBaseTille -> Cylinder with small height placed at the bottom
 	// of the pin
+	/**
+	 * Returns lower baseTile 
+	 * @param l Length/Radius of lower BaseTile
+	 * @return ScadObject BaseTileLow
+	 */
 	private ScadObject getBaseTileLow(double l) {
 		// calculates Radius out of given length and an addition of the positive
 		// Pin Radius
@@ -67,6 +81,10 @@ public class CornerPin implements ScadObject {
 
 	// calculates the necessary length of a pin so it has a minimum distance to
 	// both walls
+	/**
+	 * Calculates necessary length of pin to have a minimum distance to adjacent walls
+	 * @return double Length
+	 */
 	private double calculateD() {
 		// minumum length
 		double min = Params.getPinMinLength() + Params.getCornerRadius();
@@ -80,6 +98,10 @@ public class CornerPin implements ScadObject {
 	}
 
 	// returns Pin without basePlate
+	/**
+	 * Returns the PinObject without the lower BaseTile
+	 * @return ScadObject Pin
+	 */
 	private ScadObject getPin() {
 		// calculate necessary distance for a 4mm gap between wall and Pin
 		double d = calculateD();
@@ -114,6 +136,10 @@ public class CornerPin implements ScadObject {
 	}
 
 	// returns whole pin object(pin + lower base plate)
+	/**
+	 * Combines Pin and lowerBaseTile to create the Pin Object
+	 * @return ScadObject whole Pin
+	 */
 	public ScadObject getPinObject() {
 		ArrayList<ScadObject> unionArrayList = new ArrayList<>();
 		double pinLength;

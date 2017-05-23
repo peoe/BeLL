@@ -25,6 +25,11 @@ public class CornerBaseTile implements ScadObject {
 		this.epsilon = epsilon;
 	}
 
+	/**
+	 * Constructor of CornerBaseTile class
+	 * @param height height of the Object
+	 * @param epsilon Epsilon margin
+	 */
 	public CornerBaseTile(double height, double epsilon) {
 		this.height = height;
 		this.epsilon = epsilon;
