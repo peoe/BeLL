@@ -10,6 +10,10 @@ public class Node {
 	private Edge incidentEdge;
 
 	//constructor out of Vector (incidentEdge will be set after)
+	/**
+	 * Constructor of Node class
+	 * @param v Vector of which the node gets created
+	 */
 	public Node(Vector v) {
 		origin = v;
 		incidentEdge = null;
@@ -30,7 +34,10 @@ public class Node {
 	public void setIncidentEdge(Edge incidentEdge) {
 		this.incidentEdge = incidentEdge;
 	}
-
+	
+	/**
+	 * @return String Presentation of Node [X, Y]
+	 */
 	public String toString() {
 		return "(" + origin.getX() + "," + origin.getY() + ")";
 	}

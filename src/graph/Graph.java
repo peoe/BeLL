@@ -124,7 +124,7 @@ public class Graph {
 		}
 	}
 	/**
-	 * finsihes faces in DCEL
+	 * renders faces in DCEL
 	 */
 	private void completeFaces() {
 
@@ -228,15 +228,6 @@ public class Graph {
 		}
 		return (new Union(objectList));
 		
-	}
-	//prints one face with corners
-	public ScadObject printFace(Face f){
-		ArrayList<ScadObject> objectList = new ArrayList<>();
-		for(Node n : f.getNodes()){
-			objectList.add(new Translate(new Corner(n),n.getOrigin(),0));
-		}
-		objectList.add(new BasePlate(f));
-		return new Union(objectList);
 	}
 	
 	/**

@@ -8,7 +8,12 @@ public class Edge {
 	private Node n1, n2;
 	// defines adjacent face of the adge
 	private Face face;
-
+	
+	/**
+	 * Constructor of Edge
+	 * @param node1 starting Node of Edge
+	 * @param node2 ending Node of Edge
+	 */
 	public Edge(Node node1, Node node2) {
 		n1 = node1;
 		n2 = node2;
@@ -62,7 +67,7 @@ public class Edge {
 		this.face = face;
 	}
 	/**
-	 * 
+	 * Swaps Nodes and returns the resulting twin Edge
 	 * @return generates twin of edge
 	 */
 	public Edge generateTwin() {
@@ -70,7 +75,7 @@ public class Edge {
 	}
 	
 	/**
-	 * 
+	 * Converts Edge to Vector
 	 * @return vector between both nodes of the edge
 	 */
 	public Vector toVector() {
@@ -78,45 +83,19 @@ public class Edge {
 	}
 	
 	/**
-	 * 
-	 * @param e
+	 * Calculates angle between this and another edge anticlockwise
+	 * @param e second Edge which creates the angle between this and e
 	 * @return angle between this edge and e 
 	 */
 	public double angleToEdge(Edge e){
 		return(this.toVector().angletoVector(e.toVector()));
 	}
 
-	// calculates the angle to another Line
 	/**
-	 * Returns the angle to another Line in an anticlockwise manner.
-	 * 
-	 * @param e
-	 *            the line to calculate the angle to
-	 * @return the angle to the given line anticlockwise
+	 * Returns the common point of two edges
+	 * @param e a different edge
+	 * @return common Node or null if the two edges don't have a common node
 	 */
-	public double angleTo(Edge e, Boolean Mode) {
-		// checking if the second Line is starting at the ending point of the
-		// first Line
-		if (!this.n2.equals(e.n1)) {
-			System.out.println("Error at angleto function: vec not starting at this.p2");
-			return 1337.0;
-		}
-
-		// MAGIC, never touch a running system
-		double angle = e.toVector().angle() - this.generateTwin().toVector().angle();
-		if (Mode) {
-			if (angle <= 0) {
-				angle = angle + 2 * Math.PI;
-			}
-		} else {
-			if (angle < 0) {
-				angle = angle + 2 * Math.PI;
-			}
-		}
-
-		return angle;
-	}
-	
 	public Node getCommonNode(Edge e){
 		if(this.getN1().equals(e.n1) || this.getN1().equals(e.n2)){
 			return this.getN1();
@@ -126,7 +105,7 @@ public class Edge {
 		}
 		return null;
 	}
-	//returns vector coordinates of n1 and n2
+	
 	public String toString() {
 		return "[(" + n1.getOrigin().getX() + "," + n1.getOrigin().getY() + "),(" + n2.getOrigin().getX() + ","
 				+ n2.getOrigin().getY() + /*"[prev: " + prev.getN1() + ", " + prev.getN2() + ", next: " + next.getN1() + ", " + next.getN2() + ")]"*/

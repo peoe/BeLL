@@ -84,7 +84,7 @@ public class Face {
 		return area / 2.0;
 	}
 	/**
-	 * 
+	 * Returns all nodes of face
 	 * @return all nodes of face
 	 */
 	public ArrayList<Node> getNodes() {

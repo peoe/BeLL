@@ -94,9 +94,17 @@ public class Cylinder implements ScadObject {
 	}
 
 	// Adds margin
+	/**
+	 * Resizies Cylinder by specified amount
+	 * @param top Top resizing
+	 * @param bot Bot resizing
+	 * @param side Side resizing
+	 * @return new ScadObject with applied transformations
+	 */
 	public ScadObject resize(double top, double bot, double side) {
 
-		return (new Translate(new Cylinder(this.getHeight() + top + bot, this.getRadius() + side, true), 0, 0, 0.5 * top - 0.5 * bot));
+		return (new Translate(new Cylinder(this.getHeight() + top + bot, this.getRadius() + side, true), 0, 0,
+				0.5 * top - 0.5 * bot));
 
 	}
 
