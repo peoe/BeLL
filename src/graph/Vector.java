@@ -38,6 +38,34 @@ public class Vector {
 		this.y = e.getY() - s.getY();
 	}
 
+	// using an angle to calculate the Line
+	/**
+	 * Creates a new Vector object by taking an angle and converting it into a
+	 * Vector. The angle needs to be in radian measure from pi to -pi.
+	 * 
+	 * @param angle
+	 *            the angle in radian measure
+	 */
+	public Vector(double angle) {
+		this.x = Math.cos(angle);
+		this.y = Math.sin(angle);
+	}
+
+	// using an angle and a vector to add
+	/**
+	 * Creates a new Vector by converting an angle into a Vector and adding
+	 * another Vector to it.
+	 * 
+	 * @param angle
+	 *            the angle to be converted into a Vector
+	 * @param v
+	 *            the Vector to be added
+	 */
+	public Vector(double angle, Vector v) {
+		this.x = new Vector(angle).getX() + v.getX();
+		this.y = new Vector(angle).getY() + v.getY();
+	}
+
 	// getter - setter
 	// getting x value
 	/**
@@ -91,13 +119,12 @@ public class Vector {
 
 	/**
 	 * Converts a vector to a line
-	 * @return line  with P1 = (0|0) and P2 = Vector
+	 * 
+	 * @return line with P1 = (0|0) and P2 = Vector
 	 */
-	public Line toLine(){
-		return(new Line(new Vector(0,0), this));
+	public Line toLine() {
+		return (new Line(new Vector(0, 0), this));
 	}
-  
-	
 
 	// changing the length of the Vector
 	/**
