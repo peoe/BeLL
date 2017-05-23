@@ -10,7 +10,7 @@ public class Offset implements ScadObject{
 	//offset amount
 	private double delta;
 	//ScadObject to transform
-	private ArrayList<ScadObject> objects;
+	private ScadObject obj;
 	
 	//scad string
 	final static String OFFSET = "offset(%1$.3f){%2$s}"; 
@@ -24,31 +24,26 @@ public class Offset implements ScadObject{
 	}
 	
 
-	public ArrayList<ScadObject> getObjects() {
-		return objects;
+	public ScadObject getObjects() {
+		return obj;
 	}
 
-	public void setObj(ArrayList<ScadObject> obj) {
-		this.objects = obj;
+	public void setObj(ScadObject obj) {
+		this.obj = obj;
 	}
 
-	public Offset(ArrayList<ScadObject> obj, double delta){
-		this.delta = delta;
-		this.objects = obj;
-	}
-	
+	/**
+	 * Constructor of Offset class
+	 * @param obj Specified 2D ScadObject 
+	 * @param delta Offset Amount
+	 */
 	public Offset(ScadObject obj, double delta){
 		this.delta = delta;
-		this.objects = new ArrayList<>();
-		this.objects.add(obj);
+		this.obj = obj;
 	}
 	
 	public String toString(){
-		String objectsToString = "";
-		for (ScadObject o : objects) {
-			objectsToString = objectsToString.concat("\t" + o.toString());
-		}
-		return String.format(Locale.UK, OFFSET, getDelta(), objectsToString);
+		return String.format(Locale.UK, OFFSET, getDelta(), obj);
 	}
 
 
