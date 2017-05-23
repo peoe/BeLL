@@ -5,6 +5,8 @@
 
 # Package Files #
 *.jar
+# Unignore kabeja library .jar
+!lib/kabeja-0.4.jar
 *.war
 *.ear
 
