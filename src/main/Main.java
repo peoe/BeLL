@@ -53,11 +53,18 @@ public class Main {
 		ArrayList<Line> lines = new ArrayList<>();
 		
 		
-		//Face face1 = new Face();
 		lines.add(a);
 		lines.add(b);
 		lines.add(c);
 		lines.add(d);
+		lines.add(e);
+		lines.add(f);
+		lines.add(g);
+		lines.add(h);
+		lines.add(i);
+		lines.add(j);
+//		lines.add(k);
+//		lines.add(l);
 		
 		
 //		Graph gr = new Graph(DXFReader.getAutocadFile("C:\\Users\\Johann\\Documents\\GitHub\\BeLL\\res\\Zeichnung1.dxf"));
@@ -66,7 +73,7 @@ public class Main {
 		for(Edge edg : gr.getEdges()){
 			System.out.println(edg);
 		}
-		ClipboardCopier.copyToClipboard(new Wall(gr.getEdges().get(0)).toString());
+		ClipboardCopier.copyToClipboard(new BasePlate(gr.getFaces().get(0)).toString());
 //		ClipboardCopier.copyToClipboard(new CornerPin(gr.getEdges().get(3), Params.getE()).toString());
 
 		
