@@ -1,0 +1,114 @@
+\documentclass[a4paper, 12pt]{report}
+
+
+
+
+%======INFORMATIONEN ZUM WERK=====
+\def\docTitle{Erzeugung eines 3D-Modells eines Gebäudes anhand des Grundrisses}
+\def\docAuthor{Peter Oehme, Johann Bartel}
+%======ALLJEMEINE PAKETE===================
+\usepackage[a4paper,left=40mm,top=25mm,bottom=20mm, right=30mm]{geometry} % korrekturränder
+\usepackage[utf8]{inputenc} % utf 8 encoding
+\usepackage{listings} % Code blocks
+\usepackage{fancyhdr}
+\usepackage{setspace} % Line spacing
+\usepackage{color} % FAARBEN
+\usepackage{graphicx} 
+\usepackage{titlesec} 
+\usepackage[ngerman]{babel} % gutes Deutsch
+%\usepackage{glossaries} % Abkürzungsverzeichnis
+\usepackage{todonotes}
+
+\usepackage{blindtext}
+
+\usepackage{chngcntr}
+
+
+\usepackage{lastpage} %Liest Seitenanzahl
+% =====FORMAT===========================================================================
+
+
+
+\doublespacing %Zeilenabstand 1.5
+
+
+
+\titleformat{\chapter}{\LARGE}{\thechapter.}{20pt}{\LARGE}
+
+%\renewcommand{\headrulewidth}{0.4pt} % Ändert die 
+%\renewcommand{\footrulewidth}{0.4pt}
+
+\pagestyle{fancy}
+%\fancyhead[C]{\docAuthor}
+
+\counterwithout{figure}{chapter} %Abbildungen
+
+%==================================HEADER============================================================================
+%\usepackage{scrpage2}
+%%\pagestyle{scrheadings}
+%\clearscrheadings			%seitenstiel löschen
+%\clearscrplain				%das gleiche
+%\clearscrheadfoot			%das gleiche
+%\rehead{\includegraphics[scale = 1.4]{Bilder/HSLogo.pdf}}
+%\rohead{\includegraphics[scale = 1.4]{Bilder/HSLogo.pdf}}
+%%\setheadwidth[0pt]{textwithmarginpar}		%Text und bilder im header bis an den rechten blattrand
+%\lehead{Hochschule Magdeburg\\
+%	Fachbereich: Ingenieurswissenschaften und Industriedesign\\
+%	Institut für Maschinenbau}
+%\lohead{Hochschule Magdeburg\\
+%	Fachbereich: Ingenieurswissenschaften und Industriedesign\\
+%	Institut für Maschinenbau}
+%\setheadsepline{2pt}
+%%\cfoot{\pagemark}
+%\renewcommand*{\chapterpagestyle}{scrheadings} %chapterstartseite haben auch ungewöhnliche kopfzeile
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\docAuthor}
+\lhead{Besondere Lernleistung}
+\rfoot{Seite \thepage{} von \pageref{LastPage}}
+
+%========================CODEDARSTELLUNG=========================
+\lstnewenvironment{code}
+{
+	\lstset{
+		language = Java,
+		breaklines  =true,
+		commentstyle = \color{green},
+		frame = single,
+		numbers = left,
+		columns=fullflexible}
+}
+{
+}
+%========================COMMANDS============
+\newcommand{\q}[1]{\glqq#1\grqq} % Zitat mit Anführungszeichen
+%\newcommand{\todo}[#1]{\newline\huge \color{red}#1 \color{black}\normalsize}
+
+%\newcommand\todo[1]{\refstepcounter{todo}\marginpar{\color{red}{#1}}\addcontentsline{tod}{subsection}{#1~\thetodo}}
+
+%====================SCHRIFTART ARIAL======================
+\renewcommand{\rmdefault}{phv} % Arial
+\renewcommand{\sfdefault}{phv} % Arialä
+
+%==========ABKÜRZUNGSVERZEICHNIS=====================
+\input{Kapitel/008Abkuerzungen}
+
+\begin{document}
+	
+	
+	\listoftodos
+	\include{Kapitel/001Titelseite}
+	\include{Kapitel/002Vorwort}
+	\tableofcontents
+	\include{Kapitel/003Einleitung}
+	\include{Kapitel/004wissenschaftlicheGrundlagen}
+	\include{Kapitel/005Hauptteil}
+	\include{Kapitel/006Ausblick}
+	\include{Kapitel/007Quellenverzeichnis}
+	
+	
+%	\printglossary[style=long]
+	\listoffigures
+
+\end{document}

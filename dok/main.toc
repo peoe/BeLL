@@ -1,0 +1,26 @@
+\select@language {ngerman}
+\contentsline {chapter}{\numberline {1}Einleitung}{7}
+\contentsline {chapter}{\numberline {2}Grundlagen}{9}
+\contentsline {section}{\numberline {2.1}OpenSCAD}{9}
+\contentsline {section}{\numberline {2.2}planarer Graph}{9}
+\contentsline {section}{\numberline {2.3}Doubly connected edge list}{9}
+\contentsline {chapter}{\numberline {3}Vorgehen zur Probleml\IeC {\"o}sung}{10}
+\contentsline {section}{\numberline {3.1}Einlesen des Grundrisses}{10}
+\contentsline {subsection}{\numberline {3.1.1}Funktionsweise der Bibliothek \textit {kabeja}}{10}
+\contentsline {subsection}{\numberline {3.1.2}Funktionsweise der GUI}{11}
+\contentsline {section}{\numberline {3.2}Erstellen der DCEL}{12}
+\contentsline {subsection}{\numberline {3.2.1}Line-to-Edge Konvertierung}{12}
+\contentsline {subsection}{\numberline {3.2.2}Twin-Edge Generierung}{13}
+\contentsline {subsection}{\numberline {3.2.3}Nachfolger- und Vorg\IeC {\"a}ngerermittlung}{14}
+\contentsline {subsubsection}{Winkelberechnung an den Knoten}{14}
+\contentsline {subsubsection}{Setzen der Referenzen}{14}
+\contentsline {subsection}{\numberline {3.2.4}Fl\IeC {\"a}chenerstellung}{14}
+\contentsline {subsection}{\numberline {3.2.5}Vervollst\IeC {\"a}ndigung der Knoten}{14}
+\contentsline {section}{\numberline {3.3}Aufbau der Einzelbauteile}{14}
+\contentsline {subsection}{\numberline {3.3.1}OpenSCAD Java Interface}{14}
+\contentsline {subsection}{\numberline {3.3.2}Corner}{14}
+\contentsline {subsection}{\numberline {3.3.3}Wall}{14}
+\contentsline {subsection}{\numberline {3.3.4}BasePlate}{14}
+\contentsline {section}{\numberline {3.4}Druck}{14}
+\contentsline {subsection}{\numberline {3.4.1}\todo {asdf}}{14}
+\contentsline {chapter}{\numberline {4}Ausblick}{15}
