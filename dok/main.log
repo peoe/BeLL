@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.6.4)  4 JUN 2017 19:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.6.4)  5 JUN 2017 00:09
 entering extended mode
 **./main.tex
 (main.tex
@@ -857,25 +857,16 @@ Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 \c@blind@pangramcount=\count141
 \c@blind@pangrammax=\count142
 )
+(C:\Users\Johann\AppData\Roaming\MiKTeX\2.9\tex\latex\etoolbox\etoolbox.sty
+Package: etoolbox 2017/01/02 v2.4 e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count143
+)
 (C:\Users\Johann\AppData\Roaming\MiKTeX\2.9\tex\latex\chngcntr\chngcntr.sty
 Package: chngcntr 2009/09/02 v1.0a change counter resetting
 )
 (C:\Users\Johann\AppData\Roaming\MiKTeX\2.9\tex\latex\lastpage\lastpage.sty
 Package: lastpage 2015/03/29 v1.2m Refers to last page's name (HMM; JPG)
 )
-
-! Package chngcntr Error: lstlisting is not a counter.
-
-See the chngcntr package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.45 \counterwithout{lstlisting}{chapter}
-                                         
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
 (C:\Users\Johann\AppData\Roaming\MiKTeX\2.9\tex\latex\listings\lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
@@ -887,19 +878,19 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 (Kapitel/007Quellenverzeichnis.aux) (Kapitel/009Selbstaendigkeit.aux))
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 104.
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 104.
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 104.
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 104.
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 104.
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 104.
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 104.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 108.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1phv.fd"
@@ -939,19 +930,19 @@ File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@lstlisting=\count143
+\c@lstlisting=\count144
 (C:\Users\Johann\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count144
+\scratchcounter=\count145
 \scratchdimen=\dimen171
 \scratchbox=\box40
-\nofMPsegments=\count145
-\nofMParguments=\count146
+\nofMPsegments=\count146
+\nofMParguments=\count147
 \everyMPshowfont=\toks34
-\MPscratchCnt=\count147
+\MPscratchCnt=\count148
 \MPscratchDim=\dimen172
-\MPnumerator=\count148
-\makeMPintoPDFobject=\count149
+\MPnumerator=\count149
+\makeMPintoPDFobject=\count150
 \everyMPtoPDFconversion=\toks35
 ) ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
 Package: pdftexcmds 2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO
@@ -998,7 +989,7 @@ G,.JBIG2,.JB2,.eps]
 ABD: EveryShipout initializing macros
 Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             https://www.ctan.org/pkg/pageslts
-(lastpage)             ! on input line 104.
+(lastpage)             ! on input line 108.
  (main.tdo
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <12> on input line 1.
@@ -1010,13 +1001,21 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \tf@tdo=\write4
 \openout4 = `main.tdo'.
 
- [1
 
 
-{C:/Users/Johann/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[1{C:/Users/Johann/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
+
+
+]
 \openout2 = `Kapitel/001Titelseite.aux'.
 
- (Kapitel/001Titelseite.tex
+
+(Kapitel/001Titelseite.tex
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <12> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 4.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <17.28> not available
@@ -1028,8 +1027,7 @@ LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <14.4> not available
 ]
 \openout2 = `Kapitel/002Vorwort.aux'.
 
-
-(Kapitel/002Vorwort.tex
+ (Kapitel/002Vorwort.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--6
 
  []
@@ -1049,23 +1047,23 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 
 
 ])
-Underfull \hbox (badness 10000) in paragraph at lines 13--109
+Underfull \hbox (badness 10000) in paragraph at lines 13--115
 
  []
 
 
-Overfull \hbox (0.23766pt too wide) in paragraph at lines 13--109
+Overfull \hbox (0.23766pt too wide) in paragraph at lines 13--115
 \OT1/phv/m/n/12 sys-tem fun-gie-ren. Eck-pfei-ler die-nen hier-bei als Ver-bin-
 dungs-st[]ucke zwi-schen
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 13--109
+Underfull \hbox (badness 10000) in paragraph at lines 13--115
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 13--109
+Underfull \hbox (badness 10000) in paragraph at lines 13--115
 
  []
 
@@ -1078,7 +1076,14 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 [4] (main.toc
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <12> not available
 (Font)              Font shape `OT1/phv/m/sl' tried instead on input line 9.
- [5
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[5
 
 
 ])
@@ -1097,6 +1102,12 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 
  (Kapitel/003Einleitung.tex
 Kapitel 1.
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
 [7
 
 
@@ -1172,7 +1183,14 @@ Overfull \hbox (12.04129pt too wide) in paragraph at lines 13--13
 \OT1/phv/m/n/12 schrei- 
  []
 
-) [9
+)
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[9
 
 
 
@@ -1194,7 +1212,14 @@ File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <10> not available
 (Font)              Font shape `OT1/pcr/b/n' tried instead on input line 8.
- [10
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[10
 
 
 
@@ -1284,7 +1309,14 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 
  (Kapitel/006Ausblick.tex
 Kapitel 4.
-) [16
+)
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[16
 
 
 
@@ -1340,7 +1372,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 25--26
 n/12 (Stand:
  []
 
-) [18
+)
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[18
 
 
 
@@ -1348,17 +1387,17 @@ n/12 (Stand:
 \openout2 = `Kapitel/009Selbstaendigkeit.aux'.
 
  (Kapitel/009Selbstaendigkeit.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 2--122
+Underfull \hbox (badness 10000) in paragraph at lines 2--128
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2--122
+Underfull \hbox (badness 10000) in paragraph at lines 2--128
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2--122
+Underfull \hbox (badness 10000) in paragraph at lines 2--128
 
  []
 
@@ -1377,6 +1416,12 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 
  
 AED: lastpage setting LastPage
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
 [20
 
 
@@ -1386,13 +1431,13 @@ AED: lastpage setting LastPage
 (Kapitel/0053Bauteile.aux) (Kapitel/0054Druck.aux) (Kapitel/006Ausblick.aux)
 (Kapitel/007Quellenverzeichnis.aux) (Kapitel/009Selbstaendigkeit.aux)) ) 
 Here is how much of TeX's memory you used:
- 15991 strings out of 493323
- 300458 string characters out of 3139064
- 425332 words of memory out of 3000000
- 19091 multiletter control sequences out of 15000+200000
+ 16294 strings out of 493323
+ 304013 string characters out of 3139064
+ 433001 words of memory out of 3000000
+ 19390 multiletter control sequences out of 15000+200000
  24111 words of font info for 48 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,11n,97p,475b,1757s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 62i,12n,97p,771b,1838s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Pro
 gram Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C:/Program Files/MiKTeX 2.9/
 fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
@@ -1401,7 +1446,7 @@ pe1/urw/courier/ucrb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/courier
 :/Program Files/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvbo8a.pfb><C:/Program Fil
 es/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Program Files/MiKTeX 2.9/
 fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on main.pdf (20 pages, 99592 bytes).
+Output written on main.pdf (20 pages, 100643 bytes).
 PDF statistics:
  99 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

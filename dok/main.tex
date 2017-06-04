@@ -20,6 +20,8 @@
 \usepackage{todonotes} % TODO notes
 \usepackage{courier} % Courier schriftart
 \usepackage{blindtext}
+\usepackage{etoolbox}
+
 
 \usepackage{chngcntr}
 
@@ -42,7 +44,9 @@
 %\fancyhead[C]{\docAuthor}
 
 \counterwithout{figure}{chapter} %Abbildungen zählen in sich selbst
-\counterwithout{lstlisting}{chapter}
+
+
+\patchcmd{\chapter}{\thispagestyle{plain}}{\thispagestyle{fancy}}{}{} % Kapitel haben auch header
 
 %==================================HEADER============================================================================
 %\usepackage{scrpage2}
@@ -72,7 +76,7 @@
 \cfoot{Seite \thepage{} von \pageref{LastPage}}
 
 %========================CODEDARSTELLUNG=========================
-\renewcommand{\lstlistingname}{Code}
+\renewcommand{\lstlistingname}{Codeauschnitt}
 %\lstnewenvironment{code}
 %{
 	\lstset{
@@ -102,6 +106,8 @@
 \input{Kapitel/008Abkuerzungen}
 
 \begin{document}
+	
+	\renewcommand{\thelstlisting}{\arabic{lstlisting}}
 	
 	
 	\listoftodos
