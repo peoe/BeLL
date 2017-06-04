@@ -10,15 +10,15 @@
 \usepackage[a4paper,left=40mm,top=25mm,bottom=20mm, right=30mm]{geometry} % korrekturränder
 \usepackage[utf8]{inputenc} % utf 8 encoding
 \usepackage{listings} % Code blocks
-\usepackage{fancyhdr}
+\usepackage{fancyhdr} % Header/Footer
 \usepackage{setspace} % Line spacing
 \usepackage{color} % FAARBEN
-\usepackage{graphicx} 
+\usepackage{graphicx} %Bilder
 \usepackage{titlesec} 
 \usepackage[ngerman]{babel} % gutes Deutsch
 %\usepackage{glossaries} % Abkürzungsverzeichnis
-\usepackage{todonotes}
-
+\usepackage{todonotes} % TODO notes
+\usepackage{courier} % Courier schriftart
 \usepackage{blindtext}
 
 \usepackage{chngcntr}
@@ -41,7 +41,8 @@
 \pagestyle{fancy}
 %\fancyhead[C]{\docAuthor}
 
-\counterwithout{figure}{chapter} %Abbildungen
+\counterwithout{figure}{chapter} %Abbildungen zählen in sich selbst
+\counterwithout{lstlisting}{chapter}
 
 %==================================HEADER============================================================================
 %\usepackage{scrpage2}
@@ -64,25 +65,31 @@
 
 \pagestyle{fancy}
 \fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}% Default \headrulewidth is 0.4pt
+\renewcommand{\footrulewidth}{0.4pt}% Default \footrulewidth is 0pt
 \rhead{\docAuthor}
 \lhead{Besondere Lernleistung}
-\rfoot{Seite \thepage{} von \pageref{LastPage}}
+\cfoot{Seite \thepage{} von \pageref{LastPage}}
 
 %========================CODEDARSTELLUNG=========================
-\lstnewenvironment{code}
-{
+\renewcommand{\lstlistingname}{Code}
+%\lstnewenvironment{code}
+%{
 	\lstset{
+		basicstyle = \footnotesize\ttfamily,
 		language = Java,
 		breaklines  =true,
 		commentstyle = \color{green},
 		frame = single,
 		numbers = left,
-		columns=fullflexible}
-}
-{
-}
+		columns=fullflexible,
+		captionpos = b}
+%}
+%{
+%}
 %========================COMMANDS============
 \newcommand{\q}[1]{\glqq#1\grqq} % Zitat mit Anführungszeichen
+\newcommand{\icode}[1]{\texttt{#1}} %inline Code
 %\newcommand{\todo}[#1]{\newline\huge \color{red}#1 \color{black}\normalsize}
 
 %\newcommand\todo[1]{\refstepcounter{todo}\marginpar{\color{red}{#1}}\addcontentsline{tod}{subsection}{#1~\thetodo}}
@@ -103,9 +110,16 @@
 	\tableofcontents
 	\include{Kapitel/003Einleitung}
 	\include{Kapitel/004wissenschaftlicheGrundlagen}
+	
 	\include{Kapitel/005Hauptteil}
+	\include{Kapitel/0051Einlesen}
+	\include{Kapitel/0052Dcel}
+	\include{Kapitel/0053Bauteile}
+	\include{Kapitel/0054Druck}
+	
 	\include{Kapitel/006Ausblick}
 	\include{Kapitel/007Quellenverzeichnis}
+	\include{Kapitel/009Selbstaendigkeit}
 	
 	
 %	\printglossary[style=long]

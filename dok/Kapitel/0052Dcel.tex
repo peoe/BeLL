@@ -1,0 +1,35 @@
+\section{Erstellen der DCEL}
+\subsection{Line-to-Edge Konvertierung}
+In der Hauptklasse des Programms wird aus der Liste von Lines ein planarer Graph erstellt. 
+Dabei werden die Start- und Endpunkte der eingelesenen Lines in Nodes ohne eine Referenz auf eine anliegende Edge umgewandelt und diese als Start- und Endnode der entsprechenden Edge gesetzt.
+Um für die Eindeutigkeit der Nodes zu sorgen, werden nur für Koordinaten neue Nodes erstellt, die zuvor in den Iteration noch nicht erschienen sind.(Funktion \icode{createNode()})
+
+\begin{lstlisting}[caption = {Line-to-Edge Konvertierung}]
+	private void processData(ArrayList<Line> ls) {
+		for (Line l : ls) {
+			Node n1 = createNode(l.getP1());
+			Node n2 = createNode(l.getP2());
+			edges.add(new Edge(n1, n2));
+		}
+	}
+\end{lstlisting}
+\subsection{Twin-Edge Generierung}
+Um aus diesen Edges die invertierten Gegenstücke, auch als \q{Twinedges} bezeichnet, zu erhalten, werden alle Edges, die in der Liste bereits vorhanden sind, betrachtet und neue Edges hinzugefügt, die im Vergleich zu den ursprünglichen Edges vertauschte Start- und Endnodes besitzen.
+Direkt nach dem Hinzufügen der neuen Edge wird jeweils eine Referenz erstellt, die in beiden Edges auf den jeweils zugehörigen Zwilling verweist. 
+In der Liste der Edges existiert nun für jede Line die der DXF--Reader eingelesen hat, zwei zueinander komplementäre Edges.
+\subsection{Nachfolger- und Vorgängerermittlung}
+Die in der DCEL besagten Referenzen von einer Edge zu ihrem Vorgänger- und Nachfolger werden durch eine Sortierung der ausgehenden Edges an den Nodes realisiert.
+\subsubsection{Winkelberechnung an den Knoten}
+Dabei wird zuerst eine ArrayList of ArrayList of Double erstellt, die die jeweiligen \icode{atan2()} Winkel im mathematisch positiven Sinn enthalten. \todo{schreiben...}
+\subsubsection{Setzen der Referenzen}
+Den entstandenen sortierten ArrayLists kann entnommen werden, wie die Edges an einem Node angeordnet sind.
+Da nur ausgehende Edges betrachtend werden, können für jede Edge und ihren Twin einzeln Referenzen gesetzt werden.\\
+Es ergibt sich bei Betrachtung einer Edge:
+\begin{itemize}
+	\item Die in der ArrayList vorgängige Edge ist der Nachfolger der Twin Edge
+	\item Der Twin der in der ArrayList vorgängigen Edge ist der Vorgänger der betrachteten Edge
+\end{itemize}
+
+\subsection{Flächenerstellung}
+
+\subsection{Vervollständigung der Knoten}
