@@ -8,11 +8,31 @@ Um planare Graphen ohne Informationsverlust zu speichern werden in der Informati
 In der sogenannten \q{Doubly connected edge list} (DCEL) erhält eine Kante, die aus einem Anfangsknoten und Endknoten besteht jeweils eine Vorgänger-, eine Nachfolger- und eine Zwillingskante. 
 Jedem Knoten wird außerdem eine ausgehende Kante und allen Flächen eine anliegende Kante zugewiesen. \\
 Diese zwischenobjektlichen Referenzierungen ermöglichen es, ausgehend von einem Element ohne umfangreiche Berechnungen auf alle anderen Objekte zu schließen, indem bei Knoten und Flächen die zugehörigen Kanten, beziehungsweise bei Kanten deren Vorgägner und Nachfolger betrachtet werden.
+\todo{Johann wollte DCEL noch mal überarbeiten}
+\section{AutoCAD}
+%Konstruktionsprogramm statt architektenprogramm
+AutoCAD ist ein grafischer Zeichnungseditor, welcher zum Erstellen von technischen Zeichnungen und dem Modellieren von Objekten verwendet wird.
+AutoCAD verwendet dabei einfache Objekte wie Linien, Kreise und Bögen, um auf deren Grundlage kompliziertere Objekte zu erschaffen.
+Zu AutoCAD gehörig wurden das Dateiformat \q{.dxf} entwickelt, welches als Industriestandard zum Austausch von CAD-Dateien dient. \\
+Der Grundriss, welcher als Ausgangspunkt dieser Arbeit fungiert, ist in AutoCAD erstellt wurden und wird dem zu erstellenden Programm in Form einer .dxf-Datei bereitgestellt.
 \section{OpenSCAD}
-Um ein Modell mit dem vorliegenden 3D-Drucker \q{MakerBot X5098} auszudrucken, muss den Windows eigenen Treibern eine .stl-Datei zur Verfügung stellen.
-Für dieses Format existieren jedoch keine grafikfähigen Bearbeitungsprogramme vor, die ein Modellieren erleichtern. \\
-Deshalb muss das Modell zunächst im Programm \q{OpenSCAD} modelliert und in einer .scad-Datei gespeichert werden.
-OpenSCAD generiert die 3D-Modelle auf der Basis einer simplen Sprache, die dem Nutzer leicht verständlich geometrische Elemente zur Verfügung stellt.
-OpenSCAD bietet zusätzlich zu zahlreichen  Modellierungshilfen, wie dem Highlighten bestimmter Objekte oder dem Modularisieren bereits erstellter Modelle, im Anschluss an die Modellierung auch die Möglichkeit, Dateien im .scad-Format in .stl-Dateien umzuwandeln. \\
-Von weiterem Vorteil ist außerdem, dass .scad-Dateien ähnlich wie Dateien des .txt-Formates sehr simpel aufgebaut sind und somit sehr leicht von separaten Programmen erstellt und bearbeitet werden können.
-\todo{Makerbot Namen raussuchen und einfügen}
+\subsection{Überblick über OpenSCAD}
+OpenSCAD ist eine freie CAD-Modellierungssoftware, welche auf Basis einer textbasierten Beschreibungssprache 3D-Modelle erzeugt.
+OpenSCAD bietet dabei verschiedene Vorteile während des Modellierungsvorganges, wie beispielsweise dem farbigen Hervorheben oder der Modularisierung bestimmter Objekte. \\
+%Modellierung
+Die Modellierung von einfachen Basisobjekten in OpenSCAD erfolgt durch das Verwenden von bestimmten Schlüsselwörtern wie \icode{cube()}, \icode{sphere()} oder \icode{cylinder()} und dem anschließenden Übergeben von Parametern in Klammern.
+Diese Basisobjekte werden anschließend durch Mengenoperationen wie Vereinigungen (\icode{union()}), Differenzen (\icode{difference()}) oder Überschneidungen (\icode{intersection()}) und Transformationen wie Skalierungen (\icode{scale()}), Rotationen (\icode{rotate()}) oder Translationen (\icode{translate()}) mit einander verknüpft und kombiniert, um neue und komplexere Objekte nach eigenen Ansrpüchen zu erhalten.
+Neben solchen einfachen Objekten, wird außerdem die Möglichkeit geboten, komplexere Objekte wie Polygone (\icode{polygon()}) zu erstellen und diese dann ausgehend vom zweidimensionalen Polygon in ein dreidimensionales Polygon umzuwandeln (\icode{linear\_extrude()}), welches vor allem das Umwandeln von komplexen Formen in Objekte erleichtert. \\
+Die Anweisungen, welche OpenSCAD zum Modellieren verwendet, werden in einfachen Textdateien im \q{.scad}-Format gespeichert.
+Die Simplizität dieser Textdateien erlaubt es, die aus dem Programm erhaltenen Anweisungen in .scad-Dateien zu speichern, welche dann von OpenSCAD eingelesen, eingesehen und bearbeitet werden können.
+\subsection{Drucken der Modelle aus OpenSCAD}
+Die Modelle, die so mit OpenSCAD erstellt wurden, können anschließend mit dem vorliegenden 3D-Drucker \q{MakerBot X>9000} ausgedruckt werden.
+Dazu werden die Modelle in Dateien des \q{.stl}-Formats konvertiert, welche schlussendlich mittels der dem 3D-Drucker beiliegenden Software entweder durch einen USB-Anschluss des 3D-Druckers oder auf einer SD-Karte gespeichert ausgedruckt werden. \\
+Auch an dieser Stelle des Modellierungsvorganges bietet sich OpenSCAD wieder an, da es von Haus aus die Option zur Konvertierung vom .scad-Format zu .stl mitliefert.
+%Um ein Modell mit dem vorliegenden 3D-Drucker \q{MakerBot X5098} auszudrucken, muss den Windows eigenen Treibern eine .stl-Datei zur Verfügung stellen.
+%Für dieses Format liegen jedoch keine grafikfähigen Bearbeitungsprogramme vor, die ein Modellieren erleichtern. \\
+%Deshalb muss das Modell zunächst im Programm \q{OpenSCAD} modelliert und in einer .scad-Datei gespeichert werden.
+%OpenSCAD generiert die 3D-Modelle auf der Basis einer simplen Sprache, die dem Nutzer leicht verständlich geometrische Elemente zur Verfügung stellt.
+%OpenSCAD bietet zusätzlich zu zahlreichen  Modellierungshilfen, wie dem Highlighten bestimmter Objekte oder dem Modularisieren bereits erstellter Modelle, im Anschluss an die Modellierung auch die Möglichkeit, Dateien im .scad-Format in .stl-Dateien umzuwandeln. \\
+%Von weiterem Vorteil ist außerdem, dass .scad-Dateien ähnlich wie Dateien des .txt-Formates sehr simpel aufgebaut sind und somit sehr leicht von separaten Programmen erstellt und bearbeitet werden können.
+%\todo{Makerbot Namen raussuchen und einfügen}
