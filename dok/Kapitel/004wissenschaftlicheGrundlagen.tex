@@ -1,13 +1,18 @@
 \chapter{Grundlagen}
-\section{OpenSCAD}
-\section{planarer Graph}
-Ein planarer, auch plättbarer Graph ist ein Graph der in der Ebene mithilfe von Punkten bzw. Knoten (1) und Kanten (2) dargestellt werden kann, ohne dass sich die Kanten schneiden. 
-Dabei findet eine Einteilung in Gebiete bzw. Flächen durch die Kanten statt. 
-Sie bilden den Rand einer Fläche (3). 
-Die Fläche um den Graphen herum wird äußerstes Gebiet genannt.
+\section{Planare Graphen}
+Ein planarer, auch plättbarer Graph ist ein Graph der in einer Ebene mithilfe von Punkten bzw. Knoten (1) und Kanten (2) dargestellt werden kann, ohne dass sich zwei oder mehr Kanten schneiden. 
+Jede Fläche (3) des Graphen wird dabei durch mindestens drei verschiedene Kanten beschrieben, die den Rand dieser Fläche darstellen. 
+Die Fläche um den Graphen herum, welche scheinbar unbegrenzt groß ist, wird äußerstes Gebiet genannt.
 \section{Doubly connected edge list}
-Um planare Graphen ohne Informationsverlust zu speichern werden in der Informatik Referenzen zwischen den einzelnen Bestandteilen des Graphen eingesetzt. 
+Um planare Graphen ohne Informationsverlust zu speichern werden in der Informatik Referenzen zwischen den einzelnen Bestandteilen des Graphen eingesetzt. \\
 In der sogenannten \q{Doubly connected edge list} (DCEL) erhält eine Kante, die aus einem Anfangsknoten und Endknoten besteht jeweils eine Vorgänger-, eine Nachfolger- und eine Zwillingskante. 
-Jedem Knoten wird eine ausgehende Kante und den Flächen eine anliegende Kante zugewiesen. Diese Verknüpfungen ermöglichen es, ausgehend von einem Element direkt auf andere zu schließen, indem  …
-OpenScad
-\todo{Openscad dazu, noch was schreiben}
+Jedem Knoten wird außerdem eine ausgehende Kante und allen Flächen eine anliegende Kante zugewiesen. \\
+Diese zwischenobjektlichen Referenzierungen ermöglichen es, ausgehend von einem Element ohne umfangreiche Berechnungen auf alle anderen Objekte zu schließen, indem bei Knoten und Flächen die zugehörigen Kanten, beziehungsweise bei Kanten deren Vorgägner und Nachfolger betrachtet werden.
+\section{OpenSCAD}
+Um ein Modell mit dem vorliegenden 3D-Drucker \q{MakerBot X5098} auszudrucken, muss den Windows eigenen Treibern eine .stl-Datei zur Verfügung stellen.
+Für dieses Format existieren jedoch keine grafikfähigen Bearbeitungsprogramme vor, die ein Modellieren erleichtern. \\
+Deshalb muss das Modell zunächst im Programm \q{OpenSCAD} modelliert und in einer .scad-Datei gespeichert werden.
+OpenSCAD generiert die 3D-Modelle auf der Basis einer simplen Sprache, die dem Nutzer leicht verständlich geometrische Elemente zur Verfügung stellt.
+OpenSCAD bietet zusätzlich zu zahlreichen  Modellierungshilfen, wie dem Highlighten bestimmter Objekte oder dem Modularisieren bereits erstellter Modelle, im Anschluss an die Modellierung auch die Möglichkeit, Dateien im .scad-Format in .stl-Dateien umzuwandeln. \\
+Von weiterem Vorteil ist außerdem, dass .scad-Dateien ähnlich wie Dateien des .txt-Formates sehr simpel aufgebaut sind und somit sehr leicht von separaten Programmen erstellt und bearbeitet werden können.
+\todo{Makerbot Namen raussuchen und einfügen}
