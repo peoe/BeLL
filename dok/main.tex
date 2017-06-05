@@ -100,6 +100,19 @@
 }
 {
 }
+
+%=========BILDER==============
+\newenvironment{Bild}[1]
+{
+	\begin{figure}[H]
+	\centering
+	\def\BildCaption{#1}
+	
+}	
+{
+	\caption{\BildCaption}
+	\end{figure}
+}
 %========================COMMANDS============
 \newcommand{\q}[1]{\glqq#1\grqq} % Zitat mit Anführungszeichen
 \newcommand{\icode}[1]{\texttt{#1}} %inline Code

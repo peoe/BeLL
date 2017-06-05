@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.6.4)  5 JUN 2017 12:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.6.4)  5 JUN 2017 16:00
 entering extended mode
 **./main.tex
 (main.tex
@@ -965,19 +965,19 @@ Package: lastpage 2015/03/29 v1.2m Refers to last page's name (HMM; JPG)
 (Kapitel/007Quellenverzeichnis.aux) (Kapitel/009Selbstaendigkeit.aux))
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 117.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 130.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1phv.fd"
@@ -1076,7 +1076,7 @@ G,.JBIG2,.JB2,.eps]
 ABD: EveryShipout initializing macros
 Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             https://www.ctan.org/pkg/pageslts
-(lastpage)             ! on input line 117.
+(lastpage)             ! on input line 130.
  (main.tdo)
 \tf@tdo=\write4
 \openout4 = `main.tdo'.
@@ -1127,23 +1127,23 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 
 
 ])
-Underfull \hbox (badness 10000) in paragraph at lines 13--124
+Underfull \hbox (badness 10000) in paragraph at lines 13--137
 
  []
 
 
-Overfull \hbox (0.24239pt too wide) in paragraph at lines 13--124
+Overfull \hbox (0.24239pt too wide) in paragraph at lines 13--137
 \OT1/phv/m/n/12 sys-tem fun-gie-ren. Eck-pfei-ler die-nen hier-bei als Ver-bin-
 dungs-st[]ucke zwi-schen
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 13--124
+Underfull \hbox (badness 10000) in paragraph at lines 13--137
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 13--124
+Underfull \hbox (badness 10000) in paragraph at lines 13--137
 
  []
 
@@ -1313,7 +1313,7 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 File: example-image-a.png Graphic file (type png)
 
 <use example-image-a.png>
-Package pdftex.def Info: example-image-a.png used on input line 36.
+Package pdftex.def Info: example-image-a.png used on input line 35.
 (pdftex.def)             Requested size: 40.15234pt x 30.11426pt.
 )
 
@@ -1360,7 +1360,18 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 [14]
 \openout2 = `Kapitel/0053Bauteile.aux'.
 
- (Kapitel/0053Bauteile.tex)
+ (Kapitel/0053Bauteile.tex
+<Bilder/Quader.png, id=57, 777.65532pt x 538.26094pt>
+File: Bilder/Quader.png Graphic file (type png)
+ <use Bilder/Quader.png>
+Package pdftex.def Info: Bilder/Quader.png used on input line 9.
+(pdftex.def)             Requested size: 341.43306pt x 236.32632pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--10
+
+ []
+
+)
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 14.49998pt.
@@ -1370,7 +1381,7 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 [15
 
 
-]
+ <./Bilder/Quader.png (PNG copy)>]
 \openout2 = `Kapitel/0054Druck.aux'.
 
  (Kapitel/0054Druck.tex)
@@ -1464,17 +1475,17 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 \openout2 = `Kapitel/009Selbstaendigkeit.aux'.
 
  (Kapitel/009Selbstaendigkeit.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 2--137
+Underfull \hbox (badness 10000) in paragraph at lines 2--150
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2--137
+Underfull \hbox (badness 10000) in paragraph at lines 2--150
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2--137
+Underfull \hbox (badness 10000) in paragraph at lines 2--150
 
  []
 
@@ -1508,10 +1519,10 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 (Kapitel/0053Bauteile.aux) (Kapitel/0054Druck.aux) (Kapitel/006Ausblick.aux)
 (Kapitel/007Quellenverzeichnis.aux) (Kapitel/009Selbstaendigkeit.aux)) ) 
 Here is how much of TeX's memory you used:
- 17480 strings out of 493323
- 321355 string characters out of 3139064
- 473390 words of memory out of 3000000
- 20541 multiletter control sequences out of 15000+200000
+ 17489 strings out of 493323
+ 321481 string characters out of 3139064
+ 473433 words of memory out of 3000000
+ 20548 multiletter control sequences out of 15000+200000
  24785 words of font info for 51 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,12n,97p,802b,1929s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1523,9 +1534,9 @@ pe1/urw/courier/ucrb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/courier
 :/Program Files/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvbo8a.pfb><C:/Program Fil
 es/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Program Files/MiKTeX 2.9/
 fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on main.pdf (21 pages, 107274 bytes).
+Output written on main.pdf (21 pages, 120626 bytes).
 PDF statistics:
- 103 PDF objects out of 1000 (max. 8388607)
+ 104 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 18 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 23 words of extra memory for PDF output out of 10000 (max. 10000000)
 

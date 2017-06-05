@@ -69,11 +69,11 @@ public class Main {
 		
 //		Graph gr = new Graph(DXFReader.getAutocadFile("C:\\Users\\Johann\\Documents\\GitHub\\BeLL\\res\\Zeichnung1.dxf"));
 		Graph gr = new Graph(lines);
-		Params.setParams(0.25, 10, 2,  4, 4, 2, 15, 4, 4, 1);
+		Params.setParams(0.25, 10, 2,  4, 4, 2, 75, 4, 4, 1);
 		for(Edge edg : gr.getEdges()){
 			System.out.println(edg);
 		}
-		ClipboardCopier.copyToClipboard(new BasePlate(gr.getFaces().get(0)).toString());
+		ClipboardCopier.copyToClipboard(new Corner(gr.getNodes().get(1)).toString());
 //		ClipboardCopier.copyToClipboard(new CornerPin(gr.getEdges().get(3), Params.getE()).toString());
 
 		
