@@ -10,17 +10,15 @@
 \contentsline {subsection}{\numberline {3.1.2}Funktionsweise der GUI}{11}
 \contentsline {section}{\numberline {3.2}Erstellen der DCEL}{12}
 \contentsline {subsection}{\numberline {3.2.1}Line-to-Edge Konvertierung}{12}
-\contentsline {subsection}{\numberline {3.2.2}Twin-Edge Generierung}{12}
+\contentsline {subsection}{\numberline {3.2.2}Twin-Edge Generierung}{13}
 \contentsline {subsection}{\numberline {3.2.3}Nachfolger- und Vorg\IeC {\"a}ngerermittlung}{13}
-\contentsline {subsubsection}{Winkelberechnung an den Knoten}{13}
-\contentsline {subsubsection}{Setzen der Referenzen}{13}
-\contentsline {subsection}{\numberline {3.2.4}Fl\IeC {\"a}chenerstellung}{13}
-\contentsline {subsection}{\numberline {3.2.5}Vervollst\IeC {\"a}ndigung der Knoten}{13}
-\contentsline {section}{\numberline {3.3}Aufbau der Einzelbauteile}{14}
-\contentsline {subsection}{\numberline {3.3.1}OpenSCAD Java Interface}{14}
-\contentsline {subsection}{\numberline {3.3.2}Corner}{14}
-\contentsline {subsection}{\numberline {3.3.3}Wall}{14}
-\contentsline {subsection}{\numberline {3.3.4}BasePlate}{14}
-\contentsline {section}{\numberline {3.4}Druck}{15}
-\contentsline {subsection}{\numberline {3.4.1}\todo {asdf}}{15}
-\contentsline {chapter}{\numberline {4}Ausblick}{16}
+\contentsline {subsection}{\numberline {3.2.4}Fl\IeC {\"a}chenerstellung}{14}
+\contentsline {subsection}{\numberline {3.2.5}Vervollst\IeC {\"a}ndigung der Knoten}{14}
+\contentsline {section}{\numberline {3.3}Aufbau der Einzelbauteile}{15}
+\contentsline {subsection}{\numberline {3.3.1}OpenSCAD Java Interface}{15}
+\contentsline {subsection}{\numberline {3.3.2}Corner}{15}
+\contentsline {subsection}{\numberline {3.3.3}Wall}{15}
+\contentsline {subsection}{\numberline {3.3.4}BasePlate}{15}
+\contentsline {section}{\numberline {3.4}Druck}{16}
+\contentsline {subsection}{\numberline {3.4.1}\todo {asdf}}{16}
+\contentsline {chapter}{\numberline {4}Ausblick}{17}

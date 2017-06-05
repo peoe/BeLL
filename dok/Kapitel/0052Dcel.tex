@@ -1,35 +1,54 @@
 \section{Erstellen der DCEL}
 \subsection{Line-to-Edge Konvertierung}
+\label{subsec:ltoe}
 In der Hauptklasse des Programms wird aus der Liste von Lines ein planarer Graph erstellt. 
 Dabei werden die Start- und Endpunkte der eingelesenen Lines in Nodes ohne eine Referenz auf eine anliegende Edge umgewandelt und diese als Start- und Endnode der entsprechenden Edge gesetzt.
 Um für die Eindeutigkeit der Nodes zu sorgen, werden nur für Koordinaten neue Nodes erstellt, die zuvor in den Iteration noch nicht erschienen sind.(Funktion \icode{createNode()})
 
-\begin{lstlisting}[caption = {Line-to-Edge Konvertierung}]
-	private void processData(ArrayList<Line> ls) {
-		for (Line l : ls) {
-			Node n1 = createNode(l.getP1());
-			Node n2 = createNode(l.getP2());
-			edges.add(new Edge(n1, n2));
+\begin{code}[Line-to-Edge Konvertierung]
+private void processData(ArrayList<Line> ls) {
+	for (Line l : ls) {
+		Node n1 = createNode(l.getP1());
+		Node n2 = createNode(l.getP2());
+		edges.add(new Edge(n1, n2));
+	}
+}
+\end{code}
+\begin{code}[\icode{createNode()} Funktion]
+private Node createNode(Vector p) {
+	for (Node n : nodes) {
+		if (n.getOrigin().equals(p)) {
+			return n;
 		}
 	}
-\end{lstlisting}
+	nodes.add(new Node(p));
+	return (nodes.get(nodes.size() - 1));
+}
+\end{code}
+\todoinline{Hier könnte man noch was zu sagen}
 \subsection{Twin-Edge Generierung}
 Um aus diesen Edges die invertierten Gegenstücke, auch als \q{Twinedges} bezeichnet, zu erhalten, werden alle Edges, die in der Liste bereits vorhanden sind, betrachtet und neue Edges hinzugefügt, die im Vergleich zu den ursprünglichen Edges vertauschte Start- und Endnodes besitzen.
 Direkt nach dem Hinzufügen der neuen Edge wird jeweils eine Referenz erstellt, die in beiden Edges auf den jeweils zugehörigen Zwilling verweist. 
 In der Liste der Edges existiert nun für jede Line die der DXF--Reader eingelesen hat, zwei zueinander komplementäre Edges.
 \subsection{Nachfolger- und Vorgängerermittlung}
-Die in der DCEL besagten Referenzen von einer Edge zu ihrem Vorgänger- und Nachfolger werden durch eine Sortierung der ausgehenden Edges an den Nodes realisiert.
-\subsubsection{Winkelberechnung an den Knoten}
-Dabei wird zuerst eine ArrayList of ArrayList of Double erstellt, die die jeweiligen \icode{atan2()} Winkel im mathematisch positiven Sinn enthalten. \todo{schreiben...}
-\subsubsection{Setzen der Referenzen}
-Den entstandenen sortierten ArrayLists kann entnommen werden, wie die Edges an einem Node angeordnet sind.
-Da nur ausgehende Edges betrachtend werden, können für jede Edge und ihren Twin einzeln Referenzen gesetzt werden.\\ 
-Es ergibt sich bei Betrachtung einer Edge:
+Für das Erstellen der Referenzen werden zuerst alle ausgehenden Edges der Nodes, das heißt alle Edges, die den jeweiligen Node als ihren Startnode besitzen, in einer zweidimensionalen ArrayList gespeichert.
+Die erste Dimension steht für den Index des Nodes in der erstellten Nodeliste für den in der zweiten Dimension die jeweiligen ausgehenden Edges vorliegen.
+Da diese durch eine \icode{for()} Schleife mit der oben stehenden Bedingung herausgesucht werden, sind die Edges im Array in zufälliger Reihenfolge, also nicht nach der Anordnung am Node gegenwärtig.
+Jetzt werden die Edges anhand des \icode{atan2()} Winkel am vorliegenden Node im mathematisch positiven Drehsinn sortiert.
+Daraus ergibt sich, dass das vorherige bzw. nachfolgende Element einer Edge die Edge, die \q{links} bzw. \q{rechts} der Betrachteten liegt darstellt.\\
+Für jede ausgehende Edge \icode{e} können nun folgende Referenzen gesetzt werden:
 \begin{itemize}
-	\item Die in der ArrayList vorgängige Edge ist der Nachfolger der Twin Edge
-	\item Der Twin der in der ArrayList vorgängigen Edge ist der Vorgänger der betrachteten Edge
+	\item Das vorherige bzw. letzte Element der ArrayList, wenn die betrachtete Edge den Index 0 hat, stellt den Nachfolger der Twinedge von \icode{e} dar.
+	\item Der Twin der in der ArrayList nachfolgenden Edge bzw. ersten Edge, wenn die betrachtete Edge das letzte Element ist, ist der Vorgänger von \icode{e}
 \end{itemize}
-
+Genannte Referenzen werden nun gesetzt, sodass die Verknüpfungen zwischen den Edges fertiggestellt sind.
+\todoinline{code eventuell bilder definitiv}
 \subsection{Flächenerstellung}
+Durch eine Schleife können die einzelnen Flächen herausgefiltert werden.
+Zuerst wird eine Boolean--ArrayList mit der selben Länge der Edgeliste erstellt, welche die Indices der Edgeliste repräsentiert schon in gespeicherten Faces vorkommen.
+Folglich besteht die Liste anfangs nur aus \icode{false} Werten.
+Fortlaufend wird eine Edge herausgesucht, die noch nicht behandelt wurden und von dieser solange die Nachfolger \todoinline{keene Ahnung wie ich das mit der repräsentativen Liste formulieren soll}
+
 
 \subsection{Vervollständigung der Knoten}
+Die letzte nötige Operation ist die Speicherung einer anliegenden Edge in den Nodes.\todoinline{man könnte das im code auch vorher tun denke ich}

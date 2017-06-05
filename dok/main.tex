@@ -21,12 +21,17 @@
 \usepackage{courier} % Courier schriftart
 \usepackage{blindtext}
 \usepackage{etoolbox}
+\usepackage[figure]{totalcount}
+\usepackage{float}
+\usepackage{mathtools}
 
 
 \usepackage{chngcntr}
 
 
 \usepackage{lastpage} %Liest Seitenanzahl
+%==========TODO===============
+\newcommand{\todoinline}[1]{\todo[inline]{#1}}
 % =====FORMAT===========================================================================
 
 
@@ -77,9 +82,10 @@
 
 %========================CODEDARSTELLUNG=========================
 \renewcommand{\lstlistingname}{Codeauschnitt}
-%\lstnewenvironment{code}
-%{
+\lstnewenvironment{code}[1][]
+{
 	\lstset{
+		caption = #1,
 		basicstyle = \footnotesize\ttfamily,
 		language = Java,
 		breaklines  =true,
@@ -87,10 +93,13 @@
 		frame = single,
 		numbers = left,
 		columns=fullflexible,
-		captionpos = b}
-%}
-%{
-%}
+		captionpos = b,
+		xleftmargin=2em,
+		framexleftmargin=2em
+	}
+}
+{
+}
 %========================COMMANDS============
 \newcommand{\q}[1]{\glqq#1\grqq} % Zitat mit Anführungszeichen
 \newcommand{\icode}[1]{\texttt{#1}} %inline Code
