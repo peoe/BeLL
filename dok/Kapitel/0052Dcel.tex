@@ -1,16 +1,17 @@
 \section{Erstellen der DCEL}
+\subsection{Graph Klasse}
+Die wichtigste Klasse der Anwendung ist \icode{Graph}. 
+Sie verbindet alle grafischen Bestandteile und kann mit einer übergebenen Liste aus Linien mittels mehrerer Zwischenoperationen eine vollständige DCEL, also einen planaren Graph erstellen.
+Dafür sind drei Listen vom Typ \icode{Edge}(Kante), \icode{Node}(Knoten) und \icode{Face}(Fläche) gespeichert, die eine DCEL repräsentieren.
 \subsection{Line-to-Edge Konvertierung}
-\label{subsec:ltoe}
-In der Hauptklasse des Programms wird aus der Liste von Lines ein planarer Graph erstellt. 
-Dabei werden die Start- und Endpunkte der eingelesenen Lines in Nodes ohne eine Referenz auf eine anliegende Edge umgewandelt und diese als Start- und Endnode der entsprechenden Edge gesetzt.
-Um für die Eindeutigkeit der Nodes zu sorgen, werden nur für Koordinaten neue Nodes erstellt, die zuvor in den Iteration noch nicht erschienen sind.(Funktion \icode{createNode()})
+\label{subsec:ltoe} 
+Initialisierend werden die Start- und Endpunkte der eingelesenen Linien in Knoten ohne eine Referenz auf eine anliegende Kante umgewandelt und diese als Start- und Endknoten der entsprechenden Kante gesetzt.
+Um für die Eindeutigkeit der Knoten zu sorgen, gibt die Funktion \icode{createNode()} ein äquivalenten Knoten zu einem Punkt zurück und fügt ihn zu der Liste an Knoten hinzu, wenn er noch nicht in ihr existiert.
 
 \begin{code}[Line-to-Edge Konvertierung]
 private void processData(ArrayList<Line> ls) {
 	for (Line l : ls) {
-		Node n1 = createNode(l.getP1());
-		Node n2 = createNode(l.getP2());
-		edges.add(new Edge(n1, n2));
+		edges.add(new Edge(createNode(l.getP1()), createNode(l.getP2())));
 	}
 }
 \end{code}
@@ -26,10 +27,20 @@ private Node createNode(Vector p) {
 }
 \end{code}
 \todoinline{Hier könnte man noch was zu sagen}
-\subsection{Twin-Edge Generierung}
-Um aus diesen Edges die invertierten Gegenstücke, auch als \q{Twinedges} bezeichnet, zu erhalten, werden alle Edges, die in der Liste bereits vorhanden sind, betrachtet und neue Edges hinzugefügt, die im Vergleich zu den ursprünglichen Edges vertauschte Start- und Endnodes besitzen.
-Direkt nach dem Hinzufügen der neuen Edge wird jeweils eine Referenz erstellt, die in beiden Edges auf den jeweils zugehörigen Zwilling verweist. 
-In der Liste der Edges existiert nun für jede Line die der DXF--Reader eingelesen hat, zwei zueinander komplementäre Edges.
+\subsection{Zwillingskantengenerierung}
+Um aus den entstandenen Kanten die invertierten Gegenstücke, auch als \q{Zwillingskanten} bezeichnet, zu erhalten, werden alle Kanten, die in der Liste bereits vorhanden sind, betrachtet und neue Kanten hinzugefügt, die im Vergleich zu den ursprünglichen Kanten vertauschte Start- und Endknoten besitzen.
+Direkt nach dem Hinzufügen der neuen Kante wird jeweils eine Referenz erstellt, die in beiden Kanten auf den jeweils zugehörigen Zwilling verweist. 
+In der Kantenliste existiert nun für jede Linie die der DXF-Reader eingelesen hat, zwei zueinander komplementäre Kanten.
+\begin{code}[Hinzufügen der Zwillingskanten]
+private void computeTwins() {
+	int amount = edges.size();
+	for (int i = 0; i < amount; i++) {
+		edges.add(edges.get(i).generateTwin());
+		edges.get(i).setTwin(edges.get(edges.size() - 1));
+		edges.get(edges.size() - 1).setTwin(edges.get(i));
+	}
+}
+\end{code}
 \subsection{Nachfolger- und Vorgängerermittlung}
 Für das Erstellen der Referenzen werden zuerst alle ausgehenden Edges der Nodes, das heißt alle Edges, die den jeweiligen Node als ihren Startnode besitzen, in einer zweidimensionalen ArrayList gespeichert.
 Die erste Dimension steht für den Index des Nodes in der erstellten Nodeliste für den in der zweiten Dimension die jeweiligen ausgehenden Edges vorliegen.
