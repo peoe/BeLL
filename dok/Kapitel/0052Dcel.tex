@@ -42,7 +42,7 @@ private void computeTwins() {
 }
 \end{code}
 \subsection{Nachfolger- und Vorgängerermittlung}
-Für das Erstellen der Referenzen werden zuerst alle ausgehenden Edges der Nodes, das heißt alle Edges, die den jeweiligen Node als ihren Startnode besitzen, in einer zweidimensionalen ArrayList gespeichert.
+Das Erstellen der Referenzen werden zuerst alle ausgehenden Edges der Nodes, das heißt alle Edges, die den jeweiligen Node als ihren Startnode besitzen, in einer zweidimensionalen ArrayList gespeichert.
 Die erste Dimension steht für den Index des Nodes in der erstellten Nodeliste für den in der zweiten Dimension die jeweiligen ausgehenden Edges vorliegen.
 Da diese durch eine \icode{for()} Schleife mit der oben stehenden Bedingung herausgesucht werden, sind die Edges im Array in zufälliger Reihenfolge, also nicht nach der Anordnung am Node gegenwärtig.
 Jetzt werden die Edges anhand des \icode{atan2()} Winkel am vorliegenden Node im mathematisch positiven Drehsinn sortiert.
@@ -56,9 +56,12 @@ Genannte Referenzen werden nun gesetzt, sodass die Verknüpfungen zwischen den E
 \todoinline{code eventuell bilder definitiv}
 \subsection{Flächenerstellung}
 Durch eine Schleife können die einzelnen Flächen herausgefiltert werden.
-Zuerst wird eine Boolean--ArrayList mit der selben Länge der Edgeliste erstellt, welche die Indices der Edgeliste repräsentiert schon in gespeicherten Faces vorkommen.
+Zuerst wird eine Boolean-ArrayList mit der selben Länge der Edgeliste erstellt, welche die Indices der schon behandelten Kanten repräsentiert.
 Folglich besteht die Liste anfangs nur aus \icode{false} Werten.
-Fortlaufend wird eine Edge herausgesucht, die noch nicht behandelt wurden und von dieser solange die Nachfolger \todoinline{keene Ahnung wie ich das mit der repräsentativen Liste formulieren soll}
+Jetzt wird fortlaufend eine nicht behandelte Kante herausgesucht und von dieser   \todoinline{keene Ahnung wie ich das mit der repräsentativen Liste formulieren soll}
+
+Ab diesem Schritt existieren alle Flächen vollständig in der Flächenliste.
+Das unendliche bzw. äußere Gebiet lässt sich 
 
 
 \subsection{Vervollständigung der Knoten}
