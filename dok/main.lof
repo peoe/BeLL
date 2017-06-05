@@ -1,7 +1,0 @@
-\select@language {ngerman}
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {1}{\ignorespaces Eins Grafik}}{11}
-\contentsline {figure}{\numberline {2}{\ignorespaces Ergebnis von \texttt {new Cube(3, 4, 5).toString()}}}{15}
-\addvspace {10\p@ }
