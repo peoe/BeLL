@@ -5,9 +5,13 @@ Jede Fläche (3) des Graphen wird dabei durch mindestens drei verschiedene Kante
 Die Fläche um den Graphen herum, welche scheinbar unbegrenzt groß ist, wird äußeres Gebiet genannt.
 \section{Doubly connected edge list}
 Um planare Graphen ohne Informationsverlust zu speichern werden in der Informatik Referenzen zwischen den einzelnen Bestandteilen des Graphen eingesetzt. \\
-In der sogenannten \q{Doubly connected edge list} (DCEL) erhält eine Kante, die aus einem Anfangsknoten und Endknoten besteht jeweils eine Vorgänger-, eine Nachfolger- und eine Zwillingskante. 
-Jedem Knoten wird außerdem eine ausgehende Kante und allen Flächen eine anliegende Kante zugewiesen. \\
-Diese zwischenobjektlichen Referenzierungen ermöglichen es, ausgehend von einem Element ohne umfangreiche Berechnungen auf alle anderen Objekte zu schließen, indem bei Knoten und Flächen die zugehörigen Kanten, beziehungsweise bei Kanten deren Vorgägner und Nachfolger betrachtet werden.
+In der sogenannten \q{Doubly connected edge list} (DCEL) werden die grafischen Elemente Kante, Knoten und Fläche wie folgt festgelegt:
+\begin{itemize}
+	\item Jede Kante besitzt Referenzen zu ihrem Vorgänger, Nachfolger und Zwilling. Zudem noch eine zur von ihr links liegende Fläche. Die Kante besteht aus einem Start- und Endknoten.
+	\item Knoten besitzen Koordinaten und eine ausgehende Kante
+	\item Für jede Fläche wird eine anliegende Kante gespeichert
+\end{itemize}
+Diese zwischenobjektlichen Referenzierungen ermöglichen es, ausgehend von einem Element ohne umfangreiche Berechnungen auf alle anderen Objekte zu schließen.
 \todoinline{Johann wollte DCEL noch mal überarbeiten}
 \section{AutoCAD}
 %Konstruktionsprogramm statt architektenprogramm

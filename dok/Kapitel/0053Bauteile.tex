@@ -108,4 +108,5 @@ Grundplatten, sogenannte \q{BasePlates} repräsentieren die Flächen des Grundri
 Sie sind aufgebaut aus einem extrudierten Polygon, welches negative Steckmechanismen am Boden aufweist.
 Diese werden durch Differenzen des Ausgangspolygon mit dem negativen komplementären CornerPin realisiert.
 So entsteht für jeden Knoten der Fläche eine Einkerbung für die Verankerung.
-\todoinline{Abstand zwischen Flächen; Vergrößerung von an das äußere Gebiet angrenzende Fläche}
+Kanten von Flächen, die an das äußere Gebiet angrenzen, werden um \icode{WallWidth + 0.5*E} vergrößert, so dass diese  abschließend mit den Wänden ein äußere Umrandung bilden.
+\todoinline{In diesen kompletten Abschnitt muss noch der Epsilon Abstand zwischen Objekten und positiven und negativen Steckern}
