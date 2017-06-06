@@ -1,5 +1,5 @@
 \section{Aufbau der Einzelbauteile}
-Die drei Kriterien, die die Unterteilung des Modells einhalten sollen, sind wie folgt festgelegt:\\
+Die drei Kriterien, die die Unterteilung des Modells einhalten sollen, sind wie folgt festgelegt:
 \begin{itemize}
 	\item Die Einzelteile sollen möglichst simpel gestaltet sein, um unnötig komplizierten Konflikten
 	\item Die Untereinheiten sollen durch so geringe Modifikation wie möglich einen guten seitlichen Einblick in das Modell gewähren
@@ -8,20 +8,72 @@ Die drei Kriterien, die die Unterteilung des Modells einhalten sollen, sind wie 
 Aus diesen Kriterien resultiert die Verwendung von herausnehmbaren Wandstücken, welche nicht zu fest im restlichen Modell verankert sind, so dass sie sehr leicht herausgenommen und auch wieder hineingesetzt werden können.
 Um diese Wände auch weiterhin im Modell fixieren zu können, werden Eckpfeiler verwendet, in welche die Wandstücke, eingesetzt werden.
 Da die Einheit aus Eckpfeilern und leicht entfernbaren Wandstücken nicht sehr stabil ist, werden nun am unteren Teil der Eckpfeiler noch Stecker hinzugefügt, um eine Grundplatte zu fixieren und so eine stabile Einheit zu erhalten. Zur Realisierung des Stecksystems müssen anschließend für beide Verankerungsmechanismen geeignete Designs ausgearbeitet werden.
-\subsection{$\varepsilon$ Abstand}
-Aufgrund des Fehlers der beim Druckprozess entsteht, wird ein Abstand zwischen den positiven und negativen definiert. \todo{Params?}
 
+\subsection{Zuweisen von Berechnungskonstanten}
+\subsubsection{Funktionsweise der \icode{Params}-Klasse}
+Die \icode{Params}-Klasse wird als statische Zugriffsmöglichkeit auf bestimmte Konstanten des Programms verwendet, welche bei der Berechnung der Bauteile vonnöten sind.
+Diese Klasse verfügt hierbei über öffentliche statische Funktionen, mit der aus allen anderen Klassen ohne eine Instanziierung der \icode{Params}-Klasse deren Parameter gesetzt oder auf bereits vorhandene Parameter zugegriffen werden kann.
+Die Statik der Variablen und Funktionen verhindert hierbei, dass während des Programmablaufes verschiedene  Berechnungskomponenten unterschiedliche Konstanten zur Verfügung gestellt bekommen. \\
+Das Setzen der Parameter findet zu Beginn des Programmes in der \icode{Main}-Klasse statt.
+Hierbei wird die Funktion \icode{setParams()} aufgerufen.
+Dieser Funktion werden sämtliche Werte als Parameter des Datentyps \icode{double} übergeben.
+In der \icode{Params}-Klasse werden dann innerhalb der Funktion allen privaten Variablen ihre Werte entsprechend der Parameter zugewiesen und abrufbar gemacht.
+\begin{code} [Die \icode{setParams()}-Funktion zum Setzen der Parameter]
+	public static void setParams(double E, double CornerRadius, double PinMinLength, double PinPWidth, double PinPRadius, double PinDistance, double Height, double PinHeight, double BasePlateHeight, double BasePlatePinCircleHeight){
+		e = E;
+		cornerRadius = CornerRadius;
+		pinMinLength = PinMinLength+CornerRadius;
+		pinDistance = PinDistance;
+		height = Height;
+		pinHeight = PinHeight;
+		pinPRadius = PinPRadius;
+		pinPWidth = PinPWidth;
+		basePlateHeight = BasePlateHeight;
+		basePlatePinCircleHeight = BasePlatePinCircleHeight;
+	}
+\end{code}
+Das Abrufen der Parameter erfolgt dann mittels der entsprechenden \icode{get()}-Funktionen der \icode{Params}-Klasse, welche für alle Parameter vorhanden sind.
+Ein Überschreiben einzelner Parameter wird an dieser Stelle verhindert, da für die privaten Variablen keine \icode{set()}-Funktionen vorliegen.
+Der Aufbau der \icode{get()}-Funktionen folgt dem generellen Aufbau des nachfolgenden Codebeispiels, jedoch werden die Parameterbezeichnungen jeweils entsprechend ersetzt:
+\begin{code} [Die \icode{get()}-Funktion für den Parameter \icode{e}]
+public static double getE() {
+	return e;
+}
+\end{code}
+Diese Funktionen werden dann aus den Programmteilen, in denen sie für Berechnungen benötigt werden, statisch mittels des Aufrufs der \icode{Params}-Klasse aufgerufen. \\
+Die Bedeutung der einzelnen Parameter erklärt sich wie folgt:
+\begin{description}[style=nextline]
+	\item[E ($\epsilon$/Epsilon)] 
+		Der Parameter \q{E} entspricht der Konstante $\epsilon$ (Epsilon), welcher aus Gründen der vorteilhaften Kürze der Parameternamen hier verwendet wurde.
+		$\epsilon$ bezeichnet den Abstand, welcher zwischen zwei Bauteilen mit einberechnet werden muss, um ein einfaches Zusammenstecken zu gewährleisten.
+	\item[CornerRadius]
+		Der Parameter \q{CornerRadius} entspricht der Konstante, welche den Radius des Grundzylinders der Eckstücken angibt.
+	\item[PinMinLength] 
+		Der Parameter \q{PinMinLength} entspricht der Konstante, welche die minimale Länge des Quaders des positiven Eckstücks angibt, welcher zwischen dem Eckzylinder und dem Pinzylinder platziert wird.
+	\item[PinPWidth] 
+		Der Parameter \q{PinPWidth} entspricht der Konstante, welche die Weite für den Quader des positiven Eckstücks angibt, welcher zwischen dem Eckzylinder und dem Pinzylinder platziert wird.
+	\item[PinPRadius] 
+		Der Parameter \q{PinPRadius} entspricht der Konstante, welche den Radius des Pinzylinders des positiven Eckstücks angibt.
+	\item[PinDistance]
+		Der Parameter \q{PinDistance} entspricht der Konstante, welche die Distanz zwischen dem positiven Pin und den anliegenden Wandstücken angibt, welche für jeden Pin eingehalten werden muss.
+	\item[Height]
+		Der Parameter \q{Height} entspricht der Konstante, welche die Höhe der Wandteile und der Eckzylinder angibt.
+	\item[PinHeight]
+		Der Parameter \q{PinHeight} entspricht der Konstante, welche die Höhe des positiven Pinzylinders angibt.
+	\item[BasePlateHeight]
+		Der Parameter \q{BasePlateHeight} entspricht der Konstante, welche die Höhe der Grundplatte angibt.
+	\item[BasePlatePinCircleHeight]
+		Der Parameter \q{BasePlateCircleHeight} entspricht der Konstante, welche die Höhe der Kreisflächen angibt, die unter den positiven Eckstücken angebracht werden und der Stabilisierung und Verankerung von Grundplatter und Eckstück dienen.
+\end{description}
 
 \subsection{OpenSCAD Java Interface}
 Für die erleichterte Erstellung von OpenScad Objekten wurde ein Java Interface \icode{ScadObject} erstellt, welches alle für das Projekt wichtigen Befehle enthält.
 Die Methode \icode{toString()} stellt in den Klassen des Interfaces die Übergabe des OpenSCAD Befehlsstrings dar.
-So kann man z.B. mit der Klasse \icode{Cube} einen Quader mit Länge, Höhe und Breite erstellen der dann wie folgt mit \icode{Cube.toString()} in einen String konvertiert wird:\\
+So kann man z.B. mit der Klasse \icode{Cube} einen Quader mit Länge, Höhe und Breite erstellen der dann wie folgt mit \icode{Cube.toString()} in einen String konvertiert wird:
 \icode{cube([Länge, Breite, Höhe]);}\\
-\begin{Bild}{Ergebnis von \icode{new Cube(3, 4, 5).toString()}}
+\begin{Bild}{Ergebnis von \icode{new Cube(3, 4, 5).toString()} (Screenshot der Verfasser)}
 	\includegraphics[width = 120mm]{Bilder/Quader}
 \end{Bild}
-
-
 
 \subsection{Corner}
 Das Corner Element bezeichnet die Eckpfeiler des 3D-Modells.
