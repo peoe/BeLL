@@ -28,14 +28,20 @@ Die Simplizität dieser Textdateien erlaubt es, die aus dem Programm erhaltenen 
 Die Modelle, die so mit OpenSCAD erstellt wurden, können anschließend mit dem 3D-Drucker ausgedruckt werden.
 Dazu werden die Modelle in Dateien des \q{.stl}-Formats konvertiert, welche schlussendlich mittels der dem 3D-Drucker beiliegenden Software entweder durch einen USB-Anschluss des 3D-Druckers oder auf einer SD-Karte gespeichert ausgedruckt werden.
 Auch an dieser Stelle des Modellierungsvorganges bietet sich OpenSCAD wieder an, da es von Haus aus die Option zur Konvertierung vom .scad-Format zu .stl mitliefert.
-\section{3D-Drucker MakerBot X$>$9000}
+\section{3D-Drucker MakerBot Replicator\texttrademark\ 2}
 %Erklärung 3D-Drucker
-Der vorliegende 3D-Drucker ist das Modell XYZ der Firma MakerBot.
-Dieser verfügt über eine höhenverstellbare Grundplatte, auf der das Filament aufgetragen und so auch das finale Objekt gedruckt wird, und einen sogenannten \q{Extruder}, welcher die Funktion übernimmt, das Filament mit dem gedruckt werden soll, zu erhitzen und kontrolliert auf die Grundplatte bzw. das gedruckte Objekt aufzutragen. \\
-Die Höhe der Grundplatte wird automatisch vom Drucker variiert und nach dem Ende jedes Druckvorganges wieder komplett nach unten gefahren.
-Um die Beweglichkeit des Extruders zu garantieren, ist dieser so auf drei Achsen befestigt, dass drei Motoren ihn darauf verschieben können. \\
+Der vorliegende 3D-Drucker ist das Modell Replicator\texttrademark\ 2 der Firma MakerBot.
+Dieser Drucker verfügt über eine höhenverstellbare Grundplatte, auf der das Filament aufgetragen und so auch das finale Objekt gedruckt wird, und einen sogenannten \q{Extruder}, welcher die Funktion übernimmt, das zu druckende Filament zu erhitzen und mit einer konstanten Filamentbreite auf die Grundplatte bzw. das gedruckte Objekt aufzutragen. 
+Mithilfe dieser zwei Hauptbestandteile wird schichtweise Filament aufgetragen, welches aushärtet und so nach und nach das Objekt bildet. \\
+Die Höhe der Grundplatte wird während des Druckvorganges automatisch vom Drucker variiert und nach Abschluss des Druckens wieder auf den Ausgangszustand zurückgesetzt.
+Um die Beweglichkeit des Extruders zu garantieren, ist dieser auf drei Achsen befestigt, sodass drei Motoren ihn auf diesen Achsen verschieben können. \\
 Abhängig vom Filament bzw. der Temperatur, bei der dieses aufgetragen wird, der Bewegungsgeschwindigkeit des Extruders und der Filamentstärke, die der Extruder aufträgt, lässt sich die gewünschte Druckqualität anpassen.
 Eine niedrige Qualität ist dabei in den meisten Fällen mit einer erheblich kürzeren Druckzeit verbunden. \\
-Die Druckzeit wird außerdem von der eingestellten Ausfüllung von geschlossenen Objekten beeinflusst.
-So kann man beispielsweise Quader nicht komplett mit Filament füllen lassen, sondern beispielsweise mit einem Bienenwabenmuster durchsetzen, sodass nur ein geringer Teil des Objektes ausgefüllt wird, aber dennoch Stabilität garantiert ist.
-Indem so also ein stark verringerter Betrag an Filament aufgetragen werden muss, wird auch die Druckzeit reduziert.
+Die Druckzeit wird außerdem von der eingestellten Ausfüllung von geschlossenen Objekten und dem Hinzufügen von Druckhilfen beeinflusst.
+So kann man Quader zum Beispiel nicht komplett mit Filament füllen lassen, sondern mit einem Bienenwabenmuster durchsetzen, sodass nur ein geringer Teil des Objektes ausgefüllt wird.
+Zusätzlich zu dem eigentlichen Druckergebnis wird unter jedes gedruckte Element ein dünner Untergrund gedruckt, welcher leicht von der Grundplatte und vom gedruckten Modell zu trennen ist und so eine Beschädigung beim Entfernen des Objekts vom Drucker verhindert.
+Außerdem werden bei Überhängen zusätzliche Stützen angebracht, um ein Absacken des noch nicht fest gewordenen Filaments zu verhindern. 
+Indem so also ein stark verringerter Betrag an Filament aufgetragen werden muss, wird auch die Druckzeit drastisch reduziert. \\
+Beim Drucken von Objekten ist neben Anpassungen zur Kontrolle der Druckqualität und Druckzeit außerdem zu beachten, dass die Grundplatte nur auf einer Fläche von 28,5 $\times$ 15,3 cm und einer maximalen Höhe von 15,5 cm bedruckbar ist.
+Entsprechend dieser möglichen Maße sollten also alle Objekte angepasst werden.
+% [28.5 x 15.3 x 15.5 cm]
