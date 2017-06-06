@@ -56,13 +56,14 @@ Genannte Referenzen werden nun gesetzt, sodass die Verknüpfungen zwischen den E
 \todoinline{code eventuell bilder definitiv}
 \subsection{Flächenerstellung}
 Durch eine Schleife können die einzelnen Flächen herausgefiltert werden.
-Zuerst wird eine Boolean-ArrayList mit der selben Länge der Edgeliste erstellt, welche die Indices der schon behandelten Kanten repräsentiert.
-Folglich besteht die Liste anfangs nur aus \icode{false} Werten.
-Fortlaufend wird von einer anfänglichen Kante   \todoinline{keene Ahnung wie ich das mit der repräsentativen Liste formulieren soll}
-
-Ab diesem Schritt existieren alle Flächen vollständig in der Flächenliste.
-Das unendliche bzw. äußere Gebiet lässt sich 
-
+Es muss lediglich fortlaufend alle Nachfolger einer gewählten Kante herausgesucht werden bis die gewählte Kante einen Nachfolger darstellt, bis alle Kanten genau einmal behandelt wurden.
+Dafür wurde eine repräsentative Boolean-ArrayList mit der Länge der Kantenliste erstellt, die mit ihren Werten den Status der Kanten darstellt.
+Folglich besteht diese am Anfang nur aus \icode{false} Werten die während der Schleife alle auf \icode{true} gesetzt werden.
+Die Speicherung der Faces folgt nach dem DCEL-Standard statt, sodass nur eine anliegende Kante zugewiesen wird, mit der man, aufgrund von den Referenzen zwischen den Kanten alle Kanten und Knoten der Fläche ermitteln kann.
+Das äußere Gebiet des planaren Graphens lässt sich an der Umlaufrichtung der Kanten erkennen.
+Es ist die einzige Fläche, die im mathematisch negativen Drehsinn ausgerichtet ist.
+Unterschieden wird sie im weiteren Programmablauf mithilfe der gaußschen Trapezformel.
+Bei negativer Umlaufrichtung ist das Ergebnis dieser negativ und lässt sich resultierend leicht erkennen.
 
 \subsection{Vervollständigung der Knoten}
 Die letzte nötige Operation ist die Speicherung einer anliegenden Edge in den Nodes.\todoinline{man könnte das im code auch vorher tun denke ich}

@@ -78,8 +78,34 @@ So kann man z.B. mit der Klasse \icode{Cube} einen Quader mit Länge, Höhe und 
 \subsection{Corner}
 Das Corner Element bezeichnet die Eckpfeiler des 3D-Modells.
 Es besteht aus zwei zusammengefügten Teilen, dem CornerCylinder und dem CornerPin.
+\subsubsection{CornerCylinder}
 CornerCylinder stellt den oberen Teil einer Ecke dar, der ein rundes Grundbauteil mit Einkerbungen für Wände bereitstellt.
-In dessen Berechnung werden alle an dem Knoten anliegenden Kanten betrachtet und eine Schnittmenge zwischen einem Grundzylinder und in die Richtung der Kanten gedrehten Quadern vollzogen.\\
+In dessen Berechnung werden alle an dem Knoten anliegenden Kanten betrachtet und eine Schnittmenge zwischen einem Grundzylinder und in die Richtung der Kanten gedrehten Quadern vollzogen. 
+\subsubsection{CornerPin}
+Der CornerPin Teil ist der untere Abschnitt des Eckpfeilers, welcher die positiven Steckmechanismen für die Grundplatten zur Verfügung stellt.
+Für jede anliegende Fläche wird dabei ein neues Objekt kalkuliert.
+Es ist zu unterscheiden, ob die Fläche das äußere Gebiet oder einen Teil des inneren Gebietes darstellt.
+Im Inneren des Grundrisses sollten Steckmechanismen angebracht werden, um die Verankerung der Grunplatten zu gewähren, was außen nicht notwendig ist, da dort keine reale Fläche angelegt wird.
+\paragraph{Pin des äußeren Gebietes}
+Wenn an einen Knoten das äußere Gebiet angrenzt wird der entsprechende Eckpfeiler dessen nicht mit einem Pin sondern nur mit einer Umrandung versehen.
+Diese entsteht durch eine Differenzmenge zwischen einem Basiszylinder, der den kompletten Eckpfeiler umschließt und der äußeren Fläche.
+Gewährleistet wird das durch die Verarbeitung von Polygonen mit OpenSCAD, denn obwohl es die unendliche Fläche in die Differenz mit inkludiert ist, wird diese immer den kompletten inneren Raum des Grundrisses repräsentieren, so dass eine Differenz möglich ist.
+\paragraph{Pin des inneren Gebietes}
+Bei diesem wird ein positiver Steckmechanismus errechnet.
+Er setzt sich zusammen aus einer Basis, einem Quader und einem Zylinder.
+Die Länge des Pins kann dabei variieren.
+Sie ist so definiert, dass zum Rand der Fläche immer ein gewisser Abstand vorherrscht, sodass es zu keinen Komplikationen kommt.
+Die Basis entsteht durch eine Schnittmenge der betrachteten Fläche mit dem Basiszylinders des Pins.
 \todoinline{CornerPin}
 \subsection{Wall}
+Eine Wand setzt sich aus drei Quadern zusammen. 
+Einer dieser Quader stellt das mittlere Wandstück dar, welches die wirkliche Wand repräsentiert und somit die entsprechende Länge und die definierte \icode{WallWidth} Wandbreite besitzt.
+Zwei kleinere werden eingesetzt um die Verankerung mit den Eckpfeilern zu garantieren.
+Diese werden am Anfang und Ende des Mittelstückes angelegt und können so an den Enden in die Eckzylinder greifen.
+\todo{$\varepsilon$?}
 \subsection{BasePlate}
+Grundplatten, sogenannte \q{BasePlates} repräsentieren die Flächen des Grundrisses.
+Sie sind aufgebaut aus einem extrudierten Polygon, welches negative Steckmechanismen am Boden aufweist.
+Diese werden durch Differenzen des Ausgangspolygon mit dem negativen komplementären CornerPin realisiert.
+So entsteht für jeden Knoten der Fläche eine Einkerbung für die Verankerung.
+\todoinline{Abstand zwischen Flächen; Vergrößerung von an das äußere Gebiet angrenzende Fläche}
