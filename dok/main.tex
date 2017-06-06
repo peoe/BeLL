@@ -19,7 +19,7 @@
 \usepackage{float}
 \usepackage{mathtools}
 \usepackage{titlesec}
-
+\usepackage{enumitem}
 \usepackage{chngcntr}
 
 
@@ -37,7 +37,7 @@
 
 \doublespacing %Zeilenabstand 1.5
 
-
+\setlength{\headheight}{15pt}
 
 \titleformat{\chapter}{\LARGE}{\thechapter.}{20pt}{\LARGE}
 
@@ -126,6 +126,10 @@
 %==========ABKÜRZUNGSVERZEICHNIS=====================
 \input{Kapitel/008Abkuerzungen}
 
+%====================HYPHENS===============
+\hyphenation{Screen-shot}
+
+%============MAIN=DOCUMENT=====================
 \begin{document}
 	
 	\renewcommand{\thelstlisting}{\arabic{lstlisting}}
