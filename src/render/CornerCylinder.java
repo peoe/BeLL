@@ -16,6 +16,8 @@ public class CornerCylinder implements ScadObject {
 	
 	//node for which the cylinder need to be created
 	private Node n;
+	//Parameters
+	private Params params;
 
 	//getters and setters
 	public double getEpsilon() {
@@ -34,15 +36,24 @@ public class CornerCylinder implements ScadObject {
 		this.n = n;
 	}
 
+	public Params getParams() {
+		return params;
+	}
+
+	public void setParams(Params params) {
+		this.params = params;
+	}
+
 	//constructor
 	/**
 	 * Constructor of CornerCylinder class
 	 * @param n DCEL Node of CornerCylinder
 	 * @param epsilon Epsilon margin
 	 */
-	public CornerCylinder(Node n, double epsilon) {
+	public CornerCylinder(Node n, double epsilon, Params params) {
 		this.epsilon = epsilon;
 		this.n = n;
+		this.params = params;
 	}
 
 	// returns the difference tile for wall cuttings
@@ -53,8 +64,8 @@ public class CornerCylinder implements ScadObject {
 	 */
 	private ScadObject getMinusTileCorner(double angle) {
 
-		double cornerRadius = Params.getCornerRadius();
-		double wallWidth = Params.getWallwidth() / 2 - 2 * getEpsilon();
+		double cornerRadius = params.getCornerRadius();
+		double wallWidth = params.getWallwidth() / 2 - 2 * getEpsilon();
 		Cube tileCube = new Cube(cornerRadius, wallWidth, 4, true);
 		Translate tTileCube = new Translate(tileCube, cornerRadius + getEpsilon(), 0, 0);
 
@@ -68,15 +79,15 @@ public class CornerCylinder implements ScadObject {
 	public ScadObject getCornerCylinder() {
 		// First part Wall fitting segment
 		ArrayList<ScadObject> cornerBaseDifference = new ArrayList<>();
-		cornerBaseDifference.add(new CornerBaseTile(1, getEpsilon()));
+		cornerBaseDifference.add(new CornerBaseTile(1, getEpsilon(), params));
 		ArrayList<Edge> cornerEdges = n.getAdjacentEdges();
 		for (Edge cornerEdge : cornerEdges) {
 			cornerBaseDifference.add(getMinusTileCorner(cornerEdge.toVector().angleInDegrees()));
 		}
 
 		return new Translate(
-				new Scale(new Difference(cornerBaseDifference), 1, 1, Params.getHeight() - Params.getBasePlateHeight()),
-				0, 0, Params.getBasePlateHeight() + 0.5 * (Params.getHeight() - Params.getBasePlateHeight()));
+				new Scale(new Difference(cornerBaseDifference), 1, 1, params.getHeight() - params.getBasePlateHeight()),
+				0, 0, params.getBasePlateHeight() + 0.5 * (params.getHeight() - params.getBasePlateHeight()));
 	}
 
 	// returns scad command

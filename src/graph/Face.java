@@ -49,7 +49,7 @@ public class Face {
 	 */
 	public String toString() {
 		String s = "[";
-		// loop thrpugh all edges and add them to the existing String
+		// loop through all edges and add them to the existing String
 		for (int i = 0; i < getEdges().size(); i++) {
 			s = s.concat(getEdges().get(i).toString());
 			if (i != getEdges().size() - 1) {

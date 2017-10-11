@@ -66,14 +66,15 @@ public class Main {
 //		lines.add(k);
 //		lines.add(l);
 		
-		
 //		Graph gr = new Graph(DXFReader.getAutocadFile("C:\\Users\\Johann\\Documents\\GitHub\\BeLL\\res\\Zeichnung1.dxf"));
 		Graph gr = new Graph(lines);
-		Params.setParams(0.25, 10, 2,  4, 4, 2, 75, 4, 4, 1);
-		for(Edge edg : gr.getEdges()){
-			System.out.println(edg);
-		}
-		ClipboardCopier.copyToClipboard(new Corner(gr.getNodes().get(1)).toString());
+		Params p = new Params(0.25, 10.0, 2.0,  4.0, 4.0, 2.0, 75.0, 4.0, 4.0, 1.0);
+		ScadProcessor proc = new ScadProcessor(gr, p);
+		Union u = new Union(null);
+//		u.getObjects().add(proc.outputBasePlates());
+		u.getObjects().add(proc.outputWalls());
+//		u.getObjects().add(proc.outputCorners());
+		ClipboardCopier.copyToClipboard(u.toString());
 //		ClipboardCopier.copyToClipboard(new CornerPin(gr.getEdges().get(3), Params.getE()).toString());
 
 		

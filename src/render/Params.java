@@ -14,10 +14,10 @@ public class Params {
 	 * height - the height of the corner 
 	 * pinHeight - the height of the pin
 	 */
-	private static double e, cornerRadius, pinMinLength, pinPWidth, pinPRadius, pinDistance, height, pinHeight, basePlateHeight, basePlatePinCircleHeight;
+	private double e, cornerRadius, pinMinLength, pinPWidth, pinPRadius, pinDistance, height, pinHeight, basePlateHeight, basePlatePinCircleHeight, wallWidth;
 
 	// the constant for defining the width of all walls
-	private static final double wallWidth = 6.0;
+	//	private static final double wallWidth = 6.0;
 	
 	// getter - setter
 	// pinPWidth
@@ -25,7 +25,7 @@ public class Params {
 	 * Returns the parameter corresponding to the width of the positive pin.
 	 * @return the width of the positive pin
 	 */
-	public static double getPinPWidth() {
+	public double getPinPWidth() {
 		return pinPWidth;
 	}
 
@@ -34,7 +34,7 @@ public class Params {
 	 * Returns the parameter corresponding to the radius of the positive pin.
 	 * @return the radius of the positive pin
 	 */
-	public static double getPinPRadius() {
+	public double getPinPRadius() {
 		return pinPRadius;
 	}
 
@@ -43,7 +43,7 @@ public class Params {
 	 * Returns the parameter corresponding to the value of epsilon.
 	 * @return the value of epsilon
 	 */
-	public static double getE() {
+	public double getE() {
 		return e;
 	}
 	
@@ -52,7 +52,7 @@ public class Params {
 	 * Returns the parameter corresponding to the corner radius.
 	 * @return the corner radius 
 	 */
-	public static double getCornerRadius() {
+	public double getCornerRadius() {
 		return cornerRadius;
 	}
 
@@ -61,7 +61,7 @@ public class Params {
 	 * Returns the parameter corresponding to the minimum pin length.
 	 * @return the minimum pin length
 	 */
-	public static double getPinMinLength() {
+	public double getPinMinLength() {
 		return pinMinLength;
 	}
 
@@ -70,7 +70,7 @@ public class Params {
 	 * Returns the parameter corresponding to the pin distance.
 	 * @return the pin distance
 	 */
-	public static double getPinDistance() {
+	public double getPinDistance() {
 		return pinDistance;
 	}
 
@@ -79,7 +79,7 @@ public class Params {
 	 * Returns the parameter corresponding to the height.
 	 * @return the height
 	 */
-	public static double getHeight() {
+	public double getHeight() {
 		return height;
 	}
 
@@ -88,7 +88,7 @@ public class Params {
 	 * Returns the parameter corresponding to the pin height.
 	 * @return the pin height
 	 */
-	public static double getPinHeight() {
+	public double getPinHeight() {
 		return pinHeight;
 	}
 
@@ -97,15 +97,15 @@ public class Params {
 	 * Returns the parameter corresponding to the wall width.
 	 * @return the wall width
 	 */
-	public static double getWallwidth() {
+	public double getWallwidth() {
 		return wallWidth;
 	}
   
-  public static double getBasePlatePinCircleHeight() {
+  public double getBasePlatePinCircleHeight() {
 		return basePlatePinCircleHeight;
 	}
 	
-	public static double getBasePlateHeight() {
+	public double getBasePlateHeight() {
 		return basePlateHeight;
 	}
 
@@ -123,7 +123,7 @@ public class Params {
 	 * @param BasePlateHeight
 	 * @param BasePlatePinCircleHeight
 	 */
-	public static void setParams(double E, double CornerRadius, double PinMinLength, double PinPWidth, double PinPRadius, double PinDistance, double Height, double PinHeight, double BasePlateHeight, double BasePlatePinCircleHeight){
+	public Params(double E, double CornerRadius, double PinMinLength, double PinPWidth, double PinPRadius, double PinDistance, double Height, double PinHeight, double BasePlateHeight, double BasePlatePinCircleHeight){
 		e = E;
 		cornerRadius = CornerRadius;
 		pinMinLength = PinMinLength+CornerRadius;
@@ -134,6 +134,7 @@ public class Params {
 		pinPWidth = PinPWidth;
 		basePlateHeight = BasePlateHeight;
 		basePlatePinCircleHeight = BasePlatePinCircleHeight;
+		wallWidth = 6.0;
 		
 	}
 

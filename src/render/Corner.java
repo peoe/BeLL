@@ -9,6 +9,8 @@ public class Corner implements ScadObject {
 	private Node n;
 	//epsilon distance between positive corner and negative 
 	private double Epsilon;
+	//Parameters
+	private Params params;
 
 	public Node getN() {
 		return n;
@@ -26,14 +28,23 @@ public class Corner implements ScadObject {
 		Epsilon = epsilon;
 	}
 
+	public Params getParams() {
+		return params;
+	}
+
+	public void setParams(Params params) {
+		this.params = params;
+	}
+
 	/**
 	 * Constructor of Corner class using a Node and an epsilon margin
 	 * @param n DCEL Node of Corner
 	 * @param epsilon margin amount
 	 */
-	public Corner(Node n, double epsilon) {
+	public Corner(Node n, double epsilon, Params params) {
 		this.n = n;
 		Epsilon = epsilon;
+		this.params = params;
 	}
 	
 	/**
@@ -41,9 +52,10 @@ public class Corner implements ScadObject {
 	 * @param n DCEL Node of Corner
 	 * 
 	 */
-	public Corner(Node n) {
+	public Corner(Node n, Params params) {
 		this.n = n;
 		Epsilon = 0.0;
+		this.params = params;
 	}
 	
 	/**
@@ -53,9 +65,9 @@ public class Corner implements ScadObject {
 	public ScadObject getCorner(){
 		ArrayList<ScadObject> cornerObjects = new ArrayList<>();
 		for(Edge e : getN().getAdjacentEdges()){
-			cornerObjects.add(new CornerPin(e, getEpsilon()));
+			cornerObjects.add(new CornerPin(e, getEpsilon(), params));
 		}
-		cornerObjects.add(new CornerCylinder(getN(), getEpsilon()));
+		cornerObjects.add(new CornerCylinder(getN(), getEpsilon(), params));
 		return new Union(cornerObjects);
 	}
 	

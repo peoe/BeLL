@@ -212,23 +212,6 @@ public class Graph {
 
 		return edgs;
 	}
-	//test
-	public ScadObject outputCorners(){
-		ArrayList<ScadObject> objectList = new ArrayList<>();
-		for(Node n : nodes){
-			objectList.add(new Translate(new Corner(n),n.getOrigin(),0));
-		}
-//		for(Edge e : edges){
-//			objectList.add(new Wall(e));
-//		}
-		for(Face f: faces){
-			if(f.getArea()>0.0){
-			objectList.add(new BasePlate(f));
-			}
-		}
-		return (new Union(objectList));
-		
-	}
 	
 	/**
 	 * 
