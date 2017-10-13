@@ -8,7 +8,7 @@ import render.ScadObject;
 public class Union implements ScadObject {
 
 	// ArrayList of ScadObjects for the Union
-	private ArrayList<ScadObject> objects;
+	private ArrayList<ScadObject> objects = new ArrayList<>();
 
 	// the layout String for creating the Union
 	final static String union = "union(){\n%s}";

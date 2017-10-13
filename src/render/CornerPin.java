@@ -157,7 +157,7 @@ public class CornerPin implements ScadObject {
 		ArrayList<ScadObject> pinBottom = new ArrayList<>();
 		Edge prevEdge = cornerEdge.getPrev().getTwin();
 		double faceArea = cornerEdge.getFace().getArea();
-		//just adds a pin if it incident face isn't the infinite face( = negative area)
+		//adds a pin if incident face isn't the infinite face( = negative area)
 		if (faceArea > 0) {
 			
 			pinLength = calculateD();
@@ -179,12 +179,13 @@ public class CornerPin implements ScadObject {
 		//whether the face is the infinite one or not a difference or an intersection must be created
 			if (faceArea > 0) {
 				unionArrayList.add(new Intersection(pinBottom));
-			} else {
+			} else  {
 				unionArrayList.add(new Difference(pinBottom));
 			}
 			
+			
 		if (getEpsilon() != 0.0){
-			unionArrayList.add(getBaseTileLow(params.getPinMinLength() + 2*params.getPinPRadius()));
+			unionArrayList.add(getBaseTileLow(params.getPinMinLength()));
 		}
 			
 		//return of the Union of all pre-defined tiles

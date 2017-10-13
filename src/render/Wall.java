@@ -11,7 +11,8 @@ public class Wall implements ScadObject {
 	private Edge e;
 	//Parameters
 	private Params params;
-
+	//3D ScadObjekt
+	private ScadObject object;
 	// constructor
 	/**
 	 * Creates a new Wall object based upon the given Line object.
@@ -22,6 +23,26 @@ public class Wall implements ScadObject {
 	public Wall(Edge e, Params params) {
 		this.e = e;
 		this.params = params;
+		
+		Vector wallVector = e.toVector();
+
+		Cube rawWallCube = new Cube(wallVector.getLength(), params.getWallwidth(), 1, true);
+
+		double wallAngle = wallVector.angleInDegrees();
+
+		ArrayList<ScadObject> wallDifference = new ArrayList<>();
+		wallDifference.add(new Rotate(rawWallCube, wallAngle, 0, 0, 1));
+
+		wallDifference.add(new Translate(new CornerCylinder(getE().getN1(), params.getE(), params), wallVector.multiply(-0.5),
+				-0.5 * params.getHeight()));
+		wallDifference.add(new Translate(new CornerCylinder(getE().getN2(), params.getE(), params), wallVector.multiply(0.5),
+				-0.5 * params.getHeight()));
+		// Difference of pre-defined objects -> rotate to wall position -> Scale
+		// it to height -> Translate it to wall position -> output toString()
+		this.object = new Translate(
+				new Scale(new Difference(wallDifference), 1.0, 1.0, params.getHeight() - params.getBasePlateHeight() - params.getE()),
+				wallVector.multiply(0.5).add(getE().getN1().getOrigin()),
+				params.getBasePlateHeight() + 0.5 * params.getE() + 0.5 * (params.getHeight() - params.getBasePlateHeight()));
 	}
 
 	public Edge getE() {
@@ -46,25 +67,7 @@ public class Wall implements ScadObject {
 	 */
 	@Override
 	public String toString() {
-		Vector wallVector = e.toVector();
-
-		Cube rawWallCube = new Cube(wallVector.getLength(), params.getWallwidth(), 1, true);
-
-		double wallAngle = wallVector.angleInDegrees();
-
-		ArrayList<ScadObject> wallDifference = new ArrayList<>();
-		wallDifference.add(new Rotate(rawWallCube, wallAngle, 0, 0, 1));
-
-		wallDifference.add(new Translate(new CornerCylinder(getE().getN1(), params.getE(), params), wallVector.multiply(-0.5),
-				-0.5 * params.getHeight()));
-		wallDifference.add(new Translate(new CornerCylinder(getE().getN2(), params.getE(), params), wallVector.multiply(0.5),
-				-0.5 * params.getHeight()));
-		// Difference of pre-defined objects -> rotate to wall position -> Scale
-		// it to height -> Translate it to wall position -> output toString()
-		return new Translate(
-				new Scale(new Difference(wallDifference), 1.0, 1.0, params.getHeight() - params.getBasePlateHeight() - params.getE()),
-				wallVector.multiply(0.5).add(getE().getN1().getOrigin()),
-				params.getBasePlateHeight() + 0.5 * params.getE() + 0.5 * (params.getHeight() - params.getBasePlateHeight())).toString();
+		return object.toString();
 
 	}
 

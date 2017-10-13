@@ -70,11 +70,13 @@ public class Main {
 		Graph gr = new Graph(lines);
 		Params p = new Params(0.25, 10.0, 2.0,  4.0, 4.0, 2.0, 75.0, 4.0, 4.0, 1.0);
 		ScadProcessor proc = new ScadProcessor(gr, p);
-		Union u = new Union(null);
-//		u.getObjects().add(proc.outputBasePlates());
+		Union u = new Union(new ArrayList<>());
+		u.getObjects().add(proc.outputBasePlates());
 		u.getObjects().add(proc.outputWalls());
-//		u.getObjects().add(proc.outputCorners());
+		u.getObjects().add(proc.outputCorners());
 		ClipboardCopier.copyToClipboard(u.toString());
+	//	u.getObjects().add((new Corner(gr.getNodes().get(0), p.getE(), p)));
+//		ClipboardCopier.copyToClipboard(new Corner(gr.getNodes().get(6), p.getE(), p).toString());
 //		ClipboardCopier.copyToClipboard(new CornerPin(gr.getEdges().get(3), Params.getE()).toString());
 
 		
