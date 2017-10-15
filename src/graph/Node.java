@@ -47,13 +47,13 @@ public class Node {
 	 */
 	public ArrayList<Edge> getAdjacentEdges(){
 		ArrayList<Edge> adjacentEdges = new ArrayList<>();
-		Edge e = incidentEdge;
+		Edge e = getIncidentEdge();
 		Edge edge = e;
 		do{
 			adjacentEdges.add(edge);
 			edge = edge.getTwin().getNext();
 			
-		} while( edge != incidentEdge);
+		} while( edge != getIncidentEdge());
 		return adjacentEdges;
 	}
 	

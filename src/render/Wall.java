@@ -41,8 +41,9 @@ public class Wall implements ScadObject {
 		// it to height -> Translate it to wall position -> output toString()
 		this.object = new Translate(
 				new Scale(new Difference(wallDifference), 1.0, 1.0, params.getHeight() - params.getBasePlateHeight() - params.getE()),
-				wallVector.multiply(0.5).add(getE().getN1().getOrigin()),
-				params.getBasePlateHeight() + 0.5 * params.getE() + 0.5 * (params.getHeight() - params.getBasePlateHeight()));
+				0, 0,
+				//wallVector.multiply(0.0).add(getE().getN1().getOrigin()),
+				0);
 	}
 
 	public Edge getE() {
@@ -59,6 +60,10 @@ public class Wall implements ScadObject {
 
 	public void setParams(Params params) {
 		this.params = params;
+	}
+	
+	public double getLength(){
+		return e.toVector().getLength();
 	}
 
 	// printing the command for creating the Wall object
