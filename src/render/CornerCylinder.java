@@ -77,16 +77,40 @@ public class CornerCylinder implements ScadObject {
 	 * @return corner cylinder ScadObject
 	 */
 	public ScadObject getCornerCylinder() {
-		// First part Wall fitting segment
 		ArrayList<ScadObject> cornerBaseDifference = new ArrayList<>();
+		//Adds bottom circular CornerBaseTile used for the difference
 		cornerBaseDifference.add(new CornerBaseTile(1, getEpsilon(), params));
+		//Adds cut outs for every adjacent edge
 		ArrayList<Edge> cornerEdges = n.getAdjacentEdges();
 		for (Edge cornerEdge : cornerEdges) {
 			cornerBaseDifference.add(getMinusTileCorner(cornerEdge.toVector().angleInDegrees()));
 		}
-
+		//Scale to fit wallHeight
+		//Translate to move the object to the right position
 		return new Translate(
 				new Scale(new Difference(cornerBaseDifference), 1, 1, params.getHeight() - params.getBasePlateHeight()),
+				0, 0, params.getBasePlateHeight() + 0.5 * (params.getHeight() - params.getBasePlateHeight()));
+	}
+	
+	/**
+	 * returns cylinder for specific node with cut outs for a specific edge
+	 * @return corner cylinder ScadObject
+	 */
+	public ScadObject getCornerCylinder(Edge e) {
+		Difference cornerBaseDifference = new Difference();
+		//Adds bottom circular CornerBaseTile used for the difference
+		cornerBaseDifference.getObjects().add(new CornerBaseTile(1, getEpsilon(), params));
+		//given Edge must start in N
+		if (e.getN1() != getN()){
+			e = e.getTwin();
+		}
+		//Adds a cut out cube directing in e's direction
+		cornerBaseDifference.getObjects().add(getMinusTileCorner(e.toVector().angleInDegrees()));
+		
+		//Scale to fit wallHeight
+		//Translate to move the object to the right position
+		return new Translate(
+				new Scale(cornerBaseDifference, 1, 1, params.getHeight() - params.getBasePlateHeight()),
 				0, 0, params.getBasePlateHeight() + 0.5 * (params.getHeight() - params.getBasePlateHeight()));
 	}
 

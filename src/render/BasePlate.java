@@ -63,7 +63,7 @@ public class BasePlate implements ScadObject{
 	private Vector getCornerPoint(Edge e, Edge e2){
 		Vector vE = e.toVector();
 		Vector vE2 = e2.toVector();
-		Vector epsilonVec = e.toVector().rotate(-0.5*Math.PI).changeLength(params.getE() + params.getWallwidth()*0.5);
+		Vector epsilonVec = e.toVector().rotate(-0.5*Math.PI).changeLength(params.getEpsilon() + params.getWallwidth()*0.5);
 		double determinantDivisor = -vE.getX() * vE2.getY() + vE.getY() * vE2.getX();
 		if (determinantDivisor != 0){
 		return vE.multiply((epsilonVec.getX() * vE2.getY() - epsilonVec.getY() * vE2.getX())/determinantDivisor).add(epsilonVec);
@@ -82,10 +82,10 @@ public class BasePlate implements ScadObject{
 	 */
 	private ScadObject getBasePlateObject(){
 		ArrayList<ScadObject> differenceCorners = new ArrayList<>();
-		differenceCorners.add(new Translate(new Scale(this.modifyPolygon(new Polygon(getF().getIncidentEdge(), -0.5 * params.getE())), 1, 1, params.getBasePlateHeight()), 0, 0, 0.5*params.getBasePlateHeight()));
+		differenceCorners.add(new Translate(new Scale(this.modifyPolygon(new Polygon(getF().getIncidentEdge(), -0.5 * params.getEpsilon())), 1, 1, params.getBasePlateHeight()), 0, 0, 0.5*params.getBasePlateHeight()));
 		
 		for(Edge e: getF().getEdges()){
-			differenceCorners.add(new Translate(new CornerPin(e, params.getE(), params), e.getN1().getOrigin(), 0));
+			differenceCorners.add(new Translate(new CornerPin(e, params.getEpsilon(), params), e.getN1().getOrigin(), 0));
 		}
 		return new Difference(differenceCorners);
 	}

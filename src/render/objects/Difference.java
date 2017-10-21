@@ -25,6 +25,17 @@ public class Difference implements ScadObject {
 		super();
 		this.objects = objects;
 	}
+	
+	// constructor using nothing
+		/**
+		 * Creates a new empty Difference object
+		 * 
+		 * @see ScadObject
+		 */
+		public Difference() {
+			super();
+			this.objects = new ArrayList<>();
+		}
 
 	// getter - setter
 	// getting the objects

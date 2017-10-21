@@ -8,7 +8,7 @@ import render.objects.Union;
 
 public class ScadProcessor {
 	
-	private Double maxPrintWidth, maxPrintHeight;
+	private double maxPrintWidth, maxPrintHeight;
 	private Params params;
 	private ArrayList<Wall> walls = new ArrayList<>();
 	private ArrayList<Corner> corners = new ArrayList<>();
@@ -100,9 +100,9 @@ public class ScadProcessor {
 		
 	}
 	
-	public ScadObject renderWallFiles(){
-		ScadObject file = new Union(new ArrayList<>());
-		ArrayList<ArrayList<Double>> wallLengths = new ArrayList<>();
+	public ArrayList<Union> renderWallFiles(){
+		ArrayList<Union> files = new ArrayList<>();
+		ArrayList<Double> wallLengths = new ArrayList<>();
 		double spaceLeft, minimum;
 		int index;
 		
@@ -112,33 +112,42 @@ public class ScadProcessor {
 			index = -1;
 			for (int i = 0; i < wallLengths.size(); i++){
 				spaceLeft = 0;
-				for (Double wLength : wallLengths.get(i)){
-					spaceLeft += wLength;
-				}
+				spaceLeft = wallLengths.get(i);
+				
 				
 				if ((spaceLeft > minimum) && (spaceLeft + w.getLength() <= getMaxPrintWidth())){
 					minimum = spaceLeft;
 					index = i;
 				}
-			
 			}
+			
+		
 			if (index == -1){
-				wallLengths.add(new ArrayList<>());
-				index = wallLengths.size()-1;
-			} 
-				wallLengths.get(index).add(w.getLength());
-				((Union) file).getObjects().add((new Translate(new Rotate(w,-w.getE().toVector().angleInDegrees(), 0, 0, 1), minimum + w.getLength()*0.5, 0.5 * params.getWallwidth() + index * (params.getWallwidth() + 8 * params.getE()), 0.5 * params.getE() + 0.5 * (params.getHeight() - params.getBasePlateHeight()))));
+				wallLengths.add(w.getLength());
+				index = wallLengths.size() - 1;
+			} else {
+				wallLengths.set(index, wallLengths.get(index) + w.getLength());
+			}
+			double renderWidth = 0.5 * params.getWallwidth() + index * (params.getWallwidth() + 8 * params.getEpsilon());
+			int filesIndex = (int) renderWidth / (int) maxPrintHeight;
+			if (filesIndex > files.size()-1){
+				files.add(new Union());
+			}
+				files.get(filesIndex).getObjects().add((new Translate(new Rotate(w,-w.getE().toVector().angleInDegrees(), 0, 0, 1),
+						minimum + w.getLength()*0.5,
+						0.5 * params.getWallwidth() + (index - filesIndex * ((int)maxPrintHeight / (int)(params.getWallwidth() + 8 * params.getEpsilon()))) * (params.getWallwidth() + 8 * params.getEpsilon()),
+						0.5 * params.getEpsilon() + 0.5 * (params.getHeight() - params.getBasePlateHeight()))));
 				
 			
 		}
-		return file;
+		return  files;
 	}
 	
 	public ScadObject outputWalls(){
 		ArrayList<ScadObject> objectList = new ArrayList<>();
 		
 		for(Wall w : getWalls()){
-			objectList.add(new Translate(w, w.getE().toVector().multiply(0.5).add( w.getE().getN1().getOrigin()), params.getBasePlateHeight() + 0.5 * params.getE() + 0.5 * (params.getHeight() - params.getBasePlateHeight())));
+			objectList.add(new Translate(w, w.getE().toVector().multiply(0.5).add( w.getE().getN1().getOrigin()), params.getBasePlateHeight() + 0.5 * params.getEpsilon() + 0.5 * (params.getHeight() - params.getBasePlateHeight())));
 		}
 		
 		return (new Union(objectList));

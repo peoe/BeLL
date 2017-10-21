@@ -25,6 +25,17 @@ public class Intersection implements ScadObject {
 		super();
 		this.objects = objects;
 	}
+	
+	// constructor using an ArrayList of ScadObjects
+		/**
+		 * Creates a new empty Intersection object.
+		 * 
+		 * @see ScadObject
+		 */
+		public Intersection() {
+			super();
+			this.objects = new ArrayList<>();
+		}
 
 	// getter - setter
 	// getting the ScadObjects

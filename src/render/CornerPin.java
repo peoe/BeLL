@@ -100,7 +100,7 @@ public class CornerPin implements ScadObject {
 		// minumum length
 		double min = params.getPinMinLength();
 		// length calculated through trigonometry
-		double d = ((params.getPinDistance() + params.getPinPRadius() + params.getE() /*+ 0.5 * Params.getWallwidth()*/)
+		double d = ((params.getPinDistance() + params.getPinPRadius() + params.getEpsilon() /*+ 0.5 * Params.getWallwidth()*/)
 				/ Math.sin(calculateAngle() / 2.0)) - params.getPinPRadius();
 		if (d < min) {
 			d = min;

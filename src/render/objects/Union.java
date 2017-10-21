@@ -25,6 +25,16 @@ public class Union implements ScadObject {
 		super();
 		this.objects = objects;
 	}
+	
+	/**
+	 * Creates a new empty Union
+	 * 
+	 * @see ScadObject
+	 */
+	public Union() {
+		super();
+		this.objects = new ArrayList<>();
+	}
 
 	// getter - setter
 	// getting the ArrayList of ScadObjects
