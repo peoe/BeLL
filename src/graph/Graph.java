@@ -13,6 +13,8 @@ public class Graph {
 	private ArrayList<Node> nodes = new ArrayList<>();
 	// list of edges
 	private ArrayList<Edge> edges = new ArrayList<>();
+	//MaxPrintWidth
+	private double maxPrintWidth;
 	
 	//getter und setter
 	public ArrayList<Node> getNodes() {
@@ -38,7 +40,8 @@ public class Graph {
 	 * @param ls
 	 * 
 	 */
-	public Graph(ArrayList<Line> ls) {
+	public Graph(ArrayList<Line> ls, Params params) {
+		maxPrintWidth = params.getMaxPrintWidth();
 		processData(ls);
 		computeTwins();
 		completeEdges();
@@ -55,6 +58,18 @@ public class Graph {
 	 *            the list of lines
 	 */
 	private void processData(ArrayList<Line> ls) {
+		int i = 0;
+		do {
+			if (ls.get(i).toVector().getLength() > maxPrintWidth){
+			ls.add(new Line(ls.get(i).getP1(), ls.get(i).getP1().add(ls.get(i).toVector().multiply(0.5))));
+			ls.add(new Line(ls.get(i).getP2(), ls.get(i).getP2().add(ls.get(i).toVector().multiply(-0.5))));
+			ls.remove(ls.get(i));
+			} else
+			{
+			i += 1;
+			}
+		} while(i != ls.size()-1);
+		
 		for (Line l : ls) {
 			Node n1 = createNode(l.getP1());
 			Node n2 = createNode(l.getP2());

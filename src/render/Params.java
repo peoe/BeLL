@@ -14,7 +14,7 @@ public class Params {
 	 * height - the height of the corner 
 	 * pinHeight - the height of the pin
 	 */
-	private double epsilon, cornerRadius, pinMinLength, pinPWidth, pinPRadius, pinDistance, height, pinHeight, basePlateHeight, basePlatePinCircleHeight, wallWidth;
+	private double epsilon, cornerRadius, pinMinLength, pinPWidth, pinPRadius, pinDistance, height, pinHeight, basePlateHeight, basePlatePinCircleHeight, wallWidth, maxPrintWidth, maxPrintHeight;;
 
 	// the constant for defining the width of all walls
 	//	private static final double wallWidth = 6.0;
@@ -101,41 +101,65 @@ public class Params {
 		return wallWidth;
 	}
   
+	//
   public double getBasePlatePinCircleHeight() {
 		return basePlatePinCircleHeight;
 	}
-	
+	//height of the basePlates
 	public double getBasePlateHeight() {
 		return basePlateHeight;
 	}
 
-	// setting all params
+	//wall width
+	public double getWallWidth() {
+		return wallWidth;
+	}
+	
+	//PrintWidth
+	public double getMaxPrintWidth() {
+		return maxPrintWidth;
+	}
+
+	//PrintHeight
+	public double getMaxPrintHeight() {
+		return maxPrintHeight;
+	}
+
+
+	// setting all parameters
 	/**
 	 * 
-	 * @param E
-	 * @param CornerRadius
-	 * @param PinMinLength
-	 * @param PinPWidth
-	 * @param PinPRadius
-	 * @param PinDistance
-	 * @param Height
-	 * @param PinHeight
-	 * @param BasePlateHeight
-	 * @param BasePlatePinCircleHeight
+	 * @param epsilon
+	 * @param cornerRadius
+	 * @param pinMinLength
+	 * @param pinPWidth
+	 * @param pinPRadius
+	 * @param pinDistance
+	 * @param height
+	 * @param pinHeight
+	 * @param basePlateHeight
+	 * @param basePlatePinCircleHeight
+	 * @param wallWidth
+	 * @param maxPrintWidth
+	 * @param maxPrintHeight
 	 */
-	public Params(double E, double CornerRadius, double PinMinLength, double PinPWidth, double PinPRadius, double PinDistance, double Height, double PinHeight, double BasePlateHeight, double BasePlatePinCircleHeight){
-		epsilon = E;
-		cornerRadius = CornerRadius;
-		pinMinLength = PinMinLength+CornerRadius;
-		pinDistance = PinDistance;
-		height = Height;
-		pinHeight = PinHeight;
-		pinPRadius = PinPRadius;
-		pinPWidth = PinPWidth;
-		basePlateHeight = BasePlateHeight;
-		basePlatePinCircleHeight = BasePlatePinCircleHeight;
-		wallWidth = 12.0;
-		
+	public Params(double epsilon, double cornerRadius, double pinMinLength, double pinPWidth, double pinPRadius,
+			double pinDistance, double height, double pinHeight, double basePlateHeight,
+			double basePlatePinCircleHeight, double wallWidth, double maxPrintWidth, double maxPrintHeight) {
+		super();
+		this.epsilon = epsilon;
+		this.cornerRadius = cornerRadius;
+		this.pinMinLength = pinMinLength + cornerRadius;
+		this.pinPWidth = pinPWidth;
+		this.pinPRadius = pinPRadius;
+		this.pinDistance = pinDistance;
+		this.height = height;
+		this.pinHeight = pinHeight;
+		this.basePlateHeight = basePlateHeight;
+		this.basePlatePinCircleHeight = basePlatePinCircleHeight;
+		this.wallWidth = wallWidth;
+		this.maxPrintWidth = maxPrintWidth;
+		this.maxPrintHeight = maxPrintHeight;
 	}
 
 }
