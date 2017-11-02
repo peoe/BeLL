@@ -22,6 +22,7 @@ public static ArrayList<Line> getAutocadFile(String filePath) throws ParseExcept
 	return vcs;
 }
 \end{code}
+\todoinline{Überdenken, ob Code hier wirklich notwendig}
 In dieser Anwendung wird eine Funktion der Klasse \q{DXFReader} verwendet, welche den Pfad zur .dxf-Datei als Parameter übergeben bekommt. 
 Aus dieser Datei werden alle DXF-Objekte, die mit dem Typen \icode{DXFLine} übereinstimmen, in einer Liste zurückgegeben. 
 Die Koordinaten der Start- und Endpunkte der DXFLines  in dieser Liste werden anschließend in eine Liste von Linien übertragen, welche im weiteren Programmablauf unter anderem bei der Umwandlung des Graphen in die DCEL Verwendung findet.
@@ -50,4 +51,4 @@ Nachdem der Nutzer eine existente Datei ausgewählt hat, wird nun der \icode{Sta
 
 Sobald dieser Vorgang beendet ist, bleiben dem Nutzer nun die Möglichkeiten, die finale Datei mit den Anweisungen anzuzeigen, oder einen anderen Grundriss umzuwandeln.
 
-\todo{Bild der finalen GUI einfügen}
+\todoinline{Bild der finalen GUI einfügen}

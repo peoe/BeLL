@@ -10,7 +10,7 @@ Die drei Kriterien, die die Unterteilung des Modells einhalten sollen, sind wie 
 Aus diesen Kriterien resultiert die Verwendung von herausnehmbaren Wandstücken, welche nicht zu fest im restlichen Modell verankert sind, so dass sie sehr leicht herausgenommen und auch wieder hineingesetzt werden können.
 Um diese Wände auch weiterhin im Modell fixieren zu können, werden Eckpfeiler verwendet, in welche die Wandstücke, eingesetzt werden.
 Da die Einheit aus Eckpfeilern und leicht entfernbaren Wandstücken nicht sehr stabil ist, werden nun am unteren Teil der Eckpfeiler noch Stecker hinzugefügt, um eine Grundplatte zu fixieren und so eine stabile Einheit zu erhalten. Zur Realisierung des Stecksystems müssen anschließend für beide Verankerungsmechanismen geeignete Designs ausgearbeitet werden.
-\todo{Ausdruck}
+\todoinline{Ausdruck}
 
 \subsection{Zuweisen von Berechnungskonstanten}
 \subsubsection{Funktion der \icode{Params}-Klasse}
@@ -84,7 +84,7 @@ Es besteht aus zwei zusammengefügten Teilen, dem CornerCylinder und dem CornerP
 \subsubsection{CornerCylinder}
 CornerCylinder stellt den oberen Teil einer Ecke dar, der ein rundes Grundbauteil mit Einkerbungen für Wände bereitstellt.
 In dessen Berechnung werden alle an dem Knoten anliegenden Kanten betrachtet und eine Schnittmenge zwischen einem Grundzylinder und in die Richtung der Kanten gedrehten Quadern gebildet. 
-\todo{Abbildungen?}
+\todoinline{Abbildungen?}
 
 \subsubsection{CornerPin}
 Der CornerPin Teil ist der untere Abschnitt des Eckpfeilers, welcher die positiven Steckmechanismen für die Grundplatten zur Verfügung stellt.
@@ -92,7 +92,7 @@ Für jede anliegende Fläche wird dabei ein neues Objekt kalkuliert.
 Es ist zu unterscheiden, ob die Fläche das äußere Gebiet oder einen Teil des inneren Gebietes darstellt.
 Im Inneren des Grundrisses sollten Steckmechanismen angebracht werden, um die Verankerung der Grunplatten zu gewähren, was außen nicht notwendig ist, da dort keine reale Fläche angelegt wird.
 
-\todo{Unterschied von subsubsection zu paragraph undeutlich}
+\todoinline{Unterschied von subsubsection zu paragraph undeutlich}
 
 \paragraph{Pin des äußeren Gebietes}
 Wenn an einen Knoten das äußere Gebiet angrenzt, wird der entsprechende Eckpfeiler dessen nicht mit einem Pin, sondern nur mit einer Umrandung versehen.
@@ -107,18 +107,18 @@ Die Länge des Pins kann dabei variieren.
 Sie ist so definiert, dass zum Rand der Fläche immer ein gewisser Abstand vorherrscht.
 Dies vermeidet Komplikationen nach und während des Druckens, wo sonst Hohlräume überlappen könnten.
 Die Basis entsteht durch eine Schnittmenge der betrachteten Fläche mit dem Basiszylinders des Pins.
-\todo{CornerPin}
+\todoinline{CornerPin}
 
 \subsection{Wall}
 Eine Wand setzt sich aus drei Quadern zusammen. 
 Einer dieser Quader stellt das mittlere Wandstück dar, welches die wirkliche Wand repräsentiert und somit die entsprechende Länge und die definierte \icode{WallWidth} Wandbreite besitzt.
 Zwei kleinere werden eingesetzt um die Verankerung mit den Eckpfeilern zu garantieren.
 Diese werden am Anfang und Ende des Mittelstückes angelegt und können so an den Enden in die Eckzylinder greifen.
-\todo{$\varepsilon$?}
+\todoinline{$\varepsilon$?}
 
 \subsection{BasePlate}
 Grundplatten, sogenannte \q{BasePlates} repräsentieren die Flächen des Grundrisses.
 Sie sind aufgebaut aus einem extrudierten Polygon, welches negative Steckmechanismen am Boden aufweist.
 Diese werden durch Differenzen des Ausgangspolygon mit dem negativen komplementären CornerPin realisiert.
 So entsteht für jeden Knoten der Fläche eine Einkerbung für die Verankerung.
-\todo{Abstand zwischen Flächen; Vergrößerung von an das äußere Gebiet angrenzende Fläche}
+\todoinline{Abstand zwischen Flächen; Vergrößerung von an das äußere Gebiet angrenzende Fläche}
