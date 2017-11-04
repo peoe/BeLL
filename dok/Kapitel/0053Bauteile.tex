@@ -25,7 +25,7 @@ Um diese Verbindungen jedoch problemlos herstellen zu können, ist ein komplexes
 \subsubsection{CornerCylinder}
 Der \q{CornerCylinder} stellt den oberen Teil einer Ecke dar, der ein rundes Grundbauteil mit Einkerbungen für Wände bereitstellt.
 In dessen Berechnung werden alle an dem Knoten anliegenden Kanten betrachtet und eine Schnittmenge zwischen einem Grundzylinder und in die Richtung der Kanten gedrehten Quadern gebildet. 
-\todoinline{Abbildungen?}
+%\todoinline{Abbildungen?}
 \subsubsection{CornerPin}
 Der \q{CornerPin} ist der untere Abschnitt des Eckpfeilers, welcher die positiven Steckmechanismen für die Grundplatten zur Verfügung stellt.
 Für jede anliegende Fläche wird dabei ein neues Objekt berechnet.
@@ -85,7 +85,7 @@ Die Statik der Variablen und Funktionen verhindert hierbei, dass während des Pr
 Das Setzen der Parameter findet zu Beginn des Programmes in der \icode{Main}-Klasse statt.
 Hierbei wird die Funktion \icode{setParams()} aufgerufen.
 Dieser Funktion werden sämtliche Werte als Parameter des Datentyps \icode{double} übergeben.
-In der \icode{Params}-Klasse werden dann innerhalb der Funktion allen privaten Variablen ihre Werte entsprechend der Parameter zugewiesen und abrufbar gemacht.
+In der \icode{Params}-Klasse werden dann innerhalb der Funktion allen privaten Variablen ihre Werte entsprechend der Parameter zugewiesen und abrufbar gemacht.\\
 
 \begin{code} [Die \icode{setParams()}-Funktion zum Setzen der Parameter]
 	public static void setParams(double E, ...){
@@ -96,7 +96,7 @@ In der \icode{Params}-Klasse werden dann innerhalb der Funktion allen privaten V
 
 Das Abrufen der Parameter erfolgt dann mittels der entsprechenden \icode{get()}-Funktionen der \icode{Params}-Klasse, welche für alle Parameter vorhanden sind.
 Ein Überschreiben einzelner Parameter wird an dieser Stelle verhindert, da für die privaten Variablen keine \icode{set()}-Funktionen vorliegen.
-Der Aufbau der \icode{get()}-Funktionen folgt dem generellen Aufbau des nachfolgenden Codebeispiels, jedoch werden die Parameterbezeichnungen jeweils entsprechend ersetzt:
+Der Aufbau der \icode{get()}-Funktionen folgt dem generellen Aufbau des nachfolgenden Codebeispiels, jedoch werden die Parameterbezeichnungen jeweils entsprechend ersetzt:\\
 
 \begin{code} [Die \icode{get()}-Funktion für den Parameter \icode{e}]
 public static double getE() {
