@@ -3,6 +3,7 @@
 Die wichtigste Klasse der Anwendung ist \icode{Graph}. 
 Sie verbindet alle grafischen Bestandteile und kann mit einer übergebenen Liste aus Linien mittels mehrerer Zwischenoperationen eine vollständige DCEL, also einen planaren Graph erstellen.
 Dafür sind drei Listen vom Typ \icode{Edge}(Kante), \icode{Node}(Knoten) und \icode{Face}(Fläche) gespeichert, die eine DCEL repräsentieren.
+
 \subsection{Line-to-Edge Konvertierung}
 \label{subsec:ltoe} 
 Initialisierend werden aus den Koordinaten der eingelesenen Start- und Endpunkte in Knoten umgewandelt.
@@ -63,7 +64,7 @@ Für jede ausgehende Kante \icode{e} können nun folgende Referenzen gesetzt wer
 	\item Der Vorgänger von \icode{e} ist der Zwilling der in der \icode{ArrayList} nachfolgenden Kante.
 \end{itemize}
 
-Genannte Referenzen werden nun gesetzt, sodass die Verknüpfungen zwischen den Kanten fertiggestellt sind.
+Genannte Referenzen werden nun gesetzt, sodass die Verknüpfungen zwischen den Kanten fertiggestellt sind.\\
 \todoinline{code eventuell bilder definitiv}
 
 \subsection{Flächenerstellung}
@@ -75,8 +76,9 @@ Die Speicherung der Flächen folgt dem DCEL-Standard, sodass nur eine anliegende
 Das äußere Gebiet des planaren Graphen lässt sich an der Umlaufrichtung der Kanten erkennen.
 Es ist die einzige Fläche, die im mathematisch negativen Drehsinn ausgerichtet ist.
 Unterschieden wird sie im weiteren Programmablauf mithilfe der Gaußschen Trapezformel.
-Bei negativer Umlaufrichtung ist das Ergebnis dieser negativ.
+Bei negativer Umlaufrichtung ist das Ergebnis dieser negativ.\\
 \todoinline{Bitte noch mal überarbeiten, total wirr}
 
 \subsection{Vervollständigung der Knoten}
-Die letzte nötige Operation ist die Speicherung einer anliegenden Edge in den Nodes.\todoinline{man könnte das im code auch vorher tun denke ich}
+Die letzte nötige Operation ist die Speicherung einer anliegenden Edge in den Nodes.\\
+\todoinline{man könnte das im code auch vorher tun denke ich}

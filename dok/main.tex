@@ -103,6 +103,7 @@
 }
 
 %=========BILDER==============
+\newcounter{bildnr}
 \newenvironment{Bild}[1]
 {
 	\begin{figure}[H]
@@ -112,6 +113,7 @@
 }	
 {
 	\caption{\BildCaption}
+	\refstepcounter{bildnr}
 	\end{figure}
 }
 %========================COMMANDS============
