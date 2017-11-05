@@ -70,6 +70,15 @@ public class ScadProcessor {
 		
 	}
 	
+	public ArrayList<Union> renderCornerFiles(){
+		ArrayList<Union> files = new ArrayList<>();
+		ArrayList<ArrayList<Double>> cornerDimensions = new ArrayList<>();
+		ArrayList<Corner> corners = (ArrayList<Corner>) getCorners().clone();
+		for (Corner c : getCorners()) {
+			
+		}
+	}
+	
 	public ArrayList<Union> renderWallFiles(){
 		ArrayList<Union> files = new ArrayList<>();
 		ArrayList<Double> wallLengths = new ArrayList<>();

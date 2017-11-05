@@ -96,7 +96,7 @@ public class CornerPin implements ScadObject {
 	 * Calculates necessary length of pin to have a minimum distance to adjacent walls
 	 * @return double Length
 	 */
-	private double calculateD() {
+	public double calculateD() {
 		// minumum length
 		double min = params.getPinMinLength();
 		// length calculated through trigonometry
