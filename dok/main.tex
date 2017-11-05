@@ -103,7 +103,8 @@
 }
 
 %=========BILDER==============
-\newcounter{bildnr}
+\newcounter{bildnr} 
+\def\thebildnr{\arabic{bildnr}}
 \newenvironment{Bild}[1]
 {
 	\begin{figure}[H]
@@ -113,8 +114,8 @@
 }	
 {
 	\caption{\BildCaption}
-	\refstepcounter{bildnr}
 	\end{figure}
+	\refstepcounter{bildnr}
 }
 %========================COMMANDS============
 \newcommand{\q}[1]{\glqq#1\grqq} % Zitat mit Anführungszeichen
@@ -132,6 +133,8 @@
 
 %====================HYPHENS===============
 \hyphenation{Screen-shot}
+\hyphenation{AutoCAD}
+\hyphenation{OpenSCAD}
 
 %============MAIN=DOCUMENT=====================
 \begin{document}

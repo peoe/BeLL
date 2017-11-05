@@ -1,22 +1,24 @@
 \chapter{Grundlagen}
 \section{Planare Graphen}
-Ein planarer, auch plättbarer Graph ist ein Graph der in einer Ebene mithilfe von Punkten bzw. Knoten (1) und Kanten (2) dargestellt werden kann, ohne dass sich zwei oder mehr Kanten schneiden. 
-Jede Fläche (3) des Graphen wird dabei durch mindestens drei verschiedene Kanten beschrieben, die den Rand dieser Fläche darstellen. 
+Ein planarer, auch plättbarer Graph ist ein Graph der in einer Ebene mithilfe von Punkten bzw. Knoten und Kanten dargestellt werden kann, ohne dass sich zwei oder mehr Kanten schneiden. 
+Jede Fläche des Graphen wird dabei durch mindestens drei verschiedene Kanten beschrieben, die den Rand dieser Fläche darstellen. 
 Die Fläche um den Graphen herum, welche scheinbar unbegrenzt groß ist, wird äußeres Gebiet genannt.
 \begin{Bild}{Schema eines planaren Graphen (Abbildung der Verfasser)}
 	\includegraphics[width = 100px, height = 100px]{Bilder/Graph_Scheme}
 \end{Bild}
+In Abbildung~\thebildnr\ wird ein solcher planarer Graph dargestellt.
+Der linke obere Knoten wir hier mit (1) bezeichnet, die rechte Kante mit (2) und die innere Fläche mit (3).
 
 \section{Doubly connected edge list}
 Um planare Graphen ohne Informationsverlust zu speichern werden in der Informatik Referenzen zwischen den einzelnen Bestandteilen des Graphen eingesetzt. \\
 In der sogenannten \q{Doubly connected edge list} (DCEL) erhält eine Kante, die aus einem Anfangsknoten und Endknoten besteht, jeweils eine Vorgänger-, eine Nachfolger- und eine Zwillingskante. 
 Die jeweiligen Zwillingskanten beschreiben hierbei die invertierten Varianten der betrachteten Kanten.
 Jedem Knoten wird außerdem eine ausgehende Kante und allen Flächen eine anliegende Kante zugewiesen. \\
-In folgender Abbildung wird die Kante \q{e} durch den Anfangsknoten durch \q{N\textsubscript{1}} und den Endknoten \q{N\textsubscript{2}} gebildet.
-Die Zwillingskante wird hier mit \q{twin(e)} bezeichnet, die Nachfolgerkante mit \q{next(e)} und die Vorgängerkante mit \q{prev(e)}.
 \begin{Bild}{Schema einer DCEL (Abbildung der Verfasser)}
 	\includegraphics[width=150px]{Bilder/DCEL_Scheme}
 \end{Bild}
+In Abbildung~\thebildnr\ wird die Kante \q{e} durch den Anfangsknoten durch \q{N\textsubscript{1}} und den Endknoten \q{N\textsubscript{2}} gebildet.
+Die Zwillingskante wird mit \q{twin(e)} bezeichnet, die Nachfolgerkante mit \q{next(e)} und die Vorgängerkante mit \q{prev(e)}. \\
 Diese Referenzierungen ermöglichen es, ausgehend von einem Element ohne umfangreiche Berechnungen auf alle anderen Objekte zu schließen, indem bei der Betrachtung von Knoten und Flächen die zugehörigen Kanten, beziehungsweise bei der Betrachtung von einzelnen Kanten deren Vorgänger und Nachfolger betrachtet werden.
 
 \todoinline{Johann wollte DCEL noch mal überarbeiten}
@@ -25,13 +27,13 @@ Diese Referenzierungen ermöglichen es, ausgehend von einem Element ohne umfangr
 %Konstruktionsprogramm statt architektenprogramm
 AutoCAD ist ein grafischer Zeichnungseditor, welcher zum Erstellen von technischen Zeichnungen und dem Modellieren von Objekten verwendet wird.
 AutoCAD verwendet dabei einfache Objekte wie Linien, Kreise und Bögen, um auf deren Grundlage kompliziertere Objekte zu erschaffen.
-Zu AutoCAD gehörig wurden das Dateiformat \q{.dxf} entwickelt, welches als Industriestandard zum Austausch von CAD-Dateien dient. \\
-Der Grundriss, welcher als Ausgangspunkt dieser Arbeit fungiert, wird in AutoCAD erstellt und dem zu erstellenden Programm in Form einer .dxf-Datei bereitgestellt.
-Diese Dateien dienen auch dem fertiggestellten Programm als Ausgangspunkt.
-Ein Beispiel für einen solchen Grundriss könnte wie folgt aussehen:
+Zu AutoCAD gehörig wurde das Dateiformat \q{.dxf} entwickelt, welches als Industriestandard zum Austausch von CAD-Dateien dient. \\
 \begin{Bild}{Grundriss aus AutoCAD (Screenshot der Verfasser)}
 	\includegraphics[width=\textwidth]{Bilder/Grundriss}
 \end{Bild}
+Der Grundriss, welcher als Ausgangspunkt dieser Arbeit fungiert, wird in AutoCAD erstellt und dem zu erstellenden Programm in Form einer .dxf-Datei bereitgestellt.
+Diese Dateien dienen auch dem fertiggestellten Programm als Ausgangspunkt.
+Ein Beispiel für einen solchen Grundriss ist in Abbildung~\thebildnr\ zu sehen.
 
 \section{OpenSCAD}
 OpenSCAD ist eine kostenlos verfügbare CAD-Modellierungssoftware, welche aus einer textbasierten Beschreibungssprache 3D-Modelle erzeugt.

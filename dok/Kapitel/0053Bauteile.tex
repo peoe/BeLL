@@ -17,17 +17,23 @@ Zur Realisierung des Stecksystems müssen anschließend für beide Verankerungsm
 Die Eckpfeiler des Modells symbolisieren die Schnittpunkte der Wände des Grundrisses.
 Sie dienen dem Befestigen der Grundplatten und Wandstücke.
 Um das Stecksystem zu realisieren, verfügen die Eckpfeiler über die meisten Verbindungen zu den anderen Objekten.
-Um diese Verbindungen jedoch problemlos herstellen zu können, ist ein komplexes Modell wie in Abbildung 8 vonnöten.
+Um diese Verbindungen jedoch problemlos herstellen zu können, ist ein komplexes Modell vonnöten.
 %Es besteht aus zwei zusammengefügten Teilen, dem CornerCylinder und dem CornerPin.
 \begin{Bild}{Ein Eckpfeiler (Screenshot der Verfasser)}
 	\includegraphics[height=200px]{Bilder/Untereinheit_Ecke}
 \end{Bild}
+
 \subsubsection{CornerCylinder}
-Der \q{CornerCylinder} stellt den oberen Teil einer Ecke dar, der ein rundes Grundbauteil mit Einkerbungen für Wände bereitstellt.
-In dessen Berechnung werden alle an dem Knoten anliegenden Kanten betrachtet und eine Schnittmenge zwischen einem Grundzylinder und in die Richtung der Kanten gedrehten Quadern gebildet. 
+%Der \q{CornerCylinder} stellt den oberen Teil einer Ecke dar, der ein rundes Grundbauteil mit Einkerbungen für die Wände bereitstellt.
+Der \q{CornerCylinder} stellt den oberen Teil eines Eckpfeilers dar.
+Dieser besteht aus einem zylindrischen Grundbauteil mit Vertiefungen, in denen die Wände befestigt werden.
+Dieser ist auf der Oberseite des Eckpfeilers in Abbildung~\thebildnr\ zu sehen. \\
+In dessen Berechnung werden alle an dem Knoten anliegenden Kanten betrachtet und eine Schnittmenge zwischen einem Grundzylinder und in die Richtung der Kanten gedrehten Quadern gebildet.
 %\todoinline{Abbildungen?}
 \subsubsection{CornerPin}
-Der \q{CornerPin} ist der untere Abschnitt des Eckpfeilers, welcher die positiven Steckmechanismen für die Grundplatten zur Verfügung stellt.
+%Der \q{CornerPin} ist der untere Abschnitt des Eckpfeilers, welcher die positiven Steckmechanismen für die Grundplatten zur Verfügung stellt.
+Der \q{CornerPin} ist der untere Abschnitt des Eckpfeilers, welcher der Verbindung des Eckpfeilers mit den Grundplatten dient.
+Hierfür verfügt er über positive Steckmechanismen, die auf der Unterseite des Eckpfeilers in Abbildung~\thebildnr\ zu sehen ist. \\
 Für jede anliegende Fläche wird dabei ein neues Objekt berechnet.
 Es ist dabei zu unterscheiden, ob die Fläche das äußere Gebiet oder einen Teil des inneren Gebietes darstellt.
 Auf der Innenseite des Grundrisses sollten Steckmechanismen angebracht werden, um die Verankerung der Grundplatten zu gewähren, was außen nicht notwendig ist, da dort keine reale Fläche angelegt wird.\\ % das hier klingt noch doof
@@ -49,7 +55,10 @@ Die Basis entsteht durch eine Schnittmenge der betrachteten Fläche mit dem Basi
 \subsection{Wandstücke}
 Die Wände des Modells stellen die Wände des Grundrisses dar.
 Eine Wand setzt sich aus jeweils drei Quadern zusammen. 
-Der größte dieser Quader stellt, wie in Abbildung 9 zu sehen, den mittleren Hauptteil dar.
+\begin{Bild}{Ein Wandteil (Screenshot der Verfasser)}
+	\includegraphics[height=200px, width=240px]{Bilder/Untereinheit_Wand}
+\end{Bild}
+Der größte dieser Quader stellt, wie in Abbildung~\thebildnr\ zu sehen, den mittleren Hauptteil dar.
 Dieser Teil verfügt über die tatsächliche Länge der Wand, welche im Grundriss angegeben ist.
 Die Höhe und Breite der Wand werden jedoch mit konstanten Parametern zu Beginn des Programmes festgelegt. \\
 %Einer dieser Quader stellt das mittlere Wandstück dar, welches die wirkliche Wand repräsentiert und somit die entsprechende Länge und die definierte \icode{WallWidth} Wandbreite besitzt.
@@ -59,22 +68,19 @@ Die Verbindungsstücke verfügen dabei über die gleiche Höhe wie die eigentlic
 \todoinline{Details über die Länge der Pins hinzufügen!}
 %Zwei kleinere werden eingesetzt um die Verankerung mit den Eckpfeilern zu garantieren.
 %Diese werden am Anfang und Ende des Mittelstückes angelegt und können so an den Enden in die Eckzylinder greifen.
-\begin{Bild}{Ein Wandteil (Screenshot der Verfasser)}
-	\includegraphics[height=200px, width=240px]{Bilder/Untereinheit_Wand}
-\end{Bild}
 \todoinline{$\varepsilon$?}
 
 \subsection{Grundplatten}
 Grundplatten repräsentieren die Flächen des Grundrisses.
 Sie sind aufgebaut aus einem extrudierten Polygon, welches inverse Steckmechanismen am Boden aufweist.
-Ein Ausschnitt einer solchen Grundplatte ist in Abbildung 10 zu sehen.
+\begin{Bild}{Eine Grundplatte (Screenshot der Verfasser)}
+	\includegraphics[height=200px]{Bilder/Untereinheit_GP}
+\end{Bild}
+Ein Ausschnitt einer solchen Grundplatte ist in Abbildung~\thebildnr\ zu sehen.
 Die inversen Steckmechanismen dienen dem Anbringen der Grundplatte an die Eckpfeiler.
 Für jeden Knoten, der an der Fläche anliegt wird hierbei je eine Einkerbung vorgenommen, die auf das Stecksystem des zu dem Knoten zugehörigen Eckpfeiler passt.
 %Diese werden durch Differenzen des Ausgangspolygon mit dem negativen komplementären CornerPin realisiert.
 %So entsteht für jeden Knoten der Fläche eine Einkerbung für die Verankerung.
-\begin{Bild}{Eine Grundplatte (Screenshot der Verfasser)}
-	\includegraphics[height=300px]{Bilder/Untereinheit_GP}
-\end{Bild}
 \todoinline{Abstand zwischen Flächen; Vergrößerung von an das äußere Gebiet angrenzende Fläche}
 
 \subsection{Zuweisen von Berechnungskonstanten}
