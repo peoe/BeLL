@@ -21,6 +21,7 @@
 \usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage{chngcntr}
+\usepackage[T1]{fontenc} %hyphenation für Ä/Ö/Ü
 
 
 \usepackage{lastpage} %Liest Seitenanzahl
@@ -79,6 +80,7 @@
 \rhead{\docAuthor}
 \lhead{Besondere Lernleistung}
 \cfoot{Seite \thepage{} von \pageref{LastPage}}
+\setlength\emergencystretch{5em} % bessere Zeilenubrüche ohne überstehende Wörter; ab 4em fand sich ein zufriedenstellendes Resultat
 
 %========================CODEDARSTELLUNG=========================
 \renewcommand{\lstlistingname}{Codeauschnitt}
@@ -135,6 +137,7 @@
 \hyphenation{Screen-shot}
 \hyphenation{AutoCAD}
 \hyphenation{OpenSCAD}
+\hyphenation{Vor-gäng-er}
 
 %============MAIN=DOCUMENT=====================
 \begin{document}
