@@ -22,6 +22,7 @@
 \usepackage{enumitem}
 \usepackage{chngcntr}
 \usepackage[T1]{fontenc} %hyphenation für Ä/Ö/Ü
+\usepackage{calc} %für Seitennummerierung
 
 
 \usepackage{lastpage} %Liest Seitenanzahl
@@ -79,7 +80,7 @@
 \renewcommand{\footrulewidth}{0.4pt}% Default \footrulewidth is 0pt
 \rhead{\docAuthor}
 \lhead{Besondere Lernleistung}
-\cfoot{Seite \thepage{} von \pageref{LastPage}}
+%\cfoot{Seite \thepage{} von \pageref{LastPage}}
 \setlength\emergencystretch{5em} % bessere Zeilenubrüche ohne überstehende Wörter; ab 4em fand sich ein zufriedenstellendes Resultat
 
 %========================CODEDARSTELLUNG=========================
@@ -105,6 +106,9 @@
 }
 
 %=========BILDER==============
+\newcounter{seitennr} 
+\setcounter{seitennr}{28} %needs to be changed before publishing
+\def\theseitennr{\arabic{seitennr}}
 \newcounter{bildnr} 
 \def\thebildnr{\arabic{bildnr}}
 \newenvironment{Bild}[1]
@@ -123,6 +127,7 @@
 \newcommand{\q}[1]{\glqq#1\grqq} % Zitat mit Anführungszeichen
 \newcommand{\icode}[1]{\texttt {#1}} %inline Code
 %\newcommand{\todo}[#1]{\newline\huge \color{red}#1 \color{black}\normalsize}
+\newcommand\tab[1][1cm]{\hspace*{#1}} %command for inserting tabs
 
 %\newcommand\todo[1]{\refstepcounter{todo}\marginpar{\color{red}{#1}}\addcontentsline{tod}{subsection}{#1~\thetodo}}
 
@@ -161,7 +166,9 @@
 	\include{Kapitel/006Ausblick}
 	\include{Kapitel/007Quellenverzeichnis}
 	\listoffigures
+	\include{Kapitel/0090Betreuerdank}
 	\include{Kapitel/009Selbstaendigkeit}
+	\include{Kapitel/010Arbeitsteilung}
 	
 	
 %	\printglossary[style=long]
