@@ -1,6 +1,7 @@
-\chapter{Grundlagen}
+\chapter{Wissenschaftliche Grundlagen}
 \section{Planare Graphen}
-Ein planarer, auch plättbarer Graph ist ein Graph der in einer Ebene mithilfe von Punkten bzw. Knoten und Kanten dargestellt werden kann, ohne dass sich zwei oder mehr Kanten schneiden. 
+Zur einfacheren Handhabung des Grundrisses wird dieser in einen planaren Graphen umgewandelt. 
+Ein planarer, auch plättbarer Graph ist ein Graph der in einer Ebene mithilfe von Punkten bzw. Knoten und Kanten dargestellt werden kann, ohne dass sich zwei oder mehr Kanten schneiden (vgl. Quelle \cite{planarGraph}). 
 Jede Fläche des Graphen wird dabei durch mindestens drei verschiedene Kanten beschrieben, die den Rand dieser Fläche darstellen. 
 Die Fläche um den Graphen herum, welche scheinbar unbegrenzt groß ist, wird äußeres Gebiet genannt.
 \begin{Bild}{Schema eines planaren Graphen (Abbildung der Verfasser)}
@@ -13,7 +14,7 @@ Der linke obere Knoten wir hier mit (1) bezeichnet, die rechte Kante mit (2) und
 Um planare Graphen ohne Informationsverlust zu speichern werden in der Informatik Referenzen zwischen den einzelnen Bestandteilen des Graphen eingesetzt. \\
 In der sogenannten \q{Doubly connected edge list} (DCEL) erhält eine Kante, die aus einem Anfangsknoten und Endknoten besteht, jeweils eine Vorgänger-, eine Nachfolger- und eine Zwillingskante. 
 Die jeweiligen Zwillingskanten beschreiben hierbei die invertierten Varianten der betrachteten Kanten.
-Jedem Knoten wird außerdem eine ausgehende Kante und allen Flächen eine anliegende Kante zugewiesen. \\
+Jedem Knoten wird außerdem eine ausgehende Kante und allen Flächen eine anliegende Kante zugewiesen (vgl. Quelle \cite{dcel} und \cite{dcelwiki}). \\
 \begin{Bild}{Schema einer DCEL (Abbildung der Verfasser)}
 	\includegraphics[width=150px]{Bilder/DCEL_Scheme}
 \end{Bild}
@@ -25,7 +26,7 @@ Diese Referenzierungen ermöglichen es, ausgehend von einem Element ohne umfangr
 
 \section{AutoCAD}
 %Konstruktionsprogramm statt architektenprogramm
-AutoCAD ist ein grafischer Zeichnungseditor, welcher zum Erstellen von technischen Zeichnungen und dem Modellieren von Objekten verwendet wird.
+AutoCAD ist ein grafischer Zeichnungseditor, welcher zum Erstellen von technischen Zeichnungen und dem Modellieren von Objekten verwendet wird (siehe Quelle \cite{autocadwiki}).
 AutoCAD verwendet dabei einfache Objekte wie Linien, Kreise und Bögen, um auf deren Grundlage kompliziertere Objekte zu erschaffen.
 Zu AutoCAD gehörig wurde das Dateiformat \q{.dxf} entwickelt, welches als Industriestandard zum Austausch von CAD-Dateien dient. \\
 \begin{Bild}{Grundriss aus AutoCAD (Screenshot der Verfasser)}
@@ -36,7 +37,7 @@ Diese Dateien dienen auch dem fertiggestellten Programm als Ausgangspunkt.
 Ein Beispiel für einen solchen Grundriss ist in Abbildung~\thebildnr\ zu sehen.
 
 \section{OpenSCAD}
-OpenSCAD ist eine kostenlos verfügbare CAD-Modellierungssoftware, welche aus einer textbasierten Beschreibungssprache 3D-Modelle erzeugt.
+OpenSCAD ist eine kostenlos verfügbare CAD-Modellierungssoftware, welche aus einer textbasierten Beschreibungssprache 3D-Modelle erzeugt (siehe Quelle \cite{OpenScad}).
 OpenSCAD bietet dabei verschiedene Vorteile während des Modellierungsvorganges.
 Hierzu gehören beispielsweise das farbige Hervorheben oder die Modularisierung zusammenhängender Objekte. \\
 %Modellierung
