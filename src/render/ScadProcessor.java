@@ -2,6 +2,7 @@ package render;
 import java.util.ArrayList;
 
 import graph.*;
+import io.Quicksort;
 import render.objects.Rotate;
 import render.objects.Translate;
 import render.objects.Union;
@@ -73,7 +74,9 @@ public class ScadProcessor {
 	public ArrayList<Union> renderCornerFiles(){
 		ArrayList<Union> files = new ArrayList<>();
 		ArrayList<ArrayList<Double>> cornerDimensions = new ArrayList<>();
-		ArrayList<Corner> corners = (ArrayList<Corner>) getCorners().clone();
+		@SuppressWarnings("unchecked")
+		ArrayList<Object> corners = new Quicksort(getCorners(), "width").sortArray();
+		
 		for (Corner c : getCorners()) {
 			
 		}

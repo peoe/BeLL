@@ -71,9 +71,9 @@ public class Main {
 		Params p = new Params(0.25, 10.0, 2.0,  4.0, 4.0, 2.0, 75.0, 4.0, 4.0, 1.0, 6.0, 185.0, 153.0);
 		ScadProcessor proc = new ScadProcessor(lines, p);
 		
-		ArrayList<Object> oa = new ArrayList<>();
-		oa.addAll(proc.getCorners());
-		Quicksort sort = new Quicksort(oa, "width");
+		@SuppressWarnings("unchecked")
+		ArrayList<Corner> oa = new Quicksort(proc.getCorners(), "width").sortArray();
+		
 		for (Object o : oa){
 			System.out.println(((Corner) o).getWidth());
 		}

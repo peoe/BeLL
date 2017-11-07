@@ -6,17 +6,18 @@ import render.ScadObject;
 
 import java.lang.reflect.Field;
 
-public class Quicksort {
+public class Quicksort<T> {
+	
 	//ArrayList which needs sorting
-	private ArrayList<Object> elements;
+	private ArrayList<T> elements;
 	//property of sort
 	private String comparisonField;
 	
-	public ArrayList<Object> getElements() {
+	public ArrayList<T> getElements() {
 		return elements;
 	}
 
-	public void setElements(ArrayList<Object> elements) {
+	public void setElements(ArrayList<T> elements) {
 		this.elements = elements;
 	}
 
@@ -33,12 +34,23 @@ public class Quicksort {
 	 * @param e ArrayList which needs sorting
 	 * @param c property of sort
 	 */
-	public Quicksort(ArrayList<Object> e, String c) {
-		elements = e;
+	public Quicksort(ArrayList<T> e, String c) {
+		elements = new ArrayList<>();
+		elements.addAll(e);
 		comparisonField = c;
-		quicksort(0, elements.size() - 1);
+		
 	}
 	
+	public ArrayList<T> sortArray(){
+		quicksort(0, elements.size() - 1);
+		return elements;
+		
+	}
+	/**
+	 * Main Quicksort method
+	 * @param low lower index of the array
+	 * @param high higher index of the array
+	 */
 	private void quicksort(int low, int high){
 		int i = low, j = high;
 		//get the pivot element index
@@ -68,13 +80,23 @@ public class Quicksort {
 		if (low < j) quicksort(low, j);
 		if (i < high) quicksort(i, high);
 		}
-	
+	/**
+	 * exchanges two elements in the arrayList
+	 * @param i index 1
+	 * @param j index 2
+	 * 
+	 */
 	private void exchange(int i, int j){
-		Object temp = getElements().get(i);
+		T temp = getElements().get(i);
 		getElements().set(i, getElements().get(j));
 		getElements().set(j, temp);
 	}
 	
+	/**
+	 * returns value of the comparisonField of an element at a certain index
+	 * @param index the index of the item
+	 * @return double value of comparisonField of index element 
+	 */
 	private double getField(int index){
 		try {
 			Field field = getElements().get(index).getClass().getDeclaredField(comparisonField);
