@@ -93,7 +93,7 @@ public class Corner implements ScadObject {
 				maxD = (( CornerPin ) cornerObjects.get(cornerObjects.size() - 1)).calculateD(); 
 			}
 		}
-		setWidth(2 * maxD + 4 * params.getPinPRadius());
+		setWidth(2 * maxD + 6 * params.getPinPRadius() + 4 *params.getEpsilon());
 		cornerObjects.add(new CornerCylinder(getN(), getEpsilon(), params));
 		return new Union(cornerObjects);
 	}

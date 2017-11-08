@@ -73,13 +73,33 @@ public class ScadProcessor {
 	
 	public ArrayList<Union> renderCornerFiles(){
 		ArrayList<Union> files = new ArrayList<>();
-		ArrayList<ArrayList<Double>> cornerDimensions = new ArrayList<>();
-		@SuppressWarnings("unchecked")
-		ArrayList<Object> corners = new Quicksort(getCorners(), "width").sortArray();
-		
-		for (Corner c : getCorners()) {
+		double cornerRowLength = 0.0;
+		double cornerLength = 0.0;
+		double cornerWidth = 0.0;
+		double differenceX = 1.0;
+		@SuppressWarnings({ "unchecked", "rawtypes" })
+		ArrayList<Corner> corners = new Quicksort(getCorners(), "width").sortArray();
+		int fileIndex = -1;
+		for (Corner c : corners){
+			
+			if (params.getMaxPrintWidth() - cornerWidth - c.getWidth() < 0) {
+				cornerWidth = 0;
+				cornerLength += corners.get(corners.indexOf(c) - 1 ).getWidth();
+			}
+			if ((cornerLength + c.getWidth() > params.getMaxPrintHeight()) || (files.size() == 0)) {
+				files.add(new Union());
+				fileIndex++;
+				cornerLength = 0;
+				cornerWidth = 0;
+			}
+			files.get(fileIndex).getObjects().add(new Translate(c, new Vector(c.getWidth() *0.5, c.getWidth() *0.5).add(new Vector(cornerWidth, cornerLength)),0));
+			//area of Corner is a square so Width of c = Length of c
+			cornerWidth += c.getWidth();
 			
 		}
+	
+	return files;
+		
 	}
 	
 	public ArrayList<Union> renderWallFiles(){

@@ -81,10 +81,9 @@ public class CornerPin implements ScadObject {
 	private ScadObject getBaseTileLow(double l) {
 		// calculates Radius out of given length and an addition of the positive
 		// Pin Radius
-		double r = l + params.getPinPRadius();
 		ScadObject baseTile;
 		// returns small cylinder and enlarges it by the EPSILON value
-		baseTile = new Cylinder(params.getBasePlatePinCircleHeight(), r, true).resize(getEpsilon(), getEpsilon(),
+		baseTile = new Cylinder(params.getBasePlatePinCircleHeight(), l, true).resize(getEpsilon(), getEpsilon(),
 				getEpsilon());
 		// translates cylinder by a half of its height
 		return (new Translate(baseTile, 0, 0, 0.5 * params.getBasePlatePinCircleHeight()));
@@ -171,7 +170,7 @@ public class CornerPin implements ScadObject {
 			pinLength = params.getPinMinLength();
 		}
 		//generation of base tile -> intersection between complete circular basetile + pin and the face
-		pinBottom.add(getBaseTileLow(pinLength));
+		pinBottom.add(getBaseTileLow(pinLength + params.getPinPRadius()));
 		//translates the point of the face to the calculation area (0,0) and adds it to the intersection
 		pinBottom
 				.add(new Translate(new Scale(new Polygon(cornerEdge, getEpsilon()), 1, 1, params.getBasePlateHeight()*2),
