@@ -26,11 +26,11 @@ public class Main {
 	public static void main(String[] args) throws ParseException {
 
 		Vector A = new Vector(0, 0);
-		Vector B = new Vector(800, 0);
+		Vector B = new Vector(100, 0);
 		Vector C = new Vector(100, 100);
 		Vector D = new Vector(0, 100);
 		Vector E = new Vector(-130, 0);
-		Vector F = new Vector(-100, 100);
+		Vector F = new Vector(-150, 100);
 		Vector G = new Vector(0,-150);
 		
 		Vector H = new Vector(-50,-50);
@@ -54,10 +54,10 @@ public class Main {
 		ArrayList<Line> lines = new ArrayList<>();
 		
 		
-		lines.add(a);
+		//lines.add(a);
 		lines.add(b);
 		lines.add(c);
-		lines.add(d);
+		//lines.add(d);
 		lines.add(e);
 		lines.add(f);
 		lines.add(g);
@@ -71,9 +71,16 @@ public class Main {
 		Params p = new Params(0.25, 10.0, 2.0,  4.0, 4.0, 2.0, 75.0, 4.0, 4.0, 1.0, 6.0, 185.0, 153.0);
 		ScadProcessor proc = new ScadProcessor(lines, p);
 		
-		ClipboardCopier.copyToClipboard(proc.renderCornerFiles().get(2)/*.getObjects().get(0)*/.toString());
-		System.out.println(new Cube(p.getMaxPrintWidth(), p.getMaxPrintHeight(), 1).toString());
-		System.out.println(proc.getCorners().size());
+		ClipboardCopier.copyToClipboard(proc.outputWalls().toString());
+		for ( BasePlate bp : proc.getBasePlates()){
+			if ( bp.getF().getArea() > 0){
+				System.out.println(bp.getF().getNodes());
+				System.out.println(bp.getF().getConvexHull());
+				System.out.println("");
+			}
+		}
+	//	System.out.println(new Vector(0,0).angletoVector(new Vector(30,2)));
+		
 //		Union u = new Union(new ArrayList<>());
 //////		u.getObjects().add(proc.outputBasePlates());
 //////	 	u.getObjects().add(proc.outputWalls());

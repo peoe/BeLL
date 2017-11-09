@@ -95,4 +95,41 @@ public class Face {
 		}
 		return returnNodes;
 	}
-}
+	
+	//calculating convex hull
+	
+	public ArrayList<Node> getConvexHull(){
+		int mostLeftNode = 0;
+		ArrayList<Node> convexHull = new ArrayList<>();
+		ArrayList<Node> faceNodes = getNodes();
+		for (int i = 0; i < faceNodes.size();i++){
+			if (faceNodes.get(i).getOrigin().getX() < faceNodes.get(mostLeftNode).getOrigin().getX()){
+				mostLeftNode = i;
+			}
+		}
+		int i = mostLeftNode, nextPoint;
+	
+		double angleBetweenVectors;
+		
+		do {
+			//int P1 = i;
+			convexHull.add(faceNodes.get(i));
+			nextPoint = (i + 1) % faceNodes.size();
+			for(int j = 0; j < faceNodes.size();j++){
+				angleBetweenVectors = new Vector(faceNodes.get(i).getOrigin(), faceNodes.get(j).getOrigin()).angletoVector(new Vector(faceNodes.get(i).getOrigin(), faceNodes.get(nextPoint).getOrigin()));
+				if((j != i && angleBetweenVectors < Math.PI) || angleBetweenVectors == 2*Math.PI){
+					nextPoint = j;
+				}	
+			}
+			i = nextPoint;
+			
+		} while(nextPoint != mostLeftNode);
+		
+	return convexHull;
+	}
+	
+		
+		
+		
+	}
+
