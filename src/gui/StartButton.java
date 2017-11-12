@@ -40,7 +40,7 @@ public class StartButton extends JButton {
 			public void actionPerformed(ActionEvent e) {
 				if ("start".equals(e.getActionCommand())) {
 					setEnabled(false);
-					Main.startConversion(Main.getGui().getFileChooserButton().getFilePath());
+					Main.startConversion(Main.getGui().getFileChooserButton().getFilePath(), "result");
 					System.out.println("StartButton received command: start.");
 				} else {
 					System.out.println("StartButton received unknown command.");
