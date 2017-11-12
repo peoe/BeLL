@@ -12,7 +12,7 @@ import javax.swing.JButton;
 @SuppressWarnings("serial")
 public class ShowResultButton extends JButton {
 
-	private String resultFile = "";
+	private String resultFolder = "";
 	
 	/**
 	 * Creates a new StartButton object.
@@ -27,7 +27,7 @@ public class ShowResultButton extends JButton {
 	 * Sets the default parameters for the button. 
 	 */
 	private void setDefaults() {
-		setText("Show the result file");
+		setText("Show the result fodler");
 		setActionCommand("show");
 		setPreferredSize(new Dimension(233, 27));
 		setEnabled(false);
@@ -43,21 +43,11 @@ public class ShowResultButton extends JButton {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if ("show".equals(e.getActionCommand())) {
-					if(!Desktop.isDesktopSupported()){
-			            System.out.println("Desktop is not supported");
-			            return;
-			        }
-			        
-			        Desktop desktop = Desktop.getDesktop();
-			        resultFile += ".scad";
-			        if(new File(resultFile).exists())
-						try {
-							System.out.println("exists" + new File(resultFile).getAbsolutePath());
-							desktop.open(new File(resultFile));
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						}
-					System.out.println("ShowResultButton received command: show." + resultFile);
+					try {
+						Desktop.getDesktop().open(new File(".\\" + resultFolder));
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 				} else {
 					System.out.println("ShowResultButton received unknown command.");
 				}
@@ -65,12 +55,12 @@ public class ShowResultButton extends JButton {
 		});
 	}
 
-	public String getResultFile() {
-		return resultFile;
+	public String getResultFodler() {
+		return resultFolder;
 	}
 
-	public void setResultFile(String resultFile) {
-		this.resultFile = resultFile;
+	public void setResultFolder(String resultFolder) {
+		this.resultFolder = resultFolder;
 	}
 
 }

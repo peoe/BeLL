@@ -46,11 +46,9 @@ public class StartButton extends JButton {
 					// disable start button before choosing a new file
 					Main.getGui().getStartButton().setEnabled(false);
 					Main.getGui().getStartButton().setToolTipText("Please choose a different file!");
-					
-					// end of conversion (insert automatically generated filePath)
-					//Main.getGui().getShowResultButton().setResultFile(resultFile);
 					Main.getGui().getShowResultButton().setToolTipText("Show the result file of the conversion.");
 					Main.getGui().getShowResultButton().setEnabled(true);
+					Main.getGui().getFolderNameField().setText("");
 				} else {
 					System.out.println("StartButton received unknown command.");
 				}

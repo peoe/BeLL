@@ -118,6 +118,9 @@ public class Main {
 			// Graph g = new Graph(DXFReader.getAutocadFile(absoluteFilePath));
 			ScadProcessor proc = new ScadProcessor(DXFReader.getAutocadFile(targetFile), p);
 			
+			// for showing the result folder
+			getGui().getShowResultButton().setResultFolder(folderName);
+			
 			// printing the results
 			createDirs(folderName);
 			// printing the scads
