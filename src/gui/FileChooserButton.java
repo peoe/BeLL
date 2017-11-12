@@ -61,8 +61,12 @@ public class FileChooserButton extends JButton {
 			        if (returnVal == JFileChooser.APPROVE_OPTION) {
 			            File file = fc.getSelectedFile();
 			            Main.getGui().getFilePathField().setText(file.getAbsolutePath());
-			            Main.getGui().getStartButton().setEnabled(true);
-			            Main.getGui().getStartButton().setToolTipText("Start the conversion process.");
+			            if (!Main.getGui().getFolderNameField().getText().equals(new String("")) && !Main.getGui().getFolderNameField().getText().equals(new String(""))) {
+			            	Main.getGui().getStartButton().setEnabled(true);
+				            Main.getGui().getStartButton().setToolTipText("Start the conversion process");
+			            } else {
+			            	Main.getGui().getStartButton().setToolTipText("Insert a output folder name");
+			            }
 			            filePath = file.getAbsolutePath();
 			            System.out.println("File chosen: " + file.getAbsolutePath());
 			        } else {
@@ -84,5 +88,4 @@ public class FileChooserButton extends JButton {
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
-
 }
