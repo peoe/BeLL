@@ -27,8 +27,8 @@ public class Main {
 
 		Vector A = new Vector(0, 0);
 		Vector B = new Vector(100, 0);
-		Vector C = new Vector(100, 100);
-		Vector D = new Vector(0, 100);
+		Vector C = new Vector(70, 100);
+		Vector D = new Vector(-30, 100);
 		Vector E = new Vector(-130, 0);
 		Vector F = new Vector(-150, 100);
 		Vector G = new Vector(0,-150);
@@ -54,10 +54,10 @@ public class Main {
 		ArrayList<Line> lines = new ArrayList<>();
 		
 		
-		//lines.add(a);
+		lines.add(a);
 		lines.add(b);
 		lines.add(c);
-		//lines.add(d);
+		lines.add(d);
 		lines.add(e);
 		lines.add(f);
 		lines.add(g);
@@ -72,13 +72,13 @@ public class Main {
 		ScadProcessor proc = new ScadProcessor(lines, p);
 		
 		ClipboardCopier.copyToClipboard(proc.outputWalls().toString());
-		for ( BasePlate bp : proc.getBasePlates()){
+		BasePlate bp = proc.getBasePlates().get(0);
 			if ( bp.getF().getArea() > 0){
-				System.out.println(bp.getF().getNodes());
-				System.out.println(bp.getF().getConvexHull());
+				ClipboardCopier.copyToClipboard(new Rotate(bp,  Math.toDegrees(bp.getF().getOMBBAngle()), 0, 0 , 1).toString());
+				//System.out.println(bp.getF().getOMBBAngle());
 				System.out.println("");
 			}
-		}
+		
 	//	System.out.println(new Vector(0,0).angletoVector(new Vector(30,2)));
 		
 //		Union u = new Union(new ArrayList<>());

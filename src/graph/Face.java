@@ -2,6 +2,8 @@ package graph;
 
 import java.util.ArrayList;
 
+import render.objects.Polygon;
+
 public class Face {
 
 	// incident edge of face
@@ -97,7 +99,10 @@ public class Face {
 	}
 	
 	//calculating convex hull
-	
+	/**
+	 * calculates the convex hull of the face
+	 * @return ArrayList<Node> of the connvex hull
+	 */
 	public ArrayList<Node> getConvexHull(){
 		int mostLeftNode = 0;
 		ArrayList<Node> convexHull = new ArrayList<>();
@@ -127,6 +132,62 @@ public class Face {
 		
 	return convexHull;
 	}
+	
+	//
+	public double getOMBBAngle(){
+		ArrayList<Node> nodeConvexHull = getConvexHull();
+		ArrayList<Vector> convexHull = new ArrayList<>();
+		for (Node n : nodeConvexHull){
+			convexHull.add(n.getOrigin());
+		}
+		
+		double edgeAngle;
+		double xMax = Double.MIN_VALUE, yMax = Double.MIN_VALUE,
+		xMin = Double.MAX_VALUE, yMin = Double.MAX_VALUE, ombbArea, ombbAreMin = Double.MAX_VALUE, ombbAngle = 0.0;
+		ArrayList<Vector> ombb = new ArrayList<>();
+		for (int i  = 0; i < convexHull.size() - 2; i++){
+			edgeAngle = -new Vector(convexHull.get(i), convexHull.get(i + 1)).angle();
+			for (Vector v : convexHull){
+				v = v.rotate(edgeAngle);
+				if (v.getX() > xMax){
+					xMax = v.getX();
+				}
+				if (v.getX() < xMin){
+					xMin = v.getX();
+				}
+				if (v.getY() > yMax){
+					yMax = v.getY();
+				}
+				if (v.getY() < yMin){
+					yMin = v.getY();
+				}
+				
+			}
+			ombbArea = (xMax - xMin) * (yMax - yMin);
+			if(ombbArea < ombbAreMin){
+				ombbAreMin = ombbArea;
+				ombbAngle = edgeAngle;
+				if (xMax - xMin < yMax - yMin){
+					ombbAngle += 0.5 * Math.PI;
+				}
+				
+				ombb.clear();
+				ombb.add(new Vector(xMin, yMin));
+				ombb.add(new Vector(xMin, yMax));
+				ombb.add(new Vector(xMax, yMax));   
+				ombb.add(new Vector(xMax, yMin));
+			}
+			
+			
+		
+			
+			
+		}
+		System.out.println(new Polygon(ombb, 0).toString());
+		return ombbAngle;
+		
+	}
+	
 	
 		
 		
