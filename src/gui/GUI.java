@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -13,6 +14,8 @@ public class GUI extends JFrame {
 	
 	private JTextField filePathField = new JTextField();
 	private FileChooserButton fileChooserButton = new FileChooserButton();
+	private JTextField folderNameField = new JTextField();
+	private JLabel folderNameLabel = new JLabel();
 	private StartButton startButton = new StartButton();
 	private ShowResultButton showResultButton = new ShowResultButton();
 	
@@ -36,11 +39,16 @@ public class GUI extends JFrame {
 		// contentPane
 		JPanel p = new JPanel();
 		p.setLayout(new FlowLayout());
-		p.setPreferredSize(new Dimension(480, 70));
+		p.setPreferredSize(new Dimension(480, 100));
 		setContentPane(p);
 		// filePathField
 		filePathField.setPreferredSize(new Dimension(350, 27));
 		filePathField.setToolTipText("The absolute filepath");
+		// folderNameLabel
+		folderNameLabel.setText("Name of the output folder:");
+		// folderNameField
+		folderNameField.setPreferredSize(new Dimension(322, 27));
+		folderNameField.setToolTipText("The name of the output folder");
 	}
 	
 	/**
@@ -54,12 +62,11 @@ public class GUI extends JFrame {
 	/**
 	 * Adds all interface components for the GUI.
 	 */
-	private void addComponents() {
-		// TODO Button for choosing File
-		// TODO button for starting conversion
-		
+	private void addComponents() {		
 		getPane().add(filePathField);
 		getPane().add(fileChooserButton);
+		getPane().add(folderNameLabel);
+		getPane().add(folderNameField);
 		getPane().add(startButton);
 		getPane().add(showResultButton);
 		
@@ -86,6 +93,14 @@ public class GUI extends JFrame {
 		this.fileChooserButton = fileChooserButton;
 	}
 
+	public JTextField getFolderNameField() {
+		return folderNameField;
+	}
+
+	public void setFolderNameField(JTextField folderNameField) {
+		this.folderNameField = folderNameField;
+	}
+	
 	public StartButton getStartButton() {
 		return startButton;
 	}

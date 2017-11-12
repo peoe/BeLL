@@ -95,12 +95,13 @@ public class Main {
 //		u.getObjects().add(proc.outputCorners());
 //		ClipboardCopier.copyToClipboard(u.toString());
 			
-		try {
-			Files.createDirectories(Paths.get("./result"));
-			Desktop.getDesktop().open(new File("./result"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			Files.createDirectories(Paths.get("./ausg/scad"));
+//			Files.createDirectories(Paths.get("./ausg/stl"));
+//			Desktop.getDesktop().open(new File("./ausg"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		
 		gui = new GUI("Convert model");		
 	}
@@ -111,29 +112,58 @@ public class Main {
 	 * @param targetFile the file to be converted
 	 */
 	public static void startConversion (String targetFile, String folderName) {
-		String result = "";
-		String resultFile = "";
 		Params p = new Params(0.25, 10.0, 2.0,  4.0, 4.0, 2.0, 75.0, 4.0, 4.0, 1.0, 6.0, 185.0, 153.0);
 		
 		try {
-			//Graph g = new Graph(DXFReader.getAutocadFile(absoluteFilePath));
+			// Graph g = new Graph(DXFReader.getAutocadFile(absoluteFilePath));
 			ScadProcessor proc = new ScadProcessor(DXFReader.getAutocadFile(targetFile), p);
 			
-			//print results
-			//result = g.outputCorners().toString();
-			resultFile = "result";
-			ScadPrinter.printFile(resultFile, result);
-			
-			// disable start button before choosing a new file
-			gui.getStartButton().setEnabled(false);
-			gui.getStartButton().setToolTipText("Please choose a different file!");
-			
-			// end of conversion (insert automatically generated filePath)
-			gui.getShowResultButton().setResultFile(resultFile);
-			gui.getShowResultButton().setToolTipText("Show the result file of the conversion.");
-			gui.getShowResultButton().setEnabled(true);
+			// printing the results
+			createDirs(folderName);
+			// printing the scads
+			printSCAD(proc, folderName);
+			// printing the stls
+			//TODO printSTL(folderName);
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
+		}
+	}
+	
+	/**
+	 * Prints the scad files.
+	 * @param proc the ScadProcessor
+	 * @see ScadProcessor
+	 */
+	private static void printSCAD (ScadProcessor proc, String folderName) {
+		ArrayList<Union> walls = proc.renderWallFiles();
+		ArrayList<Union> corners = proc.renderCornerFiles();
+		//TODO ArrayList<Union> baseplates;
+		
+		// print walls
+		for (int i = 0; i < walls.size(); i++) {
+			ScadPrinter.printFile("./" + folderName + "/scad/walls" + (i + 1), walls.get(i).toString());
+		}
+		
+		// print corners
+		for (int i = 0; i < corners.size(); i++) {
+			ScadPrinter.printFile("./" + folderName + "/scad/corners" + (i + 1), corners.get(i).toString());
+		}
+		
+		//TODO print baseplates
+//		for (int i = 0; i < baseplates.size(); i++) {
+//			ScadPrinter.printFile("./" + folderName + "/scad/baseplates" + (i + 1), baseplates.get(i).toString());
+//		}
+	}
+	
+	/**
+	 * Creates the directories for the scad and the stl files.
+	 */
+	private static void createDirs(String folderName) {
+		try {
+			Files.createDirectories(Paths.get("./" + folderName + "/scad"));
+			Files.createDirectories(Paths.get("./" + folderName + "/stl"));
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

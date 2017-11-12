@@ -1,5 +1,6 @@
 package io;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -14,7 +15,7 @@ public class ScadPrinter {
 	public static void printFile (String filename, String filetext) {		
 		try {
 			// filewriter is awesome
-			FileWriter fw = new FileWriter(filename + ".scad");
+			FileWriter fw = new FileWriter(new File (filename + ".scad"));
 			fw.write(filetext);
 			fw.close();
 		} catch (IOException ioe) {
