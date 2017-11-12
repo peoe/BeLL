@@ -11,11 +11,12 @@ public class STLConverter {
 	 * The file names will be taken over.
 	 * 
 	 * @param fileName name of the file
+	 * @param fodlerName the name of the output folder
 	 */
-	public static void convert (String fileName) throws InterruptedException {
+	public static void convert (String fileName, String folderName) throws InterruptedException {
 		Process p;
 		try {
-			p = Runtime.getRuntime().exec("openscad -o stl\\" + fileName + ".stl scad\\" + fileName + ".scad");
+			p = Runtime.getRuntime().exec("openscad -o " + folderName + "\\stl\\" + fileName + ".stl " + folderName + "\\scad\\" + fileName + ".scad");
 
 			new Thread(new Runnable() {
 			    public void run() {

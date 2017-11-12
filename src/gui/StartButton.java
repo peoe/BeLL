@@ -26,7 +26,7 @@ public class StartButton extends JButton {
 		setText("Start the conversion");
 		setActionCommand("start");
 		setPreferredSize(new Dimension(233, 27));
-		setToolTipText("Pick a file to convert first!");
+		setToolTipText("No file picked for conversion");
 		setEnabled(false);
 		setVisible(true);
 	}
