@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class STLConverter {
+	//private static String openSCADLocation = System.getenv("ProgramFiles") + "/OpenSCAD/openscad.exe";
+	private static String openSCADLocation = "";
 
 	/**
 	 * Converts a certain scad file into stl.
@@ -15,8 +17,13 @@ public class STLConverter {
 	 */
 	public static void convert (String fileName, String folderName) throws InterruptedException {
 		Process p;
+		ProcessBuilder b;
 		try {
-			p = Runtime.getRuntime().exec("openscad -o " + folderName + "\\stl\\" + fileName + ".stl " + folderName + "\\scad\\" + fileName + ".scad");
+			b = new ProcessBuilder("openscad", "-o", folderName + "\\stl\\" + fileName + ".stl", folderName + "\\scad\\" + fileName + ".scad");
+			b.environment().put("PATH", openSCADLocation);
+			
+			//p = Runtime.getRuntime().exec("openscad -o " + folderName + "\\stl\\" + fileName + ".stl " + folderName + "\\scad\\" + fileName + ".scad");
+			p = b.start();
 
 			new Thread(new Runnable() {
 			    public void run() {
@@ -36,6 +43,10 @@ public class STLConverter {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static void setOpenSCADLocation(String openSCADLocation) {
+		STLConverter.openSCADLocation = openSCADLocation;
 	}
 	
 }

@@ -9,6 +9,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 //import org.kabeja.parser.ParseException;
 
 import javax.transaction.TransactionRequiredException;
@@ -127,6 +131,26 @@ public class Main {
 
 			// for showing the result folder
 			getGui().getShowResultButton().setResultFolder(folderName);
+			// setting environment variables for command execution if OpenSCAD cannot be found
+			if (!new File(System.getenv("ProgramFiles") + "/OpenSCAD/openscad.exe").exists()) {
+				JFileChooser fc = new JFileChooser();
+				fc.setFileFilter(new FileNameExtensionFilter("Executables (.exe)", "exe"));
+				// information for user
+				JOptionPane.showMessageDialog(gui,
+						"This application requires to have OpenSCAD installed. This program did not find it in: 'C:\\\\Program Files\\OpenSCAD\\'.\n"
+						+ "If it is installed in another location use the following dialogue for linking to openscad.exe.",
+						"OpenSCAD required for this application", JOptionPane.WARNING_MESSAGE);
+
+				int returnVal = fc.showDialog(gui, "Link to openscad.exe");
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					String path = fc.getSelectedFile().getAbsolutePath();
+					STLConverter.setOpenSCADLocation(path.substring(0, path.length() - 12));
+				}
+			} else {
+				System.out.println("System variable for OpenSCAD not set, assuming standard location!");
+				String path = System.getenv("ProgramFiles") + "/OpenSCAD/openscad.exe";
+				STLConverter.setOpenSCADLocation(path.substring(0, path.length() - 12));
+			}
 
 			// printing the results
 			createDirs(folderName);
@@ -147,10 +171,12 @@ public class Main {
 	 */
 	private static void printSTL(String folderName) {
 		File[] fs = SCADFinder.findFiles(folderName);
-		System.out.println(fs[0].getName());
+		// System.out.println(fs[0].getName());
 
 		for (int i = 0; i < fs.length; i++) {
-			System.out.println("openscad -o " + folderName + "\\stl\\" + fs[i].getName().substring(0, fs[i].getName().lastIndexOf('.')) + ".stl " + folderName + "\\scad\\" + fs[i].getName().substring(0, fs[i].getName().lastIndexOf('.')) + ".scad");
+			System.out.println(System.getenv("ProgramFiles") + "/OpenSCAD/openscad.exe -o " + folderName + "\\stl\\"
+					+ fs[i].getName().substring(0, fs[i].getName().lastIndexOf('.')) + ".stl " + folderName + "\\scad\\"
+					+ fs[i].getName().substring(0, fs[i].getName().lastIndexOf('.')) + ".scad");
 			try {
 				STLConverter.convert(fs[i].getName().substring(0, fs[i].getName().lastIndexOf('.')), folderName);
 			} catch (InterruptedException e) {
