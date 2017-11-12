@@ -40,7 +40,7 @@ public class StartButton extends JButton {
 			public void actionPerformed(ActionEvent e) {
 				if ("start".equals(e.getActionCommand())) {
 					setEnabled(false);
-					Main.startConversion(Main.getGui().getFileChooserButton().getFilePath(), "result");
+					Main.startConversion(Main.getGui().getFileChooserButton().getFilePath(), Main.getGui().getFolderNameField().getText());
 					System.out.println("StartButton received command: start.");
 					
 					// disable start button before choosing a new file
