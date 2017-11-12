@@ -71,13 +71,9 @@ public class Main {
 		Params p = new Params(0.25, 10.0, 2.0,  4.0, 4.0, 2.0, 75.0, 4.0, 4.0, 1.0, 6.0, 185.0, 153.0);
 		ScadProcessor proc = new ScadProcessor(lines, p);
 		
-		ClipboardCopier.copyToClipboard(proc.outputWalls().toString());
-		BasePlate bp = proc.getBasePlates().get(0);
-			if ( bp.getF().getArea() > 0){
-				ClipboardCopier.copyToClipboard(new Rotate(bp,  Math.toDegrees(bp.getF().getOMBBAngle()), 0, 0 , 1).toString());
-				//System.out.println(bp.getF().getOMBBAngle());
-				System.out.println("");
-			}
+		ClipboardCopier.copyToClipboard(proc.renderBasePlateFiles().get(1).toString());
+		System.out.println(new Cube(p.getMaxPrintWidth(), p.getMaxPrintHeight(), 2));
+	
 		
 	//	System.out.println(new Vector(0,0).angletoVector(new Vector(30,2)));
 		

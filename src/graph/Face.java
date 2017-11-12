@@ -101,7 +101,7 @@ public class Face {
 	//calculating convex hull
 	/**
 	 * calculates the convex hull of the face
-	 * @return ArrayList<Node> of the connvex hull
+	 * @return ArrayList<Node> of the convex hull
 	 */
 	public ArrayList<Node> getConvexHull(){
 		int mostLeftNode = 0;
@@ -117,36 +117,57 @@ public class Face {
 		double angleBetweenVectors;
 		
 		do {
-			//int P1 = i;
+			System.out.println(faceNodes.get(i));
 			convexHull.add(faceNodes.get(i));
 			nextPoint = (i + 1) % faceNodes.size();
 			for(int j = 0; j < faceNodes.size();j++){
-				angleBetweenVectors = new Vector(faceNodes.get(i).getOrigin(), faceNodes.get(j).getOrigin()).angletoVector(new Vector(faceNodes.get(i).getOrigin(), faceNodes.get(nextPoint).getOrigin()));
-				if((j != i && angleBetweenVectors < Math.PI) || angleBetweenVectors == 2*Math.PI){
-					nextPoint = j;
+				if (j != i){
+				Vector vNP = new Vector(faceNodes.get(i).getOrigin(), faceNodes.get(j).getOrigin());
+				Vector vnew = new Vector(faceNodes.get(i).getOrigin(), faceNodes.get(nextPoint).getOrigin());
+				angleBetweenVectors = vNP.angletoVector(vnew);
+				if(angleBetweenVectors < Math.PI || angleBetweenVectors == 2*Math.PI){
+					nextPoint = j; 
 				}	
+				}
 			}
 			i = nextPoint;
 			
 		} while(nextPoint != mostLeftNode);
+		System.out.println(this.getNodes() + "\n" + convexHull + "\n");
+		
 		
 	return convexHull;
 	}
 	
 	//
-	public double getOMBBAngle(){
+	public ArrayList<Double> getOMBBInformation(){
+		
 		ArrayList<Node> nodeConvexHull = getConvexHull();
 		ArrayList<Vector> convexHull = new ArrayList<>();
+		
+		ArrayList<Double> result = new ArrayList<>();
+		
+		
+		result.add(0.0); //0 = angle
+		result.add(0.0); //1 = width
+		result.add(0.0); //2 = length
+		
 		for (Node n : nodeConvexHull){
 			convexHull.add(n.getOrigin());
 		}
 		
 		double edgeAngle;
-		double xMax = Double.MIN_VALUE, yMax = Double.MIN_VALUE,
-		xMin = Double.MAX_VALUE, yMin = Double.MAX_VALUE, ombbArea, ombbAreMin = Double.MAX_VALUE, ombbAngle = 0.0;
-		ArrayList<Vector> ombb = new ArrayList<>();
+		double xMax, yMax,
+		xMin, yMin , ombbArea, ombbAreMin = Double.MAX_VALUE, ombbAngle = 0.0;
+		//ArrayList<Vector> ombbInfo = new ArrayList<>();
+		
 		for (int i  = 0; i < convexHull.size() - 2; i++){
 			edgeAngle = -new Vector(convexHull.get(i), convexHull.get(i + 1)).angle();
+			xMax = Double.MIN_VALUE;
+			yMax = Double.MIN_VALUE;
+			xMin = Double.MAX_VALUE;
+			yMin = Double.MAX_VALUE;
+			
 			for (Vector v : convexHull){
 				v = v.rotate(edgeAngle);
 				if (v.getX() > xMax){
@@ -167,15 +188,16 @@ public class Face {
 			if(ombbArea < ombbAreMin){
 				ombbAreMin = ombbArea;
 				ombbAngle = edgeAngle;
+				result.set(1, xMax - xMin);
+				result.set(2, yMax - yMin);
 				if (xMax - xMin < yMax - yMin){
 					ombbAngle += 0.5 * Math.PI;
+					result.set(1, result.get(2));
+					result.set(2, xMax - xMin);
 				}
+				result.set(0, ombbAngle);
 				
-				ombb.clear();
-				ombb.add(new Vector(xMin, yMin));
-				ombb.add(new Vector(xMin, yMax));
-				ombb.add(new Vector(xMax, yMax));   
-				ombb.add(new Vector(xMax, yMin));
+				
 			}
 			
 			
@@ -183,9 +205,9 @@ public class Face {
 			
 			
 		}
-		System.out.println(new Polygon(ombb, 0).toString());
-		return ombbAngle;
 		
+		
+		return result; 
 	}
 	
 	
