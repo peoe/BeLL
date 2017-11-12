@@ -147,6 +147,7 @@ public class Main {
 					STLConverter.setOpenSCADLocation(path.substring(0, path.length() - 12));
 				}
 			} else {
+				// normal action, if OpenSCAD is installed in assumed directory
 				System.out.println("System variable for OpenSCAD not set, assuming standard location!");
 				String path = System.getenv("ProgramFiles") + "/OpenSCAD/openscad.exe";
 				STLConverter.setOpenSCADLocation(path.substring(0, path.length() - 12));

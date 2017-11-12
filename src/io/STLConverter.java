@@ -45,6 +45,10 @@ public class STLConverter {
 		}
 	}
 
+	/**
+	 * Sets the path to the OpenSCAD executable used by the STLConverter.
+	 * @param openSCADLocation the path to the executable
+	 */
 	public static void setOpenSCADLocation(String openSCADLocation) {
 		STLConverter.openSCADLocation = openSCADLocation;
 	}
