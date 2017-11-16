@@ -71,6 +71,47 @@ public class ScadProcessor {
 		
 	}
 	
+	public ArrayList<Union> renderBasePlateFiles(){
+		ArrayList<Union> files = new ArrayList<>();
+		@SuppressWarnings({ "unchecked", "rawtypes" })
+		ArrayList<BasePlate> basePlates = new Quicksort(getBasePlates(), "ombbArea").sortArray();
+		double xMin, yMin, usedWidth = 0.0, usedLength = 0.0;
+		Vector rotatedNode;
+		double faceEnlarge = 4 *params.getEpsilon() + params.getWallWidth();
+		int fileIndex = -1;
+		for (BasePlate b : basePlates){
+			if (b.getF().getArea() > 0){
+			xMin = Double.MAX_VALUE;
+			yMin = Double.MAX_VALUE;
+			for (Node n : b.getF().getNodes()){
+				rotatedNode = n.getOrigin().rotate(b.getOmbbAngle());
+				if (rotatedNode.getX() < xMin){
+					xMin = rotatedNode.getX();
+				}
+				if (rotatedNode.getY() < yMin){
+					yMin = rotatedNode.getY();
+				}	
+			}
+			if (params.getMaxPrintWidth() - usedWidth - b.getWidth() + 2* faceEnlarge < 0){
+				usedWidth = faceEnlarge;
+				usedLength += basePlates.get(basePlates.indexOf(b) - 1).getWidth();
+			}
+			if ((usedLength + b.getLength()) > params.getMaxPrintHeight() || files.size() == 0){
+				files.add(new Union());
+				fileIndex++;
+				usedLength = faceEnlarge;
+				usedWidth = faceEnlarge;
+			}
+			files.get(fileIndex).getObjects().add(new Translate(new Rotate(b, Math.toDegrees(b.getOmbbAngle()), 0, 0, 1), -xMin + usedWidth, -yMin + usedLength, 0 ));
+			usedWidth += b.getWidth() + 2 * faceEnlarge;
+			}
+			
+		}
+		
+		return files;
+		
+	}
+	
 	public ArrayList<Union> renderCornerFiles(){
 		ArrayList<Union> files = new ArrayList<>();
 		double cornerRowLength = 0.0;
@@ -115,7 +156,6 @@ public class ScadProcessor {
 			for (int i = 0; i < wallLengths.size(); i++){
 				spaceLeft = 0;
 				spaceLeft = wallLengths.get(i);
-				
 				
 				if ((spaceLeft > minimum) && (spaceLeft + w.getLength() <= params.getMaxPrintWidth())){
 					minimum = spaceLeft;

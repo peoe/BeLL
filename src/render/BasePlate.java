@@ -1,6 +1,8 @@
 package render;
 import java.util.ArrayList;
 
+import org.omg.CORBA.OMGVMCID;
+
 import graph.*;
 import render.Params;
 import render.objects.*;
@@ -11,6 +13,8 @@ public class BasePlate implements ScadObject{
 	private Face f;
 	//Parameters
 	private Params params;
+	//rotating angle for the minimum bounding box and width and length of the ombb
+	private double ombbAngle, width, length, ombbArea;
 
 	public Face getF() {
 		return f;
@@ -28,9 +32,43 @@ public class BasePlate implements ScadObject{
 		this.params = params;
 	}
 
+	public double getOmbbAngle() {
+		return ombbAngle;
+	}
+
+	public void setOmbbAngle(double ombbAngle) {
+		this.ombbAngle = ombbAngle;
+	}
+
+	public double getWidth() {
+		return width;
+	}
+
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+	public double getLength() {
+		return length;
+	}
+
+	public void setLength(double length) {
+		this.length = length;
+	}
+
 	public BasePlate(Face f, Params params){
 		this.f = f;
 		this.params = params;
+		if (f.getArea() > 0){
+		ArrayList<Double> values = f.getOMBBInformation();
+		ombbAngle = values.get(0);
+		width = values.get(1);
+		length = values.get(2);
+		ombbArea = width * length;
+		} else {
+			
+		}
+		
 	}
 	//modifies a polygon if its edges appear outside
 	/**
