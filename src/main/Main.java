@@ -26,9 +26,9 @@ public class Main {
 	public static void main(String[] args) throws ParseException {
 
 		Vector A = new Vector(0, 0);
-		Vector B = new Vector(100, 0);
-		Vector C = new Vector(70, 100);
-		Vector D = new Vector(-30, 100);
+		Vector B = new Vector(30, 0);
+		Vector C = new Vector(30, 30);
+		Vector D = new Vector(-30, 30);
 		Vector E = new Vector(-130, 0);
 		Vector F = new Vector(-150, 100);
 		Vector G = new Vector(0,-150);
@@ -71,7 +71,7 @@ public class Main {
 		Params p = new Params(0.25, 10.0, 2.0,  4.0, 4.0, 2.0, 75.0, 4.0, 4.0, 1.0, 6.0, 185.0, 153.0);
 		ScadProcessor proc = new ScadProcessor(lines, p);
 		
-		ClipboardCopier.copyToClipboard(proc.renderBasePlateFiles().get(1).toString());
+		ClipboardCopier.copyToClipboard(proc.renderBasePlateFiles().get(0).toString());
 		System.out.println(new Cube(p.getMaxPrintWidth(), p.getMaxPrintHeight(), 2));
 	
 		

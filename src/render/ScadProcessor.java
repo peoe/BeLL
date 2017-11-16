@@ -77,6 +77,7 @@ public class ScadProcessor {
 		ArrayList<BasePlate> basePlates = new Quicksort(getBasePlates(), "ombbArea").sortArray();
 		double xMin, yMin, usedWidth = 0.0, usedLength = 0.0;
 		Vector rotatedNode;
+		double faceEnlarge = 4 *params.getEpsilon() + params.getWallWidth();
 		int fileIndex = -1;
 		for (BasePlate b : basePlates){
 			if (b.getF().getArea() > 0){
@@ -91,18 +92,18 @@ public class ScadProcessor {
 					yMin = rotatedNode.getY();
 				}	
 			}
-			if (params.getMaxPrintWidth() - usedWidth - b.getWidth() < 0){
-				usedWidth = 0;
+			if (params.getMaxPrintWidth() - usedWidth - b.getWidth() + 2* faceEnlarge < 0){
+				usedWidth = faceEnlarge;
 				usedLength += basePlates.get(basePlates.indexOf(b) - 1).getWidth();
 			}
 			if ((usedLength + b.getLength()) > params.getMaxPrintHeight() || files.size() == 0){
 				files.add(new Union());
 				fileIndex++;
-				usedLength = 0;
-				usedWidth = 0;
+				usedLength = faceEnlarge;
+				usedWidth = faceEnlarge;
 			}
 			files.get(fileIndex).getObjects().add(new Translate(new Rotate(b, Math.toDegrees(b.getOmbbAngle()), 0, 0, 1), -xMin + usedWidth, -yMin + usedLength, 0 ));
-			usedWidth += b.getWidth();
+			usedWidth += b.getWidth() + 2 * faceEnlarge;
 			}
 			
 		}

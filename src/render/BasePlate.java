@@ -62,8 +62,8 @@ public class BasePlate implements ScadObject{
 		if (f.getArea() > 0){
 		ArrayList<Double> values = f.getOMBBInformation();
 		ombbAngle = values.get(0);
-		width = values.get(1) + 4 *params.getEpsilon() + params.getWallWidth();
-		length = values.get(2) + 4 *params.getEpsilon() + params.getWallWidth();
+		width = values.get(1);
+		length = values.get(2);
 		ombbArea = width * length;
 		} else {
 			
