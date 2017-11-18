@@ -4,6 +4,11 @@
 \usepackage[a4paper,left=40mm,top=25mm,bottom=20mm, right=30mm]{geometry} % korrekturränder
 \usepackage[utf8]{inputenc} % utf 8 encoding
 \usepackage{listings} % Code blocks
+\lstset{
+	basicstyle=\small\ttfamily,
+	columns=flexible, 
+	breaklines=true  % erlaubt Umklappen von \verb text
+}
 \usepackage{fancyhdr} % Header/Footer
 \usepackage{setspace} % Line spacing
 \usepackage{color} % FAARBEN
@@ -21,6 +26,8 @@
 \usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage{chngcntr}
+\usepackage[T1]{fontenc} %hyphenation für Ä/Ö/Ü
+\usepackage{calc} %für Seitennummerierung
 
 
 \usepackage{lastpage} %Liest Seitenanzahl
@@ -29,13 +36,14 @@
 
 %======INFORMATIONEN ZUM WERK=====
 \def\docTitle{Erzeugung eines 3D-Modells eines Gebäudes anhand des Grundrisses}
-\def\docAuthor{Peter Oehme, Johann Bartel}
+\def\docAuthor{Johann Bartel, Peter Oehme}
 % =====FORMAT===========================================================================
 \titlespacing*{\chapter}{0pt}{-30pt}{10pt}
 \titlespacing*{name=\chapter,numberless}{0pt}{-30pt}{10pt}
 
 
 \doublespacing %Zeilenabstand 1.5
+\parindent0pt %Einzüge nach Abbildungen vermeiden
 
 \setlength{\headheight}{15pt}
 
@@ -77,7 +85,8 @@
 \renewcommand{\footrulewidth}{0.4pt}% Default \footrulewidth is 0pt
 \rhead{\docAuthor}
 \lhead{Besondere Lernleistung}
-\cfoot{Seite \thepage{} von \pageref{LastPage}}
+%\cfoot{Seite \thepage{} von \pageref{LastPage}}
+\setlength\emergencystretch{5em} % bessere Zeilenubrüche ohne überstehende Wörter; ab 4em fand sich ein zufriedenstellendes Resultat
 
 %========================CODEDARSTELLUNG=========================
 \renewcommand{\lstlistingname}{Codeauschnitt}
@@ -102,6 +111,11 @@
 }
 
 %=========BILDER==============
+\newcounter{seitennr} 
+\setcounter{seitennr}{28} %needs to be changed before publishing
+\def\theseitennr{\arabic{seitennr}}
+\newcounter{bildnr} 
+\def\thebildnr{\arabic{bildnr}}
 \newenvironment{Bild}[1]
 {
 	\begin{figure}[H]
@@ -112,11 +126,13 @@
 {
 	\caption{\BildCaption}
 	\end{figure}
+	\refstepcounter{bildnr}
 }
 %========================COMMANDS============
 \newcommand{\q}[1]{\glqq#1\grqq} % Zitat mit Anführungszeichen
 \newcommand{\icode}[1]{\texttt {#1}} %inline Code
 %\newcommand{\todo}[#1]{\newline\huge \color{red}#1 \color{black}\normalsize}
+\newcommand\tab[1][1cm]{\hspace*{#1}} %command for inserting tabs
 
 %\newcommand\todo[1]{\refstepcounter{todo}\marginpar{\color{red}{#1}}\addcontentsline{tod}{subsection}{#1~\thetodo}}
 
@@ -129,6 +145,9 @@
 
 %====================HYPHENS===============
 \hyphenation{Screen-shot}
+\hyphenation{AutoCAD}
+\hyphenation{OpenSCAD}
+\hyphenation{Vor-gäng-er}
 
 %============MAIN=DOCUMENT=====================
 \begin{document}
@@ -152,7 +171,9 @@
 	\include{Kapitel/006Ausblick}
 	\include{Kapitel/007Quellenverzeichnis}
 	\listoffigures
+	\include{Kapitel/0090Betreuerdank}
 	\include{Kapitel/009Selbstaendigkeit}
+	\include{Kapitel/010Arbeitsteilung}
 	
 	
 %	\printglossary[style=long]

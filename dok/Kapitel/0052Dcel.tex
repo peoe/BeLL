@@ -1,12 +1,14 @@
-\section{Erstellen der DCEL}
+\section{Erstellen der Doubly-connected Edge List}
 \subsection{Graph Klasse}
 Die wichtigste Klasse der Anwendung ist \icode{Graph}. 
 Sie verbindet alle grafischen Bestandteile und kann mit einer übergebenen Liste aus Linien mittels mehrerer Zwischenoperationen eine vollständige DCEL, also einen planaren Graph erstellen.
 Dafür sind drei Listen vom Typ \icode{Edge}(Kante), \icode{Node}(Knoten) und \icode{Face}(Fläche) gespeichert, die eine DCEL repräsentieren.
+
 \subsection{Line-to-Edge Konvertierung}
 \label{subsec:ltoe} 
-Initialisierend werden die Start- und Endpunkte der eingelesenen Linien in Knoten ohne eine Referenz auf eine anliegende Kante umgewandelt und diese als Start- und Endknoten der entsprechenden Kante gesetzt.
-Um für die Eindeutigkeit der Knoten zu sorgen, gibt die Funktion \icode{createNode()} ein äquivalenten Knoten zu einem Punkt zurück und fügt ihn zu der Liste an Knoten hinzu, wenn er noch nicht in ihr existiert.
+Initialisierend werden aus den Koordinaten der eingelesenen Start- und Endpunkte in Knoten umgewandelt.
+Aus diesen noch unreferenzierten Knoten definiert man dann die Kanten mit entsprechendem Start- und Endknoten.
+Um für die Eindeutigkeit der Knoten zu sorgen, gibt die Funktion \icode{createNode()} ein äquivalenten Knoten zu einem Punkt zurück und fügt ihn zu der Liste von Knoten hinzu, wenn er noch nicht in ihr vorhanden ist.
 
 \begin{code}[Line-to-Edge Konvertierung]
 private void processData(ArrayList<Line> ls) {
@@ -15,6 +17,7 @@ private void processData(ArrayList<Line> ls) {
 	}
 }
 \end{code}
+
 \begin{code}[\icode{createNode()} Funktion]
 private Node createNode(Vector p) {
 	for (Node n : nodes) {
@@ -26,11 +29,15 @@ private Node createNode(Vector p) {
 	return (nodes.get(nodes.size() - 1));
 }
 \end{code}
+
 \todoinline{Hier könnte man noch was zu sagen}
+
 \subsection{Zwillingskantengenerierung}
-Um aus den entstandenen Kanten die invertierten Gegenstücke, auch als \q{Zwillingskanten} bezeichnet, zu erhalten, werden alle Kanten, die in der Liste bereits vorhanden sind, betrachtet und neue Kanten hinzugefügt, die im Vergleich zu den ursprünglichen Kanten vertauschte Start- und Endknoten besitzen.
-Direkt nach dem Hinzufügen der neuen Kante wird jeweils eine Referenz erstellt, die in beiden Kanten auf den jeweils zugehörigen Zwilling verweist. 
+Weiterhin werden für sämtliche Kanten die invertierten Gegenstücke, auch als \q{Zwillingskanten} bezeichnet, durch Vertauschen der Start- und Endknoten gebildet.
+Direkt nach dem Hinzufügen der Zwillingskante wird jeweils eine Referenz erstellt, die in beiden Kanten auf den jeweils zugehörigen Zwilling verweist. 
 In der Kantenliste existiert nun für jede Linie die der DXF-Reader eingelesen hat, zwei zueinander komplementäre Kanten.
+Die Zwillingskanten dienen dem Aufbau der DCEL, um eine Iteration in beide Richtungen um die Flächen und so auch eine einfachere Umwandlung zu ermöglichen.
+
 \begin{code}[Hinzufügen der Zwillingskanten]
 private void computeTwins() {
 	int amount = edges.size();
@@ -41,29 +48,37 @@ private void computeTwins() {
 	}
 }
 \end{code}
+
 \subsection{Nachfolger- und Vorgängerermittlung}
-Das Erstellen der Referenzen werden zuerst alle ausgehenden Edges der Nodes, das heißt alle Edges, die den jeweiligen Node als ihren Startnode besitzen, in einer zweidimensionalen ArrayList gespeichert.
-Die erste Dimension steht für den Index des Nodes in der erstellten Nodeliste für den in der zweiten Dimension die jeweiligen ausgehenden Edges vorliegen.
-Da diese durch eine \icode{for()} Schleife mit der oben stehenden Bedingung herausgesucht werden, sind die Edges im Array in zufälliger Reihenfolge, also nicht nach der Anordnung am Node gegenwärtig.
-Jetzt werden die Edges anhand des \icode{atan2()} Winkel am vorliegenden Node im mathematisch positiven Drehsinn sortiert.
-Daraus ergibt sich, dass das vorherige bzw. nachfolgende Element einer Edge die Edge, die \q{links} bzw. \q{rechts} der Betrachteten liegt darstellt.\\
-Für jede ausgehende Edge \icode{e} können nun folgende Referenzen gesetzt werden:
+Zum Erstellen der Referenzen werden zuerst alle ausgehenden Kanten der Knoten, das heißt die den jeweiligen Knoten als ihre Startkante besitzen, in einer zweidimensionalen \icode{ArrayList} gespeichert.
+Die erste Dimension steht für den Index des Knotens in der erstellten Knotenliste.
+In der zweiten Dimension liegen die den Indizes zugehörigen ausgehenden Kanten vor.
+Da diese durch eine \icode{for()} Schleife mit der oben stehenden Bedingung aufgerufen werden, liegen die Kanten im \icode{Array} in zufälliger Reihenfolge vor.
+Sortiert werden die Kanten mithilfe des Winkels, den die Funktion \icode{atan2()} der \icode{java.Math}-Bibliothek liefert, im positiven Drehsinn.
+Begonnen wird dabei mit dem kleinsten zurückgegebenen Winkel.
+Daraus ergibt sich, dass das vorherige Element die Kante, die mit einem größeren Winkel \q{links} der Betrachteten darstellt, beziehungsweise das nachfolgende Element, die mit einem kleineren Winkel \q{rechts} der Ausgewählten liegt darstellt. \\
+Für jede ausgehende Kante \icode{e} können nun folgende Referenzen gesetzt werden:
+
 \begin{itemize}
-	\item Das vorherige bzw. letzte Element der ArrayList, wenn die betrachtete Edge den Index 0 hat, stellt den Nachfolger der Twinedge von \icode{e} dar.
-	\item Der Twin der in der ArrayList nachfolgenden Edge bzw. ersten Edge, wenn die betrachtete Edge das letzte Element ist, ist der Vorgänger von \icode{e}
+	\item Das vorherige Element der \icode{ArrayList} stellt den Nachfolger der Zwillingskante von \icode{e} dar.
+	\item Der Vorgänger von \icode{e} ist der Zwilling der in der \icode{ArrayList} nachfolgenden Kante.
 \end{itemize}
-Genannte Referenzen werden nun gesetzt, sodass die Verknüpfungen zwischen den Edges fertiggestellt sind.
+
+Genannte Referenzen werden nun gesetzt, sodass die Verknüpfungen zwischen den Kanten fertiggestellt sind.\\
 \todoinline{code eventuell bilder definitiv}
+
 \subsection{Flächenerstellung}
-Durch eine Schleife können die einzelnen Flächen herausgefiltert werden.
-Es muss lediglich fortlaufend alle Nachfolger einer gewählten Kante herausgesucht werden bis die gewählte Kante einen Nachfolger darstellt, bis alle Kanten genau einmal behandelt wurden.
-Dafür wurde eine repräsentative Boolean-ArrayList mit der Länge der Kantenliste erstellt, die mit ihren Werten den Status der Kanten darstellt.
+Mithilfe einer Schleife können die einzelnen Flächen erschlossen werden.
+Es muss lediglich fortlaufend alle Nachfolger einer gewählten Kante gesucht werden bis die gefundene Kante einen Nachfolger darstellt, bis alle Kanten genau einmal behandelt wurden.
+Dafür wurde eine repräsentative \icode{Boolean-ArrayList} mit der Länge der Kantenliste erstellt, die mit ihren Werten den Status der Kanten darstellt.
 Folglich besteht diese am Anfang nur aus \icode{false} Werten die während der Schleife alle auf \icode{true} gesetzt werden.
-Die Speicherung der Faces folgt nach dem DCEL-Standard statt, sodass nur eine anliegende Kante zugewiesen wird, mit der man, aufgrund von den Referenzen zwischen den Kanten alle Kanten und Knoten der Fläche ermitteln kann.
-Das äußere Gebiet des planaren Graphens lässt sich an der Umlaufrichtung der Kanten erkennen.
+Die Speicherung der Flächen folgt dem DCEL-Standard, sodass nur eine anliegende Kante zugewiesen wird, mit der man, aufgrund von den Referenzen alle Kanten und Knoten der Fläche ermitteln kann.
+Das äußere Gebiet des planaren Graphen lässt sich an der Umlaufrichtung der Kanten erkennen.
 Es ist die einzige Fläche, die im mathematisch negativen Drehsinn ausgerichtet ist.
-Unterschieden wird sie im weiteren Programmablauf mithilfe der gaußschen Trapezformel.
-Bei negativer Umlaufrichtung ist das Ergebnis dieser negativ und lässt sich resultierend leicht erkennen.
+Unterschieden wird sie im weiteren Programmablauf mithilfe der Gaußschen Trapezformel.
+Bei negativer Umlaufrichtung ist das Ergebnis dieser negativ.\\
+\todoinline{Bitte noch mal überarbeiten, total wirr}
 
 \subsection{Vervollständigung der Knoten}
-Die letzte nötige Operation ist die Speicherung einer anliegenden Edge in den Nodes.\todoinline{man könnte das im code auch vorher tun denke ich}
+Die letzte nötige Operation ist die Speicherung einer anliegenden Edge in den Nodes.\\
+\todoinline{man könnte das im code auch vorher tun denke ich}
