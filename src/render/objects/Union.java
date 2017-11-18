@@ -8,7 +8,7 @@ import render.ScadObject;
 public class Union implements ScadObject {
 
 	// ArrayList of ScadObjects for the Union
-	private ArrayList<ScadObject> objects;
+	private ArrayList<ScadObject> objects = new ArrayList<>();
 
 	// the layout String for creating the Union
 	final static String union = "union(){\n%s}";
@@ -24,6 +24,16 @@ public class Union implements ScadObject {
 	public Union(ArrayList<ScadObject> objects) {
 		super();
 		this.objects = objects;
+	}
+	
+	/**
+	 * Creates a new empty Union
+	 * 
+	 * @see ScadObject
+	 */
+	public Union() {
+		super();
+		this.objects = new ArrayList<>();
 	}
 
 	// getter - setter
