@@ -6,20 +6,23 @@ import java.util.Arrays;
 import render.objects.*;
 
 public class ScadFile implements ScadObject {
-	private String Filetext;
+	private ArrayList<ScadObject> objects = new ArrayList<>();
 
-	public String getFiletext() {
-		return Filetext;
+	public ArrayList<ScadObject> getObjects() {
+		return objects;
 	}
 
-	public void setFiletext(String filetext) {
-		Filetext = filetext;
+	public void setObjects(ArrayList<ScadObject> objects) {
+		this.objects = objects;
+	}
+	
+	public ScadFile(){
+		
 	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Union(objects).toString();
 	}
 
 }

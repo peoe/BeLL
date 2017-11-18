@@ -14,10 +14,10 @@ public class Params {
 	 * height - the height of the corner 
 	 * pinHeight - the height of the pin
 	 */
-	private static double e, cornerRadius, pinMinLength, pinPWidth, pinPRadius, pinDistance, height, pinHeight, basePlateHeight, basePlatePinCircleHeight;
+	private double epsilon, cornerRadius, pinMinLength, pinPWidth, pinPRadius, pinDistance, height, pinHeight, basePlateHeight, basePlatePinCircleHeight, wallWidth, maxPrintWidth, maxPrintHeight;;
 
 	// the constant for defining the width of all walls
-	private static final double wallWidth = 6.0;
+	//	private static final double wallWidth = 6.0;
 	
 	// getter - setter
 	// pinPWidth
@@ -25,7 +25,7 @@ public class Params {
 	 * Returns the parameter corresponding to the width of the positive pin.
 	 * @return the width of the positive pin
 	 */
-	public static double getPinPWidth() {
+	public double getPinPWidth() {
 		return pinPWidth;
 	}
 
@@ -34,7 +34,7 @@ public class Params {
 	 * Returns the parameter corresponding to the radius of the positive pin.
 	 * @return the radius of the positive pin
 	 */
-	public static double getPinPRadius() {
+	public double getPinPRadius() {
 		return pinPRadius;
 	}
 
@@ -43,8 +43,8 @@ public class Params {
 	 * Returns the parameter corresponding to the value of epsilon.
 	 * @return the value of epsilon
 	 */
-	public static double getE() {
-		return e;
+	public double getEpsilon() {
+		return epsilon;
 	}
 	
 	// cornerRadius
@@ -52,7 +52,7 @@ public class Params {
 	 * Returns the parameter corresponding to the corner radius.
 	 * @return the corner radius 
 	 */
-	public static double getCornerRadius() {
+	public double getCornerRadius() {
 		return cornerRadius;
 	}
 
@@ -61,7 +61,7 @@ public class Params {
 	 * Returns the parameter corresponding to the minimum pin length.
 	 * @return the minimum pin length
 	 */
-	public static double getPinMinLength() {
+	public double getPinMinLength() {
 		return pinMinLength;
 	}
 
@@ -70,7 +70,7 @@ public class Params {
 	 * Returns the parameter corresponding to the pin distance.
 	 * @return the pin distance
 	 */
-	public static double getPinDistance() {
+	public double getPinDistance() {
 		return pinDistance;
 	}
 
@@ -79,7 +79,7 @@ public class Params {
 	 * Returns the parameter corresponding to the height.
 	 * @return the height
 	 */
-	public static double getHeight() {
+	public double getHeight() {
 		return height;
 	}
 
@@ -88,7 +88,7 @@ public class Params {
 	 * Returns the parameter corresponding to the pin height.
 	 * @return the pin height
 	 */
-	public static double getPinHeight() {
+	public double getPinHeight() {
 		return pinHeight;
 	}
 
@@ -97,44 +97,69 @@ public class Params {
 	 * Returns the parameter corresponding to the wall width.
 	 * @return the wall width
 	 */
-	public static double getWallwidth() {
+	public double getWallwidth() {
 		return wallWidth;
 	}
   
-  public static double getBasePlatePinCircleHeight() {
+	//
+  public double getBasePlatePinCircleHeight() {
 		return basePlatePinCircleHeight;
 	}
-	
-	public static double getBasePlateHeight() {
+	//height of the basePlates
+	public double getBasePlateHeight() {
 		return basePlateHeight;
 	}
 
-	// setting all params
+	//wall width
+	public double getWallWidth() {
+		return wallWidth;
+	}
+	
+	//PrintWidth
+	public double getMaxPrintWidth() {
+		return maxPrintWidth;
+	}
+
+	//PrintHeight
+	public double getMaxPrintHeight() {
+		return maxPrintHeight;
+	}
+
+
+	// setting all parameters
 	/**
 	 * 
-	 * @param E
-	 * @param CornerRadius
-	 * @param PinMinLength
-	 * @param PinPWidth
-	 * @param PinPRadius
-	 * @param PinDistance
-	 * @param Height
-	 * @param PinHeight
-	 * @param BasePlateHeight
-	 * @param BasePlatePinCircleHeight
+	 * @param epsilon
+	 * @param cornerRadius
+	 * @param pinMinLength
+	 * @param pinPWidth
+	 * @param pinPRadius
+	 * @param pinDistance
+	 * @param height
+	 * @param pinHeight
+	 * @param basePlateHeight
+	 * @param basePlatePinCircleHeight
+	 * @param wallWidth
+	 * @param maxPrintWidth
+	 * @param maxPrintHeight
 	 */
-	public static void setParams(double E, double CornerRadius, double PinMinLength, double PinPWidth, double PinPRadius, double PinDistance, double Height, double PinHeight, double BasePlateHeight, double BasePlatePinCircleHeight){
-		e = E;
-		cornerRadius = CornerRadius;
-		pinMinLength = PinMinLength+CornerRadius;
-		pinDistance = PinDistance;
-		height = Height;
-		pinHeight = PinHeight;
-		pinPRadius = PinPRadius;
-		pinPWidth = PinPWidth;
-		basePlateHeight = BasePlateHeight;
-		basePlatePinCircleHeight = BasePlatePinCircleHeight;
-		
+	public Params(double epsilon, double cornerRadius, double pinMinLength, double pinPWidth, double pinPRadius,
+			double pinDistance, double height, double pinHeight, double basePlateHeight,
+			double basePlatePinCircleHeight, double wallWidth, double maxPrintWidth, double maxPrintHeight) {
+		super();
+		this.epsilon = epsilon;
+		this.cornerRadius = cornerRadius;
+		this.pinMinLength = pinMinLength + cornerRadius;
+		this.pinPWidth = pinPWidth;
+		this.pinPRadius = pinPRadius;
+		this.pinDistance = pinDistance;
+		this.height = height;
+		this.pinHeight = pinHeight;
+		this.basePlateHeight = basePlateHeight;
+		this.basePlatePinCircleHeight = basePlatePinCircleHeight;
+		this.wallWidth = wallWidth;
+		this.maxPrintWidth = maxPrintWidth;
+		this.maxPrintHeight = maxPrintHeight;
 	}
 
 }

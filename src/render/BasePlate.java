@@ -1,13 +1,20 @@
 package render;
 import java.util.ArrayList;
 
+import org.omg.CORBA.OMGVMCID;
+
 import graph.*;
+import render.Params;
 import render.objects.*;
 
 public class BasePlate implements ScadObject{
 	
 	//face of base plate
 	private Face f;
+	//Parameters
+	private Params params;
+	//rotating angle for the minimum bounding box and width and length of the ombb
+	private double ombbAngle, width, length, ombbArea;
 
 	public Face getF() {
 		return f;
@@ -17,8 +24,51 @@ public class BasePlate implements ScadObject{
 		this.f = f;
 	}
 	
-	public BasePlate(Face f){
+	public Params getParams() {
+		return params;
+	}
+
+	public void setParams(Params params) {
+		this.params = params;
+	}
+
+	public double getOmbbAngle() {
+		return ombbAngle;
+	}
+
+	public void setOmbbAngle(double ombbAngle) {
+		this.ombbAngle = ombbAngle;
+	}
+
+	public double getWidth() {
+		return width;
+	}
+
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+	public double getLength() {
+		return length;
+	}
+
+	public void setLength(double length) {
+		this.length = length;
+	}
+
+	public BasePlate(Face f, Params params){
 		this.f = f;
+		this.params = params;
+		if (f.getArea() > 0){
+		ArrayList<Double> values = f.getOMBBInformation();
+		ombbAngle = values.get(0);
+		width = values.get(1);
+		length = values.get(2);
+		ombbArea = width * length;
+		} else {
+			
+		}
+		
 	}
 	//modifies a polygon if its edges appear outside
 	/**
@@ -26,7 +76,7 @@ public class BasePlate implements ScadObject{
 	 * @param p Polygon
 	 * @return Polygon Modified Polygon 
 	 */
-	public static Polygon modifyPolygon(Polygon p){
+	public Polygon modifyPolygon(Polygon p){
 		ArrayList<Vector> newPoints = new ArrayList<>();
 		for (Vector v : p.getPoints()){
 			newPoints.add(v);
@@ -35,8 +85,8 @@ public class BasePlate implements ScadObject{
 		for (Edge e : p.getIncidentEdge().getFace().getEdges()){
 			int index = p.getPoints().indexOf(e.getN1().getOrigin());
 			if (e.getTwin().getFace().getArea() < 0.0){
-				newPoints.set(index, newPoints.get(index).add(BasePlate.getCornerPoint(e, e.getPrev())));
-				newPoints.set((index +1) % newPoints.size(), newPoints.get((index +1) % newPoints.size()).add(BasePlate.getCornerPoint(e, e.getNext())));
+				newPoints.set(index, newPoints.get(index).add(this.getCornerPoint(e, e.getPrev())));
+				newPoints.set((index +1) % newPoints.size(), newPoints.get((index +1) % newPoints.size()).add(this.getCornerPoint(e, e.getNext())));
 			} 
 		}
 		return new Polygon(newPoints, p.getDelta());
@@ -48,10 +98,10 @@ public class BasePlate implements ScadObject{
 	 * @param e2 second Edge
 	 * @return Vector Translation Vector for the point
 	 */
-	private static Vector getCornerPoint(Edge e, Edge e2){
+	private Vector getCornerPoint(Edge e, Edge e2){
 		Vector vE = e.toVector();
 		Vector vE2 = e2.toVector();
-		Vector epsilonVec = e.toVector().rotate(-0.5*Math.PI).changeLength(Params.getE() + Params.getWallwidth()*0.5);
+		Vector epsilonVec = e.toVector().rotate(-0.5*Math.PI).changeLength(params.getEpsilon() + params.getWallwidth()*0.5);
 		double determinantDivisor = -vE.getX() * vE2.getY() + vE.getY() * vE2.getX();
 		if (determinantDivisor != 0){
 		return vE.multiply((epsilonVec.getX() * vE2.getY() - epsilonVec.getY() * vE2.getX())/determinantDivisor).add(epsilonVec);
@@ -70,10 +120,10 @@ public class BasePlate implements ScadObject{
 	 */
 	private ScadObject getBasePlateObject(){
 		ArrayList<ScadObject> differenceCorners = new ArrayList<>();
-		differenceCorners.add(new Translate(new Scale(BasePlate.modifyPolygon(new Polygon(getF().getIncidentEdge(), -0.5 * Params.getE())), 1, 1, Params.getBasePlateHeight()), 0, 0, 0.5*Params.getBasePlateHeight()));
+		differenceCorners.add(new Translate(new Scale(this.modifyPolygon(new Polygon(getF().getIncidentEdge(), -0.5 * params.getEpsilon())), 1, 1, params.getBasePlateHeight()), 0, 0, 0.5*params.getBasePlateHeight()));
 		
 		for(Edge e: getF().getEdges()){
-			differenceCorners.add(new Translate(new CornerPin(e, Params.getE()), e.getN1().getOrigin(), 0));
+			differenceCorners.add(new Translate(new CornerPin(e, params.getEpsilon(), params), e.getN1().getOrigin(), 0));
 		}
 		return new Difference(differenceCorners);
 	}
