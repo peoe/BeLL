@@ -29,27 +29,35 @@ Aus dieser Datei werden alle DXF-Objekte, die mit dem Typen \icode{DXFLine} übe
 Die Koordinaten der Start- und Endpunkte der DXFLines  in dieser Liste werden anschließend in eine Liste von Linien übertragen, welche im weiteren Programmablauf unter anderem bei der Umwandlung des Graphen in die DCEL Verwendung findet.
 
 \subsection{Funktionsweise der GUI}
-Die GUI setzt sich zusammen aus einem \icode{JFrame}, indem ein \icode{JTextField}, ein \icode{FileChooserButton}, ein \icode{StartButton} und ein \icode{ShowResultButton} platziert sind.
+Die GUI setzt sich zusammen aus einem \icode{JFrame}, indem zwei \icode{JTextField}, ein \icode{FileChooserButton}, ein \icode{StartButton} und ein \icode{ShowResultButton} platziert sind.
 
 \begin{Bild}{Ausgangszustand der GUI (Screenshot der Verfasser)}
-	\includegraphics[width = 120mm]{Bilder/GUI_0}
+	\includegraphics[width = 120mm]{Bilder/GUI/GUI_Startup}
 \end{Bild}
 
 Der Nutzer kann im Ausgangszustand über den \icode{FileChooserButton} einen \icode{JFileChooser}-Dialog öffnen, mit dem er die Datei, die er umwandeln möchte, auswählen kann.
 Sobald er dann eine Datei ausgewählt hat, wird der Dateipfad zu dieser Datei zusätzlich im \icode{JTextField angezeigt.}
 In diesem \icode{JFileChooser} ist außerdem ein \icode{FileFilter} implementiert, der dem Nutzer lediglich .dxf-Dateien anzeigt.
-Alternativ zum \icode{JFileChooser}-Dialog kann der Nutzer auch direkt in das \icode{JTextField} den Dateipfad eingeben.
-
-\begin{Bild}{Dateiöffnungsdialog (Screenshot der Verfasser)}
-	\includegraphics[width = 120mm]{Bilder/GUI_1_FileSelect}
-\end{Bild}
-
-Nachdem der Nutzer eine existente Datei ausgewählt hat, wird nun der \icode{StartButton} aktiviert und er kann den Konvertierungsprozess starten.
+Alternativ zum \icode{JFileChooser}-Dialog kann der Nutzer auch direkt in das links positionierte \icode{JTextField} den Dateipfad eingeben.
+Im \icode{JTextField} unterhalb dessen gibt der Nutzer dann den Ordnernamen ein, in dem die umgewandelten Dateien ausgegeben werden.\\
+Nachdem der Nutzer eine Datei ausgewählt und einen Namen für den Ergebnisordner hat, wird nun der \icode{StartButton} aktiviert und er kann den Konvertierungsprozess starten.
 
 \begin{Bild}{GUI mit aktiviertem \icode{StartButton} (Screenshot der Verfasser)}
-	\includegraphics[width = 120mm]{Bilder/GUI_2_InProgress}
+	\includegraphics[width = 120mm]{Bilder/GUI/GUI_Convert_Ready}
 \end{Bild}
 
-Sobald dieser Vorgang beendet ist, bleiben dem Nutzer nun die Möglichkeiten, die finale Datei mit den Anweisungen anzuzeigen, oder einen anderen Grundriss umzuwandeln.\\
+Beim Klicken des \icode{StartButton} wird überprüft, ob das Programm die ausführbare Datei von OpenSCAD unter \icode{C:\textbackslash \textbackslash Program Files\textbackslash OpenSCAD\textbackslash } finden kann.
+Diese Datei wird benötigt, um die Umwandlung der .scad-Dateien in .stl-Dateien zu ermöglichen.
+Sollte diese dort nicht gefunden werden, wird der Nutzer mit einem Dialog darauf hingewiesen.
 
-\todoinline{Bild der finalen GUI einfügen}
+\begin{Bild}{Dialog zur Warnung des Nutzers (Screenshot der Verfasser)}
+	\includegraphics[width = \textwidth]{Bilder/GUI/GUI_SCAD_Error}
+\end{Bild}
+
+Anschließend hat der Nutzer die Möglichkeit, den Pfad zur ausführbaren Datei mit einem weiteren \icode{JFileChooser}-Dialog anzugeben.
+
+\begin{Bild}{Dialog zum Verlinken der openscad.exe (Screenshot der Verfasser)}
+	\includegraphics[width = 120mm]{Bilder/GUI/GUI_SCAD_Linking}
+\end{Bild}
+
+Sobald dieser Vorgang beendet ist, bleiben dem Nutzer nun die Möglichkeiten, den Ordner mit den Ausgabedateien anzuzeigen, oder einen anderen Grundriss umzuwandeln.\\
