@@ -149,7 +149,7 @@ public class Main {
 			} else {
 				// normal action, if OpenSCAD is installed in assumed directory
 				System.out.println("System variable for OpenSCAD not set, assuming standard location!");
-				String path = System.getenv("ProgramFiles") + "/OpenSCAD/openscad.exe";
+				String path = System.getenv("ProgramFiles") + "\\OpenSCAD\\openscad.exe";
 				STLConverter.setOpenSCADLocation(path.substring(0, path.length() - 12));
 			}
 
@@ -175,7 +175,7 @@ public class Main {
 		// System.out.println(fs[0].getName());
 
 		for (int i = 0; i < fs.length; i++) {
-			System.out.println(System.getenv("ProgramFiles") + "/OpenSCAD/openscad.exe -o " + folderName + "\\stl\\"
+			System.out.println(System.getenv("ProgramFiles") + "\\OpenSCAD\\openscad.exe -o " + folderName + "\\stl\\"
 					+ fs[i].getName().substring(0, fs[i].getName().lastIndexOf('.')) + ".stl " + folderName + "\\scad\\"
 					+ fs[i].getName().substring(0, fs[i].getName().lastIndexOf('.')) + ".scad");
 			try {
