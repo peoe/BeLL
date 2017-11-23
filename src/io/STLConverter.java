@@ -19,8 +19,8 @@ public class STLConverter {
 		Process p;
 		ProcessBuilder b;
 		try {
-			b = new ProcessBuilder("openscad", "-o", folderName + "\\stl\\" + fileName + ".stl", folderName + "\\scad\\" + fileName + ".scad");
-			b.environment().put("PATH", openSCADLocation);
+			b = new ProcessBuilder(openSCADLocation + "\\openscad.exe", "-o", folderName + "\\stl\\" + fileName + ".stl", folderName + "\\scad\\" + fileName + ".scad");
+			//b.environment().put("PATH", openSCADLocation);
 			
 			//p = Runtime.getRuntime().exec("openscad -o " + folderName + "\\stl\\" + fileName + ".stl " + folderName + "\\scad\\" + fileName + ".scad");
 			p = b.start();

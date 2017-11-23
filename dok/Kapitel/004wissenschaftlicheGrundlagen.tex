@@ -40,20 +40,25 @@ Ein Beispiel für einen solchen Grundriss ist in Abbildung~\thebildnr\ zu sehen.
 OpenSCAD ist eine kostenlos verfügbare CAD-Modellierungssoftware, welche aus einer textbasierten Beschreibungssprache 3D-Modelle erzeugt (siehe Quelle \cite{OpenScad}).
 OpenSCAD bietet dabei verschiedene Vorteile während des Modellierungsvorganges.
 Hierzu gehören beispielsweise das farbige Hervorheben oder die Modularisierung zusammenhängender Objekte. \\
+
 %Modellierung
 Die Modellierung von einfachen Basisobjekten in OpenSCAD erfolgt durch das Verwenden von Schlüsselwörtern wie \icode{cube()}, \icode{sphere()} oder \icode{cylinder()} und Parametern in Klammern.
 Diese Basisobjekte können anschließend durch Mengenoperationen wie Vereinigungen (\icode{union()}), Differenzen (\icode{difference()}) oder Überschneidungen (\icode{intersection()}) und Transformationen wie Skalierungen (\icode{scale()}), Rotationen (\icode{rotate()}) oder Translationen (\icode{translate()}) mit einander verknüpft und kombiniert werden, um neue Objekte nach eigenen Ansprüchen zu bilden.
+
 \begin{Bild}{Eine Vereinigung zweier Würfel in OpenSCAD (Screenshot der Verfasser)}
 	\includegraphics{Bilder/OpenSCAD_Union}
 \end{Bild}
+
 Neben solchen einfachen Objekten, wird außerdem die Möglichkeit geboten, komplexere Objekte wie Polygone (\icode{polygon()}) zu erstellen und diese dann ausgehend vom zweidimensionalen Polygon in ein dreidimensionales Polygon umzuwandeln (\icode{linear\_extrude()}), welches vor allem das Umwandeln von komplexen Formen in Objekte erleichtert. \\
+
 Die Anweisungen, welche OpenSCAD zum Modellieren verwendet, werden in einfachen Textdateien im \q{.scad}-Format gespeichert.
 Die Simplizität dieser Textdateien erlaubt es, die aus dem zu entwickelnden Programm erhaltenen Anweisungen in .scad-Dateien zu speichern, welche von OpenSCAD eingelesen, eingesehen und bearbeitet werden können. \\
+
 %Drucken
 Die Modelle, die so mit OpenSCAD erstellt wurden, können anschließend mit dem 3D-Drucker ausgedruckt werden.
-Dazu werden die Modelle in Dateien des \q{.stl}-Formats konvertiert, welche schlussendlich mittels der dem 3D-Drucker beiliegenden Software entweder durch einen USB-Anschluss des 3D-Druckers oder auf einer SD-Karte gespeichert ausgedruckt werden.
-Auch an dieser Stelle des Modellierungsvorganges bietet sich OpenSCAD wieder an, da dieses die Option zur Konvertierung vom .scad-Format zu .stl bietet.
-\todoinline{diesen Druckteil evtl. in den Hauptteil verlagern}
+Dazu werden die Modelle in Dateien des \q{.stl}-Formats konvertiert.
+Dies geschieht entweder über die Oberfläche von OpenSCAD oder mittels einer Kommandozeilenanweisung.
+Die Anweisung setzt sich dabei aus dem Anwendungsnamen, dem Argument \icode{-o} und zwei weiteren Argumenten für Ein- und Ausgabedateien zusammen: \icode{openscad -o <ausgabe.stl> <eingabe.scad>}
 
 \section{3D-Drucker MakerBot Replicator\texttrademark\ 2}
 %Erklärung 3D-Drucker
