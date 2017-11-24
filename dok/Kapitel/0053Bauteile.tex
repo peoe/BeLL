@@ -137,13 +137,3 @@ Die Bedeutung der einzelnen Parameter erklärt sich wie folgt:
 	\item[BasePlatePinCircleHeight]
 		Der Parameter \q{BasePlateCircleHeight} entspricht der Konstante, welche die Höhe der Kreisflächen angibt, die unter den positiven Eckstücken angebracht werden und der Stabilisierung und Verankerung von Grundplatter und Eckstück dienen.
 \end{description}
-
-\subsection{OpenSCAD Java Interface}
-Für die erleichterte Erstellung von OpenScad Objekten wurde ein Java Interface \icode{ScadObject} erstellt, welches alle für das Projekt wichtigen Befehle enthält.
-Die Methode \icode{toString()} stellt in den Klassen des Interfaces die Übergabe des OpenSCAD Befehlsstrings dar.
-So kann man z.B. mit der Klasse \icode{Cube} einen Quader mit Länge, Höhe und Breite erstellen der dann wie folgt mit \icode{Cube.toString()} in einen String konvertiert wird:
-\icode{cube([Länge, Breite, Höhe]);}\\
-
-\begin{Bild}{Resultat der Eingabe: \icode{new Cube(3, 4, 5).toString()} (Screenshot der Verfasser)}
-	\includegraphics[height = 200px]{Bilder/Quader}
-\end{Bild}
