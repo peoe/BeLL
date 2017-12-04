@@ -74,7 +74,7 @@ public class ScadProcessor {
 	public ArrayList<Union> renderBasePlateFiles(){
 		ArrayList<Union> files = new ArrayList<>();
 		@SuppressWarnings({ "unchecked", "rawtypes" })
-		ArrayList<BasePlate> basePlates = new Quicksort(getBasePlates(), "ombbArea").sortArray();
+		ArrayList<BasePlate> basePlates = new Quicksort(getBasePlates(), "getOmbbArea").sortArray();
 		double xMin, yMin, usedWidth = 0.0, usedLength = 0.0;
 		Vector rotatedNode;
 		double faceEnlarge = 4 *params.getEpsilon() + params.getWallWidth();
@@ -114,12 +114,10 @@ public class ScadProcessor {
 	
 	public ArrayList<Union> renderCornerFiles(){
 		ArrayList<Union> files = new ArrayList<>();
-		double cornerRowLength = 0.0;
 		double cornerLength = 0.0;
 		double cornerWidth = 0.0;
-		double differenceX = 1.0;
 		@SuppressWarnings({ "unchecked", "rawtypes" })
-		ArrayList<Corner> corners = new Quicksort(getCorners(), "width").sortArray();
+		ArrayList<Corner> corners = new Quicksort(getCorners(), "getWidth").sortArray();
 		int fileIndex = -1;
 		for (Corner c : corners){
 			
@@ -143,6 +141,12 @@ public class ScadProcessor {
 		
 	}
 	
+	public ArrayList<Union> renderWallFiles2(){
+		ArrayList<Union> files = new ArrayList<>();
+		double rowLength = 0.0;
+		
+		
+	}
 	public ArrayList<Union> renderWallFiles(){
 		ArrayList<Union> files = new ArrayList<>();
 		ArrayList<Double> wallLengths = new ArrayList<>();

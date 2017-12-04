@@ -6,6 +6,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -39,54 +40,56 @@ public class Main {
 	private static GUI gui;
 
 	public static void main(String[] args) throws ParseException {
-		//
-		// Vector A = new Vector(0, 0);
-		// Vector B = new Vector(100, 0);
-		// Vector C = new Vector(70, 100);
-		// Vector D = new Vector(-30, 100);
-		// Vector E = new Vector(-130, 0);
-		// Vector F = new Vector(-150, 100);
-		// Vector G = new Vector(0,-150);
-		//
-		// Vector H = new Vector(-50,-50);
-		// Vector I = new Vector(100, -100);
-		//
-		//
-		// Line a = new Line(A, B);
-		// Line b = new Line(B, C);
-		// Line c = new Line(C, D);
-		// Line d = new Line(D, A);
-		// Line e = new Line(A, E);
-		// Line f = new Line(E, F);
-		// Line g = new Line(F, D);
-		// Line h = new Line(A, G);
-		// Line i = new Line(E, H);
-		// Line j = new Line(H, G);
-		// Line k = new Line(G, I);
-		// Line l = new Line(I, B);
-		//
-		//
-		// ArrayList<Line> lines = new ArrayList<>();
-		//
-		//
-		// lines.add(a);
-		// lines.add(b);
-		// lines.add(c);
-		// lines.add(d);
-		// lines.add(e);
-		// lines.add(f);
-		// lines.add(g);
-		// lines.add(h);
-		// lines.add(i);
-		// lines.add(j);
-		// lines.add(k);
-		// lines.add(l);
+		
+		 Vector A = new Vector(0, 0);
+		 Vector B = new Vector(100, 0);
+		 Vector C = new Vector(70, 100);
+		 Vector D = new Vector(-30, 100);
+		 Vector E = new Vector(-130, 0);
+		 Vector F = new Vector(-150, 100);
+		 Vector G = new Vector(0,-150);
+		
+		 Vector H = new Vector(-50,-50);
+		 Vector I = new Vector(100, -100);
+		
+		
+		 Line a = new Line(A, B);
+		 Line b = new Line(B, C);
+		 Line c = new Line(C, D);
+		 Line d = new Line(D, A);
+		 Line e = new Line(A, E);
+		 Line f = new Line(E, F);
+		 Line g = new Line(F, D);
+		 Line h = new Line(A, G);
+		 Line i = new Line(E, H);
+		 Line j = new Line(H, G);
+		 Line k = new Line(G, I);
+		 Line l = new Line(I, B);
+		
+		
+		 ArrayList<Line> lines = new ArrayList<>();
+		
+		
+		 lines.add(a);
+		 lines.add(b);
+		 lines.add(c);
+		 lines.add(d);
+		 lines.add(e);
+		 lines.add(f);
+		 lines.add(g);
+		 lines.add(h);
+		 lines.add(i);
+		 lines.add(j);
+		 lines.add(k);
+		 lines.add(l);
 		//
 		// Graph gr = new
 		// Graph(DXFReader.getAutocadFile("C:\\Users\\Johann\\Documents\\GitHub\\BeLL\\res\\Zeichnung1.dxf"));
-		// Params p = new Params(0.25, 10.0, 2.0, 4.0, 4.0, 2.0, 75.0, 4.0, 4.0,
-		// 1.0, 6.0, 185.0, 153.0);
-		// ScadProcessor proc = new ScadProcessor(lines, p);
+		 Params p = new Params(0.25, 10.0, 2.0, 4.0, 4.0, 2.0, 75.0, 4.0, 4.0,
+		 1.0, 6.0, 185.0, 153.0);
+		 ScadProcessor proc = new ScadProcessor(lines, p);
+		 ArrayList<Union> u = proc.renderBasePlateFiles();
+		 ClipboardCopier.copyToClipboard(u.get(1).toString());
 		//
 		// ClipboardCopier.copyToClipboard(proc.outputWalls().toString());
 		// BasePlate bp = proc.getBasePlates().get(0);
@@ -113,7 +116,7 @@ public class Main {
 		// e.printStackTrace();
 		// }
 
-		gui = new GUI("Convert model");
+		//gui = new GUI("Convert model");
 	}
 
 	/**

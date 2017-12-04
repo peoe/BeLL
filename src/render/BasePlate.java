@@ -40,6 +40,14 @@ public class BasePlate implements ScadObject{
 		this.ombbAngle = ombbAngle;
 	}
 
+	public double getOmbbArea() {
+		return ombbArea;
+	}
+
+	public void setOmbbArea(double ombbArea) {
+		this.ombbArea = ombbArea;
+	}
+
 	public double getWidth() {
 		return width;
 	}
