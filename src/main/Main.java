@@ -88,7 +88,7 @@ public class Main {
 		 Params p = new Params(0.25, 10.0, 2.0, 4.0, 4.0, 2.0, 75.0, 4.0, 4.0,
 		 1.0, 6.0, 185.0, 153.0);
 		 ScadProcessor proc = new ScadProcessor(lines, p);
-		 ArrayList<Union> u = proc.renderBasePlateFiles();
+		 ArrayList<Union> u = proc.renderWallFiles2();
 		 ClipboardCopier.copyToClipboard(u.get(1).toString());
 		//
 		// ClipboardCopier.copyToClipboard(proc.outputWalls().toString());

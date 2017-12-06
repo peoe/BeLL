@@ -144,6 +144,10 @@ public class ScadProcessor {
 	public ArrayList<Union> renderWallFiles2(){
 		ArrayList<Union> files = new ArrayList<>();
 		double rowLength = 0.0;
+		@SuppressWarnings("rawtypes")
+		ArrayList<Wall> walls = new Quicksort(getWalls(), "getE().getLength").sortArray();
+		
+		return null;
 		
 		
 	}

@@ -23,12 +23,18 @@ Die Zwillingskante wird mit \q{twin(e)} bezeichnet, die Nachfolgerkante mit \q{n
 Diese Referenzierungen ermöglichen es, ausgehend von einem Element ohne umfangreiche Berechnungen auf alle anderen Objekte zu schließen, indem bei der Betrachtung von Knoten und Flächen die zugehörigen Kanten, beziehungsweise bei der Betrachtung von einzelnen Kanten deren Vorgänger und Nachfolger betrachtet werden.
 
 \todoinline{Johann wollte DCEL noch mal überarbeiten}
-
+\section{Convex Hull}
+Die konvexe Hülle einer Punktmenge ist die kleinste konvexe Menge, in der die Punktmenge enthalten ist.
+Bezogen auf ein Polygon ist die konvexe Hülle folglich ein neues Polygon, welches so wenig wie möglich Punkte beinhaltet, damit alle Elemente des Ursprungspolygons innerhalb des Neuen liegen.
+\begin{Bild}{Beispiel einer konvexen Hülle}
+	\includegraphics[]{Bilder/convex_hull}
+\end{Bild}
 \section{Oriented Minimum Bounding Box}
 Die Oriented Minimum Bounding(OMBB) Box bzw. orientertes minimales Begrenzungsrechteck eines Polygons ist das Rechteck, welches das komplette Polygon umschließt und dabei den kleinstmöglichen Flächeninhalt besitzt.
 \begin{Bild}{Eine mögliche Bounding Box(l.) im Vergleich zur OMBB(r.)}
-	\includegraphics[width=\textwidth]{Bilder/aabb_vs_ombb}
+	\includegraphics[width = \textwidth]{Bilder/aabb_vs_ombb}
 \end{Bild}
+
 \section{AutoCAD}
 %Konstruktionsprogramm statt architektenprogramm
 AutoCAD ist ein grafischer Zeichnungseditor, welcher zum Erstellen von technischen Zeichnungen und dem Modellieren von Objekten verwendet wird (siehe Quelle \cite{autocadwiki}).

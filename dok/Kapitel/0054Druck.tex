@@ -7,22 +7,25 @@
 Nachdem die einzelnen Bestandteile des Modells berechnet wurden, können diese gedruckt werden.
 Hierbei ist allerdings zu bedenken, dass alle einzelnen Bauteile nicht in einem Druckvorgang gedruckt werden können, da die Grundplatte des 3D-Druckers zu klein ist. \\
 In unserem Fall wies diese eine Länge von 28,5 cm und eine Breite von 15,2 cm auf (siehe Quelle \cite{makerbotspecs}).
-Um die Dimensionen der Grundplatte effektiv auszunutzen, werden einzelne Elemente des Modells zu Objektgruppen zusammengefasst, die nebeneinander platzeffizient gedruckt werden können.
-
-\subsection{Aufteilen der Grundplatten}
-\todoinline{Beschreiben, wie das gemacht wird}
-
-\subsection{Verteilung der Bauteile}
-\todoinline{Beschreibung der Verteilung einzelner Bauteile für passenden Druckvorgang}
+\subsection{Minimierung der Druckvorgänge}
+Um die Dimensionen der Grundplatte effektiv auszunutzen, werden einzelne Elemente des Modells nach der Größe sortiert und dann solange nebeneinander angeordnet, wie es die Breite der Druckfläche zulässt.
+Anschließend wird eine neue Reihe eröffnet, in der nun neue Elemente platziert werden. 
+Dieser Prozess wird solange fortgeführt, bis die Länge der Druckfläche überschritten werden würde.
+Dann wird eine neue Gruppierung von Objekten bzw. \icode{Union} erstellt, in welcher der Algorithmus weiterläuft.
+Das Resultat zeigt eine Liste von Objekten, die eine platzeffiziente Anordnung dieser repräsentiert.
+Jedes einzelne Element in der Liste kann mit einem Durchgang gedruckt werden.
+\subsection{Ermittlung der Größen}
+Das Einzige, was die Strukturen \icode{Wall}, \icode{Corner} und \icode{BasePlate} in diesem Algorithmus voneinander unterscheidet, ist die Größe, welche unterschiedlich bestimmt wird.
+Da die Anordnung ein zweidimensionales Problem ist, wird die Höhe der Objekte nicht berücksichtigt.
 \subsubsection{Wände}
-Die Wandelemente
+Die Wandelemente werden durch eine \icode{Edge} dargestellt und so modifiziert, dass sie in die \icode{Corner} Elemente gesteckt werden kann.
+Sie sind dadurch immer kleiner als die \icode{Edge}, deswegen wird dessen Länge als Länge der Wand gesetzt. 
+Die Breite ermittelt sich durch die definierte \icode{wallWidth} der übergebenen \icode{Params}--Klasse.
 \subsubsection{Eckpfeiler}
-Für die Ausgabe der druckfähigen, platzoptimierten Eckpfeiler werden diese zuerst nach ihrer Größe sortiert.
-Die Größe eines Eckstückes ist dabei die Länge des längsten anliegenden Pins.
-Aus dieser kann ein Quadrat gebildet werden, welches das komplette auf 2D projizierte 3D-Objekt beinhaltet.
-\todo{Eventuell Größe bei Eckpfeiler erwähnen}
-Anschließend wird, beginnend mit dem kleinsten Element, alle Eckpfeiler in Reihen angeordnet. 
-Wäre dabei die aktuelle Reihe länger als die maximale Druckbreite, wird eine neue Reihe begonnen, die direkt neben der vorherigen liegt.
-Ist durch die Erstellung einer neuen Reihe die maximale Drucklänge überschritten, beginnt eine neue \icode{Union} die mit Eckpfeilern gefüllt wird.
-Alle entstandenen Unions bzw. Gruppierungen von Eckpfeilern können nun mit einem Durchgang gedruckt werden  
+Für die Größenberechnung der Eckpfeiler wird der längste Pin, welcher an dem jeweiligen Objekt anliegt festgestellt.
+Die Länge dieses Pins ist dann die Seitenlänge eines Quadrats, welche die Ausmaße des Eckpfeilers angibt.
 \subsubsection{Grundplatten}
+Da die Grundplatten so optimal wie möglich platziert werden sollen, muss das minimale Rechteck ermitteln werden, das eine Grundplatte einnehmen kann.
+Dafür wird die OMBB(Oriented Minimum Bounding Box) berechnet und davon ausgehend ein Winkel, um den die Grundplatte rotiert werden muss, damit diese Kanten des Rechtecks parallel zu den Seiten der Druckfläche sind.
+Zuerst der Convex Hull, die \q{konvexe Hülle} ermittelt.
+\paragraph{Bestimmung der minimalen Größe einer Fläche}
