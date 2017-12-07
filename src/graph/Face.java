@@ -108,7 +108,7 @@ public class Face {
 		ArrayList<Node> convexHull = new ArrayList<>();
 		ArrayList<Node> faceNodes = getNodes();
 		for (int i = 0; i < faceNodes.size();i++){
-			if (faceNodes.get(i).getOrigin().getX() < faceNodes.get(mostLeftNode).getOrigin().getX()){
+			if ((faceNodes.get(i).getOrigin().getY() < faceNodes.get(mostLeftNode).getOrigin().getY()) || (faceNodes.get(i).getOrigin().getY() == faceNodes.get(mostLeftNode).getOrigin().getY() && faceNodes.get(i).getOrigin().getX() < faceNodes.get(mostLeftNode).getOrigin().getX())){
 				mostLeftNode = i;
 			}
 		}
@@ -117,7 +117,6 @@ public class Face {
 		double angleBetweenVectors;
 		
 		do {
-			System.out.println(faceNodes.get(i));
 			convexHull.add(faceNodes.get(i));
 			nextPoint = (i + 1) % faceNodes.size();
 			for(int j = 0; j < faceNodes.size();j++){
@@ -133,7 +132,6 @@ public class Face {
 			i = nextPoint;
 			
 		} while(nextPoint != mostLeftNode);
-		System.out.println(this.getNodes() + "\n" + convexHull + "\n");
 		
 		
 	return convexHull;

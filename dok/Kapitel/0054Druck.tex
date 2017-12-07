@@ -25,7 +25,19 @@ Die Breite ermittelt sich durch die definierte \icode{wallWidth} der übergebene
 Für die Größenberechnung der Eckpfeiler wird der längste Pin, welcher an dem jeweiligen Objekt anliegt festgestellt.
 Die Länge dieses Pins ist dann die Seitenlänge eines Quadrats, welche die Ausmaße des Eckpfeilers angibt.
 \subsubsection{Grundplatten}
-Da die Grundplatten so optimal wie möglich platziert werden sollen, muss das minimale Rechteck ermitteln werden, das eine Grundplatte einnehmen kann.
-Dafür wird die OMBB(Oriented Minimum Bounding Box) berechnet und davon ausgehend ein Winkel, um den die Grundplatte rotiert werden muss, damit diese Kanten des Rechtecks parallel zu den Seiten der Druckfläche sind.
+Um die optimale Größe der Grundplatten zu berechnen, muss das minimale Begrenzungsrechteck, die OMBB, dieser berechnet werden.
+Dafür wird die OMBB des \icode{Face} ermittelt, welches die Grundplatte darstellt und anschließend vergrößert, damit Modifikationen, die an der dieser durchgeführt wird, berücksichtigt werden.
+\paragraph{Bestimmung des Convex Hulls}
+Die Berechnung der OMBB wird über diesen Zwischenschritt realisiert, da nach dem von Freeman und Shapira bewiesenen Satz, eine Seite des minimalen Begrenzungsrechtecks kollinear mit einer der konvexen Hülle sein muss. \\
+Für die Ermittlung wird der \q{Gift Wrapping Algorithm} herangezogen.
+Bei diesem wird zuerst der Punkt mit der kleinsten Ordinate als Startpunkt $P_0$ festegelegt.
+Gibt es mehrere von diesen, wird aus denen derjenige Punkt mit der kleinsten Abszisse gewählt.
+Von $P_0$ ausgehend wird eine Gerade durch einen beliebigen Punkt $P$ des Polygons gebildet und anschließend überprüft, ob es einen Punkt $S$ gibt der links von dieser liegt.
+Im Programm geschieht das durch die Berechnung des Winkels zwischen den Vektoren $\overrightarrow{{P_0}P}$ und $\overrightarrow{{P_0}S}$ mithilfe der \icode{Vector.angleTo(Vector v)} Methode.
+Ist dieser Winkel kleiner als $180^\circ$, liegt $S$ links von der Gerade durch $P_0$ und $P$.
+$S$ wird folglich als neuer Punkt $P$ gesetzt und die Berechnung fortgesetzt.
+Dies wird solange durchgeführt bis alle Punkte überprüft wurden und ein nächster Punkt $P_1$ der konvexen Hülle feststeht.
+Der Algorithmus wird nun fortgeführt mit $P_1$ als Ausgangspunkt, solange bis der Anfangspunkt $P_0$ wieder erreicht wurde, so dass die konvexe Hülle \q{geschlossen} ist.
+\paragraph{Bestimmung der OMBB}
+Dafür wird die OMBB(Oriented Minimum Bounding Box) des Polygons berechnet und davon ausgehend ein Winkel, um den die Grundplatte rotiert werden muss, damit diese Kanten des Rechtecks parallel zu den Seiten der Druckfläche sind.
 Zuerst der Convex Hull, die \q{konvexe Hülle} ermittelt.
-\paragraph{Bestimmung der minimalen Größe einer Fläche}
