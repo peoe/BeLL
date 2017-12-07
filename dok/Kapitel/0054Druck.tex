@@ -39,5 +39,9 @@ $S$ wird folglich als neuer Punkt $P$ gesetzt und die Berechnung fortgesetzt.
 Dies wird solange durchgeführt bis alle Punkte überprüft wurden und ein nächster Punkt $P_1$ der konvexen Hülle feststeht.
 Der Algorithmus wird nun fortgeführt mit $P_1$ als Ausgangspunkt, solange bis der Anfangspunkt $P_0$ wieder erreicht wurde, so dass die konvexe Hülle \q{geschlossen} ist.
 \paragraph{Bestimmung der OMBB}
-Dafür wird die OMBB(Oriented Minimum Bounding Box) des Polygons berechnet und davon ausgehend ein Winkel, um den die Grundplatte rotiert werden muss, damit diese Kanten des Rechtecks parallel zu den Seiten der Druckfläche sind.
-Zuerst der Convex Hull, die \q{konvexe Hülle} ermittelt.
+Nun wird die konvexe Hülle fortlaufend rotiert, so dass eine Seite parallel zur x-Achse ist.
+Dadurch kann leicht das Begrenzungsrechteck durch Feststellen der Extremwerte des rotierten Polygons ermitteln.
+Der Flächeninhalt des Rechtecks aus den Punkten $A(x_{min}, y_{min}) B(x_{min}, y_{max}) C(y_{max}, x_{max}) D(x_{max}, y_{min})$ wird gespeichert.
+Der Algorithmus wiederholt diese Abfolge für jede, bis alle Seiten der konvexen Hülle behandelt wurden.
+Als Ergebnis geht im Programm die Breite und Höhe der OMBB und der nötige Winkel hervor.
+Diese Werte werden dann in der Platzierung genutzt.
