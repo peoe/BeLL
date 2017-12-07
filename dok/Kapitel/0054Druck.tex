@@ -10,24 +10,24 @@ In unserem Fall wies diese eine Länge von 28,5 cm und eine Breite von 15,2 cm a
 \subsection{Minimierung der Druckvorgänge}
 Um die Dimensionen der Grundplatte effektiv auszunutzen, werden einzelne Elemente des Modells nach der Größe sortiert und dann solange nebeneinander angeordnet, wie es die Breite der Druckfläche zulässt.
 Anschließend wird eine neue Reihe eröffnet, in der nun neue Elemente platziert werden. 
-Dieser Prozess wird solange fortgeführt, bis die Länge der Druckfläche überschritten werden würde.
+Dieser Prozess wird solange fortgeführt, bis die Länge der Druckfläche überschritten werden würde. \\
 Dann wird eine neue Gruppierung von Objekten bzw. \icode{Union} erstellt, in welcher der Algorithmus weiterläuft.
 Das Resultat zeigt eine Liste von Objekten, die eine platzeffiziente Anordnung dieser repräsentiert.
 Jedes einzelne Element in der Liste kann mit einem Durchgang gedruckt werden.
 \subsection{Ermittlung der Größen}
-Das Einzige, was die Strukturen \icode{Wall}, \icode{Corner} und \icode{BasePlate} in diesem Algorithmus voneinander unterscheidet, ist die Größe, welche unterschiedlich bestimmt wird.
+Das Einzige, was die Strukturen Wand- und Eckteil, sowie Grundplatte in diesem Algorithmus voneinander unterscheidet, ist die Größe, welche unterschiedlich bestimmt wird.
 Da die Anordnung ein zweidimensionales Problem ist, wird die Höhe der Objekte nicht berücksichtigt.
 \subsubsection{Wände}
-Die Wandelemente werden durch eine \icode{Edge} dargestellt und so modifiziert, dass sie in die \icode{Corner} Elemente gesteckt werden kann.
-Sie sind dadurch immer kleiner als die \icode{Edge}, deswegen wird dessen Länge als Länge der Wand gesetzt. 
+Die Wandelemente werden durch eine Kante dargestellt und so modifiziert, dass sie in die Eckpfeiler gesteckt werden kann.
+Sie sind dadurch immer kleiner als die Kante, deswegen wird dessen Länge als Länge der Wand gesetzt. 
 Die Breite ermittelt sich durch die definierte \icode{wallWidth} der übergebenen \icode{Params}--Klasse.
 \subsubsection{Eckpfeiler}
 Für die Größenberechnung der Eckpfeiler wird der längste Pin, welcher an dem jeweiligen Objekt anliegt festgestellt.
 Die Länge dieses Pins ist dann die Seitenlänge eines Quadrats, welche die Ausmaße des Eckpfeilers angibt.
 \subsubsection{Grundplatten}
 Um die optimale Größe der Grundplatten zu berechnen, muss das minimale Begrenzungsrechteck, die OMBB, dieser berechnet werden.
-Dafür wird die OMBB des \icode{Face} ermittelt, welches die Grundplatte darstellt und anschließend vergrößert, damit Modifikationen, die an der dieser durchgeführt wird, berücksichtigt werden.
-\paragraph{Bestimmung des Convex Hulls}
+Dafür wird die OMBB der Grundfläche ermittelt und anschließend vergrößert, damit Modifikationen, die an der dieser durchgeführt wird, berücksichtigt werden.
+\paragraph{Bestimmung der Konvexen Hülle}
 Die Berechnung der OMBB wird über diesen Zwischenschritt realisiert, da nach dem von Freeman und Shapira bewiesenen Satz, eine Seite des minimalen Begrenzungsrechtecks kollinear mit einer der konvexen Hülle sein muss. \\
 Für die Ermittlung wird der \q{Gift Wrapping Algorithm} herangezogen.
 Bei diesem wird zuerst der Punkt mit der kleinsten Ordinate als Startpunkt $P_0$ festegelegt.
