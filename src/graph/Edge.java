@@ -11,61 +11,12 @@ public class Edge {
 	
 	/**
 	 * Constructor of the Edge class.
-	 * @param node1 starting node of an edge
-	 * @param node2 ending node of an edge
+	 * @param node1 starting node of the edge
+	 * @param node2 ending node of the edge
 	 */
 	public Edge(Node node1, Node node2) {
 		n1 = node1;
 		n2 = node2;
-	}
-	
-	//getters and setter
-	public Edge getTwin() {
-		return twin;
-	}
-
-	public void setTwin(Edge twin) {
-		this.twin = twin;
-	}
-
-	public Edge getPrev() {
-		return prev;
-	}
-
-	public void setPrev(Edge prev) {
-		this.prev = prev;
-	}
-
-	public Edge getNext() {
-		return next;
-	}
-
-	public void setNext(Edge next) {
-		this.next = next;
-	}
-
-	public Node getN1() {
-		return n1;
-	}
-
-	public void setN1(Node n1) {
-		this.n1 = n1;
-	}
-
-	public Node getN2() {
-		return n2;
-	}
-
-	public void setN2(Node n2) {
-		this.n2 = n2;
-	}
-
-	public Face getFace() {
-		return face;
-	}
-
-	public void setFace(Face face) {
-		this.face = face;
 	}
 	
 	/**
@@ -106,6 +57,103 @@ public class Edge {
 			return this.getN2();
 		}
 		return null;
+	}
+	
+	//getters and setter
+	/**
+	 * Returns the twin edge.
+	 * @return the twin edge
+	 */
+	public Edge getTwin() {
+		return twin;
+	}
+
+	/**
+	 * Sets the twin edge.
+	 * @param twin the edge to be set as twin edge
+	 */
+	public void setTwin(Edge twin) {
+		this.twin = twin;
+	}
+
+	/**
+	 * Returns the previous edge.
+	 * @return the previous edge
+	 */
+	public Edge getPrev() {
+		return prev;
+	}
+
+	/**
+	 * Sets the previous edge.
+	 * @param prev the edge to be set as previous edge
+	 */
+	public void setPrev(Edge prev) {
+		this.prev = prev;
+	}
+
+	/**
+	 * Returns the next edge.
+	 * @return the next edge
+	 */
+	public Edge getNext() {
+		return next;
+	}
+
+	/**
+	 * Sets the next edge.
+	 * @param next the edge to be set as next edge
+	 */
+	public void setNext(Edge next) {
+		this.next = next;
+	}
+
+	/**
+	 * Returns the first node of the edge.
+	 * @return the first node of the edge
+	 */
+	public Node getN1() {
+		return n1;
+	}
+
+	/**
+	 * Sets the first node of the edge.
+	 * @param n1 the node to be set as first node
+	 */
+	public void setN1(Node n1) {
+		this.n1 = n1;
+	}
+
+	/**
+	 * Returns the second node of the edge.
+	 * @return second node of the edge
+	 */
+	public Node getN2() {
+		return n2;
+	}
+
+	/**
+	 * Sets the second node of the edge.
+	 * @param n2 the node to be set as second node
+	 */
+	public void setN2(Node n2) {
+		this.n2 = n2;
+	}
+
+	/**
+	 * Returns the corresponding face of the edge.
+	 * @return the corresponding face of the edge
+	 */
+	public Face getFace() {
+		return face;
+	}
+
+	/**
+	 * Sets the corresponding face of the edge.
+	 * @param face the face to be set as corresponding face
+	 */
+	public void setFace(Face face) {
+		this.face = face;
 	}
 	
 	/**

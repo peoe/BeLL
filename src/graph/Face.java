@@ -9,62 +9,19 @@ public class Face {
 	// incident edge of face
 	private Edge incidentEdge;
 
-	//getter and setter
-	public Edge getIncidentEdge() {
-		return incidentEdge;
-	}
-
-	public void setIncidentEdge(Edge incidentEdge) {
-		this.incidentEdge = incidentEdge;
-	}
-
 	// constructor
 	/**
-	 * Creates a new instance of the Face class.
+	 * Constructor for the Face class.
+	 * @param e the incident edge of the face
 	 */
 	public Face(Edge e) {
 		incidentEdge = e;
 	}
-
-	// get - set
-	// getEdges
+	
 	/**
-	 * Returns the ArrayList containing all of the edges.
+	 * Returns the area of a face using the shoelace formula.
 	 * 
-	 * @return ArrayList of all edges
-	 */
-	public ArrayList<Edge> getEdges() {
-		ArrayList<Edge> returnEdges = new ArrayList<>();
-		Edge startingEdge = this.getIncidentEdge();
-		Edge iterationEdge = startingEdge;
-		do {
-			returnEdges.add(iterationEdge);
-			iterationEdge = iterationEdge.getNext();
-		} while (startingEdge != iterationEdge);
-		return returnEdges;
-
-	}
-
-	// printing all edges
-	/**
-	 * Prints out a String containing all edges from within the Face.
-	 */
-	public String toString() {
-		String s = "[";
-		// loop through all edges and add them to the existing String
-		for (int i = 0; i < getEdges().size(); i++) {
-			s = s.concat(getEdges().get(i).toString());
-			if (i != getEdges().size() - 1) {
-				s = s.concat(",");
-			}
-		}
-		return s.concat("]");
-	}
-	/**
-	 * Returns the area of a face using shoelace formula (Gausssche
-	 * Trapezformel).
-	 * 
-	 * @return area of specific face
+	 * @return area of the face
 	 */
 	public Double getArea() {
 
@@ -85,18 +42,6 @@ public class Face {
 
 		return area / 2.0;
 	}
-	/**
-	 * Returns all nodes of face
-	 * @return all nodes of face
-	 */
-	public ArrayList<Node> getNodes() {
-		ArrayList<Node> returnNodes = new ArrayList<>();
-		ArrayList<Edge> faceEdges = getEdges();
-		for (Edge e : faceEdges) {
-			returnNodes.add(e.getN1());
-		}
-		return returnNodes;
-	}
 	
 	//calculating convex hull
 	/**
@@ -105,15 +50,17 @@ public class Face {
 	 */
 	public ArrayList<Node> getConvexHull(){
 		int mostLeftNode = 0;
+		
 		ArrayList<Node> convexHull = new ArrayList<>();
 		ArrayList<Node> faceNodes = getNodes();
+		
 		for (int i = 0; i < faceNodes.size();i++){
 			if ((faceNodes.get(i).getOrigin().getY() < faceNodes.get(mostLeftNode).getOrigin().getY()) || (faceNodes.get(i).getOrigin().getY() == faceNodes.get(mostLeftNode).getOrigin().getY() && faceNodes.get(i).getOrigin().getX() < faceNodes.get(mostLeftNode).getOrigin().getX())){
 				mostLeftNode = i;
 			}
 		}
+		
 		int i = mostLeftNode, nextPoint;
-	
 		double angleBetweenVectors;
 		
 		do {
@@ -130,21 +77,15 @@ public class Face {
 				}
 			}
 			i = nextPoint;
-			
 		} while(nextPoint != mostLeftNode);
-		
 		
 	return convexHull;
 	}
 	
-	//
 	public ArrayList<Double> getOMBBInformation(){
-		
 		ArrayList<Node> nodeConvexHull = getConvexHull();
 		ArrayList<Vector> convexHull = new ArrayList<>();
-		
 		ArrayList<Double> result = new ArrayList<>();
-		
 		
 		result.add(0.0); //0 = angle
 		result.add(0.0); //1 = width
@@ -180,7 +121,6 @@ public class Face {
 				if (v.getY() < yMin){
 					yMin = v.getY();
 				}
-				
 			}
 			ombbArea = (xMax - xMin) * (yMax - yMin);
 			if(ombbArea < ombbAreMin){
@@ -194,23 +134,60 @@ public class Face {
 					result.set(2, xMax - xMin);
 				}
 				result.set(0, ombbAngle);
-				
-				
 			}
-			
-			
-		
-			
-			
 		}
-		
 		
 		return result; 
 	}
-	
-	
-		
-		
-		
+
+	//getter and setter
+	/**
+	 * Returns the ArrayList containing all edges of the face.
+	 * @return ArrayList of all edges
+	 */
+	public ArrayList<Edge> getEdges() {
+		ArrayList<Edge> returnEdges = new ArrayList<>();
+		Edge startingEdge = this.getIncidentEdge();
+		Edge iterationEdge = startingEdge;
+		do {
+			returnEdges.add(iterationEdge);
+			iterationEdge = iterationEdge.getNext();
+		} while (startingEdge != iterationEdge);
+		return returnEdges;
+
 	}
+	
+	public ArrayList<Node> getNodes() {
+		ArrayList<Node> returnNodes = new ArrayList<>();
+		ArrayList<Edge> faceEdges = getEdges();
+		for (Edge e : faceEdges) {
+			returnNodes.add(e.getN1());
+		}
+		return returnNodes;
+	}
+
+	public Edge getIncidentEdge() {
+		return incidentEdge;
+	}
+
+	public void setIncidentEdge(Edge incidentEdge) {
+		this.incidentEdge = incidentEdge;
+	}
+
+	/**
+	 * Returns a string containing all edges of the face.
+	 */
+	public String toString() {
+		String s = "[";
+		// loop through all edges and add them to the existing String
+		for (int i = 0; i < getEdges().size(); i++) {
+			s = s.concat(getEdges().get(i).toString());
+			if (i != getEdges().size() - 1) {
+				s = s.concat(",");
+			}
+		}
+		return s.concat("]");
+	}	
+		
+}
 
