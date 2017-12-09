@@ -6,23 +6,23 @@ import render.objects.Polygon;
 
 public class Face {
 
-	// incident edge of face
+	// incident Edge of the Face
 	private Edge incidentEdge;
 
 	/**
 	 * Constructor of the Face class.
 	 * 
 	 * @param e
-	 *            the incident edge of the face
+	 *            the incident Edge of the Face
 	 */
 	public Face(Edge e) {
 		incidentEdge = e;
 	}
 
 	/**
-	 * Returns the area of a face using the shoelace formula.
+	 * Returns the area of the Face using the shoelace formula.
 	 * 
-	 * @return area of the face
+	 * @return area of the Face
 	 */
 	public Double getArea() {
 		Double area = 0.0;
@@ -39,9 +39,9 @@ public class Face {
 	}
 
 	/**
-	 * Returns an ArrayList of nodes describing the convex hull of the face.
+	 * Returns an ArrayList of Nodes describing the convex hull of the Face.
 	 * 
-	 * @return ArrayList of nodes
+	 * @return ArrayList of Nodes
 	 */
 	public ArrayList<Node> getConvexHull() {
 		// index of the most left node
@@ -89,7 +89,7 @@ public class Face {
 	 * Returns an ArrayList containing information used for determining the
 	 * optimal minimal bounding box.
 	 * 
-	 * @return ArrayList of doubles
+	 * @return ArrayList of Doubles
 	 */
 	public ArrayList<Double> getOMBBInformation() {
 		ArrayList<Node> nodeConvexHull = getConvexHull();
@@ -149,9 +149,9 @@ public class Face {
 
 	// getter and setter
 	/**
-	 * Returns an ArrayList containing all edges of the face.
+	 * Returns an ArrayList containing all Edges of the Face.
 	 * 
-	 * @return ArrayList of all edges
+	 * @return ArrayList of all Edges
 	 */
 	public ArrayList<Edge> getEdges() {
 		ArrayList<Edge> returnEdges = new ArrayList<>();
@@ -166,9 +166,9 @@ public class Face {
 	}
 
 	/**
-	 * Returns an ArrayList containing all Nodes of the face.
+	 * Returns an ArrayList containing all Nodes of the Face.
 	 * 
-	 * @return ArrayList of all nodes
+	 * @return ArrayList of all Nodes
 	 */
 	public ArrayList<Node> getNodes() {
 		ArrayList<Node> returnNodes = new ArrayList<>();
@@ -180,26 +180,26 @@ public class Face {
 	}
 
 	/**
-	 * Returns the incident edge of the face.
+	 * Returns the incident Edge of the Face.
 	 * 
-	 * @return the incident edge
+	 * @return the incident Edge
 	 */
 	public Edge getIncidentEdge() {
 		return incidentEdge;
 	}
 
 	/**
-	 * Sets the incident edge of the face.
+	 * Sets the incident Edge of the Face.
 	 * 
 	 * @param incidentEdge
-	 *            the edge to be set as incident edge
+	 *            the Edge to be set as incident Edge
 	 */
 	public void setIncidentEdge(Edge incidentEdge) {
 		this.incidentEdge = incidentEdge;
 	}
 
 	/**
-	 * Returns a string containing all edges of the face.
+	 * Returns a String containing all Edges of the Face.
 	 */
 	public String toString() {
 		String s = "[";

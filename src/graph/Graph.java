@@ -7,11 +7,11 @@ import render.objects.*;
 
 public class Graph {
 
-	// list of faces used for decomposition
+	// list of Faces used for decomposition
 	private ArrayList<Face> faces = new ArrayList<>();
-	// list of nodes of graph
+	// list of Nodes of Graph
 	private ArrayList<Node> nodes = new ArrayList<>();
-	// list of edges of graph
+	// list of Edges of Graph
 	private ArrayList<Edge> edges = new ArrayList<>();
 	// maximum printing width
 	private double maxPrintWidth;
@@ -20,9 +20,9 @@ public class Graph {
 	 * Constructor of the Graph class.
 	 * 
 	 * @param ls
-	 *            the ArrayList of lines
+	 *            the ArrayList of Lines
 	 * @param params
-	 *            the params object used for this graph
+	 *            the Params object used for this Graph
 	 */
 	public Graph(ArrayList<Line> ls, Params params) {
 		// set maximum printing width
@@ -39,10 +39,10 @@ public class Graph {
 	}
 
 	/**
-	 * Creates nodes and edges according to the given lines.
+	 * Creates Nodes and Edges according to the given Lines.
 	 * 
 	 * @param ls
-	 *            the ArrayList of given lines
+	 *            the ArrayList of given Lines
 	 */
 	private void processData(ArrayList<Line> ls) {
 		int i = 0;
@@ -66,10 +66,10 @@ public class Graph {
 	}
 
 	/**
-	 * Creates a node at a certain point.
+	 * Creates a Node at a certain point.
 	 * 
 	 * @param p
-	 *            the vector pointing towards the point
+	 *            the Vector pointing towards the point
 	 */
 	private Node createNode(Vector p) {
 		for (Node n : nodes) {
@@ -83,7 +83,7 @@ public class Graph {
 	}
 
 	/**
-	 * Generates the twin edges for all edges within the graph.
+	 * Generates the twin Edges for all Edges within the Graph.
 	 */
 	private void computeTwins() {
 		// getting original amount of edges
@@ -99,7 +99,7 @@ public class Graph {
 	}
 
 	/**
-	 * Completes the setting of edges within the graph.
+	 * Completes the setting of Edges within the Graph.
 	 */
 	private void completeEdges() {
 		ArrayList<ArrayList<Edge>> nodeEdges = new ArrayList<>();
@@ -125,7 +125,7 @@ public class Graph {
 	}
 
 	/**
-	 * Completes the setting of faces within the graph.
+	 * Completes the setting of Faces within the Graph.
 	 */
 	private void completeFaces() {
 		// set all statuses to false
@@ -154,7 +154,7 @@ public class Graph {
 	}
 
 	/**
-	 * Completes the setting of nodes within the graph.
+	 * Completes the setting of Nodes within the Graph.
 	 */
 	public void completeNodes() {
 		for (Node n : nodes) {
@@ -168,10 +168,10 @@ public class Graph {
 	}
 
 	/**
-	 * Sorts all adjacent edges of all edges within the graph via their angle.
+	 * Sorts the adjacent Edges of all Edges within the Graph using their angle.
 	 * 
 	 * @param ArrayList
-	 *            of ArrayList containing all adjacent edges
+	 *            of ArrayList containing all adjacent Edges
 	 */
 	private void sortEdges(ArrayList<ArrayList<Edge>> e) {
 		ArrayList<Double> doubles = new ArrayList<>();
@@ -200,38 +200,38 @@ public class Graph {
 
 	// getter und setter
 	/**
-	 * Returns an ArrayList of all nodes within the Graph.
+	 * Returns an ArrayList of all Nodes within the Graph.
 	 * 
-	 * @return ArrayList of nodes
+	 * @return ArrayList of Nodes
 	 */
 	public ArrayList<Node> getNodes() {
 		return nodes;
 	}
 
 	/**
-	 * Returns an ArrayList of all edges within the Graph.
+	 * Returns an ArrayList of all Edges within the Graph.
 	 * 
-	 * @return ArrayList of edges
+	 * @return ArrayList of Edges
 	 */
 	public ArrayList<Edge> getEdges() {
 		return edges;
 	}
 
 	/**
-	 * Returns an ArrayList containing all faces of the graph.
+	 * Returns an ArrayList containing all Faces of the Graph.
 	 * 
-	 * @return ArrayList of faces
+	 * @return ArrayList of Faces
 	 */
 	public ArrayList<Face> getFaces() {
 		return faces;
 	}
 
 	/**
-	 * Returns an ArrayList of all edges pointing away from the specified node.
+	 * Returns an ArrayList of all Edges pointing away from the specified Node.
 	 * 
 	 * @param n
-	 *            the specified node
-	 * @return ArrayList of edges pointing away
+	 *            the specified Node
+	 * @return ArrayList of Edges pointing away
 	 */
 	public ArrayList<Edge> getEdgesPointingAway(Node n) {
 		ArrayList<Edge> edgs = new ArrayList<>();
@@ -247,11 +247,11 @@ public class Graph {
 	}
 
 	/**
-	 * Returns the node at a certain point.
+	 * Returns the Node at a certain point.
 	 * 
 	 * @param v
-	 *            vector to the point
-	 * @return node of the point
+	 *            Vector to the point
+	 * @return Node of the point
 	 */
 	public Node getNodeByPoint(Vector v) {
 		for (int i = 0; i < nodes.size(); i++) {
