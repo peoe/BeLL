@@ -2,22 +2,23 @@ package graph;
 
 public class Edge {
 
-	// define the next, prev and twin edge
+	// define the twin, prev and next edge
 	private Edge twin, prev, next;
-	// defines both nodes of edge
+	// define both nodes of edge
 	private Node n1, n2;
-	// defines adjacent face of the adge
+	// define adjacent face of the adge
 	private Face face;
 	
 	/**
-	 * Constructor of Edge
-	 * @param node1 starting Node of Edge
-	 * @param node2 ending Node of Edge
+	 * Constructor of the Edge class.
+	 * @param node1 starting node of an edge
+	 * @param node2 ending node of an edge
 	 */
 	public Edge(Node node1, Node node2) {
 		n1 = node1;
 		n2 = node2;
 	}
+	
 	//getters and setter
 	public Edge getTwin() {
 		return twin;
@@ -66,25 +67,26 @@ public class Edge {
 	public void setFace(Face face) {
 		this.face = face;
 	}
+	
 	/**
-	 * Swaps Nodes and returns the resulting twin Edge
-	 * @return generates twin of edge
+	 * Returns the resulting twin edge of the given edge.
+	 * @return twin of given edge
 	 */
 	public Edge generateTwin() {
 		return (new Edge(n2, n1));
 	}
 	
 	/**
-	 * Converts Edge to Vector
-	 * @return vector between both nodes of the edge
+	 * Converts the given edge to a vector.
+	 * @return vector of given edge
 	 */
 	public Vector toVector() {
 		return new Vector(n1.getOrigin(), n2.getOrigin());
 	}
 	
 	/**
-	 * Calculates angle between this and another edge anticlockwise
-	 * @param e second Edge which creates the angle between this and e
+	 * Calculates the angle between this and a given edge in anti-clockwise matter.
+	 * @param e second edge which creates the angle between this edge and e
 	 * @return angle between this edge and e 
 	 */
 	public double angleToEdge(Edge e){
@@ -92,9 +94,9 @@ public class Edge {
 	}
 
 	/**
-	 * Returns the common point of two edges
+	 * Returns the node that both edges share.
 	 * @param e a different edge
-	 * @return common Node or null if the two edges don't have a common node
+	 * @return common node or null if there is no common node
 	 */
 	public Node getCommonNode(Edge e){
 		if(this.getN1().equals(e.n1) || this.getN1().equals(e.n2)){
@@ -106,12 +108,12 @@ public class Edge {
 		return null;
 	}
 	
+	/**
+	 * Returns a string of the edge.
+	 */
 	public String toString() {
 		return "[(" + n1.getOrigin().getX() + "," + n1.getOrigin().getY() + "),(" + n2.getOrigin().getX() + ","
-				+ n2.getOrigin().getY() + /*"[prev: " + prev.getN1() + ", " + prev.getN2() + ", next: " + next.getN1() + ", " + next.getN2() + ")]"*/
-				")]";
+				+ n2.getOrigin().getY() + ")]";
 	}
-	
-	
 
 }
