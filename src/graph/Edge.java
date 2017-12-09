@@ -186,6 +186,8 @@ public class Edge {
 
 	/**
 	 * Returns a String of the Edge.
+	 * 
+	 * @return String of the Edge
 	 */
 	public String toString() {
 		return "[(" + n1.getOrigin().getX() + "," + n1.getOrigin().getY() + "),(" + n2.getOrigin().getX() + ","

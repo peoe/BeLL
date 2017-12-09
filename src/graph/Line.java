@@ -128,6 +128,7 @@ public class Line {
 
 	/**
 	 * Returns a String of the Line.
+	 * @return String of the Line
 	 */
 	public String toString() {
 		return "[(" + getP1().getX() + "," + getP1().getY() + "),(" + getP2().getX() + "," + getP2().getY() + ")]";

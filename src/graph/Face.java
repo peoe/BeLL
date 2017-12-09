@@ -200,6 +200,8 @@ public class Face {
 
 	/**
 	 * Returns a String containing all Edges of the Face.
+	 * 
+	 * @return String of the Face
 	 */
 	public String toString() {
 		String s = "[";
