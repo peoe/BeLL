@@ -9,7 +9,6 @@ public class Face {
 	// incident edge of face
 	private Edge incidentEdge;
 
-	// constructor
 	/**
 	 * Constructor of the Face class.
 	 * 

@@ -2,11 +2,11 @@ package graph;
 
 public class Edge {
 
-	// define the twin, prev and next edge
+	// twin, previous and next edge of the edge
 	private Edge twin, prev, next;
-	// define both nodes of edge
+	// first and second node of the edge
 	private Node n1, n2;
-	// define adjacent face of the adge
+	// adjacent face of the edge
 	private Face face;
 
 	/**
