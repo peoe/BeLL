@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import render.ScadObject;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 
 public class Quicksort<T> {
 	
@@ -99,21 +100,36 @@ public class Quicksort<T> {
 	 */
 	private double getField(int index){
 		try {
-			Field field = getElements().get(index).getClass().getDeclaredField(comparisonField);
-			field.setAccessible(true);
-			return field.getDouble(getElements().get(index));
+			java.lang.reflect.Method method = getElements().get(index).getClass().getMethod(comparisonField);
+			method.setAccessible(true);
+			return (double) method.invoke(getElements().get(index));
+		} catch (SecurityException e){e.printStackTrace();}
+		catch (NoSuchMethodException e){e.printStackTrace();}
+//			Field field = getElements().get(index).getClass().getDeclaredField(comparisonField);
+//			field.setAccessible(true);
+//			return field.getDouble(getElements().get(index));
 			//return (double) ((o.getClass())).(o.getClass().getDeclaredField(str));
-			
-		} catch (NoSuchFieldException | SecurityException e) {
+ catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IllegalAccessException e) {
+		} catch (InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+			
+//		} catch (NoSuchFieldException | SecurityException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IllegalArgumentException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IllegalAccessException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		return -1.0;
 	}
 	

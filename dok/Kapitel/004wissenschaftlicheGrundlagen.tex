@@ -8,7 +8,7 @@ Die Fläche um den Graphen herum, welche scheinbar unbegrenzt groß ist, wird ä
 	\includegraphics[width = 100px, height = 100px]{Bilder/Graph_Scheme}
 \end{Bild}
 In Abbildung~\thebildnr\ wird ein solcher planarer Graph dargestellt.
-Der linke obere Knoten wir hier mit (1) bezeichnet, die rechte Kante mit (2) und die innere Fläche mit (3).
+Der linke obere Knoten ist hier mit (1) bezeichnet, die rechte Kante mit (2) und die innere Fläche mit (3).
 
 \section{Doubly connected edge list}
 Um planare Graphen ohne Informationsverlust zu speichern werden in der Informatik Referenzen zwischen den einzelnen Bestandteilen des Graphen eingesetzt. \\
@@ -23,6 +23,17 @@ Die Zwillingskante wird mit \q{twin(e)} bezeichnet, die Nachfolgerkante mit \q{n
 Diese Referenzierungen ermöglichen es, ausgehend von einem Element ohne umfangreiche Berechnungen auf alle anderen Objekte zu schließen, indem bei der Betrachtung von Knoten und Flächen die zugehörigen Kanten, beziehungsweise bei der Betrachtung von einzelnen Kanten deren Vorgänger und Nachfolger betrachtet werden.
 
 \todoinline{Johann wollte DCEL noch mal überarbeiten}
+\section{Convex Hull}
+Die konvexe Hülle einer Punktmenge ist die kleinste konvexe Menge, in der die Punktmenge enthalten ist.
+Bezogen auf ein Polygon ist die konvexe Hülle folglich ein neues Polygon, welches so wenig wie möglich Punkte beinhaltet, damit alle Elemente des Ursprungspolygons innerhalb des Neuen liegen.
+\begin{Bild}{Beispiel einer konvexen Hülle}
+	\includegraphics[]{Bilder/convex_hull}
+\end{Bild}
+\section{Oriented Minimum Bounding Box}
+Die Oriented Minimum Bounding(OMBB) Box bzw. orientertes minimales Begrenzungsrechteck eines Polygons ist das Rechteck, welches das komplette Polygon umschließt und dabei den kleinstmöglichen Flächeninhalt besitzt.
+\begin{Bild}{Eine mögliche Bounding Box(l.) im Vergleich zur OMBB(r.)}
+	\includegraphics[width = \textwidth]{Bilder/aabb_vs_ombb}
+\end{Bild}
 
 \section{AutoCAD}
 %Konstruktionsprogramm statt architektenprogramm

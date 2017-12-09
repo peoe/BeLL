@@ -14,7 +14,7 @@ public class BasePlate implements ScadObject{
 	//Parameters
 	private Params params;
 	//rotating angle for the minimum bounding box and width and length of the ombb
-	private double ombbAngle, width, length, ombbArea;
+	private double ombbAngle, width, length;
 
 	public Face getF() {
 		return f;
@@ -38,6 +38,14 @@ public class BasePlate implements ScadObject{
 
 	public void setOmbbAngle(double ombbAngle) {
 		this.ombbAngle = ombbAngle;
+	}
+
+	public double getOmbbArea() {
+		return ombbArea;
+	}
+
+	public void setOmbbArea(double ombbArea) {
+		this.ombbArea = ombbArea;
 	}
 
 	public double getWidth() {

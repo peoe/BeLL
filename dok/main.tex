@@ -28,6 +28,10 @@
 \usepackage{chngcntr}
 \usepackage[T1]{fontenc} %hyphenation für Ä/Ö/Ü
 \usepackage{calc} %für Seitennummerierung
+\usepackage{units}
+\usepackage{amssymb}
+
+
 
 
 \usepackage{lastpage} %Liest Seitenanzahl
@@ -112,7 +116,7 @@
 
 %=========BILDER==============
 \newcounter{seitennr} 
-\setcounter{seitennr}{31} %needs to be changed before publishing
+\setcounter{seitennr}{35} %needs to be changed before publishing
 \def\theseitennr{\arabic{seitennr}}
 \newcounter{bildnr} 
 \def\thebildnr{\arabic{bildnr}}
@@ -133,6 +137,9 @@
 \newcommand{\icode}[1]{\texttt {#1}} %inline Code
 %\newcommand{\todo}[#1]{\newline\huge \color{red}#1 \color{black}\normalsize}
 \newcommand\tab[1][1cm]{\hspace*{#1}} %command for inserting tabs
+\newcommand{\rectangle}{{%
+		\ooalign{$\sqsubset\mkern3mu$\cr$\mkern3mu\sqsupset$\cr}%
+}}
 
 %\newcommand\todo[1]{\refstepcounter{todo}\marginpar{\color{red}{#1}}\addcontentsline{tod}{subsection}{#1~\thetodo}}
 
