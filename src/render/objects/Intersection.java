@@ -6,16 +6,15 @@ import java.util.Locale;
 import render.ScadObject;
 
 public class Intersection implements ScadObject {
-
-	// ArrayList containing all ScadObjects
+	// arraylist containing all scadobjects
 	private ArrayList<ScadObject> objects;
 
-	// layout String for creating Intersections
+	// layout atring for creating intersection in openscad
 	final static String intersection = "intersection(){\n%s}";
 
-	// constructor using an ArrayList of ScadObjects
+	// constructors
 	/**
-	 * Creates a new Intersection object using an ArrayList of ScadObjects.
+	 * Constructor of the Intersection class using an ArrayList of objects.
 	 * 
 	 * @param objects
 	 *            the ArrayList of ScadObjects
@@ -25,43 +24,41 @@ public class Intersection implements ScadObject {
 		super();
 		this.objects = objects;
 	}
-	
-	// constructor using an ArrayList of ScadObjects
-		/**
-		 * Creates a new empty Intersection object.
-		 * 
-		 * @see ScadObject
-		 */
-		public Intersection() {
-			super();
-			this.objects = new ArrayList<>();
-		}
+
+	/**
+	 * Constructor of the Intersection class. Creates an empty Intersection.
+	 * 
+	 * @see ScadObject
+	 */
+	public Intersection() {
+		super();
+		this.objects = new ArrayList<>();
+	}
 
 	// getter - setter
-	// getting the ScadObjects
 	/**
 	 * Returns an ArrayList of ScadObjects used by the Intersection object.
 	 * 
-	 * @return the ArrayList of ScadObjects
+	 * @return ArrayList of ScadObjects
 	 */
 	public ArrayList<ScadObject> getObjects() {
 		return objects;
 	}
 
-	// setting the ScadObjects
 	/**
-	 * Overrides the ArrayList of ScadObjects with a new ArrayList.
+	 * Sets the ArrayList of ScadObjects used for the Intersection.
 	 * 
 	 * @param objects
-	 *            the new ArrayList of ScadObjects
+	 *            the ArrayList of ScadObjects
 	 */
 	public void setObjects(ArrayList<ScadObject> objects) {
 		this.objects = objects;
 	}
 
-	// printing the command for creating the Intersection
 	/**
-	 * Prints a String used for creating the Intersection.
+	 * Returns a String of the Intersection used for creating it in OpenSCAD.
+	 * 
+	 * @return String of the Intersection
 	 */
 	@Override
 	public String toString() {
@@ -71,8 +68,7 @@ public class Intersection implements ScadObject {
 		for (ScadObject o : objects) {
 			objectsprint = objectsprint.concat("\t" + o.toString());
 		}
-		String s = String.format(Locale.UK, intersection, objectsprint);
-		return s;
+		return String.format(Locale.UK, intersection, objectsprint);
 	}
 
 }
