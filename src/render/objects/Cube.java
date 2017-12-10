@@ -5,7 +5,6 @@ import java.util.Locale;
 import render.ScadObject;
 
 public class Cube implements ScadObject {
-
 	// x, y and z coordinates of the Cube
 	private double x, y, z;
 

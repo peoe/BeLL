@@ -5,7 +5,6 @@ import java.util.Locale;
 import render.ScadObject;
 
 public class Cylinder implements ScadObject {
-
 	// height, bottomRadius and topRadius of the Cylinder
 	private double height, radius;
 

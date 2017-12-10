@@ -6,7 +6,6 @@ import java.util.Locale;
 import render.ScadObject;
 
 public class Difference implements ScadObject {
-
 	// all objects used for creating the Difference
 	private ArrayList<ScadObject> objects;
 
