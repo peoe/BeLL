@@ -7,31 +7,33 @@ import graph.*;
 import render.ScadObject;
 
 public class Polygon implements ScadObject {
-
-	// the ArrayList of Points used by the Polygon
+	// arraylist of points used by the polygon
 	private ArrayList<Vector> points;
-	
-	//incident Edge
+
+	// incident Edge
 	private Edge incidentEdge;
 
-	// delta value for offset used in basePlate calculation
+	// delta value for offset used in baseplate calculation
 	private double delta;
 
-	// the layout String for creating the Polygon
+	// layout string for creating the polygon in openscad
 	final static String polygon = "polygon(%1s,10);\n";
 
-	// the layout String for extruding the Polygon
+	// layout string for extruding the polygon in openscad
 	final static String linear_extrude = "linear_extrude(%1$.2f, center = true){\n%2$s}";
 
-	// scad string for the delta offset
+	// layout string for the delta offset in openscad
 	final static String OFFSET = "offset(delta = %1$.3f){%2$s}";
 
-	// constructor using ArrayList of points
+	// constructors
 	/**
-	 * Creates a new Polygon object using an ArrayList of position vectors.
+	 * Constructor of the Polygon class using an ArrayList of points and an
+	 * offset value.
 	 * 
 	 * @param points
-	 *            the ArrayList of position vectors
+	 *            the ArrayList of position Vectors
+	 * @param delta
+	 *            the offset value
 	 */
 	public Polygon(ArrayList<Vector> points, double delta) {
 		this.points = points;
@@ -39,91 +41,128 @@ public class Polygon implements ScadObject {
 	}
 
 	/**
-	 * Constructor of Polygon class using a DCEL Edge
-	 * @param e DCEL Edge
+	 * Constructor of the Polygon class using an Edge.
+	 * 
+	 * @param e
+	 *            the Edge
 	 */
 	public Polygon(Edge e) {
 		incidentEdge = e;
 		points = new ArrayList<>();
+
+		// create polygon from face
 		ArrayList<Node> nodes = e.getFace().getNodes();
 		for (Node n : nodes) {
 			getPoints().add(n.getOrigin());
 		}
+
 		this.delta = 0.0;
 	}
 
 	/**
-	 * Constructor of Polygon class using a DCEL Edge and a delta Offset
-	 * @param e DCEL Edge
-	 * @param delta Offset
+	 * Constructor of the Polygon class using an Edge and an offset value.
+	 * 
+	 * @param e
+	 *            the Edge
+	 * @param delta
+	 *            the offset value
 	 */
 	public Polygon(Edge e, double delta) {
 		incidentEdge = e;
 		points = new ArrayList<>();
+
+		// create polygon from face
 		ArrayList<Node> nodes = e.getFace().getNodes();
 		for (Node n : nodes) {
 			getPoints().add(n.getOrigin());
 		}
+
 		this.delta = delta;
 	}
 
 	// getter - setter
-	// getting the ArrayList of points
 	/**
-	 * Returns the ArrayList of position vectors.
+	 * Returns the ArrayList of position Vectors.
 	 * 
-	 * @return the ArrayList of vectors
+	 * @return ArrayList of Vectors
 	 */
 	public ArrayList<Vector> getPoints() {
 		return points;
 	}
 
-	// setting the ArrayList of points
 	/**
-	 * Overrides the ArrayList of position vectors with a new ArrayList.
+	 * Sets the ArrayList of position Vectors of the Polygon.
 	 * 
 	 * @param points
-	 *            the new ArrayList of position vectors
+	 *            the ArrayList of position Vectors
 	 */
 	public void setPoints(ArrayList<Vector> points) {
 		this.points = points;
 	}
 
+	/**
+	 * returns the offset value.
+	 * 
+	 * @return offset value
+	 */
 	public double getDelta() {
 		return delta;
 	}
 
+	/**
+	 * Sets the offset value.
+	 * 
+	 * @param delta
+	 *            the offset value
+	 */
 	public void setDelta(double delta) {
 		this.delta = delta;
 	}
 
+	/**
+	 * Returns the incident Edge of the Polygon.
+	 * 
+	 * @return incident Edge
+	 */
 	public Edge getIncidentEdge() {
 		return incidentEdge;
 	}
 
+	/**
+	 * Sets the incident Edge of the Polygon.
+	 * 
+	 * @param incidentEdge
+	 *            the incident Edge
+	 */
 	public void setIncidentEdge(Edge incidentEdge) {
 		this.incidentEdge = incidentEdge;
 	}
 
-	// printing the String to create the Polygon
 	/**
-	 * Prints a String used for creating the Polygon.
+	 * Returns a String used for creating the Polygon in OpenSCAD.
+	 * 
+	 * @return String of Polygon
 	 */
 	@Override
 	public String toString() {
 		String s = "[";
+
 		for (Vector p : points) {
 			s = s.concat(p.toScadString() + ", ");
 		}
+
 		s = s.substring(0, s.length() - 2);
 		s = s.concat("]");
-		//polygon string
+
+		// polygon string
 		s = String.format(Locale.UK, polygon, s);
-		//offset string
-		if(getDelta() != 0.0){
-		s = String.format(Locale.UK, OFFSET ,getDelta(), s);
+
+		// offset string
+		if (getDelta() != 0.0) {
+			s = String.format(Locale.UK, OFFSET, getDelta(), s);
 		}
-		//extrude string
+
+		// extrude string
 		return (String.format(Locale.UK, linear_extrude, 1.0, s));
 	}
 
