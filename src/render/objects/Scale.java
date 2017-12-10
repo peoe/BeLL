@@ -6,20 +6,19 @@ import java.util.Locale;
 import render.ScadObject;
 
 public class Scale implements ScadObject {
-
-	// the ArrayList of ScadObjects to scale
+	// arraylist of scadobjects to scale
 	private ArrayList<ScadObject> objects;
 
-	// the x, y and z value for scaling
+	// x, y and z value for scaling
 	private double x, y, z;
 
-	// the layout String for creating the Scale object
+	// layout string for creating the scale object in openscad
 	final static String scale = "scale([%1$.3f, %2$.3f, %3$.3f]){\n%4$s}";
 
 	// constructors
-	// scaling multiple ScadObjects
 	/**
-	 * Creates a new Scale object for scaling multiple ScadObjects.
+	 * Constructor of the Scale class using an ArrayList of objects and x, y and
+	 * z values.
 	 * 
 	 * @param objects
 	 *            the ScadObjects to scale
@@ -39,9 +38,8 @@ public class Scale implements ScadObject {
 		this.z = z;
 	}
 
-	// scaling a single ScadObject
 	/**
-	 * Creates a new Scale object for scaling a single ScadObject.
+	 * Constructor of the Scale class using an object and x, y and z values.
 	 * 
 	 * @param object
 	 *            the ScadObject to scale
@@ -62,9 +60,10 @@ public class Scale implements ScadObject {
 		this.z = z;
 	}
 
-	// printing the String for creating the Scale object
 	/**
-	 * Prints a String used for creating the Scale object.
+	 * Returns a String of the Scale object used for creating it in OpenSCAD.
+	 * 
+	 * @return String of Scale
 	 */
 	@Override
 	public String toString() {
