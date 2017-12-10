@@ -21,7 +21,6 @@ public class STLConverter {
 		Process p;
 		ProcessBuilder b;
 		try {
-			// using processbuilder to avoid having to use path variables
 			b = new ProcessBuilder(openSCADLocation + "\\openscad.exe", "-o",
 					folderName + "\\stl\\" + fileName + ".stl", folderName + "\\scad\\" + fileName + ".scad");
 
