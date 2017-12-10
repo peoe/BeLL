@@ -2,8 +2,6 @@ package graph;
 
 import java.util.ArrayList;
 
-import render.objects.Polygon;
-
 public class Face {
 
 	// incident Edge of the Face

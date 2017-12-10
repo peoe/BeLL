@@ -3,7 +3,6 @@ package graph;
 import java.util.ArrayList;
 
 import render.*;
-import render.objects.*;
 
 public class Graph {
 
