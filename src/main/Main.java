@@ -1,31 +1,18 @@
 package main;
 
-import java.awt.Desktop;
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-//import org.kabeja.parser.ParseException;
-
 import org.kabeja.parser.ParseException;
 
-import graph.Edge;
-import graph.Face;
-import graph.Graph;
-import graph.Vector;
 import gui.GUI;
-import graph.Line;
-import io.ClipboardCopier;
-import io.DXFReader;
-import io.Quicksort;
 import io.SCADFinder;
 import io.STLConverter;
 import io.ScadPrinter;
