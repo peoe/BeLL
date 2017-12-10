@@ -6,28 +6,27 @@ import java.util.Locale;
 import render.ScadObject;
 
 public class Rotate implements ScadObject {
-
-	// ArrayList of ScadObjects to rotate
+	// arraylist of scadobjects to rotate
 	private ArrayList<ScadObject> objects;
 
-	// the angle in degree measure used for rotating
+	// angle in degrees used for rotating
 	private double a;
 
-	// the coordinates for rotating in 3D-space
+	// coordinates for rotating in 3D-space
 	private int x, y, z;
 
-	// the layout String for creating a Rotation
+	// layout string for creating a rotation in openscad
 	final static String rotate = "rotate(%1$.2f,[%2$d,%3$d,%4$d]){\n%5$s}";
 
 	// constructors
-	// rotating multiple objects
 	/**
-	 * Creates a Rotate object which rotates multiple ScadObjects.
+	 * Constructor of the Rotate class using an ArrayList of objects, an angle
+	 * and x, y and z coordinates.
 	 * 
 	 * @param objects
 	 *            the ArrayList of ScadObjects
 	 * @param a
-	 *            the angle in degree measure used for rotating
+	 *            the angle in degrees
 	 * @param x
 	 *            the x coordinate for rotating
 	 * @param y
@@ -45,14 +44,14 @@ public class Rotate implements ScadObject {
 		this.z = z;
 	}
 
-	// rotating a single ScadObject
 	/**
-	 * Creates a new Rotate object for rotating a single ScadObject.
+	 * Constructor of the Rotate class using an object, an angle and x, y and z
+	 * coordinates.
 	 * 
 	 * @param object
 	 *            the ScadObject to rotate
 	 * @param a
-	 *            the angle in degree measure for rotating
+	 *            the angle in degrees
 	 * @param x
 	 *            the x coordinate for rotating
 	 * @param y
@@ -72,19 +71,21 @@ public class Rotate implements ScadObject {
 		this.z = z;
 	}
 
-	// printing the String for creating the Rotate object
 	/**
-	 * Prints the String used for creating the Rotate object.
+	 * Returns a String of Rotate used for creating it in OpenSCAD.
+	 * 
+	 * @return String of Rotate
 	 */
 	@Override
 	public String toString() {
 		String objectsprint = "";
+
 		// rotate every ScadObject in the ArrayList
 		for (ScadObject o : objects) {
 			objectsprint = objectsprint.concat("\t" + o.toString());
 		}
-		String s = String.format(Locale.UK, rotate, a, x, y, z, objectsprint);
-		return s;
+
+		return String.format(Locale.UK, rotate, a, x, y, z, objectsprint);
 	}
 
 }
