@@ -13,7 +13,7 @@ public class BasePlate implements ScadObject {
 	private Params params;
 	// rotating angle for the minimum bounding box and width and length of the
 	// ombb
-	private double ombbAngle, width, length, ombbArea;
+	private double ombbAngle, width, length;
 
 	public Face getF() {
 		return f;
@@ -39,14 +39,6 @@ public class BasePlate implements ScadObject {
 		this.ombbAngle = ombbAngle;
 	}
 
-	public double getOmbbArea() {
-		return ombbArea;
-	}
-
-	public void setOmbbArea(double ombbArea) {
-		this.ombbArea = ombbArea;
-	}
-
 	public double getWidth() {
 		return width;
 	}
@@ -62,6 +54,11 @@ public class BasePlate implements ScadObject {
 	public void setLength(double length) {
 		this.length = length;
 	}
+	
+	public double getOmbbArea() {
+		return width*length;
+	}
+
 
 	public BasePlate(Face f, Params params) {
 		this.f = f;
@@ -71,7 +68,6 @@ public class BasePlate implements ScadObject {
 			ombbAngle = values.get(0);
 			width = values.get(1);
 			length = values.get(2);
-			ombbArea = width * length;
 		}
 	}
 
@@ -115,7 +111,7 @@ public class BasePlate implements ScadObject {
 		Vector vE = e.toVector();
 		Vector vE2 = e2.toVector();
 		Vector epsilonVec = e.toVector().rotate(-0.5 * Math.PI)
-				.changeLength(params.getEpsilon() + params.getWallwidth() * 0.5);
+				.changeLength(params.getEpsilon() + params.getWallWidth() * 0.5);
 
 		double determinantDivisor = -vE.getX() * vE2.getY() + vE.getY() * vE2.getX();
 

@@ -51,7 +51,7 @@ public class Wall implements ScadObject {
 	public String toString() {
 		Vector wallVector = e.toVector();
 
-		Cube rawWallCube = new Cube(wallVector.getLength(), params.getWallwidth(), 1, true);
+		Cube rawWallCube = new Cube(wallVector.getLength(), params.getWallWidth(), 1, true);
 
 		double wallAngle = wallVector.angleInDegrees();
 
