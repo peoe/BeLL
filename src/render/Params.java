@@ -3,15 +3,19 @@ package render;
 public class Params {
 
 	/*
-	 * epsilon - the distance between objects cornerRadius - the radius of inner
-	 * corner ring pinMinLength - the minimum length of a pin pinPWidth - the
-	 * width of the positive pin pinPRadius - the radius of the positive pin
-	 * pinDistance - the distance from pin to the wall height - the height of
-	 * the model pinHeight - the height of the pin basePlateHeight - the height
-	 * of the baseplate basePlatePinCircleHeight - the height of the baseplate
-	 * pin circle wallWidth - the width of the wall maxPrintWidth - the width of
-	 * the maximum printing area maxPrintHeight - the height of the maximum
-	 * printing area
+	 * epsilon - the distance between objects
+	 * cornerRadius - the radius of inner corner ring
+	 * pinMinLength - the minimum length of a pin
+	 * pinPWidth - the width of the positive pin
+	 * pinPRadius - the radius of the positive pin
+	 * pinDistance - the distance from pin to the wall
+	 * height - the height of the model
+	 * pinHeight - the height of the pin
+	 * basePlateHeight - the height of the baseplate
+	 * basePlatePinCircleHeight - the height of the baseplate pin circle
+	 * wallWidth - the width of the wall
+	 * maxPrintWidth - the width of the maximum printing area
+	 * maxPrintHeight - the height of the maximum printing area
 	 */
 	private double epsilon, cornerRadius, pinMinLength, pinPWidth, pinPRadius, pinDistance, height, pinHeight,
 			basePlateHeight, basePlatePinCircleHeight, wallWidth, maxPrintWidth, maxPrintHeight;;
@@ -164,15 +168,6 @@ public class Params {
 	 */
 	public double getBasePlateHeight() {
 		return basePlateHeight;
-	}
-  
-	/**
-	 * Returns the parameter corresponding to the width of the wall.
-	 * 
-	 * @return wall width
-	 */
-	public double getWallWidth() {
-		return wallWidth;
 	}
 
 	/**
