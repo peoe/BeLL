@@ -88,7 +88,7 @@ public class Main {
 			printSCAD(proc, folderName);
 
 			// printing the stls
-			//printSTL(folderName);
+			printSTL(folderName);
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
 		}
