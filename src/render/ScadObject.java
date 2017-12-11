@@ -3,8 +3,9 @@ package render;
 public interface ScadObject {
 
 	/**
-	 * Creates an ScadString out of the ScadObject
-	 * @return String of object in the Scad language
+	 * Returns a String of the object used for creating it in OpenSCAD.
+	 * 
+	 * @return String of object
 	 */
 	public String toString();
 
