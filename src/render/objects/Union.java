@@ -6,16 +6,15 @@ import java.util.Locale;
 import render.ScadObject;
 
 public class Union implements ScadObject {
-
-	// ArrayList of ScadObjects for the Union
+	// arraylist of scadobjects for the union
 	private ArrayList<ScadObject> objects = new ArrayList<>();
 
-	// the layout String for creating the Union
+	// layout string for creating the union in openscad
 	final static String union = "union(){\n%s}";
 
-	// constructor using an ArrayList
+	// constructors
 	/**
-	 * Creates a new Union object using an ArrayList of ScadObjects.
+	 * Constructor of the Union class using an ArrayList of ScadObjects.
 	 * 
 	 * @param objects
 	 *            the ArrayList of ScadObjects
@@ -25,9 +24,9 @@ public class Union implements ScadObject {
 		super();
 		this.objects = objects;
 	}
-	
+
 	/**
-	 * Creates a new empty Union
+	 * Constructor of the Union class. Creates an empty Union object.
 	 * 
 	 * @see ScadObject
 	 */
@@ -37,40 +36,40 @@ public class Union implements ScadObject {
 	}
 
 	// getter - setter
-	// getting the ArrayList of ScadObjects
 	/**
 	 * Returns the ArrayList of ScadObjects used to create the Union.
 	 * 
-	 * @return the ArrayList of ScadObjects
+	 * @return ArrayList of ScadObjects
 	 */
 	public ArrayList<ScadObject> getObjects() {
 		return objects;
 	}
 
-	// setting the ArrayList
 	/**
-	 * Overrides the ArrayList of ScadObjects with a new ArrayList.
+	 * Sets the ArrayList of ScadObjects.
 	 * 
 	 * @param objects
-	 *            the new ArrayList of ScadObjects
+	 *            the ArrayList of ScadObjects
 	 */
 	public void setObjects(ArrayList<ScadObject> objects) {
 		this.objects = objects;
 	}
 
-	// printing the String for creating the Union object
 	/**
-	 * Prints a String used for creating the Union object.
+	 * Returns a String used for creating the Union object in OpenSCAD.
+	 * 
+	 * @return String of Union
 	 */
 	@Override
 	public String toString() {
 		String objectsprint = "";
+
 		// adds all the ScadObjects to the Union object
 		for (ScadObject o : objects) {
 			objectsprint = objectsprint.concat("\t" + o.toString());
 		}
-		String s = String.format(Locale.UK, union, objectsprint);
-		return s;
+
+		return String.format(Locale.UK, union, objectsprint);
 	}
 
 }

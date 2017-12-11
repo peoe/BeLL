@@ -8,25 +8,22 @@ public class Vector {
 	private double x, y;
 
 	// constructors
-	// using two doubles
 	/**
-	 * Creates a new Vector object using two doubles to describe the change of
-	 * the x and the y coordinates.
+	 * Constructor of the Vector class using differences of the x and y
+	 * coordinates.
 	 * 
-	 * @param x
-	 *            the change of the x coordinate
-	 * @param y
-	 *            the change of the y coordinate
+	 * @param dx
+	 *            the difference of the x coordinates
+	 * @param dy
+	 *            the difference of the y coordinates
 	 */
-	public Vector(double x, double y) {
-		this.x = x;
-		this.y = y;
+	public Vector(double dx, double dy) {
+		this.x = dx;
+		this.y = dy;
 	}
 
-	// using two points
 	/**
-	 * Creates a new Vector object using two points to calculate the changes of
-	 * the coordinates.
+	 * Constructor of the Vector class using a start and an end point.
 	 * 
 	 * @param s
 	 *            the starting point of the Vector
@@ -38,200 +35,193 @@ public class Vector {
 		this.y = e.getY() - s.getY();
 	}
 
-	// getter - setter
-	// getting x value
 	/**
-	 * Returns the change of the x coordinate by the Vector.
+	 * Returns a Line to the point specified by the Vector.
 	 * 
-	 * @return the change of the x coordinate
+	 * @return a Line to the point of the Vector
+	 */
+	public Line toLine() {
+		return (new Line(new Vector(0, 0), this));
+	}
+
+	/**
+	 * Changes the length of the Vector to the specified length.
+	 * 
+	 * @param len
+	 *            the new length of the Vector
+	 * @return changed Vector
+	 */
+	public Vector changeLength(double len) {
+		return (this.multiply(len / this.getLength()));
+	}
+
+	/**
+	 * Multiplies the Vector using scalar multiplication and a factor.
+	 * 
+	 * @param f
+	 *            the factor
+	 * @return multiplied Vector
+	 */
+	public Vector multiply(double f) {
+		return (new Vector(f * x, f * y));
+	}
+
+	/**
+	 * Adds another Vector to the Vector.
+	 * 
+	 * @param v
+	 *            the other Vector
+	 * @return changed Vector
+	 */
+	public Vector add(Vector v) {
+		return (new Vector(x + v.getX(), y + v.getY()));
+	}
+
+	/**
+	 * Calculates the angle of the Vector in radian measure using Math.atan2().
+	 * 
+	 * @return angle of the Vector
+	 * @see Math
+	 */
+	public double angle() {
+		double angle = Math.atan2(this.y, this.x);
+
+		return angle;
+	}
+
+	/**
+	 * Calculates the angle of the Vector in degrees using Math.atan2().
+	 * 
+	 * @return angle of the Vector in degrees
+	 * @see Math
+	 */
+	public double angleInDegrees() {
+		return Math.toDegrees(angle());
+	}
+
+	/**
+	 * Calculates the angle of two Vectors in radian measure.
+	 * 
+	 * @param v
+	 *            the other Vector
+	 * @return angle between both Vectors anti-clockwise
+	 */
+	public double angletoVector(Vector v) {
+		double angle = v.angle() - this.angle();
+
+		if (angle <= 0) {
+			angle = angle + 2 * Math.PI;
+		}
+
+		return angle;
+	}
+
+	/**
+	 * Calculates the angle of two Vectors in degrees.
+	 * 
+	 * @param v
+	 *            the other Vector
+	 * @return angle between both Vectors anti-clockwise in degrees
+	 */
+	public double angletoVectorD(Vector v2) {
+		return Math.toDegrees(this.angletoVector(v2));
+	}
+
+	/**
+	 * Returns the bisector of the angle between two Vectors.
+	 * 
+	 * @param v
+	 *            the other Vector
+	 * @return bisector of the angle between both Vectors
+	 */
+	public double bisectorOfAngleTo(Vector v) {
+		return (this.angleInDegrees() + 0.5 * this.angletoVectorD(v));
+	}
+
+	/**
+	 * Checks if two Vectors are equal.
+	 * 
+	 * @param v
+	 *            the other Vector
+	 * @return true if both Vectors are equal
+	 */
+	public Boolean equals(Vector v) {
+		if ((this.getX() == v.getX()) && (this.getY() == v.getY())) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Returns a rotated Vector. The Vector is rotated by the specified angle.
+	 * 
+	 * @param phi
+	 *            the angle the Vector is being rotated
+	 * @return rotated Vector
+	 */
+	public Vector rotate(double phi) {
+		return new Vector(DXFReader.round2(getX() * Math.cos(phi) - getY() * Math.sin(phi)),
+				DXFReader.round2(getX() * Math.sin(phi) + getY() * Math.cos(phi)));
+	}
+
+	/**
+	 * Returns a String describing the Vector in OpenSCAD.
+	 * 
+	 * @return String of Vector
+	 */
+	public String toScadString() {
+		return "[" + getX() + "," + getY() + "]";
+	}
+
+	// getter - setter
+	/**
+	 * Returns the length of the Vector.
+	 * 
+	 * @return length of the Vector
+	 */
+	public double getLength() {
+		return (Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)));
+	}
+
+	/**
+	 * Returns the difference of the x coordinates.
+	 * 
+	 * @return difference of the x coordinates
 	 */
 	public double getX() {
 		return x;
 	}
 
-	// getting y value
 	/**
-	 * Returns the change of the y coordinate by the Vector.
+	 * Returns the difference of the y coordinates.
 	 * 
-	 * @return the change of the y coordinate
+	 * @return the difference of the y coordinates
 	 */
 	public double getY() {
 		return y;
 	}
 
-	// setting the location of the point
 	/**
-	 * Overrides the current position Vector of the point.
+	 * Sets the coordinates of the Vector.
 	 * 
 	 * @param x
-	 *            the new x coordinate
+	 *            the new x coordinate of the Vector
 	 * @param y
-	 *            the new y coordinate
+	 *            the new y coordinate of the Vector
 	 */
 	public void setLocation(double x, double y) {
 		this.x = x;
 		this.y = y;
 	}
 
-	// printing the position vector
 	/**
-	 * Returns a String describing the Vector.
+	 * Returns a String of the Vector.
+	 * 
+	 * @return String of the Vector
 	 */
 	public String toString() {
 		return "(" + getX() + "," + getY() + ")";
 	}
-	
-	// printing the position vector scad definition
-		/**
-		 * Returns a String describing the Vector.
-		 */
-		public String toScadString() {
-			return "[" + getX() + "," + getY() + "]";
-		}
-
-	/**
-	 * Converts a vector to a line
-	 * @return line  with P1 = (0|0) and P2 = Vector
-	 */
-	public Line toLine(){
-		return(new Line(new Vector(0,0), this));
-	}
-  
-	
-
-	// changing the length of the Vector
-	/**
-	 * Changes the length of the Vector to the specified length.
-	 * 
-	 * @param len
-	 *            the new length of the Vector
-	 * @return the changed Vector
-	 */
-	public Vector changeLength(double len) {
-		return (this.multiply(len / this.getLength()));
-	}
-
-	// calculating the length of the Vector
-	/**
-	 * Returns the cuurent length of the Vector.
-	 * 
-	 * @return the length of the Vector
-	 */
-	public double getLength() {
-		return (Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)));
-	}
-
-	// multipies a vector using scalar mulitplication
-	/**
-	 * Multiplies the vector using scalar mulitpilcation and a given factor.
-	 * 
-	 * @param f
-	 *            the factor used for multiplication
-	 * @return the multiplied Vector
-	 */
-	public Vector multiply(double f) {
-		return (new Vector(f * x, f * y));
-	}
-
-	// adds another Vector to the old Vector
-	/**
-	 * Returns a new Vector describing the addition of the old Vector and the
-	 * specified Vector.
-	 * 
-	 * @param v
-	 *            the specified Vector
-	 * @return the added Vector
-	 */
-	public Vector add(Vector v) {
-		return (new Vector(x + v.getX(), y + v.getY()));
-	}
-
-	// calculates the angle of the Vector using atan2 in radian measure
-	/**
-	 * Calculates the angle of the Vector in radian measure using Math.atan2().
-	 * 
-	 * @return the angle of the Vector in radian measure
-	 * @see Math
-	 */
-	public double angle() { // normal atan2
-		double angle = Math.atan2(this.y, this.x);
-		return angle;
-	}
-
-	// calculates the angle of the Vector using atan2 in degree measure
-	/**
-	 * Calculates the angle of the Vector in degree measure using Math.atan2().
-	 * 
-	 * @return the angle of the Vector in degree measure
-	 * @see Math
-	 */
-	public double angleInDegrees() { // normal atan2
-		return Math.toDegrees(angle());
-	}
-
-	// calculates the angle to another Vector in radian measure
-	/**
-	 * Calculates the angle of the Vector to another Vector anticlockwise in
-	 * radian measure.
-	 * 
-	 * @param v
-	 *            the other Vector for calculating the angle in radian measure
-	 * @return the angle of the old Vector to the given Vector anticlockwise
-	 */
-	public double angletoVector(Vector v) {
-		double angle = v.angle() - this.angle();
-		if (angle <= 0) {
-			angle = angle + 2 * Math.PI;
-		}
-		return angle;
-	}
-
-	// calculates the angle to another Vector in degree measure
-	/**
-	 * Calculates the angle of the Vector to another Vector anticlockwise in
-	 * degree measure.
-	 * 
-	 * @param v
-	 *            the other Vector for calculating the angle in degree measure
-	 * @return the angle of the old Vector to the given Vector anticlockwise
-	 */
-	public double angletoVectorD(Vector v2) {
-		return Math.toDegrees(this.angletoVector(v2));
-	}
-
-	// calculates the bisector of the angle
-	/**
-	 * Returns the bisector of the angle between two Vectors.
-	 * 
-	 * @param v
-	 *            the other Vector
-	 * @return the bisector of the angle
-	 */
-	public double bisectorOfAngleTo(Vector v) {
-		return (this.angleInDegrees() + 0.5 * this.angletoVectorD(v));
-	}
-	
-	//test for equality of two vector
-	/**
-	 * checks if this vector is equal to a given vector
-	 * @param v comparison vector
-	 * @return true/false whether vectors are equal or not
-	 */
-	public Boolean equals(Vector v){
-		if ((this.getX() == v.getX()) && (this.getY() == v.getY())){
-			return true;
-		}
-		return false;
-	}
-	//rotates a vector
-	/**
-	 * rotates vector by given amount 
-	 * @param phi rotation angle
-	 * @return rotated Vector
-	 */
-	public Vector rotate(double phi){
-		return new Vector(DXFReader.round2(getX() * Math.cos(phi) - getY() * Math.sin(phi)), DXFReader.round2(getX() * Math.sin(phi) + getY() * Math.cos(phi)));
-	}
-	
 
 }

@@ -6,16 +6,15 @@ import java.util.Locale;
 import render.ScadObject;
 
 public class Difference implements ScadObject {
-
-	// all objects used for creating the Difference
+	// arraylist of objects used for the Difference
 	private ArrayList<ScadObject> objects;
 
-	// the layout String for creating the Difference
+	// layout String for creating the Difference in openscad
 	final static String difference = "difference(){\n%s}";
 
-	// constructor using an ArryList of ScadObjects
+	// constructors
 	/**
-	 * Creates a Difference object using an ArrayList of ScadObjects.
+	 * Constructor of the Difference class using an ArrayList of objects.
 	 * 
 	 * @param objects
 	 *            the ArrayList of ScadObjects
@@ -25,54 +24,51 @@ public class Difference implements ScadObject {
 		super();
 		this.objects = objects;
 	}
-	
-	// constructor using nothing
-		/**
-		 * Creates a new empty Difference object
-		 * 
-		 * @see ScadObject
-		 */
-		public Difference() {
-			super();
-			this.objects = new ArrayList<>();
-		}
+
+	/**
+	 * Constructor of the Difference class. Creates an empty Difference.
+	 * 
+	 * @see ScadObject
+	 */
+	public Difference() {
+		super();
+		this.objects = new ArrayList<>();
+	}
 
 	// getter - setter
-	// getting the objects
 	/**
-	 * Returns an ArrayList containing all ScadObjects given to the Difference.
+	 * Returns an ArrayList containing all ScadObjects of the Difference.
 	 * 
-	 * @return the ArrayList with all ScadObjects
+	 * @return ArrayList of all ScadObjects
 	 */
 	public ArrayList<ScadObject> getObjects() {
 		return objects;
 	}
 
-	// setiing the objects
 	/**
-	 * Overrides the ArrayList of ScadObjects used by the Difference object.
+	 * Sets the ArrayList of ScadObjects used by the Difference object.
 	 * 
 	 * @param objects
-	 *            the ArrayList to be used in overriding
+	 *            the ArrayList to be used for the Difference
 	 */
 	public void setObjects(ArrayList<ScadObject> objects) {
 		this.objects = objects;
 	}
 
-	// printing the command to create the Difference
 	/**
-	 * Prints the String used to create the Difference Object.
+	 * Returns a String of the Difference used for creating it in OpenSCAD.
+	 * 
+	 * @return String of the difference
 	 */
 	@Override
 	public String toString() {
 		String objectsprint = "";
 		// enlists all objects within the Difference
-		// all objects ar ebeing substracted by the first
+		// all objects are being subtracted from the first object
 		for (ScadObject o : objects) {
 			objectsprint = objectsprint.concat("\t" + o.toString());
 		}
-		String s = String.format(Locale.UK, difference, objectsprint);
-		return s;
+		return String.format(Locale.UK, difference, objectsprint);
 	}
 
 }

@@ -7,20 +7,19 @@ import graph.Vector;
 import render.ScadObject;
 
 public class Translate implements ScadObject {
-
-	// the ArrayList of ScadObjects for translating
+	// arraylist of scadobjects for translating
 	private ArrayList<ScadObject> objects;
 
-	// the x, y and z coordinates for the Translation
+	// x, y and z coordinates for the translation
 	private double x, y, z;
 
-	// the layout String for creating the Translate object
+	// layout string for creating the translate object in openscad
 	final static String translate = "translate([%1$.2f, %2$.2f, %3$.2f]){\n%4$s}";
 
 	// constructors
-	// translating multiple ScadObjects
 	/**
-	 * Creates a new Translate object for translating multiple ScadObjects.
+	 * Constructor of the Translate class using an ArrayList of objects and x, y
+	 * and z coordinates.
 	 * 
 	 * @param object
 	 *            the ArrayList of ScadObjects for translating
@@ -40,9 +39,9 @@ public class Translate implements ScadObject {
 		this.z = z;
 	}
 
-	// translating a single ScadObject
 	/**
-	 * Creates a new Translate object used for translating a single ScadObject.
+	 * Constructor of the Translate class using an object and x, y and z
+	 * coordinates.
 	 * 
 	 * @param object
 	 *            the ScadObject to translate
@@ -63,16 +62,14 @@ public class Translate implements ScadObject {
 		this.z = z;
 	}
 
-	// translating a single ScadObject using a Vector
 	/**
-	 * Creates a new Translate object for translating a single ScadObject using
-	 * a Vector to determine the x and y coordinates.
+	 * Constructor of the Translate class using an object, a Vector and a z
+	 * coordinate.
 	 * 
 	 * @param object
 	 *            the ScadObject to translate
 	 * @param v
-	 *            the Vector for determining the x and y coordinate of the
-	 *            Translation
+	 *            the Vector for of the x and y coordinate
 	 * @param z
 	 *            the z coordinate of the Translation
 	 * @see ScadObject, Vector
@@ -87,61 +84,55 @@ public class Translate implements ScadObject {
 	}
 
 	// getter - setter
-	// getting the ArrayList of ScadObjects
 	/**
 	 * Returns the ArrayList of ScadObjects of the Translation.
 	 * 
-	 * @return the ArrayList ScadObjects to translate
+	 * @return ArrayList of objects to translate
 	 */
 	public ArrayList<ScadObject> getObjects() {
 		return objects;
 	}
 
-	// setting the ArrayList of ScadObjects
 	/**
-	 * Overrides the ArrayList of ScadObjects with a new ArrayList.
+	 * Sets the ArrayList of ScadObjects of the Translation.
 	 * 
 	 * @param objects
-	 *            the new ArrayList of ScadObjects
+	 *            the ArrayList of objects of the Translation
 	 */
 	public void setObjects(ArrayList<ScadObject> objects) {
 		this.objects = objects;
 	}
 
-	// getting the x coordinate
 	/**
 	 * Returns the x coordinate of the Translation.
 	 * 
-	 * @return the x coordinate of the Translation
+	 * @return x coordinate of the Translation
 	 */
 	public double getX() {
 		return x;
 	}
 
-	// setting the x coordinate
 	/**
-	 * Overrides the x coordinate of the Translation with a new x coordinate.
+	 * Sets the x coordinate of the Translation.
 	 * 
 	 * @param x
-	 *            the new x coordinate
+	 *            the x coordinate
 	 */
 	public void setX(double x) {
 		this.x = x;
 	}
 
-	// getting the y coordinate
 	/**
 	 * Returns the y coordinate of the Translation.
 	 * 
-	 * @return the y coordinate of the Translation
+	 * @return y coordinate of the Translation
 	 */
 	public double getY() {
 		return y;
 	}
 
-	// setting the y coordinate
 	/**
-	 * Overrides the y coordinate of the Translation with a new y coordinate.
+	 * Sets the y coordinate of the Translation.
 	 * 
 	 * @param y
 	 *            the new y coordinate
@@ -150,19 +141,17 @@ public class Translate implements ScadObject {
 		this.y = y;
 	}
 
-	// getting the z coordinate
 	/**
 	 * Returns the z coordinate of the Translation.
 	 * 
-	 * @return the z coordinate of the Translation
+	 * @return z coordinate of the Translation
 	 */
 	public double getZ() {
 		return z;
 	}
 
-	// setting the z coordinate
 	/**
-	 * Overrrides the z coordinate of the Translation with a new z coordinate.
+	 * Sets the z coordinate of the Translation.
 	 * 
 	 * @param z
 	 *            the new z coordinate
@@ -171,19 +160,22 @@ public class Translate implements ScadObject {
 		this.z = z;
 	}
 
-	// printing the String for creating the Translate object
 	/**
-	 * Prints the String used for creating the Translate object.
+	 * Returns a String of the Translate object used for creating it in
+	 * OpenSCAD.
+	 * 
+	 * @return String of Translate
 	 */
 	@Override
 	public String toString() {
 		String objectsprint = "";
+
 		// adds all the ScadObjects to the Translation
 		for (ScadObject o : objects) {
 			objectsprint = objectsprint.concat("\t" + o.toString());
 		}
-		String s = String.format(Locale.UK, translate, x, y, z, objectsprint);
-		return s;
+
+		return String.format(Locale.UK, translate, x, y, z, objectsprint);
 	}
 
 }

@@ -18,17 +18,12 @@ import graph.Line;
 
 public class DXFReader {
 
-	// fixed URI, has to be changed to be dynamic
-	public static final String URI = "C:/Users/Peter/Documents/Coding/Bell/BeLL/res/umsetzung_gr_3.dxf";
-
-	// reading the .dxf file
 	/**
-	 * Reads the file specifies by the filepath and return a ArrayList of all
-	 * Lines found in the file.
+	 * Returns all Lines from within a .dxf file.
 	 * 
 	 * @param filePath
-	 *            the filepath of the file
-	 * @return an ArrayList of all Lines
+	 *            the path of the .dxf file
+	 * @return ArrayList of Lines
 	 * @throws ParseException
 	 */
 	@SuppressWarnings({ "rawtypes" })
@@ -58,13 +53,12 @@ public class DXFReader {
 		return vcs;
 	}
 
-	// rounds given numbers with two decimals
 	/**
-	 * Returns rounded numbers to only contain two decimals.
+	 * Returns a rounded Double with a maximum of two decimals.
 	 * 
 	 * @param val
-	 *            the number to be rounded
-	 * @return the rounded number
+	 *            the Double to be rounded
+	 * @return rounded Double
 	 */
 	public static Double round2(Double val) {
 		return new BigDecimal(val.toString()).setScale(2, RoundingMode.HALF_UP).doubleValue();

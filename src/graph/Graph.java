@@ -3,89 +3,72 @@ package graph;
 import java.util.ArrayList;
 
 import render.*;
-import render.objects.*;
 
 public class Graph {
 
-	// list of faces used for decomposition
+	// list of Faces used for decomposition
 	private ArrayList<Face> faces = new ArrayList<>();
-	// list of points
+	// list of Nodes of Graph
 	private ArrayList<Node> nodes = new ArrayList<>();
-	// list of edges
+	// list of Edges of Graph
 	private ArrayList<Edge> edges = new ArrayList<>();
-	//MaxPrintWidth
+	// maximum printing width
 	private double maxPrintWidth;
-	
-	//getter und setter
-	public ArrayList<Node> getNodes() {
-		return nodes;
-	}
 
-	public ArrayList<Edge> getEdges() {
-		return edges;
-	}
-
-	// getter for faces list
 	/**
-	 * Returns the ArrayList containing all faces of the graph.
+	 * Constructor of the Graph class.
 	 * 
-	 * @return ArrayList of the graphs faces
-	 */
-	public ArrayList<Face> getFaces() {
-		return faces;
-	}
-	
-	/**
-	 * Constructor of Graph class which creates DCEL
 	 * @param ls
-	 * 
+	 *            the ArrayList of Lines
+	 * @param params
+	 *            the Params object used for this Graph
 	 */
 	public Graph(ArrayList<Line> ls, Params params) {
+		// set maximum printing width
 		maxPrintWidth = params.getMaxPrintWidth();
+
+		// create edges from lines
 		processData(ls);
+		// create twin edges
 		computeTwins();
+
 		completeEdges();
 		completeFaces();
 		completeNodes();
 	}
 
-	// Creates Nodes and Edges out of the given Line ArrayList
 	/**
-	 * Creates Nodes and Edges out of the given Lines and stores them in the
-	 * specific field in the graph class
+	 * Creates Nodes and Edges according to the given Lines.
 	 * 
 	 * @param ls
-	 *            the list of lines
+	 *            the ArrayList of given Lines
 	 */
 	private void processData(ArrayList<Line> ls) {
 		int i = 0;
+
 		do {
-			if (ls.get(i).toVector().getLength() > maxPrintWidth){
-			ls.add(new Line(ls.get(i).getP1(), ls.get(i).getP1().add(ls.get(i).toVector().multiply(0.5))));
-			ls.add(new Line(ls.get(i).getP2(), ls.get(i).getP2().add(ls.get(i).toVector().multiply(-0.5))));
-			ls.remove(ls.get(i));
-			} else
-			{
-			i += 1;
+			if (ls.get(i).toVector().getLength() > maxPrintWidth) {
+				ls.add(new Line(ls.get(i).getP1(), ls.get(i).getP1().add(ls.get(i).toVector().multiply(0.5))));
+				ls.add(new Line(ls.get(i).getP2(), ls.get(i).getP2().add(ls.get(i).toVector().multiply(-0.5))));
+				ls.remove(ls.get(i));
+			} else {
+				i += 1;
 			}
-		} while(i != ls.size()-1);
-		
+		} while (i != ls.size() - 1);
+
+		// create nodes and egdes
 		for (Line l : ls) {
 			Node n1 = createNode(l.getP1());
 			Node n2 = createNode(l.getP2());
 			edges.add(new Edge(n1, n2));
 		}
-
 	}
 
-	// function for creating a node using a point if this specific node hasn't
-	// been created yet
 	/**
-	 * Creates a node out of the given point if this node does not already exist
-	 * in the Graph class
+	 * Creates a Node at a certain point.
 	 * 
 	 * @param p
-	 *            Point which needs to be converted into node
+	 *            the Vector pointing towards the point
 	 */
 	private Node createNode(Vector p) {
 		for (Node n : nodes) {
@@ -93,21 +76,19 @@ public class Graph {
 				return n;
 			}
 		}
+
 		nodes.add(new Node(p));
 		return (nodes.get(nodes.size() - 1));
 	}
 
-	// function for generating complementary lines
 	/**
-	 * Generates the complementary lines for the entirety of the already
-	 * existing lines.
+	 * Generates the twin Edges for all Edges within the Graph.
 	 */
 	private void computeTwins() {
-		// getting the amount of lines to be added (size of getLines is going to
-		// be changed -> needs to be saved for later reuse)
+		// getting original amount of edges
 		int amount = edges.size();
 
-		// adding the complementary lines
+		// add twin edges
 		for (int i = 0; i < amount; i++) {
 			edges.add(edges.get(i).generateTwin());
 			edges.get(i).setTwin(edges.get(edges.size() - 1));
@@ -117,17 +98,21 @@ public class Graph {
 	}
 
 	/**
-	 * finishes all Edges in DCEL
+	 * Completes the setting of Edges within the Graph.
 	 */
 	private void completeEdges() {
 		ArrayList<ArrayList<Edge>> nodeEdges = new ArrayList<>();
+
+		// add all edges within the graph
 		for (int i = 0; i < nodes.size(); i++) {
 			nodeEdges.add(new ArrayList<Edge>());
 		}
+
 		for (Edge e : edges) {
 			nodeEdges.get(nodes.indexOf(e.getN1())).add(e);
 		}
 
+		// sort all edges
 		sortEdges(nodeEdges);
 
 		for (ArrayList<Edge> e : nodeEdges) {
@@ -135,22 +120,27 @@ public class Graph {
 				e.get(i).setPrev(e.get((i + 1) % e.size()).getTwin());
 				e.get(i).getTwin().setNext(e.get(Math.floorMod((i - 1), e.size())));
 			}
-
 		}
 	}
+
 	/**
-	 * renders faces in DCEL
+	 * Completes the setting of Faces within the Graph.
 	 */
 	private void completeFaces() {
-
+		// set all statuses to false
 		ArrayList<Boolean> edgeStatus = new ArrayList<>();
+
 		for (int i = 0; i < edges.size(); i++) {
 			edgeStatus.add(false);
 		}
+
 		Edge e, originalEdge;
+
+		// complete all faces
 		while (edgeStatus.contains(false)) {
 			originalEdge = edges.get(edgeStatus.indexOf(false));
 			faces.add(new Face(originalEdge));
+
 			originalEdge.setFace(faces.get(faces.size() - 1));
 			edgeStatus.set(edges.indexOf(originalEdge), true);
 			e = originalEdge.getNext();
@@ -161,13 +151,14 @@ public class Graph {
 			}
 		}
 	}
+
 	/**
-	 * finishes nodes in DCEL (adds incident edges)
+	 * Completes the setting of Nodes within the Graph.
 	 */
-	public void completeNodes(){
-		for(Node n : nodes){
-			for(Edge e: edges){
-				if(n==e.getN1()){
+	public void completeNodes() {
+		for (Node n : nodes) {
+			for (Edge e : edges) {
+				if (n == e.getN1()) {
 					n.setIncidentEdge(e);
 					break;
 				}
@@ -176,14 +167,14 @@ public class Graph {
 	}
 
 	/**
+	 * Sorts the adjacent Edges of all Edges within the Graph using their angle.
 	 * 
-	 * @param ArrayList of ArrayList of Edge e (adjacentEdges of nodes) 
-	 * 
-	 * @return sorted adjacentEdges of nodes
+	 * @param ArrayList
+	 *            of ArrayList containing all adjacent Edges
 	 */
 	private void sortEdges(ArrayList<ArrayList<Edge>> e) {
-		// getAngles
 		ArrayList<Double> doubles = new ArrayList<>();
+
 		for (ArrayList<Edge> eList : e) {
 			doubles.clear();
 			for (Edge edg : eList) {
@@ -204,16 +195,42 @@ public class Graph {
 				}
 			}
 		}
-
 	}
 
-	// function for getting all the lines pointing away from a certain node
+	// getter und setter
 	/**
-	 * Returns an ArrayList of all lines pointing away from the specified point.
+	 * Returns an ArrayList of all Nodes within the Graph.
+	 * 
+	 * @return ArrayList of Nodes
+	 */
+	public ArrayList<Node> getNodes() {
+		return nodes;
+	}
+
+	/**
+	 * Returns an ArrayList of all Edges within the Graph.
+	 * 
+	 * @return ArrayList of Edges
+	 */
+	public ArrayList<Edge> getEdges() {
+		return edges;
+	}
+
+	/**
+	 * Returns an ArrayList containing all Faces of the Graph.
+	 * 
+	 * @return ArrayList of Faces
+	 */
+	public ArrayList<Face> getFaces() {
+		return faces;
+	}
+
+	/**
+	 * Returns an ArrayList of all Edges pointing away from the specified Node.
 	 * 
 	 * @param n
-	 *            the specified node
-	 * @return ArrayList of edges pointing away from the given node
+	 *            the specified Node
+	 * @return ArrayList of Edges pointing away
 	 */
 	public ArrayList<Edge> getEdgesPointingAway(Node n) {
 		ArrayList<Edge> edgs = new ArrayList<>();
@@ -227,11 +244,13 @@ public class Graph {
 
 		return edgs;
 	}
-	
+
 	/**
+	 * Returns the Node at a certain point.
 	 * 
-	 * @param v Vector
-	 * @return Node with Origin = v and incidentEdge = null
+	 * @param v
+	 *            Vector to the point
+	 * @return Node of the point
 	 */
 	public Node getNodeByPoint(Vector v) {
 		for (int i = 0; i < nodes.size(); i++) {
@@ -239,6 +258,7 @@ public class Graph {
 				return nodes.get(i);
 			}
 		}
+
 		return null;
 	}
 

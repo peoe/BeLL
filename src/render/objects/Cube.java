@@ -5,94 +5,28 @@ import java.util.Locale;
 import render.ScadObject;
 
 public class Cube implements ScadObject {
-
 	// x, y and z coordinates of the Cube
 	private double x, y, z;
 
-	// boolean to determine if the piece will be centered
+	// boolean if the piece will be centered
 	private boolean center;
 
-	// the layout for the String used to generate a Cube
+	// layout String used to generate a Cube in OpenSCAD
 	final static String CUBE = "cube([%1$.2f,%2$.2f,%3$.2f], %4$s);\n";
 
-	// getter - setter
-	// getting the x coordinate
-	/**
-	 * Returns the x coordinate of the Cube.
-	 * 
-	 * @return the x coordinate
-	 */
-	public double getX() {
-		return x;
-	}
-
-	// overriding the x coordinate
-	/**
-	 * Overrides the current x coordinate with a new one.
-	 * 
-	 * @param x
-	 *            the new x corrdinate
-	 */
-	public void setX(double x) {
-		this.x = x;
-	}
-
-	// getting the y coordinate
-	/**
-	 * Returns the y coordinate of the Cube.
-	 * 
-	 * @return the y coordinate
-	 */
-	public double getY() {
-		return y;
-	}
-
-	// overriding the y coordinate
-	/**
-	 * Overrides the current y coordinate with a new one.
-	 * 
-	 * @param y
-	 *            the new y corrdinate
-	 */
-	public void setY(double y) {
-		this.y = y;
-	}
-
-	// getting the z coordinate
-	/**
-	 * Returns the z coordinate of the Cube.
-	 * 
-	 * @return the z coordinate
-	 */
-	public double getZ() {
-		return z;
-	}
-
-	// overriding the z coordinate
-	/**
-	 * Overrides the current z coordinate with a new one.
-	 * 
-	 * @param z
-	 *            the new z corrdinate
-	 */
-	public void setZ(double z) {
-		this.z = z;
-	}
-
 	// constructors
-	// using three doubles and a boolean
 	/**
-	 * Creates a new Cube object using Cubes the x, y and z coordinates and a
-	 * boolean to determine if it will be centered.
+	 * Constructor of the Cube class using x, y and z coordinate of the Cube and
+	 * a Boolean if the Cube will be centered.
 	 * 
 	 * @param X
-	 *            the x coordinate
+	 *            the x coordinate of the Cube
 	 * @param Y
-	 *            the y coordinate
+	 *            the y coordinate of the Cube
 	 * @param Z
-	 *            the z coordinate
+	 *            the z coordinate of the Cube
 	 * @param Center
-	 *            the boolean for centering
+	 *            the Boolean for centering the Cube
 	 */
 	public Cube(double X, double Y, double Z, boolean Center) {
 		this.x = X;
@@ -101,16 +35,16 @@ public class Cube implements ScadObject {
 		this.center = Center;
 	}
 
-	// using only three doubles
 	/**
-	 * Creates a new Cube object using the Cubes x, y and z coordinate.
+	 * Constructor of the Cube class using x, y and z coordinate of the Cube.
+	 * Assumes that the Cube will not be centered.
 	 * 
 	 * @param X
-	 *            the x coordinate
+	 *            the x coordinate of the Cube
 	 * @param Y
-	 *            the y coordinate
+	 *            the y coordinate of the Cube
 	 * @param Z
-	 *            the z coordinate
+	 *            the z coordinate of the Cube
 	 */
 	public Cube(double X, double Y, double Z) {
 		this.x = X;
@@ -121,20 +55,20 @@ public class Cube implements ScadObject {
 
 	// Add margins to the sides of a cube
 	/**
-	 * Resizes all faces of cube to specified amount
+	 * Resizes all faces of cube to specified size.
 	 * 
 	 * @param xn
-	 *            negative x resizing
+	 *            the negative x resizing
 	 * @param xp
-	 *            positive x resizing
+	 *            the positive x resizing
 	 * @param yn
-	 *            negative y resizing
+	 *            the negative y resizing
 	 * @param yp
-	 *            positive y resizing
+	 *            the positive y resizing
 	 * @param zn
-	 *            negative z resizing
+	 *            the negative z resizing
 	 * @param zp
-	 *            positive z resizing
+	 *            the positive z resizing
 	 * @return ScadObject with applied transformations
 	 */
 	public ScadObject resize(double xn, double xp, double yn, double yp, double zn, double zp) {
@@ -142,9 +76,68 @@ public class Cube implements ScadObject {
 				0.5 * xp - 0.5 * xn, 0.5 * yp - 0.5 * yn, 0.5 * zp - 0.5 * zn));
 	}
 
-	// printing the command for creating the cube
+	// getter - setter
 	/**
-	 * Returns a String which can be used to create the Cube.
+	 * Returns the x coordinate of the Cube.
+	 * 
+	 * @return x coordinate of the Cube
+	 */
+	public double getX() {
+		return x;
+	}
+
+	/**
+	 * Sets the x coordinate for the Cube.
+	 * 
+	 * @param x
+	 *            the x coordinate
+	 */
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	/**
+	 * Returns the y coordinate of the Cube.
+	 * 
+	 * @return y coordinate of the Cube
+	 */
+	public double getY() {
+		return y;
+	}
+
+	/**
+	 * Sets the y coordinate for the Cube.
+	 * 
+	 * @param y
+	 *            the y coordinate
+	 */
+	public void setY(double y) {
+		this.y = y;
+	}
+
+	/**
+	 * Returns the z coordinate of the Cube.
+	 * 
+	 * @return z coordinate of the Cube
+	 */
+	public double getZ() {
+		return z;
+	}
+
+	/**
+	 * Sets the z coordinate for the Cube.
+	 * 
+	 * @param z
+	 *            the z coordinate
+	 */
+	public void setZ(double z) {
+		this.z = z;
+	}
+
+	/**
+	 * Returns a String of the Cube used for creating it in OpenSCAD.
+	 * 
+	 * @return String of the Cube
 	 */
 	@Override
 	public String toString() {
