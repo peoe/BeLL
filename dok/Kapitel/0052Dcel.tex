@@ -54,20 +54,28 @@ Aus den angeordneten Kanten $E$ lassen sich unter Beachtung des mathematisch pos
 \end{Bild}
 Falls $i-1$ bzw. $i+1$ die Indices der Menge $E$ mit $n$ Elementen überschreiten, wird anstattdessen $E_n$ bzw. $E_0$ gewählt. \\
 Der aufgeführte Algorithmus wird für alle Knoten $N$ der DCEL fortgeführt, sodass alle Referenzen zwischen den Kanten fertiggestellt werden. 
-\todoinline{code eventuell bilder definitiv}
+\begin{code}[Zuweisung der Beziehungen im Programm; \icode{nodeEdges} ist eine zweidimensionale ArrayList, die f{\"u}r jeden Knoten eine sortierte ArrayList aus Kanten enth{\"a}lt]
+	for (ArrayList<Edge> e : nodeEdges) {
+		for (int i = 0; i < e.size(); i++) {
+			e.get(i).setPrev(e.get((i + 1) \% e.size()).getTwin());
+			e.get(i).getTwin().setNext(e.get(Math.floorMod((i - 1), e.size())));
+		}
+	}
+\end{code}
 
 \subsection{Flächenerstellung}
-Mithilfe einer Schleife können die einzelnen Flächen erschlossen werden.
-Es muss lediglich fortlaufend alle Nachfolger einer gewählten Kante gesucht werden bis die gefundene Kante einen Nachfolger darstellt, bis alle Kanten genau einmal behandelt wurden.
-Dafür wurde eine repräsentative \icode{Boolean-ArrayList} mit der Länge der Kantenliste erstellt, die mit ihren Werten den Status der Kanten darstellt.
-Folglich besteht diese am Anfang nur aus \icode{false} Werten die während der Schleife alle auf \icode{true} gesetzt werden.
-Die Speicherung der Flächen folgt dem DCEL-Standard, sodass nur eine anliegende Kante zugewiesen wird, mit der man, aufgrund von den Referenzen alle Kanten und Knoten der Fläche ermitteln kann.
-Das äußere Gebiet des planaren Graphen lässt sich an der Umlaufrichtung der Kanten erkennen.
-Es ist die einzige Fläche, die im mathematisch negativen Drehsinn ausgerichtet ist.
-Unterschieden wird sie im weiteren Programmablauf mithilfe der Gaußschen Trapezformel.
-Bei negativer Umlaufrichtung ist das Ergebnis dieser negativ.\\
-\todoinline{Bitte noch mal überarbeiten, total wirr}
+Durch das Vorliegen der DCEL Kanten können alle Flächen des Graphen erschlossen werden.
+Dabei wird bei dem Element $E_0$ der Kantenliste begonnen und solange der Nachfolger über die Verknüpfung ermittelt, bis die Ursprungskante wieder erreicht wurde.
+Die ermittelte Fläche $F_0$ besitzt als anliegende Kante so die Kante $E_0$.
+Alle in der Fläche enthaltenen Kanten werden bei der fortlaufenden Rechnung ignoriert, sodass die alle anderen Flächen $F$ analog errechnet werden können.
+Das äußere Gebiet des planaren Graphen, also in der DCEL der Umriss, kann durch den Drehsinn der Kanten dieser Fläche festgestellt werden, denn dieser ist als einziger mathematisch negativ.
+In der Anwendung wird dafür die Gaußsche Trapezformel verwendet, welche bei einem umgekehrten Drehsinn einen negativen Flächeninhalt ausgibt.
+
+\begin{Bild}{Flächenberechnung. Dargestellt: Anliegende Kante(Cyan), Kanten(grün) und Fläche(gelb)}
+	\includegraphics[width = 90mm]{Bilder/FlaecheBerechnung}
+\end{Bild}
 
 \subsection{Vervollständigung der Knoten}
-Die letzte nötige Operation ist die Speicherung einer anliegenden Edge in den Nodes.\\
-\todoinline{man könnte das im code auch vorher tun denke ich}
+Die letzte nötige Referenz ist die einer anliegenden Kante eines Knotens.
+Dafür wird für die Knoten $N$ eine Kante ermittelt, die ihren Usrpung in dem jeweiligen Knoten hat.
+Die DCEL ist mit diesem Schritt fertiggestellt und bildet die Grundlage für alle folgenden dreidimensionalen Berechnungen.
