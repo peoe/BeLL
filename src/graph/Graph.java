@@ -46,15 +46,15 @@ public class Graph {
 	private void processData(ArrayList<Line> ls) {
 		int i = 0;
 
-//		do {
-//			if (ls.get(i).toVector().getLength() > maxPrintWidth) {
-//				ls.add(new Line(ls.get(i).getP1(), ls.get(i).getP1().add(ls.get(i).toVector().multiply(0.5))));
-//				ls.add(new Line(ls.get(i).getP2(), ls.get(i).getP2().add(ls.get(i).toVector().multiply(-0.5))));
-//				ls.remove(ls.get(i));
-//			} else {
-//				i += 1;
-//			}
-//		} while (i != ls.size() - 1);
+		do {
+			if (ls.get(i).toVector().getLength() > maxPrintWidth) {
+				ls.add(new Line(ls.get(i).getP1(), ls.get(i).getP1().add(ls.get(i).toVector().multiply(0.5))));
+				ls.add(new Line(ls.get(i).getP2(), ls.get(i).getP2().add(ls.get(i).toVector().multiply(-0.5))));
+				ls.remove(ls.get(i));
+			} else {
+				i += 1;
+			}
+		} while (i != ls.size() - 1);
 
 		// create nodes and egdes
 		for (Line l : ls) {
