@@ -28,7 +28,7 @@ public class ShowResultButton extends JButton {
 	 * Sets the default parameters for the ShowResultButton.
 	 */
 	private void setDefaults() {
-		setText("Show the result fodler");
+		setText("Show the result folder");
 		setActionCommand("show");
 		// set width and height
 		setPreferredSize(new Dimension(233, 27));
