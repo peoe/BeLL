@@ -1,7 +1,6 @@
 package render;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import render.objects.*;
 
