@@ -102,7 +102,6 @@ public class Main {
 	 */
 	private static void printSTL(String folderName) {
 		File[] fs = SCADFinder.findFiles(folderName);
-		// System.out.println(fs[0].getName());
 
 		for (int i = 0; i < fs.length; i++) {
 			System.out.println(System.getenv("ProgramFiles") + "\\OpenSCAD\\openscad.exe -o " + folderName + "\\stl\\"
