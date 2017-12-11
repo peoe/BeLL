@@ -159,50 +159,30 @@ public class ScadProcessor {
 
 	public ArrayList<Union> renderWallFiles() {
 		ArrayList<Union> files = new ArrayList<>();
-		ArrayList<Double> wallLengths = new ArrayList<>();
+		ArrayList<Wall> walls = new Quicksort<Wall>(getWalls(), "getLength").sortArray();
 
-		double spaceLeft, minimum;
+		double rowLength = 0.0;
+		double columnWidth = 0.0;
 
-		int index;
+		int fileIndex = -1;
 
-		for (Wall w : getWalls()) {
-			minimum = 0;
-			spaceLeft = 0;
-			index = -1;
-
-			for (int i = 0; i < wallLengths.size(); i++) {
-				spaceLeft = 0;
-				spaceLeft = wallLengths.get(i);
-
-				if ((spaceLeft > minimum) && (spaceLeft + w.getLength() <= params.getMaxPrintWidth())) {
-					minimum = spaceLeft;
-					index = i;
-				}
+		for (Wall w : walls) {
+			if (params.getMaxPrintWidth() - columnWidth - w.getLength() < 0) {
+				columnWidth = 0;
+				rowLength += params.getWallWidth() + 4 * params.getEpsilon();
 			}
 
-			if (index == -1) {
-				wallLengths.add(w.getLength());
-				index = wallLengths.size() - 1;
-			} else {
-				wallLengths.set(index, wallLengths.get(index) + w.getLength());
-			}
-
-			double renderWidth = 0.5 * params.getWallwidth()
-					+ index * (params.getWallwidth() + 8 * params.getEpsilon());
-
-			int filesIndex = (int) renderWidth / (int) params.getMaxPrintHeight();
-
-			if (filesIndex > files.size() - 1) {
+			if ((rowLength + params.getWallWidth() > params.getMaxPrintHeight()) || (files.size() == 0)) {
 				files.add(new Union());
+				fileIndex++;
+				rowLength = 0;
+				columnWidth = 0;
 			}
 
-			files.get(filesIndex).getObjects()
-					.add((new Translate(new Rotate(w, -w.getE().toVector().angleInDegrees(), 0, 0, 1),
-							minimum + w.getLength() * 0.5,
-							0.5 * params.getWallwidth() + (index - filesIndex * ((int) params.getMaxPrintHeight()
-									/ (int) (params.getWallwidth() + 8 * params.getEpsilon())))
-									* (params.getWallwidth() + 8 * params.getEpsilon()),
-							0.5 * params.getEpsilon() + 0.5 * (params.getHeight() - params.getBasePlateHeight()))));
+			files.get(fileIndex).getObjects().add(new Translate(new Rotate(w, -w.getE().toVector().angleInDegrees(), 0, 0, 1),
+					new Vector(w.getLength() * 0.5,  params.getWallWidth() * 0.5).add(new Vector(columnWidth, rowLength)), 0.5 * params.getEpsilon() + 0.5 * (params.getHeight() - params.getBasePlateHeight())));
+
+			columnWidth += w.getLength();
 		}
 		return files;
 	}

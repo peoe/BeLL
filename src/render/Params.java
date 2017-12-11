@@ -143,7 +143,7 @@ public class Params {
 	 * 
 	 * @return wall width
 	 */
-	public double getWallwidth() {
+	public double getWallWidth() {
 		return wallWidth;
 	}
 
@@ -165,7 +165,7 @@ public class Params {
 	public double getBasePlateHeight() {
 		return basePlateHeight;
 	}
-
+  
 	/**
 	 * Returns the parameter corresponding to the width of the wall.
 	 * 
