@@ -13,7 +13,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import org.kabeja.parser.ParseException;
 
 import gui.GUI;
-import io.ClipboardCopier;
 import io.DXFReader;
 import io.SCADFinder;
 import io.STLConverter;
@@ -88,9 +87,8 @@ public class Main {
 			// printing the scads
 			printSCAD(proc, folderName);
 			
-			ClipboardCopier.copyToClipboard(proc.outputWalls().toString());
 			// printing the stls
-			//printSTL(folderName);
+			printSTL(folderName);
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
 		}
