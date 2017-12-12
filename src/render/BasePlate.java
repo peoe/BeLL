@@ -9,57 +9,19 @@ import render.objects.*;
 public class BasePlate implements ScadObject {
 	// face of base plate
 	private Face f;
-	// Parameters
+	// params
 	private Params params;
-	// rotating angle for the minimum bounding box and width and length of the
-	// ombb
+	// rotating angle, width and length of the ombb
 	private double ombbAngle, width, length;
 
-	public Face getF() {
-		return f;
-	}
-
-	public void setF(Face f) {
-		this.f = f;
-	}
-
-	public Params getParams() {
-		return params;
-	}
-
-	public void setParams(Params params) {
-		this.params = params;
-	}
-
-	public double getOmbbAngle() {
-		return ombbAngle;
-	}
-
-	public void setOmbbAngle(double ombbAngle) {
-		this.ombbAngle = ombbAngle;
-	}
-
-	public double getWidth() {
-		return width;
-	}
-
-	public void setWidth(double width) {
-		this.width = width;
-	}
-
-	public double getLength() {
-		return length;
-	}
-
-	public void setLength(double length) {
-		this.length = length;
-	}
-	
-	public double getOmbbArea() {
-		return width*length;
-	}
-
-
+	/**
+	 * Constructor of the BasePlate class using a Face and a Params object.
+	 * 
+	 * @param f
+	 *            the Face of the BasePlate
+	 * @param params
+	 *            the Params object
+	 */
 	public BasePlate(Face f, Params params) {
 		this.f = f;
 		this.params = params;
@@ -72,11 +34,11 @@ public class BasePlate implements ScadObject {
 	}
 
 	/**
-	 * Modifies outer Polygons
+	 * Returns the modified Polygon.
 	 * 
 	 * @param p
-	 *            Polygon
-	 * @return Polygon Modified Polygon
+	 *            the Polygon to be modified
+	 * @return modified Polygon
 	 */
 	public Polygon modifyPolygon(Polygon p) {
 		ArrayList<Vector> newPoints = new ArrayList<>();
@@ -99,13 +61,13 @@ public class BasePlate implements ScadObject {
 	}
 
 	/**
-	 * Calculates necessary translation of a point of outer Polygons
+	 * Returns the translation Vector of the outer Polygon.
 	 * 
 	 * @param e
-	 *            first Edge
+	 *            the first Edge of the corner point
 	 * @param e2
-	 *            second Edge
-	 * @return Vector Translation Vector for the point
+	 *            the second Edge of the corner point
+	 * @return translation Vector
 	 */
 	private Vector getCornerPoint(Edge e, Edge e2) {
 		Vector vE = e.toVector();
@@ -124,13 +86,13 @@ public class BasePlate implements ScadObject {
 	}
 
 	/**
-	 * Calculates the Object consisting of Differences between a polygon and the
-	 * negative corner elements
+	 * Returns the BasePlate object.
 	 * 
-	 * @return the basePlate ScadObject
+	 * @return ScadObject of the BasePlate
 	 */
 	private ScadObject getBasePlateObject() {
 		ArrayList<ScadObject> differenceCorners = new ArrayList<>();
+
 		differenceCorners.add(new Translate(
 				new Scale(this.modifyPolygon(new Polygon(getF().getIncidentEdge(), -0.5 * params.getEpsilon())), 1, 1,
 						params.getBasePlateHeight()),
@@ -140,9 +102,121 @@ public class BasePlate implements ScadObject {
 			differenceCorners
 					.add(new Translate(new CornerPin(e, params.getEpsilon(), params), e.getN1().getOrigin(), 0));
 		}
+
 		return new Difference(differenceCorners);
 	}
 
+	// getters - setters
+	/**
+	 * Returns the Face of the BasePlate.
+	 * 
+	 * @return Face of the BasePlate
+	 */
+	public Face getF() {
+		return f;
+	}
+
+	/**
+	 * Sets the Face of the BasePlate.
+	 * 
+	 * @param f
+	 *            the Face to be set for the BasePlate
+	 */
+	public void setF(Face f) {
+		this.f = f;
+	}
+
+	/**
+	 * Returns the Params object of the BasePlate.
+	 * 
+	 * @return Params object of BasePlate
+	 */
+	public Params getParams() {
+		return params;
+	}
+
+	/**
+	 * Sets the Params object of the BasePlate.
+	 * 
+	 * @param params
+	 *            the Params object to be set for the BasePlate
+	 */
+	public void setParams(Params params) {
+		this.params = params;
+	}
+
+	/**
+	 * Returns the ombb angle of the BasePlate.
+	 * 
+	 * @return ombb angle as Double value
+	 */
+	public double getOmbbAngle() {
+		return ombbAngle;
+	}
+
+	/**
+	 * Sets the ombb angle of the BasePlate.
+	 * 
+	 * @param ombbAngle
+	 *            the value to be set for the ombb angle
+	 */
+	public void setOmbbAngle(double ombbAngle) {
+		this.ombbAngle = ombbAngle;
+	}
+
+	/**
+	 * Returns the width of the BasePlate.
+	 * 
+	 * @return width as Double value
+	 */
+	public double getWidth() {
+		return width;
+	}
+
+	/**
+	 * Sets the width of the BasePlate.
+	 * 
+	 * @param width
+	 *            the width to be set for the BasePlate
+	 */
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+	/**
+	 * Returns the length of the BasePlate.
+	 * 
+	 * @return length as Double value
+	 */
+	public double getLength() {
+		return length;
+	}
+
+	/**
+	 * Sets the length of the BasePlate.
+	 * 
+	 * @param length
+	 *            the length to be set for the BasePlate
+	 */
+	public void setLength(double length) {
+		this.length = length;
+	}
+
+	/**
+	 * Returns the ombb area of the BasePlate.
+	 * 
+	 * @return ombb area as Double value
+	 */
+	public double getOmbbArea() {
+		return width * length;
+	}
+
+	/**
+	 * Returns a String of the BasePlate object used for creating it in
+	 * OpenSCAD.
+	 * 
+	 * @return String of BasePlate
+	 */
 	@Override
 	public String toString() {
 		return getBasePlateObject().toString();

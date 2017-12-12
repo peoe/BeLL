@@ -21,7 +21,6 @@ import render.*;
 import render.objects.*;
 
 public class Main {
-
 	// gui for the program
 	private static GUI gui;
 
@@ -88,7 +87,7 @@ public class Main {
 			printSCAD(proc, folderName);
 
 			// printing the stls
-			//printSTL(folderName);
+			printSTL(folderName);
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
 		}
