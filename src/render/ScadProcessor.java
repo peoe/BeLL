@@ -9,44 +9,20 @@ import render.objects.Translate;
 import render.objects.Union;
 
 public class ScadProcessor {
-
+	// params
 	private Params params;
+	// walls
 	private ArrayList<Wall> walls = new ArrayList<>();
+	// corners
 	private ArrayList<Corner> corners = new ArrayList<>();
+	// baseplates
 	private ArrayList<BasePlate> basePlates = new ArrayList<>();
 
-	public Params getParams() {
-		return params;
-	}
-
-	public void setParams(Params params) {
-		this.params = params;
-	}
-
-	public ArrayList<Wall> getWalls() {
-		return walls;
-	}
-
-	public void setWalls(ArrayList<Wall> walls) {
-		this.walls = walls;
-	}
-
-	public ArrayList<Corner> getCorners() {
-		return corners;
-	}
-
-	public void setCorners(ArrayList<Corner> corners) {
-		this.corners = corners;
-	}
-
-	public ArrayList<BasePlate> getBasePlates() {
-		return basePlates;
-	}
-
-	public void setBasePlates(ArrayList<BasePlate> basePlates) {
-		this.basePlates = basePlates;
-	}
-
+	/**
+	 * Constructor of the ScadProcessor class using an ArrayList of Lines and a Params object.
+	 * @param ls the ArrayList of Lines
+	 * @param params the Params object 
+	 */
 	public ScadProcessor(ArrayList<Line> ls, Params params) {
 		Graph graph = new Graph(ls, params);
 		this.params = params;
@@ -75,6 +51,10 @@ public class ScadProcessor {
 		}
 	}
 
+	/**
+	 * Returns the oriented BasePlates in an ArrayList of Unions.
+	 * @return ArrayList of BasePlate Unions
+	 */
 	public ArrayList<Union> renderBasePlateFiles() {
 		ArrayList<Union> files = new ArrayList<>();
 		ArrayList<BasePlate> basePlates = new Quicksort<BasePlate>(getBasePlates(), "getOmbbArea").sortArray();
@@ -115,9 +95,7 @@ public class ScadProcessor {
 					usedWidth = faceEnlarge;
 				}
 
-				files.get(fileIndex).getObjects()
-						.add(new Translate(new Rotate(b, Math.toDegrees(b.getOmbbAngle()), 0, 0, 1), -xMin + usedWidth,
-								-yMin + usedLength, 0));
+				files.get(fileIndex).getObjects().add(new Translate(new Rotate(b, Math.toDegrees(b.getOmbbAngle()), 0, 0, 1), -xMin + usedWidth, -yMin + usedLength, 0));
 				usedWidth += b.getWidth() + 2 * faceEnlarge;
 			}
 		}
@@ -125,6 +103,10 @@ public class ScadProcessor {
 		return files;
 	}
 
+	/**
+	 * Returns the oriented Corners in an ArrayList of Unions.
+	 * @return ArrayList of Corner Unions
+	 */
 	public ArrayList<Union> renderCornerFiles() {
 		ArrayList<Union> files = new ArrayList<>();
 		ArrayList<Corner> corners = new Quicksort<Corner>(getCorners(), "getWidth").sortArray();
@@ -147,16 +129,17 @@ public class ScadProcessor {
 				cornerWidth = 0;
 			}
 
-			files.get(fileIndex).getObjects().add(new Translate(c,
-					new Vector(c.getWidth() * 0.5, c.getWidth() * 0.5).add(new Vector(cornerWidth, cornerLength)), 0));
-
-			// area of Corner is a square so Width of c = Length of c
+			files.get(fileIndex).getObjects().add(new Translate(c, new Vector(c.getWidth() * 0.5, c.getWidth() * 0.5).add(new Vector(cornerWidth, cornerLength)), 0));
 			cornerWidth += c.getWidth();
 		}
 
 		return files;
 	}
 
+	/**
+	 * Returns the oriented Walls in an ArrayList of Unions.
+	 * @return ArrayList of Wall Unions
+	 */
 	public ArrayList<Union> renderWallFiles() {
 		ArrayList<Union> files = new ArrayList<>();
 		ArrayList<Wall> walls = new Quicksort<Wall>(getWalls(), "getLength").sortArray();
@@ -179,14 +162,17 @@ public class ScadProcessor {
 				columnWidth = 0;
 			}
 
-			files.get(fileIndex).getObjects().add(new Translate(new Rotate(w, -w.getE().toVector().angleInDegrees(), 0, 0, 1),
-					new Vector(w.getLength() * 0.5,  params.getWallWidth() * 0.5).add(new Vector(columnWidth, rowLength)), 0.5 * params.getEpsilon() + 0.5 * (params.getHeight() - params.getBasePlateHeight())));
-
+			files.get(fileIndex).getObjects().add(new Translate(new Rotate(w, -w.getE().toVector().angleInDegrees(), 0, 0, 1), new Vector(w.getLength() * 0.5,  params.getWallWidth() * 0.5).add(new Vector(columnWidth, rowLength)), 0.5 * params.getEpsilon() + 0.5 * (params.getHeight() - params.getBasePlateHeight())));
 			columnWidth += w.getLength();
 		}
+		
 		return files;
 	}
 
+	/**
+	 * Returns the Walls as Unions of ScadObjects.
+	 * @return ScadObject of Walls
+	 */
 	public ScadObject outputWalls() {
 		ArrayList<ScadObject> objectList = new ArrayList<>();
 
@@ -199,6 +185,10 @@ public class ScadProcessor {
 		return (new Union(objectList));
 	}
 
+	/**
+	 * Returns the Corners as Unions of ScadObjects.
+	 * @return ScadObject of Corners
+	 */
 	public ScadObject outputCorners() {
 		ArrayList<ScadObject> objectList = new ArrayList<>();
 
@@ -209,6 +199,10 @@ public class ScadProcessor {
 		return (new Union(objectList));
 	}
 
+	/**
+	 * Returns the BasePlates as Unions of ScadObjects.
+	 * @return ScadObject of BasePlates
+	 */
 	public ScadObject outputBasePlates() {
 		ArrayList<ScadObject> objectList = new ArrayList<>();
 
@@ -219,6 +213,71 @@ public class ScadProcessor {
 		}
 
 		return (new Union(objectList));
+	}
+
+	// getters - setters
+	/**
+	 * Returns the Params object of the ScadProcessor.
+	 * @return Params object of ScadProcessor
+	 */
+	public Params getParams() {
+		return params;
+	}
+
+	/**
+	 * Sets the Params object of the ScadProcessor.
+	 * @param params the Params object to be set for ScadProcessor
+	 */
+	public void setParams(Params params) {
+		this.params = params;
+	}
+
+	/**
+	 * Returns the ArrayList of Walls of the ScadProcessor.
+	 * @return ArrayList of Walls
+	 */
+	public ArrayList<Wall> getWalls() {
+		return walls;
+	}
+
+	/**
+	 * Sets the ArrayList of Walls of the ScadProcessor.
+	 * @param walls the ArrayList to be set for ScadProcessor
+	 */
+	public void setWalls(ArrayList<Wall> walls) {
+		this.walls = walls;
+	}
+
+	/**
+	 * Returns the ArrayList of Corners of the ScadProcessor.
+	 * @return ArrayList of Corners
+	 */
+	public ArrayList<Corner> getCorners() {
+		return corners;
+	}
+
+	/**
+	 * Sets the ArrayList of Corners of the ScadProcessor.
+	 * @param corners the ArrayList to be set for ScadProcessor
+	 */
+	public void setCorners(ArrayList<Corner> corners) {
+		this.corners = corners;
+	}
+
+	/**
+	 * Returns the ArrayList of BasePlates of the ScadProcessor.
+	 * @return ArrayList of BasePlates
+	 */
+	public ArrayList<BasePlate> getBasePlates() {
+		return basePlates;
+	}
+
+	/**
+	 * Sets the ArrayList of BasePlates of the ScadProcessor.
+	 * @param basePlates the ArrayList to be set for ScadProcessor
+	 */
+	public void setBasePlates(ArrayList<BasePlate> basePlates) {
+		this.basePlates = basePlates;
 	}
 
 }
