@@ -42,7 +42,7 @@ Für die Erstellung der Nachfolger- und Vorgängerreferenzen zwischen den Kanten
 Anschließend sortiert die Anwendung diese mittels der \icode{angle()}-Methode anhand des Winkels.
 Dabei wird die jeweilige Kante $E_i$ in einen Vektor, welcher zwischen die beiden Kantenknoten gespannt werden kann, konvertiert, damit die \icode{angle()}-Funktion aufrufbar ist.
 Diese gibt den Winkel des Vektors zur x-Achse im Intervall $(-\pi,\pi]$ aus.
-Aus den angeordneten Kanten $E$ lassen sich unter Beachtung des mathematisch positivem Umlaufsinnes der Kanten an den Flächen nun folgende Beziehungen ableiten. 
+Aus den angeordneten Kanten $E$ lassen sich unter Beachtung des mathematisch positivem Umlaufsinnes der Kanten an den Flächen nun folgende Beziehungen ableiten.:
 \begin{enumerate}
 	\item Die Zwillingskante von $E_{i+1}$ ist der Vorgänger von $E_i$
 	\item $E_{i-1}$ ist der Nachfolger der Zwillingskante von $E_i$ 
