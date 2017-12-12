@@ -30,11 +30,8 @@
 \usepackage{calc} %für Seitennummerierung
 \usepackage{units}
 \usepackage{amssymb}
-
-
-
-
 \usepackage{lastpage} %Liest Seitenanzahl
+
 %==========TODO===============
 \newcommand{\todoinline}[1]{\todo[inline]{#1}}
 
@@ -160,7 +157,8 @@
 \begin{document}
 	
 	\renewcommand{\thelstlisting}{\arabic{lstlisting}}
-	
+	% renaming the bibliography
+	\renewcommand{\bibname}{Internetquellenverzeichnis}	
 	
 	\listoftodos
 	\include{Kapitel/001Titelseite}
