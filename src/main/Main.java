@@ -85,7 +85,7 @@ public class Main {
 
 			// printing the scads
 			printSCAD(proc, folderName);
-
+			
 			// printing the stls
 			printSTL(folderName);
 		} catch (ParseException e) {

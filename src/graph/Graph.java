@@ -46,16 +46,6 @@ public class Graph {
 	private void processData(ArrayList<Line> ls) {
 		int i = 0;
 
-		do {
-			if (ls.get(i).toVector().getLength() > maxPrintWidth) {
-				ls.add(new Line(ls.get(i).getP1(), ls.get(i).getP1().add(ls.get(i).toVector().multiply(0.5))));
-				ls.add(new Line(ls.get(i).getP2(), ls.get(i).getP2().add(ls.get(i).toVector().multiply(-0.5))));
-				ls.remove(ls.get(i));
-			} else {
-				i += 1;
-			}
-		} while (i != ls.size() - 1);
-
 		// create nodes and egdes
 		for (Line l : ls) {
 			Node n1 = createNode(l.getP1());
@@ -173,32 +163,34 @@ public class Graph {
 	 *            of ArrayList containing all adjacent Edges
 	 */
 	private void sortEdges(ArrayList<ArrayList<Edge>> e) {
-		ArrayList<Edge> sortedEdges = new ArrayList<>();
+		ArrayList<Double> doubles = new ArrayList<>();
 		
 		for (ArrayList<Edge> eList : e) {
-			sortedEdges.clear();
-			for (Edge edg : eList) {
-				int index = 0;
-				for(int i = 0; i < sortedEdges.size(); i++){
-					if(sortedEdges.get(i).toVector().angle() > edg.toVector().angle()){
-						index = i;
-						break;
-					}
-					if(i == sortedEdges.size() - 1){
-						index = i + 1;
-					}
-				}
-					
-				if (index != sortedEdges.size()){
-					sortedEdges.add(index, edg);
-				} else {
-					sortedEdges.add(edg);
-				}
-					
-				
-			}
-			eList = (ArrayList<Edge>) sortedEdges.clone();
+			doubles.clear();
 			
+			for (Edge edg : eList) {
+				doubles.add(edg.toVector().angle());
+				
+				double temp = 0.0;
+				
+				Edge tempEdg = null;
+				
+				for (int i = 0; i < doubles.size() - 1; i++) {
+					for (int j = i + 1; j < doubles.size(); j++) {
+						if (doubles.get(i) > doubles.get(j)) {
+							temp = doubles.get(i);
+							
+							doubles.set(i, doubles.get(j));
+							doubles.set(j, temp);
+							
+							tempEdg = eList.get(i);
+							
+							eList.set(i, eList.get(j));
+							eList.set(j, tempEdg);
+						}
+					}
+				}
+			}
 		}
 	}
 
