@@ -173,33 +173,54 @@ public class Graph {
 	 *            of ArrayList containing all adjacent Edges
 	 */
 	private void sortEdges(ArrayList<ArrayList<Edge>> e) {
-		ArrayList<Edge> sortedEdges = new ArrayList<>();
+		ArrayList<Double> doubles = new ArrayList<>();
 		
 		for (ArrayList<Edge> eList : e) {
-			sortedEdges.clear();
-			for (Edge edg : eList) {
-				int index = 0;
-				for(int i = 0; i < sortedEdges.size(); i++){
-					if(sortedEdges.get(i).toVector().angle() > edg.toVector().angle()){
-						index = i;
-						break;
-					}
-					if(i == sortedEdges.size() - 1){
-						index = i + 1;
-					}
-				}
-					
-				if (index != sortedEdges.size()){
-					sortedEdges.add(index, edg);
-				} else {
-					sortedEdges.add(edg);
-				}
-					
-				
-			}
-			eList = (ArrayList<Edge>) sortedEdges.clone();
-			
-		}
+						doubles.clear();
+			 			for (Edge edg : eList) {
+							doubles.add(edg.toVector().angle());
+							double temp = 0.0;
+							Edge tempEdg = null;
+							for (int i = 0; i < doubles.size() - 1; i++) {
+								for (int j = i + 1; j < doubles.size(); j++) {
+									if (doubles.get(i) > doubles.get(j)) {
+										temp = doubles.get(i);
+										doubles.set(i, doubles.get(j));
+										doubles.set(j, temp);
+										tempEdg = eList.get(i);
+										eList.set(i, eList.get(j));
+										eList.set(j, tempEdg);
+									}
+								}
+							}
+			 			}
+			 		}
+		
+//		for (ArrayList<Edge> eList : e) {
+//			sortedEdges.clear();
+//			for (Edge edg : eList) {
+//				int index = 0;
+//				for(int i = 0; i < sortedEdges.size(); i++){
+//					if(sortedEdges.get(i).toVector().angle() < edg.toVector().angle()){
+//						index = i;
+//						break;
+//					}
+//					if(i == sortedEdges.size() - 1){
+//						index = i + 1;
+//					}
+//				}
+//					
+//				if (index != sortedEdges.size()){
+//					sortedEdges.add(index, edg);
+//				} else {
+//					sortedEdges.add(edg);
+//				}
+//					
+//				
+//			}
+//			eList = (ArrayList<Edge>) sortedEdges.clone();
+//			
+//		}
 	}
 
 	// getter und setter
