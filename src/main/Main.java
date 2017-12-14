@@ -13,6 +13,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import org.kabeja.parser.ParseException;
 
 import gui.GUI;
+import io.ClipboardCopier;
 import io.DXFReader;
 import io.SCADFinder;
 import io.STLConverter;
@@ -50,7 +51,9 @@ public class Main {
 		try {
 			// creating scadprocessor using targetfile and params object
 			ScadProcessor proc = new ScadProcessor(DXFReader.getAutocadFile(targetFile), p);
-
+			
+			ClipboardCopier.copyToClipboard(new CornerPin(proc.getCorners().get(0).getN().getAdjacentEdges().get(0), 0, p).toString());
+			System.out.println(new CornerPin(proc.getCorners().get(0).getN().getAdjacentEdges().get(1), 0, p).toString());
 			// for showing the result folder
 			getGui().getShowResultButton().setResultFolder(folderName);
 
