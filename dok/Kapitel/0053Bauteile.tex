@@ -29,7 +29,7 @@ Nun können Wände in diese eingeschoben werden.
 
 %\todoinline{Abbildungen?}
 \subsubsection{Eckpin}
-\begin{Bild}{Draufsicht auf den unteren Abschnitt eines Eckpfeilers}
+\begin{Bild}{Draufsicht auf den unteren Abschnitt eines Eckpfeilers mit zwei anliegenden Flächen}
 	\includegraphics[height=150px]{Bilder/CornerPin2D-07.png}
 \end{Bild}
 Die Summe aller Objekte des Typs \icode{CornerPin} repräsentieren den untere Abschnitt des Eckpfeilers, welcher die Verbindungen der Grundplatten mit diesem gewährleistet.
@@ -47,41 +47,30 @@ Ein Eckpfeiler hat so einen stabilisierten unteren Abschnitt, auch außerhalb de
 \subsection{Wandstücke}
 Eine Wand verkörpert eine Kante der DCEL.
 Für die Erstellung dieser wird ein Quader mit der Länge der entsprechenden Kante gebildet und nach dieser rotiert.
-Jeweils ein Eckzylinder wird anschließend an den Start- bzw. Endknoten des Quaders verschoben, sodass zwischen diesem und den beiden \q{CornerCylinder} eine Differenzmenge gebildet werden kann.
+Jeweils ein Eckzylinder wird anschließend an den Start- bzw. Endknoten des Quaders verschoben, sodass zwischen diesem und den beiden Eckzylindern eine Differenzmenge gebildet werden kann.
 Das Resultat ist eine Wand, welche abschließend in einen Eckpfeiler eingesetzt werden kann. 
-
 \begin{Bild}{Querschnitt einer Wand}
-	\includegraphics[width = 100mm]{Bilder/Wand2D-04}
+	\includegraphics[width = 110mm]{Bilder/Wand2D-04}
 \end{Bild}
-\begin{Bild}{Ein Wandteil (Screenshot der Verfasser)}
+\begin{Bild}{Ein Wand in der OpenSCAD Darstellung (Screenshot der Verfasser)}
 	\includegraphics[height=200px, width=240px]{Bilder/Untereinheit_Wand}
 \end{Bild}
-Der größte dieser Quader stellt, wie in Abbildung~\thebildnr\ zu sehen, den mittleren Hauptteil dar.
-Dieser Teil verfügt über die tatsächliche Länge der Wand, welche im Grundriss angegeben ist.
-Die Höhe und Breite der Wand werden jedoch mit konstanten Parametern zu Beginn des Programmes festgelegt. \\
-%Einer dieser Quader stellt das mittlere Wandstück dar, welches die wirkliche Wand repräsentiert und somit die entsprechende Länge und die definierte \icode{WallWidth} Wandbreite besitzt.
-Die zwei kleineren Quader dienen dem Befestigen der Wand am Eckpfeiler.
-Dafür wurden die beiden Quader mittig an die beiden schmalen Seiten des Mittelteils gesetzt.
-Die Verbindungsstücke verfügen dabei über die gleiche Höhe wie die eigentliche Wand, ihre Breite beträgt aber nur ein Drittel der Wandbreite.\\
-\todoinline{Details über die Länge der Pins hinzufügen!}
-%Zwei kleinere werden eingesetzt um die Verankerung mit den Eckpfeilern zu garantieren.
-%Diese werden am Anfang und Ende des Mittelstückes angelegt und können so an den Enden in die Eckzylinder greifen.
-\todoinline{$\varepsilon$?}
 
 
 
 \subsection{Grundplatten}
-Grundplatten repräsentieren die Flächen des Grundrisses.
-Sie sind aufgebaut aus einem extrudierten Polygon, welches inverse Steckmechanismen am Boden aufweist.
-\begin{Bild}{Eine Grundplatte (Screenshot der Verfasser)}
+Eine Grundplatte wird anhand einer Fläche des Grundrisses konstruiert.
+Sie sind aufgebaut aus einem geradem Prisma mit einer Polygon-Grundfläche, welches eingestülpte Steckmechanismen an der Unterseite besitzt.
+\begin{Bild}{Stecker einer Grundplatte}
 	\includegraphics[height=200px]{Bilder/Untereinheit_GP}
 \end{Bild}
-Ein Ausschnitt einer solchen Grundplatte ist in Abbildung~\thebildnr\ zu sehen.
-Die inversen Steckmechanismen dienen dem Anbringen der Grundplatte an die Eckpfeiler.
-Für jeden Knoten, der an der Fläche anliegt wird hierbei je eine Einkerbung vorgenommen, die auf das Stecksystem des zu dem Knoten zugehörigen Eckpfeiler passt.
-%Diese werden durch Differenzen des Ausgangspolygon mit dem negativen komplementären CornerPin realisiert.
-%So entsteht für jeden Knoten der Fläche eine Einkerbung für die Verankerung.
-\todoinline{Abstand zwischen Flächen; Vergrößerung von an das äußere Gebiet angrenzende Fläche}
+Für die Berechnung des 3D-Objekts, wird an jedem Knoten der Fläche wird ein Eckpin gebildet und von dem polygonalen Prisma abgezogen, sodass genannte Einkerbungen durch eine Differenzmenge entstehen. 
+Jede Grundplatte, die an das äußere Gebiet angrenzt wird zudem an dieser Seite um die halbe Wanddicke vergrößert, damit ein abgeschlossener Eindruck des gesamten 3D-Modells entsteht.(Siehe Abbildung \thebildnr)
+\begin{Bild}{Vergrößerung der äußeren Grundplatten}
+	\includegraphics[width=120mm]{Bilder/GrundplatteVergroesserung-08}
+\end{Bild}
+
+
 
 \subsection{Zuweisen von Berechnungskonstanten}
 \label{params}
