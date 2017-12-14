@@ -2,6 +2,7 @@ package graph;
 
 import java.util.ArrayList;
 
+import io.Quicksort;
 import render.*;
 
 public class Graph {
@@ -166,31 +167,33 @@ public class Graph {
 		ArrayList<Double> doubles = new ArrayList<>();
 		
 		for (ArrayList<Edge> eList : e) {
-			doubles.clear();
-			
-			for (Edge edg : eList) {
-				doubles.add(edg.toVector().angle());
-				
-				double temp = 0.0;
-				
-				Edge tempEdg = null;
-				
-				for (int i = 0; i < doubles.size() - 1; i++) {
-					for (int j = i + 1; j < doubles.size(); j++) {
-						if (doubles.get(i) > doubles.get(j)) {
-							temp = doubles.get(i);
-							
-							doubles.set(i, doubles.get(j));
-							doubles.set(j, temp);
-							
-							tempEdg = eList.get(i);
-							
-							eList.set(i, eList.get(j));
-							eList.set(j, tempEdg);
-						}
-					}
-				}
-			}
+//			doubles.clear();
+			eList = (ArrayList<Edge>) new Quicksort<Edge>(eList, "angle").sortArray().clone();
+//			for (Edge edg : eList) {
+//				
+//			}
+//				doubles.add(edg.toVector().angle());
+//				
+//				double temp = 0.0;
+//				
+//				Edge tempEdg = null;
+//				
+//				for (int i = 0; i < doubles.size() - 1; i++) {
+//					for (int j = i + 1; j < doubles.size(); j++) {
+//						if (doubles.get(i) > doubles.get(j)) {
+//							temp = doubles.get(i);
+//							
+//							doubles.set(i, doubles.get(j));
+//							doubles.set(j, temp);
+//							
+//							tempEdg = eList.get(i);
+//							
+//							eList.set(i, eList.get(j));
+//							eList.set(j, tempEdg);
+//						}
+//					}
+//				}
+//			}
 		}
 	}
 

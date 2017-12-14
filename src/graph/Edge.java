@@ -51,6 +51,13 @@ public class Edge {
 	public double angleToEdge(Edge e) {
 		return (this.toVector().angletoVector(e.toVector()));
 	}
+	/**
+	 * Calculates the atan2 angle of the Edge.
+	 * @return angle between Edge and x-axis
+	 */
+	public double angle(){
+		return (this.toVector().angle());
+	}
 
 	/**
 	 * Returns the Node that both Edges share.
