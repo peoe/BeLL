@@ -29,6 +29,7 @@ Nun können Wände in diese eingeschoben werden.
 
 %\todoinline{Abbildungen?}
 \subsubsection{Eckpin}
+\label{Eckpin}
 \begin{Bild}{Draufsicht auf den unteren Abschnitt eines Eckpfeilers mit zwei anliegenden Flächen}
 	\includegraphics[height=150px]{Bilder/CornerPin2D-07.png}
 \end{Bild}
@@ -109,33 +110,73 @@ In Folgenden Teilen des 3D-Modells tritt Epsilon auf:
 
 Das im Programm definierte Epsilon wurde mittels einem Experiment(siehe Abbildung \thebildnr) ermittelt.
 Dafür wurde ein Stecker und Einstülpungen, die um ein verschiedenes $\epsilon$ vergrößert wurden, gedruckt, sodass getestet wurden konnte, welches Epsilon für den MakerBot Replicator\texttrademark\ 2 am geeignetsten ist.
-Ausgewertet wurde daraus ein Wert von 0.25mm.
-So erkennt man, dass dieser Parameter druckerspezifisch.
+Ausgewertet wurde daraus ein Wert von 0.25mm. \\
+Der $\epsilon$-Parameter ist deswegen ein druckerspezifischer Parameter.
 \begin{Bild}{Versuch zur Ermittlung eines passenden Epsilon-Wertes}
 		\includegraphics[width=120mm]{Bilder/EpsilonTest_cut-09}
 \end{Bild}
 
-\begin{description}[style=nextline]
-	\item[E ($\epsilon$/Epsilon)] 
-		Der Parameter \q{E} entspricht der Konstante $\epsilon$ (Epsilon), welcher aus Gründen der vorteilhaften Kürze der Parameternamen hier verwendet wurde.
-		Somit muss nicht jedes mal \icode{Epsilon} ausgeschrieben werden, es wird auf \icode{E} reduziert.
-		$\epsilon$ bezeichnet den Abstand, welcher zwischen zwei Bauteilen mit einberechnet werden muss, um ein einfaches Zusammenstecken zu gewährleisten.
-	\item[CornerRadius]
-		Der Parameter \q{CornerRadius} entspricht der Konstante, welche den Radius des Grundzylinders der Eckstücken angibt.
-	\item[PinMinLength] 
-		Der Parameter \q{PinMinLength} entspricht der Konstante, welche die minimale Länge des Quaders des positiven Eckstücks angibt, welcher zwischen dem Eckzylinder und dem Pinzylinder platziert wird.
-	\item[PinPWidth] 
-		Der Parameter \q{PinPWidth} entspricht der Konstante, welche die Weite für den Quader des positiven Eckstücks angibt, welcher zwischen dem Eckzylinder und dem Pinzylinder platziert wird.
-	\item[PinPRadius] 
-		Der Parameter \q{PinPRadius} entspricht der Konstante, welche den Radius des Pinzylinders des positiven Eckstücks angibt.
-	\item[PinDistance]
-		Der Parameter \q{PinDistance} entspricht der Konstante, welche die Distanz zwischen dem positiven Pin und den anliegenden Wandstücken angibt, welche für jeden Pin eingehalten werden muss.
-	\item[Height]
-		Der Parameter \q{Height} entspricht der Konstante, welche die Höhe der Wandteile und der Eckzylinder angibt.
-	\item[PinHeight]
-		Der Parameter \q{PinHeight} entspricht der Konstante, welche die Höhe des positiven Pinzylinders angibt.
-	\item[BasePlateHeight]
-		Der Parameter \q{BasePlateHeight} entspricht der Konstante, welche die Höhe der Grundplatte angibt.
-	\item[BasePlatePinCircleHeight]
-		Der Parameter \q{BasePlateCircleHeight} entspricht der Konstante, welche die Höhe der Kreisflächen angibt, die unter den positiven Eckstücken angebracht werden und der Stabilisierung und Verankerung von Grundplatter und Eckstück dienen.
-\end{description}
+\subsubsection{Weiter Konstanten}
+Die restlichen Parameter werden in der folgenden Tabelle gelistet.
+\begin{table}[h]
+	\begin{tabularx}{\textwidth}{XXX}
+	\toprule 
+	Konstante & Bedeutung & Wert in mm \\ 
+	\midrule 
+	CornerRadius & Radius des Basiszylinders der Eckpfeiler & 10 \\ 
+	\hline 
+	PinMinLength & minimale Länge des Pinkopfes am Eckpin & 2 \\ 
+	\hline 
+	PinPWidth & Breite des Quaders des Pinkopfes & 4 \\ 
+	\hline 
+	PinPRadius & Radius des Zylinders am Pinkopf & 4 \\ 
+	\hline 
+	PinDistance & minimaler Abstand zwischen Pinkopf und Wand & 2 \\ 
+	\hline 
+	Height & Höhe des 3D-Modells & 75 \\ 
+	\hline 
+	pinHeight & Höhe des Pinkopfes & 4 \\ 
+	\hline 
+	BasePlateHeight & Höhe der Grundplatten & 4 \\ 
+	\hline 
+	basePlatePinCircleHeight & Höhe der Kreissegmenten an den Eckpins & 1 \\ 
+	\hline 
+	wallWidth & Breite der Wände & 6 \\ 
+	\hline 
+	maxPrintWidth & Breite der Druckfläche & 185 \\ 
+	\hline 
+	maxPrintHeight & Höhe der Druckfläche & 153 \\  
+	\end{tabularx}
+\end{table} 
+\todo{fick diese Tabellenscheiße}
+%\subsubsection{CornerRadius}
+%Der Eckradius entspricht der Konstante, welche den Radius des Basiszylinders der Eckpfeiler angibt.
+%Er ist als 10 Milimeter definiert.
+%\subsubsection{PinMinLength}
+%Die minimale Länge eines Pins oder auch \icode{PinMinLength} genannt, legt die kleinstmögliche Länge des Pinkopfes an den Eckpins fest. (Siehe Kapitel \ref{Eckpin})
+%Er ergibt sich aus der Addition von \icode{PinPWidth} und \icode{PinPRadius}.
+%\subsubsection{PinPWidth}
+%Dieser Parameter definiert die minimale Länge im Pinkopf vorkommenden Quader an einem Eckpfeiler.   
+%
+%\subsection{title}
+%
+%\begin{description}[style=nextline]
+%	\item[CornerRadius]
+%		Der Parameter \q{CornerRadius} entspricht der Konstante, welche den Radius des Grundzylinders der Eckstücken angibt.
+%	\item[PinMinLength] 
+%		Der Parameter \q{PinMinLength} entspricht der Konstante, welche die minimale Länge des Quaders des positiven Eckstücks angibt, welcher zwischen dem Eckzylinder und dem Pinzylinder platziert wird.
+%	\item[PinPWidth] 
+%		Der Parameter \q{PinPWidth} entspricht der Konstante, welche die Weite für den Quader des positiven Eckstücks angibt, welcher zwischen dem Eckzylinder und dem Pinzylinder platziert wird.
+%	\item[PinPRadius] 
+%		Der Parameter \q{PinPRadius} entspricht der Konstante, welche den Radius des Pinzylinders des positiven Eckstücks angibt.
+%	\item[PinDistance]
+%		Der Parameter \q{PinDistance} entspricht der Konstante, welche die Distanz zwischen dem positiven Pin und den anliegenden Wandstücken angibt, welche für jeden Pin eingehalten werden muss.
+%	\item[Height]
+%		Der Parameter \q{Height} entspricht der Konstante, welche die Höhe der Wandteile und der Eckzylinder angibt.
+%	\item[PinHeight]
+%		Der Parameter \q{PinHeight} entspricht der Konstante, welche die Höhe des positiven Pinzylinders angibt.
+%	\item[BasePlateHeight]
+%		Der Parameter \q{BasePlateHeight} entspricht der Konstante, welche die Höhe der Grundplatte angibt.
+%	\item[BasePlatePinCircleHeight]
+%		Der Parameter \q{BasePlateCircleHeight} entspricht der Konstante, welche die Höhe der Kreisflächen angibt, die unter den positiven Eckstücken angebracht werden und der Stabilisierung und Verankerung von Grundplatter und Eckstück dienen.
+%\end{description}
