@@ -12,15 +12,42 @@ Der linke obere Knoten ist hier mit (1) bezeichnet, die rechte Kante mit (2) und
 
 \section{Doubly connected edge list}
 Um planare Graphen ohne Informationsverlust zu speichern werden in der Informatik Referenzen zwischen den einzelnen Bestandteilen des Graphen eingesetzt. \\
-In der sogenannten \q{Doubly connected edge list} (DCEL) erhält eine Kante, die aus einem Anfangsknoten und Endknoten besteht, jeweils eine Vorgänger-, eine Nachfolger- und eine Zwillingskante. 
-Die jeweiligen Zwillingskanten beschreiben hierbei die invertierten Varianten der betrachteten Kanten.
-Jedem Knoten wird außerdem eine ausgehende Kante und allen Flächen eine anliegende Kante zugewiesen (vgl. Quelle \cite{dcel} und \cite{dcelwiki}). \\
+In der sogenannten \q{Doubly connected edge list} (DCEL) erhält eine Kante, die aus einem Anfangsknoten und Endknoten besteht, jeweils eine Vorgänger-, Nachfolger- und Zwillingskante zugewiesen und zudem die angrenzende Fläche. 
+Durch die Darstellung einer Kante des Grundrisses durch zwei zueinander entgegengesetzt laufenden Kanten wird gewährt, dass sich Flächen keine Kante teilen, was zu Komplikationen in verschiedenen Operationen kommen kann.\\
+Zudem wird für einen Knoten der DCEL eine ausgehende Kante und für eine Fläche eine anliegende Kante gespeichert(vgl. Quelle \cite{dcel} und \cite{dcelwiki}). \\
+
 \begin{Bild}{Schema einer DCEL (Abbildung der Verfasser)}
-	\includegraphics[width=150px]{Bilder/DCEL_Scheme}
+	\includegraphics[width=250px]{Bilder/DCEL-10}
 \end{Bild}
-In Abbildung~\thebildnr\ wird die Kante \q{e} durch den Anfangsknoten durch \q{N\textsubscript{1}} und den Endknoten \q{N\textsubscript{2}} gebildet.
-Die Zwillingskante wird mit \q{twin(e)} bezeichnet, die Nachfolgerkante mit \q{next(e)} und die Vorgängerkante mit \q{prev(e)}. \\
-Diese Referenzierungen ermöglichen es, ausgehend von einem Element ohne umfangreiche Berechnungen auf alle anderen Objekte zu schließen, indem bei der Betrachtung von Knoten und Flächen die zugehörigen Kanten, beziehungsweise bei der Betrachtung von einzelnen Kanten deren Vorgänger und Nachfolger betrachtet werden.
+Folgende Tabellen zeigen beispielhafte Referenzen von den Bestandteilen einer DCEL anhand Abbildung \thebildnr.\\\\
+\begin{tabularx}{\textwidth}{|Y|Y|}
+	\hline
+	\thead{Knoten} & \thead{ausgehende Kante} \\
+	\hline
+	$N_0$ & $E_1$ \\
+	\hline
+	$N_2$ & $E_6$ \\
+	\hline
+\end{tabularx}\\\\
+
+\begin{tabularx}{\textwidth}{|Y|Y|}
+	\hline
+	\thead{Fläche} & \thead{anliegende Kante} \\
+	\hline
+	$F_0$ & $E_3$ \\
+	$F_1$(äußere Gebiet) & $E_7$ \\
+	\hline
+\end{tabularx}\\\\
+
+\begin{tabularx}{\textwidth}{|Y|Y|Y|Y|Y|}
+	\hline
+	\thead{Kante} & \thead{Nachfolger} & \thead{Vorgänger} & \thead{Zwilling} & \thead{Fläche} \\
+	\hline
+	$E_0$ & $E_1$ & $E_3$& $E_4$& $F_0$ \\
+	\hline
+	$E_1$ & $E_2$ & $E_0$& $E_5$& $F_0$ \\
+	\hline
+\end{tabularx}
 
 \todoinline{Johann wollte DCEL noch mal überarbeiten}
 \section{Convex Hull}
