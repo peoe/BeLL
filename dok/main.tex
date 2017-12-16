@@ -122,7 +122,7 @@
 
 %=========BILDER==============
 \newcounter{seitennr} 
-\setcounter{seitennr}{39} %needs to be changed before publishing
+\setcounter{seitennr}{40} %needs to be changed before publishing
 \def\theseitennr{\arabic{seitennr}}
 \newcounter{bildnr} 
 \def\thebildnr{\arabic{bildnr}}
@@ -162,6 +162,12 @@
 \hyphenation{OpenSCAD}
 \hyphenation{Vor-gäng-er}
 
+%=======FANCY FOOTER FOR LISTOFFIGURES====
+\fancypagestyle{plain}{	
+	\fancyfoot{}
+	\fancyfoot[C]{Seite \thepage{} von \theseitennr}
+}
+
 %============MAIN=DOCUMENT=====================
 \begin{document}
 	
@@ -189,6 +195,8 @@
 	\phantomsection
 	\addcontentsline{toc}{chapter}{Internetquellenverzeichnis}
 	\include{Kapitel/007Quellenverzeichnis}
+	\phantomsection
+	\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
 	\listoffigures
 	\include{Kapitel/0090Betreuerdank}
 	\include{Kapitel/009Selbstaendigkeit}
