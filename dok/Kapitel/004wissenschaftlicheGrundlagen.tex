@@ -1,8 +1,8 @@
 \chapter{Wissenschaftliche Grundlagen}
 \section{Planare Graphen}
-Zur einfacheren Handhabung des Grundrisses wird dieser in einen planaren Graphen umgewandelt. 
+Zur einfacheren Handhabung wird der Grundriss in einen planaren Graphen umgewandelt. 
 Ein planarer, auch plättbarer Graph ist ein Graph der in einer Ebene mithilfe von Punkten bzw. Knoten und Kanten dargestellt werden kann, ohne dass sich zwei oder mehr Kanten schneiden (vgl. Quelle \cite{planarGraph}). 
-Jede Fläche des Graphen wird dabei durch mindestens drei verschiedene Kanten beschrieben, die den Rand dieser Fläche darstellen. 
+Jede Fläche des Graphen wird dabei durch mindestens drei verschiedene Kanten beschrieben, die den Rand der Fläche darstellen. 
 Die Fläche um den Graphen herum, welche scheinbar unbegrenzt groß ist, wird äußeres Gebiet genannt.
 \begin{Bild}{Schema eines planaren Graphen (Abbildung der Verfasser)}
 	\includegraphics[width = 100px, height = 100px]{Bilder/Graph_Scheme}
@@ -11,16 +11,16 @@ In Abbildung~\thebildnr\ wird ein solcher planarer Graph dargestellt.
 Der linke obere Knoten ist hier mit (1) bezeichnet, die rechte Kante mit (2) und die innere Fläche mit (3).
 
 \section{Doubly connected edge list}
-Um planare Graphen ohne Informationsverlust zu speichern werden in der Informatik Referenzen zwischen den einzelnen Bestandteilen des Graphen eingesetzt. \\
-In der sogenannten \q{Doubly connected edge list} (DCEL) erhält eine Kante, die aus einem Anfangsknoten und Endknoten besteht, jeweils eine Vorgänger-, Nachfolger- und Zwillingskante zugewiesen und zudem die angrenzende Fläche. 
-Durch die Darstellung einer Kante des Grundrisses durch zwei zueinander entgegengesetzt laufenden Kanten wird gewährt, dass sich Flächen keine Kante teilen, was zu Komplikationen in verschiedenen Operationen kommen kann.\\
-Zudem wird für einen Knoten der DCEL eine ausgehende Kante und für eine Fläche eine anliegende Kante gespeichert(vgl. Quelle \cite{dcel} und \cite{dcelwiki}). \\
+Um planare Graphen ohne Informationsverlust zu speichern wird in der Informatik eine sogenannte \q{Doubly connected edge list} (DCEL) genutzt.
+In einer DCEL erhält jede Kante, die aus einem Anfangsknoten und Endknoten besteht, jeweils eine Vorgänger-, Nachfolger-, Zwillingskante und die angrenzende Fläche. 
+Durch die Darstellung einer Linie des Grundrisses durch zwei zueinander entgegengesetzt laufenden Kanten wird gewährt, dass sich keine zwei Flächen an einer Kante anliegen.\\
+Zudem wird für einen Knoten der DCEL eine ausgehende Kante und für eine Fläche eine anliegende Kante gespeichert (vgl. Quelle \cite{dcel} und \cite{dcelwiki}). \\
 
 \begin{Bild}{Schema einer DCEL (Abbildung der Verfasser)}
 	\includegraphics[width=250px]{Bilder/DCEL-10}
 \end{Bild}
 
-Folgende Tabellen zeigen beispielhafte Referenzen von den Bestandteilen einer DCEL anhand Abbildung \thebildnr.\\\\
+Folgende Tabellen verdeutlichen die Referenzen der Bestandteilen einer DCEL in Abbildung \thebildnr.\\\\
 
 \begin{tabularx}{\textwidth}{|Y|Y|}
 	\hline
