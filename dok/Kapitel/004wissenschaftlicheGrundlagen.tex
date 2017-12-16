@@ -52,6 +52,7 @@ Folgende Tabellen zeigen beispielhafte Referenzen von den Bestandteilen einer DC
 \end{tabularx}
 
 \todoinline{Johann wollte DCEL noch mal überarbeiten}
+
 \section{Convex Hull}
 Die konvexe Hülle einer Punktmenge ist die kleinste konvexe Menge, in der die Punktmenge enthalten ist.
 Bezogen auf ein Polygon ist die konvexe Hülle folglich ein neues Polygon, welches so wenig wie möglich Punkte beinhaltet, damit alle Elemente des Ursprungspolygons innerhalb des Neuen liegen.
@@ -88,13 +89,14 @@ Hierzu gehören beispielsweise das farbige Hervorheben oder die Modularisierung 
 
 %Modellierung
 Die Modellierung von einfachen Basisobjekten in OpenSCAD erfolgt durch das Verwenden von Schlüsselwörtern wie \icode{cube()}, \icode{sphere()} oder \icode{cylinder()} und Parametern in Klammern.
-Diese Basisobjekte können anschließend durch Mengenoperationen wie Vereinigungen (\icode{union()}), Differenzen (\icode{difference()}) oder Überschneidungen (\icode{intersection()}) und Transformationen wie Skalierungen (\icode{scale()}), Rotationen (\icode{rotate()}) oder Translationen (\icode{translate()}) mit einander verknüpft und kombiniert werden, um neue Objekte nach eigenen Ansprüchen zu bilden.
+Diese Basisobjekte können anschließend durch Mengenoperationen wie Vereinigungen (\icode{union()}), Differenzen (\icode{difference()}) oder Überschneidungen (\icode{intersection()}) und Transformationen wie Skalierungen (\icode{scale()}), Rotationen (\icode{rotate()}) oder Translationen (\icode{translate()}) miteinander verknüpft und kombiniert werden, um neue Objekte nach eigenen Ansprüchen zu bilden.
 
 \begin{Bild}{Eine Vereinigung zweier Würfel in OpenSCAD (Screenshot der Verfasser)}
 	\includegraphics{Bilder/OpenSCAD_Union}
 \end{Bild}
 
-Neben solchen einfachen Objekten, wird außerdem die Möglichkeit geboten, komplexere Objekte wie Polygone (\icode{polygon()}) zu erstellen und diese dann ausgehend vom zweidimensionalen Polygon in ein dreidimensionales Polygon umzuwandeln (\icode{linear\_extrude()}), welches vor allem das Umwandeln von komplexen Formen in Objekte erleichtert. \\
+Neben solchen einfachen Objekten wird außerdem die Möglichkeit geboten, komplexere Objekte wie Polygone (\icode{polygon()}) zu erstellen.
+Diese können dann ausgehend von einem zweidimensionalen Polygon in dreidimensionale Polygone umgewandelt werden (\icode{linear\_extrude()}), welche vor allem das Umwandeln von komplexen Formen in Objekte erleichtert. \\
 
 Die Anweisungen, welche OpenSCAD zum Modellieren verwendet, werden in einfachen Textdateien im \q{.scad}-Format gespeichert.
 Die Simplizität dieser Textdateien erlaubt es, die aus dem zu entwickelnden Programm erhaltenen Anweisungen in .scad-Dateien zu speichern, welche von OpenSCAD eingelesen, eingesehen und bearbeitet werden können. \\
@@ -107,7 +109,7 @@ Dies geschieht entweder über die Oberfläche von OpenSCAD oder mittels einer Ko
 \section{3D-Drucker MakerBot Replicator\texttrademark\ 2}
 %Erklärung 3D-Drucker
 Der vorliegende 3D-Drucker ist das Modell Replicator\texttrademark\ 2 der Firma MakerBot.
-Dieser Drucker verfügt über eine höhenverstellbare Grundplatte, auf der das Filament\footnote{Filament bezeichnet das Material, welches der 3D-Drucker zum Drucken verwendet.} aufgetragen und das finale Objekt gedruckt wird, und einen sogenannten \q{Extruder}, welcher die Funktion übernimmt, das zu druckende Filament zu erhitzen und mit einer konstanten Filamentbreite auf die Grundplatte bzw. das gedruckte Objekt aufzutragen. 
+Dieser Drucker verfügt über eine höhenverstellbare Grundplatte, auf der das Filament\footnote{Filament bezeichnet das Material, welches der 3D-Drucker zum Drucken verwendet.} aufgetragen und das finale Objekt gedruckt wird und einen sogenannten \q{Extruder}, welcher die Funktion übernimmt, das zu druckende Filament zu erhitzen und mit einer konstanten Filamentbreite auf die Grundplatte bzw. das gedruckte Objekt aufzutragen. 
 Mithilfe dieser zwei Hauptbestandteile wird schichtweise Filament aufgetragen, welches aushärtet und so nach und nach das Objekt bildet. \\
 Die Höhe der Grundplatte wird während des Druckvorganges automatisch vom Drucker variiert und nach Abschluss des Druckens wieder auf den Ausgangszustand zurückgesetzt.
 Um die Beweglichkeit des Extruders zu garantieren, ist dieser auf drei Achsen befestigt, sodass drei Motoren ihn auf diesen Achsen verschieben können. \\

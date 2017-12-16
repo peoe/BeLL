@@ -21,7 +21,6 @@ import render.*;
 import render.objects.*;
 
 public class Main {
-
 	// gui for the program
 	private static GUI gui;
 

@@ -36,6 +36,7 @@
 
 
 \usepackage{lastpage} %Liest Seitenanzahl
+
 %==========TODO===============
 \newcommand{\todoinline}[1]{\todo[inline]{#1}}
 
@@ -120,7 +121,7 @@
 
 %=========BILDER==============
 \newcounter{seitennr} 
-\setcounter{seitennr}{35} %needs to be changed before publishing
+\setcounter{seitennr}{38} %needs to be changed before publishing
 \def\theseitennr{\arabic{seitennr}}
 \newcounter{bildnr} 
 \def\thebildnr{\arabic{bildnr}}
@@ -164,11 +165,14 @@
 \begin{document}
 	
 	\renewcommand{\thelstlisting}{\arabic{lstlisting}}
-	
+	% renaming the bibliography
+	\renewcommand{\bibname}{Internetquellenverzeichnis}	
 	
 	\listoftodos
 	\include{Kapitel/001Titelseite}
 	\include{Kapitel/002Vorwort}
+	\setcounter{page}{1}
+	\cfoot{Seite \thepage{} von \theseitennr}
 	\tableofcontents
 	\include{Kapitel/003Einleitung}
 	\include{Kapitel/004wissenschaftlicheGrundlagen}
@@ -181,6 +185,8 @@
 	\include{Kapitel/0055Ausgabe}
 	
 	\include{Kapitel/006Ausblick}
+	\phantomsection
+	\addcontentsline{toc}{chapter}{Internetquellenverzeichnis}
 	\include{Kapitel/007Quellenverzeichnis}
 	\listoffigures
 	\include{Kapitel/0090Betreuerdank}

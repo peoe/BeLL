@@ -2,7 +2,7 @@
 \subsection{Erstellung des Ausgabeordners}
 Alle ausgegebenen Dateien des Programms werden in einem Ordner zusammengefasst.
 Dieser Ordner wird im gleichen Verzeichnis erstellt, in dem auch das Programm ausgeführt wird.
-Als Name des Verzeichnis wird der Name benutzt, den der Nutzer in der GUI eingegeben hat.
+Als Name des Verzeichnisses wird der Name genutzt, den der Nutzer in der GUI eingegeben hat.
  
 \begin{code}[Erstellung der Unterordner]
 	private static void createDirs(String folderName) {
@@ -20,7 +20,7 @@ Im Unterordner \q{scad} dieses Ordners finden sich dann sämtliche .scad-Dateien
 \subsection{OpenSCAD Java Interface}
 Für die erleichterte Erstellung von OpenScad Objekten wurde ein Java Interface \icode{ScadObject} erstellt, welches alle für das Projekt wichtigen Befehle enthält.
 Die Methode \icode{toString()} stellt in den Klassen des Interfaces die Übergabe des OpenSCAD Befehlsstrings dar.
-So kann man z.B. mit der Klasse \icode{Cube} einen Quader mit gegebener Länge, Höhe und Breite erstellen der dann wie folgt mit \icode{Cube.toString()} in einen String konvertiert wird:
+So kann man z.B. mit der Klasse \icode{Cube} einen Quader mit gegebener Länge, Höhe und Breite erstellen, der dann wie folgt mit \icode{Cube.toString()} in einen String konvertiert wird:
 \icode{cube([Länge, Breite, Höhe]);}\\
 
 \begin{Bild}{Resultat der Eingabe: \icode{new Cube(3, 4, 5).toString()} (Screenshot der Verfasser)}
@@ -30,7 +30,7 @@ So kann man z.B. mit der Klasse \icode{Cube} einen Quader mit gegebener Länge, 
 \subsection{STL Konvertierung}
 Um die ermittelten .scad-Dateien im .stl-Format auszugeben, wird die Kommandozeilenfunktionalität von OpenSCAD verwendet.
 Die verwendete Anweisung setzt sich hierbei aus dem Pfad zur \icode{openscad.exe}, dem Parameter \icode{-o} und zwei weiteren Parametern zusammen. 
-Diese beiden weiteren Parameter stehen zum einen für den Namen der Ausgabedatei und den Namen der Eingabedatei zusammen.
+Die beiden weiteren Parameter stehen zum einen für den Namen der Ausgabedatei und zum anderen für den Namen der Eingabedatei.
 Eine vollständige Anweisung könnte wie folgt aussehen: \icode{C:\textbackslash \textbackslash Program Files\textbackslash OpenSCAD\textbackslash openscad.exe -o \textbackslash stl\textbackslash walls1.stl \textbackslash scad\textbackslash walls1.scad} \\
 Hierzu werden zunächst alle Dateien im \q{scad}-Unterordner mit der Endung .scad durch die Klasse \icode{SCADFinder} ermittelt und in einem Feld ausgegeben.
 
