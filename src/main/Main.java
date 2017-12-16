@@ -13,7 +13,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import org.kabeja.parser.ParseException;
 
 import gui.GUI;
-import io.ClipboardCopier;
 import io.DXFReader;
 import io.SCADFinder;
 import io.STLConverter;
