@@ -18,6 +18,7 @@ Diese sind an zwei voneinander unabhängigen Abschnitten \q{CornerPin} und \q{Co
 \begin{Bild}{Ein Eckpfeiler (Screenshot der Verfasser)}
 	\includegraphics[height=200px]{Bilder/Untereinheit_Ecke}
 \end{Bild}
+
 \subsubsection{Eckzylinder}
 Der Eckzylinder, im Code \icode{CornerCylinder} stellt den oberen Teil des Eckpfeilers dar.
 Dieser besteht aus einem zylindrischen Grundbauteil mit Vertiefungen.
@@ -44,7 +45,6 @@ Falls ein Eckpin für das äußere Gebiet berechnet werden soll, wird anstatt de
 Dies resultiert in ein Zylindersegment, wie es in Abbildung \thebildnr (rot) zu sehen ist.
 Ein Eckpfeiler hat so einen stabilisierten unteren Abschnitt, auch außerhalb des Grundrisses.
 
-
 \subsection{Wandstücke}
 Eine Wand verkörpert eine Kante der DCEL.
 Für die Erstellung dieser wird ein Quader mit der Länge der entsprechenden Kante gebildet und nach dieser rotiert.
@@ -56,8 +56,6 @@ Das Resultat ist eine Wand, welche abschließend in einen Eckpfeiler eingesetzt 
 \begin{Bild}{Ein Wand in der OpenSCAD Darstellung (Screenshot der Verfasser)}
 	\includegraphics[height=200px, width=240px]{Bilder/Untereinheit_Wand}
 \end{Bild}
-
-
 
 \subsection{Grundplatten}
 Eine Grundplatte wird anhand einer Fläche des Grundrisses konstruiert.
@@ -147,6 +145,7 @@ Die restlichen Parameter werden in der folgenden Tabelle gelistet.\\
 	maxPrintHeight & Höhe der Druckfläche & 153 \\  
 	\hline
 \end{tabularx}
+
 %\subsubsection{CornerRadius}
 %Der Eckradius entspricht der Konstante, welche den Radius des Basiszylinders der Eckpfeiler angibt.
 %Er ist als 10 Milimeter definiert.

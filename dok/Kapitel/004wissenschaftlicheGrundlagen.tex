@@ -19,7 +19,9 @@ Zudem wird für einen Knoten der DCEL eine ausgehende Kante und für eine Fläch
 \begin{Bild}{Schema einer DCEL (Abbildung der Verfasser)}
 	\includegraphics[width=250px]{Bilder/DCEL-10}
 \end{Bild}
+
 Folgende Tabellen zeigen beispielhafte Referenzen von den Bestandteilen einer DCEL anhand Abbildung \thebildnr.\\\\
+
 \begin{tabularx}{\textwidth}{|Y|Y|}
 	\hline
 	\thead{Knoten} & \thead{ausgehende Kante} \\
@@ -53,11 +55,14 @@ Folgende Tabellen zeigen beispielhafte Referenzen von den Bestandteilen einer DC
 \section{Convex Hull}
 Die konvexe Hülle einer Punktmenge ist die kleinste konvexe Menge, in der die Punktmenge enthalten ist.
 Bezogen auf ein Polygon ist die konvexe Hülle folglich ein neues Polygon, welches so wenig wie möglich Punkte beinhaltet, damit alle Elemente des Ursprungspolygons innerhalb des Neuen liegen.
+
 \begin{Bild}{Beispiel einer konvexen Hülle}
 	\includegraphics[]{Bilder/convex_hull}
 \end{Bild}
+
 \section{Oriented Minimum Bounding Box}
 Die Oriented Minimum Bounding(OMBB) Box bzw. orientertes minimales Begrenzungsrechteck eines Polygons ist das Rechteck, welches das komplette Polygon umschließt und dabei den kleinstmöglichen Flächeninhalt besitzt.
+
 \begin{Bild}{Eine mögliche Bounding Box(l.) im Vergleich zur OMBB(r.)}
 	\includegraphics[width = \textwidth]{Bilder/aabb_vs_ombb}
 \end{Bild}
@@ -67,9 +72,11 @@ Die Oriented Minimum Bounding(OMBB) Box bzw. orientertes minimales Begrenzungsre
 AutoCAD ist ein grafischer Zeichnungseditor, welcher zum Erstellen von technischen Zeichnungen und dem Modellieren von Objekten verwendet wird (siehe Quelle \cite{autocadwiki}).
 AutoCAD verwendet dabei einfache Objekte wie Linien, Kreise und Bögen, um auf deren Grundlage kompliziertere Objekte zu erschaffen.
 Zu AutoCAD gehörig wurde das Dateiformat \q{.dxf} entwickelt, welches als Industriestandard zum Austausch von CAD-Dateien dient. \\
+
 \begin{Bild}{Grundriss aus AutoCAD (Screenshot der Verfasser)}
 	\includegraphics[width=\textwidth]{Bilder/Grundriss}
 \end{Bild}
+
 Der Grundriss, welcher als Ausgangspunkt dieser Arbeit fungiert, wird in AutoCAD erstellt und dem zu erstellenden Programm in Form einer .dxf-Datei bereitgestellt.
 Diese Dateien dienen auch dem fertiggestellten Programm als Ausgangspunkt.
 Ein Beispiel für einen solchen Grundriss ist in Abbildung~\thebildnr\ zu sehen.
