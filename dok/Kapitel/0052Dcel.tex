@@ -25,11 +25,11 @@ Desweiteren wird, falls ein Knoten zu einem abgefragten Punkt schon generiert wu
 Die \icode{processData} Funktion greift auf \icode{createNode()} zu und erstellt die Liste aus Kanten mit den jeweiligen Start- und Endknoten.
 Auch hier gibt es noch keine abgespeicherten Zusammenhänge zwischen den einzelnen Kanten.
 \begin{code}[Line-to-Edge Konvertierung]
-private void processData(ArrayList<Line> ls) {
-	for (Line l : ls) {
-		edges.add(new Edge(createNode(l.getP1()), createNode(l.getP2())));
+	private void processData(ArrayList<Line> ls) {
+		for (Line l : ls) {
+			edges.add(new Edge(createNode(l.getP1()), createNode(l.getP2())));
+		}
 	}
-}
 \end{code}
 Basierend auf dieser Grundlage müssen alle folgenden Kalkulationen der \icode{Graph}-Klasse durchgeführt werden.
 \subsection{Zwillingskantengenerierung}
@@ -50,7 +50,7 @@ Aus den angeordneten Kanten $E$ lassen sich unter Beachtung des mathematisch pos
 \end{enumerate}
 \begin{Bild}{Veranschaulichung 1. und 2.}
 	\includegraphics[width = 70mm]{Bilder/Beziehung1Kanten}
-		\includegraphics[width = 70mm]{Bilder/Beziehung2Kanten}
+	\includegraphics[width = 70mm]{Bilder/Beziehung2Kanten}
 \end{Bild}
 Falls $i-1$ bzw. $i+1$ die Indices der Menge $E$ mit $n$ Elementen überschreiten, wird anstattdessen $E_n$ bzw. $E_0$ gewählt. \\
 Der aufgeführte Algorithmus wird für alle Knoten $N$ der DCEL fortgeführt, sodass alle Referenzen zwischen den Kanten fertiggestellt werden. 
