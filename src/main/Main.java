@@ -49,7 +49,7 @@ public class Main {
 		try {
 			// creating scadprocessor using targetfile and params object
 			ScadProcessor proc = new ScadProcessor(DXFReader.getAutocadFile(targetFile), p);
-
+	
 			// for showing the result folder
 			getGui().getShowResultButton().setResultFolder(folderName);
 

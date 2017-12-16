@@ -1,5 +1,4 @@
 \section{Erstellen der Doubly-connected Edge List}
-\subsection{Graph Klasse}
 Die zweidimensionalen Operationen der Anwendung werden von der \icode{Graph}-Klasse durchgeführt. 
 Übergibt man dieser eine Liste aus Linien, welche jeweils aus einem Start- und Endortsvektor bestehen, wird auf diesen basierend eine DCEL berechnet.
 Dafür werden die drei graphischen Elemente der Typen \icode{Edge}(Kante), \icode{Node}(Knoten) und \icode{Face}(Fläche) gespeichert.
@@ -42,12 +41,12 @@ Durch die Zwillingskanten werden folgende Operationen in der DCEL vereinfacht, d
 Für die Erstellung der Nachfolger- und Vorgängerreferenzen zwischen den Kanten, werden alle ausgehenden Kanten $E$ eines Knotens $N_i$ betrachtet.
 Anschließend sortiert die Anwendung diese mittels der \icode{angle()}-Methode anhand des Winkels.
 Dabei wird die jeweilige Kante $E_i$ in einen Vektor, welcher zwischen die beiden Kantenknoten gespannt werden kann, konvertiert, damit die \icode{angle()}-Funktion aufrufbar ist.
-Diese gibt den Winkel des Vektors zur x-Achse im Intervall $(-\pi,\pi]$ aus.
-Aus den angeordneten Kanten $E$ lassen sich unter Beachtung des mathematisch positivem Umlaufsinnes der Kanten an den Flächen nun folgende Beziehungen ableiten. 
-\begin{enumerate}
+Diese gibt einen eindeutigen Winkel des Vektors zur x-Achse im Intervall $(-\pi,\pi]$ aus.
+Aus den angeordneten Kanten $E$ lassen sich unter Beachtung des mathematisch positivem Umlaufsinnes der Kanten an den Flächen nun folgende Beziehungen ableiten:
+\begin{compactenum}
 	\item Die Zwillingskante von $E_{i+1}$ ist der Vorgänger von $E_i$
 	\item $E_{i-1}$ ist der Nachfolger der Zwillingskante von $E_i$ 
-\end{enumerate}
+\end{compactenum}
 \begin{Bild}{Veranschaulichung 1. und 2.}
 	\includegraphics[width = 70mm]{Bilder/Beziehung1Kanten}
 	\includegraphics[width = 70mm]{Bilder/Beziehung2Kanten}
@@ -77,5 +76,5 @@ In der Anwendung wird dafür die Gaußsche Trapezformel verwendet, welche bei ei
 
 \subsection{Vervollständigung der Knoten}
 Die letzte nötige Referenz ist die einer anliegenden Kante eines Knotens.
-Dafür wird für die Knoten $N$ eine Kante ermittelt, die ihren Usrpung in dem jeweiligen Knoten hat.
+Dafür wird für die Knoten $N$ eine Kante ermittelt, die ihren Ursprung in dem jeweiligen Knoten hat.
 Die DCEL ist mit diesem Schritt fertiggestellt und bildet die Grundlage für alle folgenden dreidimensionalen Berechnungen.\label{key}

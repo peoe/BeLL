@@ -12,8 +12,6 @@ public class Graph {
 	private ArrayList<Node> nodes = new ArrayList<>();
 	// list of Edges of Graph
 	private ArrayList<Edge> edges = new ArrayList<>();
-	// maximum printing width
-	private double maxPrintWidth;
 
 	/**
 	 * Constructor of the Graph class.
@@ -24,9 +22,6 @@ public class Graph {
 	 *            the Params object used for this Graph
 	 */
 	public Graph(ArrayList<Line> ls, Params params) {
-		// set maximum printing width
-		maxPrintWidth = params.getMaxPrintWidth();
-
 		// create edges from lines
 		processData(ls);
 		// create twin edges
@@ -44,8 +39,6 @@ public class Graph {
 	 *            the ArrayList of given Lines
 	 */
 	private void processData(ArrayList<Line> ls) {
-		int i = 0;
-
 		// create nodes and egdes
 		for (Line l : ls) {
 			Node n1 = createNode(l.getP1());
@@ -194,7 +187,7 @@ public class Graph {
 		}
 	}
 
-	// getter und setter
+	// getter - setter
 	/**
 	 * Returns an ArrayList of all Nodes within the Graph.
 	 * 
@@ -203,6 +196,7 @@ public class Graph {
 	public ArrayList<Node> getNodes() {
 		return nodes;
 	}
+
 
 	/**
 	 * Returns an ArrayList of all Edges within the Graph.

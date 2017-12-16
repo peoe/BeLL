@@ -96,6 +96,9 @@
 
 %========================CODEDARSTELLUNG=========================
 \renewcommand{\lstlistingname}{Codeauschnitt}
+\newcommand*{\thead}[1]{\multicolumn{1}{|c|}{\bfseries #1}}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcolumntype{Z}{>{\raggedright\arraybackslash}X}
 \lstnewenvironment{code}[1][]
 {
 	\lstset{
