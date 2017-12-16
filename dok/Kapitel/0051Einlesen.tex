@@ -4,7 +4,7 @@
 \subsection{Funktionsweise der Bibliothek \textit{kabeja}}
 Den Beginn der Verarbeitung markiert hierbei die Grundrissdatei, in welcher sämtliche Werte, welche im weiteren Verlauf des Programmes relevant werden, enthalten sind.
 Das Einlesen der Daten eines Grundrisses, wie in Abb. 5, erfolgt mit der Java-Bibliothek „kabeja“. 
-Diese ermöglicht es, aus .dxf-Dateien alle DXF-Objekte eines bestimmten Typs zu erhalten und deren Werte in einer Liste zu speichern und später zu verarbeiten \cite{kabeja}.
+Diese ermöglicht es, aus .dxf-Dateien alle DXF-Objekte eines bestimmten Typs zu erhalten, deren Werte in einer Liste zu speichern und später zu verarbeiten.
 \begin{code}[DXF File Parser]
 public static ArrayList<Line> getAutocadFile(String filePath) throws ParseException {
 	ArrayList<Line> vcs = new ArrayList<>();
@@ -26,9 +26,8 @@ public static ArrayList<Line> getAutocadFile(String filePath) throws ParseExcept
 
 \todoinline{Überdenken, ob Code hier wirklich notwendig}
 
-In dieser Anwendung wird eine Funktion der Klasse \q{DXFReader} verwendet, welche den Pfad zur .dxf-Datei als Parameter übergeben bekommt. 
-Aus dieser Datei werden alle DXF-Objekte, die mit dem Typen \icode{DXFLine} übereinstimmen, in einer Liste zurückgegeben. 
-Die Koordinaten der Start- und Endpunkte der DXFLines  in dieser Liste werden anschließend in eine Liste von Linien übertragen, welche im weiteren Programmablauf unter anderem bei der Umwandlung des Graphen in die DCEL Verwendung findet.
+Aus der .dxf-Datei deren Pfad der Klasse \q{DXFReader} übergeben wird, werden alle DXF-Objekte, die mit dem Typen \icode{DXFLine} übereinstimmen, in einer Liste zurückgegeben. 
+Die Koordinaten der Start- und Endpunkte der DXFLines  in dieser Liste werden anschließend in eine Liste von Linien übertragen, welche unter anderem bei der Umwandlung des Graphen in die DCEL Verwendung findet.
 
 \subsection{Funktionsweise der GUI}
 Die GUI setzt sich zusammen aus einem \icode{JFrame}, in dem zwei \icode{JTextField}, ein \icode{FileChooserButton}, ein \icode{StartButton} und ein \icode{ShowResultButton} platziert sind.
