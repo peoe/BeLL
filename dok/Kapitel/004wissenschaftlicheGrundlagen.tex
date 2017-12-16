@@ -53,24 +53,25 @@ Folgende Tabellen verdeutlichen die Referenzen der Bestandteilen einer DCEL in A
 \end{tabularx}
 
 \section{Convex Hull}
-Die konvexe Hülle einer Punktmenge ist die kleinste konvexe Menge, in der die Punktmenge enthalten ist.
-Bezogen auf ein Polygon ist die konvexe Hülle folglich ein neues Polygon, welches so wenig wie möglich Punkte beinhaltet, damit alle Elemente des Ursprungspolygons innerhalb des Neuen liegen.
+Für die Berechnung der Fläche einer DCEL wird eine Menge von Punkten benötigt, die die konvexe Hülle der DCEL beschreiben.
+Die konvexe Hülle einer Punktmenge ist dabei die kleinste Menge von Punkten, in der alle Punkte der DCEL enthalten sind.
+Bezogen auf ein Polygon ist die konvexe Hülle folglich ein weiteres Polygon, welches so wenig Punkte wie möglich beinhaltet, damit alle Punkte des Ursprungspolygons darin liegen.
 
 \begin{Bild}{Beispiel einer konvexen Hülle}
 	\includegraphics[]{Bilder/convex_hull}
 \end{Bild}
 
 \section{Oriented Minimum Bounding Box}
-Die Oriented Minimum Bounding(OMBB) Box bzw. orientertes minimales Begrenzungsrechteck eines Polygons ist das Rechteck, welches das komplette Polygon umschließt und dabei den kleinstmöglichen Flächeninhalt besitzt.
+Die Oriented Minimum Bounding(OMBB) Box bzw. das orientierte minimale Begrenzungsrechteck eines Polygons ist das Rechteck, welches das komplette Polygon umschließt und dabei den kleinstmöglichen Flächeninhalt besitzt.
 
-\begin{Bild}{Eine mögliche Bounding Box(l.) im Vergleich zur OMBB(r.)}
+\begin{Bild}{Eine mögliche Bounding Box (l.) im Vergleich zur OMBB (r.)}
 	\includegraphics[width = \textwidth]{Bilder/aabb_vs_ombb}
 \end{Bild}
 
 \section{AutoCAD}
 %Konstruktionsprogramm statt architektenprogramm
-AutoCAD ist ein grafischer Zeichnungseditor, welcher zum Erstellen von technischen Zeichnungen und dem Modellieren von Objekten verwendet wird (siehe Quelle \cite{autocadwiki}).
-AutoCAD verwendet dabei einfache Objekte wie Linien, Kreise und Bögen, um auf deren Grundlage kompliziertere Objekte zu erschaffen.
+AutoCAD ist ein grafischer Zeichnungseditor, welcher zum Erstellen von technischen Zeichnungen und dem Modellieren von Objekten verwendet wird (vgl. Quelle \cite{autocadwiki}).
+AutoCAD verwendet dabei einfache Objekte wie Linien, Kreise und Bögen, um auf deren Grundlage kompliziertere Objekte zu bilden.
 Zu AutoCAD gehörig wurde das Dateiformat \q{.dxf} entwickelt, welches als Industriestandard zum Austausch von CAD-Dateien dient. \\
 
 \begin{Bild}{Grundriss aus AutoCAD (Screenshot der Verfasser)}
@@ -78,47 +79,47 @@ Zu AutoCAD gehörig wurde das Dateiformat \q{.dxf} entwickelt, welches als Indus
 \end{Bild}
 
 Der Grundriss, welcher als Ausgangspunkt dieser Arbeit fungiert, wird in AutoCAD erstellt und dem zu erstellenden Programm in Form einer .dxf-Datei bereitgestellt.
-Diese Dateien dienen auch dem fertiggestellten Programm als Ausgangspunkt.
 Ein Beispiel für einen solchen Grundriss ist in Abbildung~\thebildnr\ zu sehen.
 
 \section{OpenSCAD}
-OpenSCAD ist eine kostenlos verfügbare CAD-Modellierungssoftware, welche aus einer textbasierten Beschreibungssprache 3D-Modelle erzeugt (siehe Quelle \cite{OpenScad}).
+OpenSCAD ist eine kostenlos verfügbare CAD-Modellierungssoftware, welche aus einer textbasierten Beschreibungssprache 3D-Modelle erzeugt (vgl. Quelle \cite{OpenScad}).
 OpenSCAD bietet dabei verschiedene Vorteile während des Modellierungsvorganges.
 Hierzu gehören beispielsweise das farbige Hervorheben oder die Modularisierung zusammenhängender Objekte. \\
 
 %Modellierung
-Die Modellierung von einfachen Basisobjekten in OpenSCAD erfolgt durch das Verwenden von Schlüsselwörtern wie \icode{cube()}, \icode{sphere()} oder \icode{cylinder()} und Parametern in Klammern.
-Diese Basisobjekte können anschließend durch Mengenoperationen wie Vereinigungen (\icode{union()}), Differenzen (\icode{difference()}) oder Überschneidungen (\icode{intersection()}) und Transformationen wie Skalierungen (\icode{scale()}), Rotationen (\icode{rotate()}) oder Translationen (\icode{translate()}) miteinander verknüpft und kombiniert werden, um neue Objekte nach eigenen Ansprüchen zu bilden.
+Die Modellierung von einfachen Basisobjekten in OpenSCAD erfolgt durch das Verwenden von Anweisungen wie \icode{cube()}, \icode{sphere()} oder \icode{cylinder()} und Parametern in Klammern.
+Diese Basisobjekte können anschließend durch Mengenoperationen wie Vereinigungen (\icode{union()}), Differenzen (\icode{difference()}) oder Überschneidungen (\icode{intersection()}) und Transformationen wie Skalierungen (\icode{scale()}), Rotationen (\icode{rotate()}) oder Translationen (\icode{translate()}) miteinander verknüpft und kombiniert werden, um neue Objekte nach eigenen Ansprüchen zu erzeugen.
 
 \begin{Bild}{Eine Vereinigung zweier Würfel in OpenSCAD (Screenshot der Verfasser)}
 	\includegraphics{Bilder/OpenSCAD_Union}
 \end{Bild}
 
 Neben solchen einfachen Objekten wird außerdem die Möglichkeit geboten, komplexere Objekte wie Polygone (\icode{polygon()}) zu erstellen.
-Diese können dann ausgehend von einem zweidimensionalen Polygon in dreidimensionale Polygone umgewandelt werden (\icode{linear\_extrude()}), welche vor allem das Umwandeln von komplexen Formen in Objekte erleichtert. \\
+Diese können dann ausgehend von einem zweidimensionalen Polygon in Prismen umgewandelt werden (\icode{linear\_extrude()}), welche vor allem das Umwandeln von komplexen Formen in Objekte erleichtert. \\
 
-Die Anweisungen, welche OpenSCAD zum Modellieren verwendet, werden in einfachen Textdateien im \q{.scad}-Format gespeichert.
-Die Simplizität dieser Textdateien erlaubt es, die aus dem zu entwickelnden Programm erhaltenen Anweisungen in .scad-Dateien zu speichern, welche von OpenSCAD eingelesen, eingesehen und bearbeitet werden können. \\
+Die Anweisungen, welche OpenSCAD zum Modellieren verwendet, werden in einfachen Textdateien im .scad-Format gespeichert.
+Die Einfachheit dieser Textdateien erlaubt es, die aus dem zu entwickelnden Programm erhaltenen Anweisungen in .scad-Dateien zu speichern, welche von OpenSCAD eingelesen, eingesehen und bearbeitet werden können. \\
 
 %Drucken
-Die Modelle, die so mit OpenSCAD erstellt wurden, können anschließend mit dem 3D-Drucker ausgedruckt werden.
-Dazu werden die Modelle in Dateien des \q{.stl}-Formats konvertiert.
-Dies geschieht entweder über die Oberfläche von OpenSCAD oder mittels einer Kommandozeilenanweisung.
+Die Modelle, die so mit OpenSCAD erstellt wurden, können anschließend mit einem 3D-Drucker ausgedruckt werden.
+Dazu werden die Modelle in Dateien des .stl-Formats konvertiert.
+Dies geschieht entweder über die Benutzeroberfläche von OpenSCAD oder mittels einer Kommandozeilenanweisung.
 
 \section{3D-Drucker MakerBot Replicator\texttrademark\ 2}
 %Erklärung 3D-Drucker
 Der vorliegende 3D-Drucker ist das Modell Replicator\texttrademark\ 2 der Firma MakerBot.
-Dieser Drucker verfügt über eine höhenverstellbare Grundplatte, auf der das Filament\footnote{Filament bezeichnet das Material, welches der 3D-Drucker zum Drucken verwendet.} aufgetragen und das finale Objekt gedruckt wird und einen sogenannten \q{Extruder}, welcher die Funktion übernimmt, das zu druckende Filament zu erhitzen und mit einer konstanten Filamentbreite auf die Grundplatte bzw. das gedruckte Objekt aufzutragen. 
-Mithilfe dieser zwei Hauptbestandteile wird schichtweise Filament aufgetragen, welches aushärtet und so nach und nach das Objekt bildet. \\
-Die Höhe der Grundplatte wird während des Druckvorganges automatisch vom Drucker variiert und nach Abschluss des Druckens wieder auf den Ausgangszustand zurückgesetzt.
-Um die Beweglichkeit des Extruders zu garantieren, ist dieser auf drei Achsen befestigt, sodass drei Motoren ihn auf diesen Achsen verschieben können. \\
+Dieser Drucker verfügt über eine höhenverstellbare Grundplatte, auf der das Filament\footnote{Filament bezeichnet das Material, welches der 3D-Drucker zum Drucken verwendet.} aufgetragen und das finale Objekt gedruckt wird.
+Ein sogenannter \q{Extruder} erhitzt dazu das zu druckende Filament und trägt dieses auf die Grundplatte auf. 
+Mithilfe dieser zwei Hauptbestandteile wird schichtweise Filament aufgetragen, welches aushärtet und so das Objekt bildet. \\
+Die Höhe der Grundplatte wird während des Druckvorganges automatisch vom Drucker variiert und nach Abschluss des Drucks wieder auf den Ausgangszustand zurückgesetzt.
+Um die Beweglichkeit des Extruders zu garantieren, ist dieser auf drei Achsen befestigt, sodass Motoren ihn auf diesen Achsen verschieben können. \\
 Abhängig vom Filament bzw. der Temperatur, bei der dieses aufgetragen wird, der Bewegungsgeschwindigkeit des Extruders und der Filamentstärke, die der Extruder aufträgt, lässt sich die gewünschte Druckqualität anpassen.
 Eine niedrige Qualität ist dabei in den meisten Fällen mit einer erheblich kürzeren Druckzeit verbunden. \\
 Die Druckzeit wird außerdem von der eingestellten Ausfüllung von geschlossenen Objekten und dem Hinzufügen von Druckhilfen beeinflusst.
-So kann man Quader zum Beispiel nicht komplett mit Filament füllen lassen, sondern mit einem Bienenwabenmuster durchsetzen, sodass nur ein geringer Teil des Objektes ausgefüllt wird.
-Zusätzlich zu dem eigentlichen Druckergebnis wird unter jedes gedruckte Element ein dünner Untergrund gedruckt, welcher leicht von der Grundplatte und vom gedruckten Modell zu trennen ist und so eine Beschädigung beim Entfernen des Objekts vom Drucker verhindert.
-Außerdem werden bei Überhängen zusätzliche Stützen angebracht, um ein Absacken des noch nicht fest gewordenen Filaments zu verhindern. 
+So kann man Objekte beispielsweise nicht komplett mit Filament füllen lassen, sondern mit einem Bienenwabenmuster durchsetzen, sodass nur ein geringer Teil des Objektes ausgefüllt, aber dennoch Stabilität gewährleistet wird.
 Indem so also ein stark verringerter Betrag an Filament aufgetragen werden muss, wird auch die Druckzeit drastisch reduziert. \\
+Zu dem eigentlichen Druckergebnis wird unter jedes gedruckte Element eine dünne Schicht gedruckt, welcher leicht von der Grundplatte und vom gedruckten Modell zu trennen ist und so eine Beschädigung beim Entfernen des Objekts vom Drucker verhindert.
+Außerdem werden bei Überhängen zusätzliche Stützen gedruckt, um ein Absacken des noch nicht ausgehärteten Filaments zu verhindern.  \\
 Beim Drucken von Objekten ist neben Anpassungen zur Kontrolle der Druckqualität und Druckzeit außerdem zu beachten, dass die Grundplatte nur auf einer begrenzten Fläche bedruckbar ist.
-Entsprechend dieser möglichen Maße sollten also alle Objekte in ihrer Größe angepasst werden.
+Entsprechend dieser vorgegebenen Maße sollten also alle Objekte in ihrer Größe angepasst werden.
 % [28.5 x 15.3 x 15.5 cm]
