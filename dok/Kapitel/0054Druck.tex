@@ -14,6 +14,7 @@ Anschließend wird eine neue Reihe eröffnet, in der nun neue Elemente platziert
 Dieser Prozess wird solange fortgeführt, bis die Länge der Druckfläche überschritten werden würde. \\
 Dann wird eine neue Gruppierung von Objekten bzw. \icode{Union} erstellt, in welcher der Algorithmus weiterläuft.
 Das Resultat zeigt eine Liste von Objekten, die eine platzeffiziente Anordnung dieser repräsentiert.
+Die Vereinigungen von Grundplatten werden zusätzlich um 180$^\circ$ gedreht, damit keine Überhänge in der Datei vorkommen, was zu einer Verlängerung der Druckzeit führen würde.\\
 Jedes einzelne Element in der Liste kann mit einem Durchgang gedruckt werden.
 
 \subsection{Ermittlung der Größen}
@@ -43,6 +44,7 @@ Der Vorgang wird solange durchgeführt bis alle Punkte überprüft wurden und ei
 Der Algorithmus wird nun fortgeführt mit $P_1$ als Ausgangspunkt, solange bis der Anfangspunkt $P_0$ wieder erreicht wurde, so dass die konvexe Hülle \q{geschlossen} ist.\\
 Nun wird die konvexe Hülle fortlaufend rotiert, so dass eine Seite parallel zur x-Achse ist.
 Dadurch kann man leicht das Begrenzungsrechteck durch Feststellen der Extremwerte des rotierten Polygons ermitteln.
+Der Flächeninhalt des Rechtecks aus den Punkten $A(x_{min}, y_{min})$, $B(x_{min}, y_{max})$, $C(y_{max}, x_{max})$ und $D(x_{max}, y_{min})$ wird gespeichert.
 Der Algorithmus wiederholt diese Abfolge für jede Gerade, bis alle Seiten der konvexen Hülle behandelt wurden.
 Als Ergebnis erhält das Programm die Breite, Höhe und den nötigen Winkel der OMBB.\\
 Diese Werte werden auf die Grundplatte angewendet, wobei die Breite und Höhe jeweils vergrößert wird, damit die Modifikationen berücksichtigt werden, die an der Grundplatte durchgeführt wurden(Vgl. \ref{gr}).
