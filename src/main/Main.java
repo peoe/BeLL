@@ -125,7 +125,7 @@ public class Main {
 	private static void printSCAD(ScadProcessor proc, String folderName) {
 		ArrayList<Union> walls = proc.renderWallFiles();
 		ArrayList<Union> corners = proc.renderCornerFiles();
-		ArrayList<Union> baseplates = proc.renderBasePlateFiles();
+		ArrayList<ScadObject> baseplates = proc.renderBasePlateFiles();
 
 		// print walls
 		for (int i = 0; i < walls.size(); i++) {
