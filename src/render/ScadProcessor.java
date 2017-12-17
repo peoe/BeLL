@@ -55,8 +55,8 @@ public class ScadProcessor {
 	 * Returns the oriented BasePlates in an ArrayList of Unions.
 	 * @return ArrayList of BasePlate Unions
 	 */
-	public ArrayList<Union> renderBasePlateFiles() {
-		ArrayList<Union> files = new ArrayList<>();
+	public ArrayList<ScadObject> renderBasePlateFiles() {
+		ArrayList<ScadObject> files = new ArrayList<>();
 		ArrayList<BasePlate> basePlates = new Quicksort<BasePlate>(getBasePlates(), "getOmbbArea").sortArray();
 
 		Vector rotatedNode;
@@ -95,11 +95,13 @@ public class ScadProcessor {
 					usedWidth = faceEnlarge;
 				}
 
-				files.get(fileIndex).getObjects().add(new Translate(new Rotate(b, Math.toDegrees(b.getOmbbAngle()), 0, 0, 1), -xMin + usedWidth, -yMin + usedLength, 0));
+				((Union) files.get(fileIndex)).getObjects().add(new Translate(new Rotate(b, Math.toDegrees(b.getOmbbAngle()), 0, 0, 1), -xMin + usedWidth, -yMin + usedLength, 0));
 				usedWidth += b.getWidth() + 2 * faceEnlarge;
 			}
 		}
-
+		for (int i = 0; i < files.size(); i++){
+			files.set(i, new Translate(new Rotate(files.get(i), 180, 1, 0, 0), 0, params.getMaxPrintHeight(), params.getBasePlateHeight()));
+		}
 		return files;
 	}
 
