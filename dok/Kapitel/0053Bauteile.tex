@@ -20,10 +20,9 @@ Diese sind an zwei voneinander unabhängigen Abschnitten \q{CornerPin} und \q{Co
 \end{Bild}
 
 \subsubsection{Eckzylinder}
-Der Eckzylinder, im Code \icode{CornerCylinder} stellt den oberen Teil des Eckpfeilers dar.
-Dieser besteht aus einem zylindrischen Grundbauteil mit Vertiefungen.
-Diese Entstehen, indem Schnittmengen zwischen dem Zylinder und in Richtung der ausgehenden Kanten gedrehten Quader gebildet werden.
-Nun können Wände in diese eingeschoben werden.
+Der Eckzylinder im Code \icode{CornerCylinder} stellt den oberen Teil des Eckpfeilers dar.
+Dieser besteht aus einem zylindrischen Grundbauteil mit Vertiefungen, welche entstehen, indem Schnittmengen zwischen dem Basiszylinder und Quadern durchgeführt werden.
+Diese Quader sind in Richtung der vom Knoten ausgehenden Kanten rotiert, sodass in diese die jeweiligen Wände eingeschoben werden können.
 \begin{Bild}{Querschnitt eines Eckzylinders mit zwei angrenzenden Wänden}
 	\includegraphics[height=150px]{Bilder/CornerCylinder2D-06.png}
 \end{Bild}
@@ -34,24 +33,24 @@ Nun können Wände in diese eingeschoben werden.
 \begin{Bild}{Draufsicht auf den unteren Abschnitt eines Eckpfeilers mit zwei anliegenden Flächen}
 	\includegraphics[height=150px]{Bilder/CornerPin2D-07.png}
 \end{Bild}
-Die Summe aller Objekte des Typs \icode{CornerPin} repräsentieren den untere Abschnitt des Eckpfeilers, welcher die Verbindungen der Grundplatten mit diesem gewährleistet.
-Hierfür besteht ein einzelner Eckpin aus einem Zylinder, einer Ausstülpung seitens diesem und einem Zylindersegment.
+Die Summe aller Objekte des Typs \icode{CornerPin} repräsentieren den untere Abschnitt des Eckpfeilers, welcher die Fixierung der Grundplatten mit diesem gewährleistet.
+Ein einzelner Eckpin besteht aus einem Zylinder, einer Ausstülpung an dessen Seite und einem Zylindersegment.
 Das Grundgerüst wird durch den Basiszylinder des Eckpfeilers festgelegt, welcher auch beim Eckzylinder vorkommt.
 Für die Ausstülpung gilt, dass sie aus einem Quader mit angrenzendem Zylinder aufgebaut ist.
 Die Länge des Quaders ist dabei abhängig von dem Winkel zwischen den beiden Wänden, welche die Grundplatte an dem Eckpfeiler begrenzen.
-Er wird stets so lang berechnet, dass die Ausstülpung(siehe Abbildung, grün dargestellt) einen definierten Abstand von den Wänden einnimmt(siehe \ref{params}).
-Für die untere Abgrenzung des Pinkopfes(siehe Abbildung \thebildnr, hellblau) berechnet die Anwendung eine Schnittmenge zwischen der angrenzenden Fläche und einem flachen Zylinder.\\
+Er wird stets so lang berechnet, dass die Ausstülpung (siehe Abbildung \thebildnr, grün) einen definierten Abstand von den Wänden einnimmt (siehe \ref{params} \q{pinDistance}).
+Für die untere Abgrenzung des Pinkopfes (siehe Abbildung \thebildnr, hellblau) berechnet die Anwendung eine Schnittmenge zwischen der angrenzenden Fläche und einem flachen Zylinder.\\
 Falls ein Eckpin für das äußere Gebiet berechnet werden soll, wird anstatt der oben beschriebenen Elementen eine Differenzmenge zwischen der Umrandungsfläche des Grundrisses und dem flachen Zylinder gebildet.
 Dies resultiert in ein Zylindersegment, wie es in Abbildung \thebildnr (rot) zu sehen ist.
-Ein Eckpfeiler hat so einen stabilisierten unteren Abschnitt, auch außerhalb des Grundrisses.
+Ein Eckpfeiler hat dadurch einen stabilisierten unteren Abschnitt, auch außerhalb des Grundrisses.
 
 
 \subsection{Wandstücke}
 Eine Wand verkörpert eine Kante der DCEL.
-Für die Erstellung dieser wird ein Quader mit der Länge der entsprechenden Kante gebildet und nach dieser rotiert.
+Für die Erstellung dieser wird ein rotierter Quader mit der Länge der entsprechenden Kante benutzt.
 Jeweils ein Eckzylinder wird anschließend an den Start- bzw. Endknoten des Quaders verschoben, sodass zwischen diesem und den beiden Eckzylindern eine Differenzmenge gebildet werden kann.
 Das Resultat ist eine Wand, welche abschließend in einen Eckpfeiler eingesetzt werden kann. 
-\begin{Bild}{Querschnitt einer Wand}
+\begin{Bild}{Querschnitt einer Wand(Abbildung der Verfasser)}
 	\includegraphics[width = 110mm]{Bilder/Wand2D-04}
 \end{Bild}
 \begin{Bild}{Ein Wand in der OpenSCAD Darstellung (Screenshot der Verfasser)}
@@ -60,50 +59,50 @@ Das Resultat ist eine Wand, welche abschließend in einen Eckpfeiler eingesetzt 
 
 \subsection{Grundplatten}
 Eine Grundplatte wird anhand einer Fläche des Grundrisses konstruiert.
-Sie sind aufgebaut aus einem geradem Prisma mit einer Polygon-Grundfläche, welches eingestülpte Steckmechanismen an der Unterseite besitzt.
+Sie ist aufgebaut aus einem geradem Prisma mit einer Polygon-Grundfläche, welches eingestülpte Steckmechanismen an der Unterseite besitzt.
 \begin{Bild}{Stecker einer Grundplatte}
 	\includegraphics[height=200px]{Bilder/Untereinheit_GP}
 \end{Bild}
 Für die Berechnung des 3D-Objekts, wird an jedem Knoten der Fläche wird ein Eckpin gebildet und von dem polygonalen Prisma abgezogen, sodass genannte Einkerbungen durch eine Differenzmenge entstehen. 
-Jede Grundplatte, die an das äußere Gebiet angrenzt wird zudem an dieser Seite um die halbe Wanddicke vergrößert, damit ein abgeschlossener Eindruck des gesamten 3D-Modells entsteht.(Siehe Abbildung \thebildnr)
-\begin{Bild}{Vergrößerung der äußeren Grundplatten(vereinfacht)}
+Jede Grundplatte, die an das äußere Gebiet angrenzt wird zudem an dieser Seite um die halbe Wanddicke vergrößert, damit ein abgeschlossener Eindruck des gesamten 3D-Modells entsteht.(Siehe Abbildung \thebildnrnext)
+\begin{Bild}{Vergrößerung der äußeren Grundplatten (vereinfacht)}
 	\includegraphics[width=120mm]{Bilder/GrundplatteVergroesserung-08}
 \end{Bild}
 
 \subsection{Zuweisen von Berechnungskonstanten}
 \label{params}
 Die \icode{Params}-Klasse dient als Speichermöglichkeit für alle nötigen Konstanten, welche für die Umrechnung des Grundrisses in das 3D-Modell benötigt werden.
-Jedem dreidimensionalen Objekt benötigt eine Instanz einer solchen Klasse, um den OpenSCAD Code zu generieren.
-In der Anwendung wird von der Klasse \icode{ScadProcessor} die angegebenen Parameter an alle Elemente des Grundrisses weitergegeben, damit verhindert wird, dass unterschiedliche Komponenten desselben Grundrisses verschiedene Konstanten zur Verfügung gestellt bekommen.
+Jedes dreidimensionale Objekt benötigt eine Instanz einer solchen Klasse, um den OpenSCAD Code zu generieren.
+In der Anwendung werden von der Klasse \icode{ScadProcessor} die angegebenen Parameter an alle Elemente des Grundrisses weitergegeben, damit verhindert wird, dass unterschiedliche Komponenten desselben Grundrisses verschiedene Konstanten zur Verfügung gestellt bekommen.
 Sie werden bei Beginn des Programms in der \icode{Main}-Klasse gesetzt und können über eine Instanz der \icode{Params}-Klasse aufgerufen werden. \\
 
-\begin{code} [Die \icode{setParams()}-Funktion zum Setzen der Parameter]
+\begin{code} [Die \icode{setParams()}- Funktion zum Setzen der Parameter]
 	public void setParams(double E, ...){
 		e = E;
 		// ...
 	}
 \end{code}
 
-Das Abrufen der Parameter erfolgt dann mittels der entsprechenden \icode{get()}-Funktionen der \icode{Params}-Klasse, welche für alle Parameter vorhanden sind. 
+Das Abrufen der Parameter erfolgt dann mittels der entsprechenden \icode{get()}- Funktionen der \icode{Params}- Klasse, welche für alle Parameter vorhanden sind. 
 Die nötigen Parameter stellen dabei Gleitkommazahlen (\icode{double}) dar, die verschiedene Teile des Grundrisses beeinflussen. 
 Theoretisch können sie alle variiert werden.
 
-\subsubsection{$\epsilon$/Epsilon}
-Der Parameter Epsilon ($\epsilon$) bezeichnet einen Abstand zwischen 3D-Objekten, der benötigt wird, um einem möglichen Fehler des 3D-Druckers entgegenzuwirken.
-Dieser kann z.B. bewirken, dass Steckmechanismen nicht ineinander passen.
-Deswegen tritt der Abstand $\epsilon$ generell dort auf, wo zwei Objekte aufeinander oder ineinander geschoben werden müssen.
+\subsubsection{Epsilon}
+Der Parameter Epsilon ({\Large$\epsilon$}) bezeichnet einen Abstand zwischen 3D-Objekten, der benötigt wird, um eine möglichen Druckabweichung des 3D-Druckers entgegenzuwirken.
+Diese kann z.B. bewirken, dass Steckmechanismen nicht ineinander passen.
+Deswegen tritt der Abstand {\Large$\epsilon$} dort auf, wo zwei Objekte aufeinander oder ineinander geschoben werden müssen.
 In Folgenden Teilen des 3D-Modells tritt Epsilon auf:
 
 \begin{compactenum}
-	\item Bei dem Vorkommen von einem positven und einem negativem Steckern (Wand/Eckpfeiler und Grundplatte/Eckpfeiler) ist der negative gleichmäßig um $\epsilon$ vergrößert, damit ein abschließendes Stecken ermöglicht wird.
-	\item Wenn zwei Grundplatten aufeinandertreffen, wird die sich berührenden Seiten um $0.5*\epsilon$ entgegengesetzt zueinander verschoben zur Einhaltung eines Abstandes von $\epsilon$ .
-	\item Die Höhe einer Wand wird um $\epsilon$ verringert, damit die Oberseite des gesamten 3D-Objekts eine glatte Oberfläche besitzt.
+	\item Bei dem Vorkommen von einem positiven und einem negativen Steckern (Wand/Eckpfeiler und Grundplatte/Eckpfeiler) ist der negative gleichmäßig um {\Large$\epsilon$} vergrößert, damit ein abschließendes Stecken ermöglicht wird.
+	\item Wenn zwei Grundplatten aufeinandertreffen, werden die sich berührenden Seiten um $0.5$ $*$ {\Large$\epsilon$} entgegengesetzt zueinander verschoben zur Einhaltung eines Abstandes von {\Large$\epsilon$} .
+	\item Die Höhe einer Wand wird um {\Large$\epsilon$} verringert, damit die Oberseite des gesamten 3D-Objekts eine glatte Oberfläche besitzt.
 \end{compactenum}
 
-Das im Programm definierte Epsilon wurde mittels einem Experiment (siehe Abbildung \thebildnr) ermittelt.
-Dafür wurde ein Stecker und Einstülpungen, die um ein verschiedenes $\epsilon$ vergrößert wurden, gedruckt, sodass getestet wurden konnte, welches Epsilon für den MakerBot Replicator\texttrademark\ 2 am geeignetsten ist.
+Das im Programm definierte Epsilon wurde mittels einem Experiment (siehe Abbildung \thebildnrnext) ermittelt.
+Dafür wurde ein Stecker und Einstülpungen gedruckt, die um ein verschiedenes {\Large$\epsilon$} vergrößert wurden, sodass getestet werden konnte, welches Epsilon für den MakerBot Replicator\texttrademark\ 2 am geeignetsten ist.
 Ausgewertet wurde daraus ein Wert von 0.25mm. \\
-Der $\epsilon$-Parameter ist deswegen ein druckerspezifischer Parameter.
+Der {\Large$\epsilon$}-Parameter ist deswegen ein druckerspezifischer Parameter.
 
 \begin{Bild}{Versuch zur Ermittlung eines passenden Epsilon-Wertes}
 		\includegraphics[width=120mm]{Bilder/EpsilonTest_cut-09}
