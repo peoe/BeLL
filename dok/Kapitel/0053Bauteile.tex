@@ -2,11 +2,13 @@
 Die zweidimensionalen Strukturen der DCEL werden genutzt, um das aus OpenSCAD-Objekten bestehende 3D-Modell zu erstellen.
 Dabei werden Modifikationen an allen Bauteilen vorgenommen, damit folgende Kriterien erfüllt sind:\\
 Das 3D-Modell soll...
+
 \begin{compactenum}
 	\item ...einfach aufgebaut werden können.
 	\item ...einen angemessenen Einblick in die Immobilie gewährleisten.
 	\item ...stabil sein, auch nachdem einzelne Elemente entfernt wurden.
 \end{compactenum}
+
 Für die Erfüllung dieser Kriterien wurden die drei Strukturen Wand, Eckpfeiler und Grundplatte entworfen.
 Weiterführend sind diese so modifiziert, dass sie ein oben beschriebenes 3D-Konstrukt darstellen.
 
@@ -15,6 +17,7 @@ Die Eckpfeiler des Modells symbolisieren die Knoten des Grundrisses.
 Sie sind das Schlüsselelement des implementierten Stecksystems, welches für Stabilität und Variabilität sorgt.
 Damit anliegende Wände und Grundplatten in einen Eckpfeiler greifen können, sind zwei verschiedene Arten von Steckern entworfen wurden.
 Diese sind an zwei voneinander unabhängigen Abschnitten \q{CornerPin} und \q{CornerCylinder} angebracht, welche zusammengefügt das gesamte 3D-Objekt verkörpern.
+
 \begin{Bild}{Ein Eckpfeiler (Screenshot der Verfasser)}
 	\includegraphics[height=200px]{Bilder/Untereinheit_Ecke}
 \end{Bild}
@@ -23,16 +26,19 @@ Diese sind an zwei voneinander unabhängigen Abschnitten \q{CornerPin} und \q{Co
 Der Eckzylinder im Code \icode{CornerCylinder} stellt den oberen Teil des Eckpfeilers dar.
 Dieser besteht aus einem zylindrischen Grundbauteil mit Vertiefungen, welche entstehen, indem Schnittmengen zwischen dem Basiszylinder und Quadern durchgeführt werden.
 Diese Quader sind in Richtung der vom Knoten ausgehenden Kanten rotiert, sodass in diese die jeweiligen Wände eingeschoben werden können.
-\begin{Bild}{Querschnitt eines Eckzylinders mit zwei angrenzenden Wänden}
+
+\begin{Bild}{Querschnitt eines Eckzylinders mit zwei angrenzenden Wänden (Abbildung der Verfasser)}
 	\includegraphics[height=150px]{Bilder/CornerCylinder2D-06.png}
 \end{Bild}
 
 %\todoinline{Abbildungen?}
 \subsubsection{Eckpin}
 \label{Eckpin}
-\begin{Bild}{Draufsicht auf den unteren Abschnitt eines Eckpfeilers mit zwei anliegenden Flächen}
+
+\begin{Bild}{Draufsicht auf den unteren Abschnitt eines Eckpfeilers mit zwei anliegenden Flächen (Abbildung der Verfasser)}
 	\includegraphics[height=150px]{Bilder/CornerPin2D-07.png}
 \end{Bild}
+
 Die Summe aller Objekte des Typs \icode{CornerPin} repräsentieren den untere Abschnitt des Eckpfeilers, welcher die Fixierung der Grundplatten mit diesem gewährleistet.
 Ein einzelner Eckpin besteht aus einem Zylinder, einer Ausstülpung an dessen Seite und einem Zylindersegment.
 Das Grundgerüst wird durch den Basiszylinder des Eckpfeilers festgelegt, welcher auch beim Eckzylinder vorkommt.
@@ -50,9 +56,11 @@ Eine Wand verkörpert eine Kante der DCEL.
 Für die Erstellung dieser wird ein rotierter Quader mit der Länge der entsprechenden Kante benutzt.
 Jeweils ein Eckzylinder wird anschließend an den Start- bzw. Endknoten des Quaders verschoben, sodass zwischen diesem und den beiden Eckzylindern eine Differenzmenge gebildet werden kann.
 Das Resultat ist eine Wand, welche abschließend in einen Eckpfeiler eingesetzt werden kann. 
-\begin{Bild}{Querschnitt einer Wand(Abbildung der Verfasser)}
+
+\begin{Bild}{Querschnitt einer Wand (Abbildung der Verfasser)}
 	\includegraphics[width = 110mm]{Bilder/Wand2D-04}
 \end{Bild}
+
 \begin{Bild}{Ein Wand in der OpenSCAD Darstellung (Screenshot der Verfasser)}
 	\includegraphics[height=200px, width=240px]{Bilder/Untereinheit_Wand}
 \end{Bild}
@@ -60,12 +68,16 @@ Das Resultat ist eine Wand, welche abschließend in einen Eckpfeiler eingesetzt 
 \subsection{Grundplatten}
 Eine Grundplatte wird anhand einer Fläche des Grundrisses konstruiert.
 Sie ist aufgebaut aus einem geradem Prisma mit einer Polygon-Grundfläche, welches eingestülpte Steckmechanismen an der Unterseite besitzt.
-\begin{Bild}{Stecker einer Grundplatte}
+
+\begin{Bild}{Stecker einer Grundplatte (Screenshot der Verfasser)}
 	\includegraphics[height=200px]{Bilder/Untereinheit_GP}
 \end{Bild}
+
 Für die Berechnung des 3D-Objekts, wird an jedem Knoten der Fläche wird ein Eckpin gebildet und von dem polygonalen Prisma abgezogen, sodass genannte Einkerbungen durch eine Differenzmenge entstehen. 
-Jede Grundplatte, die an das äußere Gebiet angrenzt wird zudem an dieser Seite um die halbe Wanddicke vergrößert, damit ein abgeschlossener Eindruck des gesamten 3D-Modells entsteht.(Siehe Abbildung \thebildnrnext)
-\begin{Bild}{Vergrößerung der äußeren Grundplatten (vereinfacht)}
+
+Jede Grundplatte, die an das äußere Gebiet angrenzt wird zudem an dieser Seite um die halbe Wanddicke vergrößert, damit ein abgeschlossener Eindruck des gesamten 3D-Modells entsteht (siehe Abbildung \thebildnrnext).
+
+\begin{Bild}{Vergrößerung der äußeren Grundplatten (Abbildung der Verfasser)}
 	\includegraphics[width=120mm]{Bilder/GrundplatteVergroesserung-08}
 \end{Bild}
 
@@ -104,7 +116,7 @@ Dafür wurde ein Stecker und Einstülpungen gedruckt, die um ein verschiedenes {
 Ausgewertet wurde daraus ein Wert von 0.25mm. \\
 Der {\Large$\epsilon$}-Parameter ist deswegen ein druckerspezifischer Parameter.
 
-\begin{Bild}{Versuch zur Ermittlung eines passenden Epsilon-Wertes}
+\begin{Bild}{Versuch zur Ermittlung eines passenden Epsilon-Wertes (Abbildung der Verfasser)}
 		\includegraphics[width=120mm]{Bilder/EpsilonTest_cut-09}
 \end{Bild}
 

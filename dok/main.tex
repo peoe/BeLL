@@ -33,7 +33,7 @@
 \usepackage{paralist}
 \usepackage{tabularx}
 \usepackage{tabu}
-%\usepackage{tocloft}
+\usepackage{tocloft}
 \usepackage[nottoc,numbib]{tocbibind}
 
 \usepackage{lastpage} %Liest Seitenanzahl
@@ -90,7 +90,7 @@
 \fancyhf{}
 \renewcommand{\headrulewidth}{0.4pt}% Default \headrulewidth is 0.4pt
 \renewcommand{\footrulewidth}{0.4pt}% Default \footrulewidth is 0pt
-%\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}} % for chapters
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}} % for chapters
 \rhead{\docAuthor}
 \lhead{Besondere Lernleistung}
 %\cfoot{Seite \thepage{} von \pageref{LastPage}}
@@ -123,7 +123,7 @@
 
 %=========BILDER==============
 \newcounter{seitennr} 
-\setcounter{seitennr}{40} %needs to be changed before publishing
+\setcounter{seitennr}{39} %needs to be changed before publishing
 \def\theseitennr{\arabic{seitennr}}
 \newcounter{bildnr} 
 \def\thebildnr{\arabic{bildnr}}
