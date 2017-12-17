@@ -73,7 +73,7 @@ Zu AutoCAD gehörig wurde das Dateiformat \q{.dxf} entwickelt, welches als Indus
 	\includegraphics[width=\textwidth]{Bilder/Grundriss}
 \end{Bild}
 
-Der Grundriss, welcher als Ausgangspunkt dieser Arbeit fungiert, wird in AutoCAD erstellt und dem zu erstellenden Programm in Form einer .dxf-Datei bereitgestellt.
+Der Grundriss, welcher als Ausgangspunkt fungiert, wird in AutoCAD erstellt und liegt als .dxf-Datei vor.
 Ein Beispiel für einen solchen Grundriss ist in Abbildung~\thebildnr\ zu sehen.
 
 \section{OpenSCAD}
@@ -82,7 +82,7 @@ OpenSCAD bietet dabei verschiedene Vorteile während des Modellierungsvorganges,
 
 %Modellierung
 Die Modellierung von einfachen Basisobjekten in OpenSCAD erfolgt durch das Verwenden von Anweisungen wie \icode{cube()}, \icode{sphere()} oder \icode{cylinder()} und Parametern in Klammern.
-Diese Basisobjekte können anschließend durch Mengenoperationen wie Vereinigungen (\icode{union()}), Differenzen (\icode{difference()}) oder Überschneidungen (\icode{intersection()}) und Transformationen wie Skalierungen (\icode{scale()}), Rotationen (\icode{rotate()}) oder Translationen (\icode{translate()}) miteinander verknüpft und kombiniert werden, um neue Objekte nach eigenen Ansprüchen zu erzeugen.
+Diese Basisobjekte können anschließend durch Mengenoperationen wie Vereinigungen (\icode{union()}), Differenzen (\icode{difference()}) oder Schnittmengen (\icode{intersection()}) und Transformationen wie Skalierungen (\icode{scale()}), Rotationen (\icode{rotate()}) oder Translationen (\icode{translate()}) miteinander verknüpft und kombiniert werden, um neue Objekte nach eigenen Ansprüchen zu erzeugen.
 
 \begin{Bild}{Eine Vereinigung zweier Würfel in OpenSCAD (Screenshot der Verfasser)}
 	\includegraphics{Bilder/OpenSCAD_Union}
@@ -92,12 +92,12 @@ Neben solchen einfachen Objekten wird außerdem die Möglichkeit geboten, komple
 Diese können dann ausgehend von einem zweidimensionalen Polygon in Prismen umgewandelt werden (\icode{linear\_extrude()}). \\
 
 Die Anweisungen, welche OpenSCAD zum Modellieren verwendet, werden in einfachen Textdateien im .scad-Format gespeichert.
-Die Einfachheit dieser Textdateien erlaubt es, die aus dem zu entwickelnden Programm erhaltenen Anweisungen in .scad-Dateien zu speichern, welche von OpenSCAD eingelesen, eingesehen und bearbeitet werden können. \\
+Die Einfachheit dieser Textdateien erlaubt es, die erhaltenen Anweisungen ohne Umwandlungen in .scad-Dateien zu speichern, welche von OpenSCAD eingelesen, eingesehen und bearbeitet werden können. \\
 
 %Drucken
 Die Modelle, die so mit OpenSCAD erstellt wurden, können anschließend mit einem 3D-Drucker ausgedruckt werden.
-Dazu werden die Modelle in Dateien des .stl-Formats konvertiert.
-Dies geschieht entweder über die Benutzeroberfläche von OpenSCAD oder mittels einer Kommandozeilenanweisung.
+Dazu werden die Modelle in Dateien des .stl-Formats umgewandelt.
+Die Konvertierung geschieht entweder über die Benutzeroberfläche von OpenSCAD oder mittels einer Kommandozeilenanweisung.
 
 \section{3D-Drucker MakerBot Replicator\texttrademark\ 2}
 %Erklärung 3D-Drucker

@@ -7,7 +7,8 @@ Dafür werden die drei graphischen Elemente der Typen \icode{Edge}(Kante), \icod
 Beginnend werden gleichzeitig die Knoten und Kanten der zu generierenden DCEL erstellt.
 \subsection{Vector-to-Node Konvertierung}
 Aus einem Ortsvektor kann die Funktion \icode{createNode()} einen kongruenten Knoten mit gleichen Ursprungskoordinaten, aber ohne Referenz auf eine anliegende Kante, erstellen. 
-Desweiteren wird, falls ein Knoten zu einem abgefragten Punkt schon generiert wurde, dieser zurückgeben.
+Desweiteren wird, falls ein Knoten zu einem abgefragten Punkt schon generiert wurde, dieser zurückgeben. \\
+
 \begin{code}[\icode{createNode()} Funktion]
 	private Node createNode(Vector p) {
 		for (Node n : nodes) {
@@ -19,10 +20,12 @@ Desweiteren wird, falls ein Knoten zu einem abgefragten Punkt schon generiert wu
 		return (nodes.get(nodes.size() - 1));
 	}
 \end{code}
+
 \subsection{Line-to-Edge Konvertierung}
 \label{subsec:ltoe} 
 Die \icode{processData} Funktion greift auf \icode{createNode()} zu und erstellt die Liste aus Kanten mit den jeweiligen Start- und Endknoten.
-Auch hier gibt es noch keine abgespeicherten Zusammenhänge zwischen den einzelnen Kanten.
+Auch hier gibt es noch keine abgespeicherten Zusammenhänge zwischen den einzelnen Kanten. \\
+
 \begin{code}[Line-to-Edge Konvertierung]
 	private void processData(ArrayList<Line> ls) {
 		for (Line l : ls) {
@@ -30,7 +33,9 @@ Auch hier gibt es noch keine abgespeicherten Zusammenhänge zwischen den einzeln
 		}
 	}
 \end{code}
+
 Basierend auf dieser Grundlage müssen alle folgenden Kalkulationen der \icode{Graph}-Klasse durchgeführt werden.
+
 \subsection{Zwillingskantengenerierung}
 Durch Vertauschen der Start- und Endknoten wird nun für jede existente Kante eine entgegengesetzt-laufende komplementäre \q{Zwillingskante} gebildet.
 In der Anwendung wird so die Liste der Kanten um ihre Größe erweitert.
@@ -43,17 +48,21 @@ Anschließend sortiert die Anwendung diese mittels der \icode{angle()}-Methode a
 Dabei wird die jeweilige Kante $E_i$ in einen Vektor, welcher zwischen die beiden Kantenknoten gespannt werden kann, konvertiert, damit die \icode{angle()}-Funktion aufrufbar ist.
 Diese gibt einen eindeutigen Winkel des Vektors zur x-Achse im Intervall $(-\pi,\pi]$ aus.
 Aus den angeordneten Kanten $E$ lassen sich unter Beachtung des mathematisch positivem Umlaufsinnes der Kanten an den Flächen nun folgende Beziehungen ableiten:
+
 \begin{compactenum}
 	\item Die Zwillingskante von $E_{i+1}$ ist der Vorgänger von $E_i$
 	\item $E_{i-1}$ ist der Nachfolger der Zwillingskante von $E_i$ 
 \end{compactenum}
+
 \begin{Bild}{Veranschaulichung 1. und 2.}
 	\includegraphics[width = 70mm]{Bilder/Beziehung1Kanten}
 	\includegraphics[width = 70mm]{Bilder/Beziehung2Kanten}
 \end{Bild}
+
 Falls $i-1$ bzw. $i+1$ die Indices der Menge $E$ mit $n$ Elementen überschreiten, wird anstattdessen $E_n$ bzw. $E_0$ gewählt. \\
-Der aufgeführte Algorithmus wird für alle Knoten $N$ der DCEL fortgeführt, sodass alle Referenzen zwischen den Kanten fertiggestellt werden. 
-\begin{code}[Zuweisung der Beziehungen im Programm; \icode{nodeEdges} ist eine zweidimensionale ArrayList, die f{\"u}r jeden Knoten eine sortierte ArrayList aus Kanten enth{\"a}lt]
+Der aufgeführte Algorithmus wird für alle Knoten $N$ der DCEL fortgeführt, sodass alle Referenzen zwischen den Kanten fertiggestellt werden.  \\
+
+\begin{code}[Zuweisung der Beziehungen im Programm]
 	for (ArrayList<Edge> e : nodeEdges) {
 		for (int i = 0; i < e.size(); i++) {
 			e.get(i).setPrev(e.get((i + 1) \% e.size()).getTwin());

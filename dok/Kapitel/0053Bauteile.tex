@@ -75,7 +75,7 @@ Jede Grundplatte, die an das äußere Gebiet angrenzt wird zudem an dieser Seite
 Die \icode{Params}-Klasse dient als Speichermöglichkeit für alle nötigen Konstanten, welche für die Umrechnung des Grundrisses in das 3D-Modell benötigt werden.
 Jedem dreidimensionalen Objekt benötigt eine Instanz einer solchen Klasse, um den OpenSCAD Code zu generieren.
 In der Anwendung wird von der Klasse \icode{ScadProcessor} die angegebenen Parameter an alle Elemente des Grundrisses weitergegeben, damit verhindert wird, dass unterschiedliche Komponenten desselben Grundrisses verschiedene Konstanten zur Verfügung gestellt bekommen.
-Sie werden bei Beginn des Programms in der \icode{Main}-Klasse gesetzt und können über eine Instanz der \icode{Params}-Klasse aufgerufen werden.
+Sie werden bei Beginn des Programms in der \icode{Main}-Klasse gesetzt und können über eine Instanz der \icode{Params}-Klasse aufgerufen werden. \\
 
 \begin{code} [Die \icode{setParams()}-Funktion zum Setzen der Parameter]
 	public void setParams(double E, ...){
@@ -84,39 +84,34 @@ Sie werden bei Beginn des Programms in der \icode{Main}-Klasse gesetzt und könn
 	}
 \end{code}
 
-Das Abrufen der Parameter erfolgt dann mittels der entsprechenden \icode{get()}-Funktionen der \icode{Params}-Klasse, welche für alle Parameter vorhanden sind.
-Der Aufbau der \icode{get()}-Funktionen folgt dem generellen Aufbau des nachfolgenden Codebeispiels, jedoch werden die Parameterbezeichnungen jeweils entsprechend ersetzt:\\
-
-\begin{code} [Die \icode{get()}-Funktion für den Parameter \icode{e}]
-public double getE() {
-	return e;
-}
-\end{code}
-
-Die nötigen Parameter stellen dabei Gleitkommazahlen(\icode{double}) dar, die verschiedene Teile des Grundrisses beeinflussen. 
+Das Abrufen der Parameter erfolgt dann mittels der entsprechenden \icode{get()}-Funktionen der \icode{Params}-Klasse, welche für alle Parameter vorhanden sind. 
+Die nötigen Parameter stellen dabei Gleitkommazahlen (\icode{double}) dar, die verschiedene Teile des Grundrisses beeinflussen. 
 Theoretisch können sie alle variiert werden.
 
 \subsubsection{$\epsilon$/Epsilon}
-Der Parameter Epsilon($\epsilon$) bezeichnet einen Abstand zwischen 3D-Objekten, der benötigt wird, um einem möglichen Fehler des 3D-Druckers entgegenzuwirken.
+Der Parameter Epsilon ($\epsilon$) bezeichnet einen Abstand zwischen 3D-Objekten, der benötigt wird, um einem möglichen Fehler des 3D-Druckers entgegenzuwirken.
 Dieser kann z.B. bewirken, dass Steckmechanismen nicht ineinander passen.
 Deswegen tritt der Abstand $\epsilon$ generell dort auf, wo zwei Objekte aufeinander oder ineinander geschoben werden müssen.
 In Folgenden Teilen des 3D-Modells tritt Epsilon auf:
+
 \begin{compactenum}
-	\item Bei dem Vorkommen von einem positven und einem negativem Steckern (Wand/Eckpfeiler und Grundplatte/Eckpfeiler) ist der negative gleichmäßig um$\epsilon$ vergrößert, damit ein abschließendes Stecken ermöglicht wird.
-	\item Wenn zwei Grundplatten aufeinandertreffen, wird die sich berührenden Seiten um $0.5*\epsilon$ entgegengesetzt zueinander verschoben zur Einhaltung eines Abstandes von $\epsilon$ 
+	\item Bei dem Vorkommen von einem positven und einem negativem Steckern (Wand/Eckpfeiler und Grundplatte/Eckpfeiler) ist der negative gleichmäßig um $\epsilon$ vergrößert, damit ein abschließendes Stecken ermöglicht wird.
+	\item Wenn zwei Grundplatten aufeinandertreffen, wird die sich berührenden Seiten um $0.5*\epsilon$ entgegengesetzt zueinander verschoben zur Einhaltung eines Abstandes von $\epsilon$ .
 	\item Die Höhe einer Wand wird um $\epsilon$ verringert, damit die Oberseite des gesamten 3D-Objekts eine glatte Oberfläche besitzt.
 \end{compactenum}
 
-Das im Programm definierte Epsilon wurde mittels einem Experiment(siehe Abbildung \thebildnr) ermittelt.
+Das im Programm definierte Epsilon wurde mittels einem Experiment (siehe Abbildung \thebildnr) ermittelt.
 Dafür wurde ein Stecker und Einstülpungen, die um ein verschiedenes $\epsilon$ vergrößert wurden, gedruckt, sodass getestet wurden konnte, welches Epsilon für den MakerBot Replicator\texttrademark\ 2 am geeignetsten ist.
 Ausgewertet wurde daraus ein Wert von 0.25mm. \\
 Der $\epsilon$-Parameter ist deswegen ein druckerspezifischer Parameter.
+
 \begin{Bild}{Versuch zur Ermittlung eines passenden Epsilon-Wertes}
 		\includegraphics[width=120mm]{Bilder/EpsilonTest_cut-09}
 \end{Bild}
 
 \subsubsection{Weitere Konstanten}
-Die restlichen Parameter werden in der folgenden Tabelle gelistet.\\
+Die restlichen Parameter werden in der folgenden Tabelle gelistet. \\
+
 \begin{tabularx}{\textwidth}{|X|X|Z|}
 	\hline
 	\thead{Konstante} & \thead{Bedeutung} & \thead{Wert in mm} \\ 
