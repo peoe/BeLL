@@ -1,9 +1,10 @@
 package render;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import graph.*;
-import io.Quicksort;
 import render.objects.Rotate;
 import render.objects.Translate;
 import render.objects.Union;
@@ -57,8 +58,9 @@ public class ScadProcessor {
 	 */
 	public ArrayList<ScadObject> renderBasePlateFiles() {
 		ArrayList<ScadObject> files = new ArrayList<>();
-		ArrayList<BasePlate> basePlates = new Quicksort<BasePlate>(getBasePlates(), "getOmbbArea").sortArray();
-
+		ArrayList<BasePlate> basePlates = (ArrayList<BasePlate>) getBasePlates().clone();
+		Collections.sort(basePlates, BasePlate.BasePlateOMBBComparator);
+		
 		Vector rotatedNode;
 
 		double xMin, yMin, usedWidth = 0.0, usedLength = 0.0;
@@ -111,8 +113,9 @@ public class ScadProcessor {
 	 */
 	public ArrayList<Union> renderCornerFiles() {
 		ArrayList<Union> files = new ArrayList<>();
-		ArrayList<Corner> corners = new Quicksort<Corner>(getCorners(), "getWidth").sortArray();
-
+		ArrayList<Corner> corners = (ArrayList<Corner>) getCorners().clone();
+		Collections.sort(corners, Corner.CornerWidthComparator);
+		
 		double cornerLength = 0.0;
 		double cornerWidth = 0.0;
 
@@ -144,8 +147,8 @@ public class ScadProcessor {
 	 */
 	public ArrayList<Union> renderWallFiles() {
 		ArrayList<Union> files = new ArrayList<>();
-		ArrayList<Wall> walls = new Quicksort<Wall>(getWalls(), "getLength").sortArray();
-
+		ArrayList<Wall> walls = (ArrayList<Wall>) getWalls().clone();
+		Collections.sort(walls, Wall.WallLengthComparator);
 		double rowLength = 0.0;
 		double columnWidth = 0.0;
 
