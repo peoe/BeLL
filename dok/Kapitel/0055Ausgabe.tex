@@ -1,8 +1,9 @@
 \section{Ausgabe der Resultate}
 \subsection{Erstellung des Ausgabeordners}
 Alle ausgegebenen Dateien des Programms werden in einem Ordner zusammengefasst.
-Dieser Ordner wird im gleichen Verzeichnis erstellt, in dem auch das Programm ausgeführt wird.
+Dieser Ordner wird im gleichen Verzeichnis erstellt, in dem auch das Programm ausgeführt wird. \\
 Als Name des Verzeichnisses wird der Name genutzt, den der Nutzer in der GUI eingegeben hat.
+Im Unterordner \q{scad} dieses Ordners finden sich dann sämtliche .scad-Dateien, im Unterordner \q{stl} alle .stl-Dateien.
  
 \begin{code}[Erstellung der Unterordner]
 	private static void createDirs(String folderName) {
@@ -14,8 +15,6 @@ Als Name des Verzeichnisses wird der Name genutzt, den der Nutzer in der GUI ein
 		}
 	}
 \end{code}
-
-Im Unterordner \q{scad} dieses Ordners finden sich dann sämtliche .scad-Dateien, im Unterordner \q{stl} alle .stl-Dateien.
 
 \subsection{OpenSCAD Java Interface}
 Für die erleichterte Erstellung von OpenScad Objekten wurde ein Java Interface \icode{ScadObject} erstellt, welches alle für das Projekt wichtigen Befehle enthält.

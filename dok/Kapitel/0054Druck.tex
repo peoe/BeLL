@@ -7,6 +7,7 @@
 Nachdem die einzelnen Bestandteile des Modells berechnet wurden, können diese gedruckt werden.
 Hierbei ist allerdings zu bedenken, dass alle einzelnen Bauteile nicht in einem Druckvorgang gedruckt werden können, da die Grundplatte des 3D-Druckers zu klein ist. \\
 In unserem Fall wies diese eine Länge von 28,5 cm und eine Breite von 15,2 cm auf (siehe Quelle \cite{makerbotspecs}).
+
 \subsection{Minimierung der Druckvorgänge}
 Um die Dimensionen der Grundplatte effektiv auszunutzen, werden einzelne Elemente des Modells nach der Größe sortiert und dann solange nebeneinander angeordnet, bis die Breite der Druckfläche mit dem nächsten Element überschritten würde.
 Anschließend wird eine neue Reihe eröffnet, in der nun neue Elemente platziert werden. 
@@ -14,16 +15,20 @@ Dieser Prozess wird solange fortgeführt, bis die Länge der Druckfläche übers
 Dann wird eine neue Gruppierung von Objekten bzw. \icode{Union} erstellt, in welcher der Algorithmus weiterläuft.
 Das Resultat zeigt eine Liste von Objekten, die eine platzeffiziente Anordnung dieser repräsentiert.
 Jedes einzelne Element in der Liste kann mit einem Durchgang gedruckt werden.
+
 \subsection{Ermittlung der Größen}
 Das Einzige, was die Strukturen Wand- und Eckteil, sowie Grundplatte in diesem Algorithmus voneinander unterscheidet, ist die Größe, welche unterschiedlich bestimmt wird.
 Da die Anordnung ein zweidimensionales Problem ist, wird die Höhe der Objekte nicht berücksichtigt.
+
 \subsubsection{Wände}
 Die Wandelemente werden durch eine Kante dargestellt und so modifiziert, dass sie in die Eckpfeiler gesteckt werden kann.
 Die Wände sind durch den notwendigen Abstand zwischen den Objekten immer kürzer als die zugehörige Kante. 
 Die Breite ermittelt sich durch die definierte \icode{wallWidth} der übergebenen \icode{Params}--Klasse.
+
 \subsubsection{Eckpfeiler}
 Für die Größenberechnung der Eckpfeiler wird der längste Pin, welcher an dem jeweiligen Objekt anliegt, festgestellt.
 Die Länge dieses Pins stellt dann die Seitenlänge eines Quadrats dar, welche die Ausmaße des Eckpfeilers angibt.
+
 \subsubsection{Grundplatten}
 Um die optimale Größe der Grundplatten zu berechnen, muss die OMBB der Grundplatte berechnet werden.
 % meinst du mit dieser die ombb oder die grundplatte?
@@ -31,7 +36,7 @@ Dafür wird die OMBB der Grundfläche ermittelt und anschließend vergrößert, 
 
 \paragraph{Bestimmung der Konvexen Hülle}
 % Verweis!
-Die Berechnung der OMBB wird über diesen Zwischenschritt realisiert, da nach dem von Freeman und Shapira bewiesenen Satz, eine Seite des minimalen Begrenzungsrechtecks kollinear mit einer der konvexen Hülle sein muss. \\
+Die Berechnung der OMBB wird über diesen Zwischenschritt realisiert, da nach dem von Freeman und Shapira bewiesenen Satz, eine Seite des minimalen Begrenzungsrechtecks kollinear mit einer der konvexen Hülle sein muss (vgl. \cite{ombb}). \\
 Für die Ermittlung wird der \q{Gift Wrapping Algorithm} herangezogen.
 Bei diesem Algorithmus wird zuerst der Punkt mit der kleinsten Ordinate als Startpunkt $P_0$ festegelegt.
 Gibt es mehrere dieser Punkte, wird der Punkt mit der kleinsten Abszisse gewählt.
@@ -41,6 +46,7 @@ Ist dieser Winkel kleiner als $180^\circ$, liegt $S$ links von der Gerade durch 
 $S$ wird folglich als neuer Punkt $P$ gesetzt und die Berechnung fortgesetzt.
 Der Vorgang wird solange durchgeführt bis alle Punkte überprüft wurden und ein nächster Punkt $P_1$ der konvexen Hülle feststeht.
 Der Algorithmus wird nun fortgeführt mit $P_1$ als Ausgangspunkt, solange bis der Anfangspunkt $P_0$ wieder erreicht wurde, so dass die konvexe Hülle \q{geschlossen} ist.
+
 \paragraph{Bestimmung der OMBB}
 Nun wird die konvexe Hülle fortlaufend rotiert, so dass eine Seite parallel zur x-Achse ist.
 Dadurch kann man leicht das Begrenzungsrechteck durch Feststellen der Extremwerte des rotierten Polygons ermitteln.
