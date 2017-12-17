@@ -1,5 +1,9 @@
 package graph;
 
+import java.util.Comparator;
+
+import render.Wall;
+
 public class Edge {
 
 	// twin, previous and next Edge of the Edge
@@ -184,6 +188,15 @@ public class Edge {
 		this.face = face;
 	}
 
+	/**
+	 * Comparator used for ArrayList sorting
+	 */
+	public static Comparator<Edge> EdgeAngleComparator = new Comparator<Edge>() {
+
+		public int compare(Edge e1, Edge e2) {
+		   return Double.compare(e1.toVector().angle(), e2.toVector().angle());
+	    }};
+	    
 	/**
 	 * Returns a String of the Edge.
 	 * 

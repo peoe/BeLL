@@ -1,6 +1,7 @@
 package render;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import graph.*;
 import render.Params;
@@ -211,6 +212,17 @@ public class BasePlate implements ScadObject {
 		return width * length;
 	}
 
+	/**
+	 * Comparator used for ArrayList sorting
+	 */
+	public static Comparator<BasePlate> BasePlateOMBBComparator = new Comparator<BasePlate>() {
+
+		public int compare(BasePlate b1, BasePlate b2) {
+			double ombb1 = b1.getOmbbArea();
+			double ombb2 = b2.getOmbbArea();
+		   return Double.compare(ombb1, ombb2);
+	    }};
+	
 	/**
 	 * Returns a String of the BasePlate object used for creating it in
 	 * OpenSCAD.

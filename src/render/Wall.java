@@ -1,6 +1,7 @@
 package render;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import graph.*;
 import render.objects.*;
@@ -71,6 +72,15 @@ public class Wall implements ScadObject {
 	public double getLength() {
 		return e.toVector().getLength();
 	}
+	
+	/**
+	 * Comparator used for ArrayList sorting
+	 */
+	public static Comparator<Wall> WallLengthComparator = new Comparator<Wall>() {
+
+		public int compare(Wall w1, Wall w2) {
+		   return Double.compare(w1.getLength(), w2.getLength());
+	    }};
 
 	/**
 	 * Returns a String of the Wall used for creating it in OpenSCAD.

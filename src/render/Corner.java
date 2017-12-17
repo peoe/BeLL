@@ -1,6 +1,8 @@
 package render;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+
 import graph.*;
 import render.objects.*;
 
@@ -169,6 +171,15 @@ public class Corner implements ScadObject {
 		this.width = width;
 	}
 
+	/**
+	 * Comparator used for ArrayList sorting
+	 */
+	public static Comparator<Corner> CornerWidthComparator = new Comparator<Corner>() {
+
+		public int compare(Corner c1, Corner c2) {
+		   return Double.compare(c1.getWidth(), c2.getWidth());
+	    }};
+	
 	/**
 	 * Returns a String of the Corner used for creating it in OpenSCAD.
 	 * 
