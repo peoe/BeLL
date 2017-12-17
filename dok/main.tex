@@ -127,6 +127,9 @@
 \def\theseitennr{\arabic{seitennr}}
 \newcounter{bildnr} 
 \def\thebildnr{\arabic{bildnr}}
+\newcounter{bildnrnext}
+\setcounter{bildnrnext}{1}
+\def\thebildnrnext{\arabic{bildnrnext}}
 \newenvironment{Bild}[1]
 {
 	\begin{figure}[H]
@@ -138,6 +141,7 @@
 	\caption{\BildCaption}
 	\end{figure}
 	\refstepcounter{bildnr}
+	\refstepcounter{bildnrnext}
 }
 %========================COMMANDS============
 \renewcommand{\listoffigures}{\begingroup

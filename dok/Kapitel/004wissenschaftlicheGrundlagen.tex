@@ -13,6 +13,8 @@ Um planare Graphen ohne Informationsverlust zu speichern wird in der Informatik 
 In einer DCEL erhält jede Kante, die aus einem Anfangsknoten und Endknoten besteht, jeweils eine Vorgänger-, Nachfolger-, Zwillingskante und die angrenzende Fläche. 
 Durch die Darstellung einer Linie des Grundrisses durch zwei zueinander entgegengesetzt laufenden Kanten wird gewährt, dass sich keine zwei Flächen an einer Kante anliegen.\\
 Zudem wird für einen Knoten der DCEL eine ausgehende Kante und für eine Fläche eine anliegende Kante gespeichert (vgl. Quelle \cite{dcel} und \cite{dcelwiki}). \\
+Die Kanten der Flächen verlaufen im mathematisch positiven Drehsinn.
+Als einzige Ausnahme gilt das äußere Gebiet, welches einen umgekehrten Drehsinn besitzt.
 
 \begin{Bild}{Schema einer DCEL (Abbildung der Verfasser)}
 	\includegraphics[width=250px]{Bilder/DCEL-10}
@@ -84,8 +86,8 @@ OpenSCAD bietet dabei verschiedene Vorteile während des Modellierungsvorganges,
 Die Modellierung von einfachen Basisobjekten in OpenSCAD erfolgt durch das Verwenden von Anweisungen wie \icode{cube()}, \icode{sphere()} oder \icode{cylinder()} und Parametern in Klammern.
 Diese Basisobjekte können anschließend durch Mengenoperationen wie Vereinigungen (\icode{union()}), Differenzen (\icode{difference()}) oder Schnittmengen (\icode{intersection()}) und Transformationen wie Skalierungen (\icode{scale()}), Rotationen (\icode{rotate()}) oder Translationen (\icode{translate()}) miteinander verknüpft und kombiniert werden, um neue Objekte nach eigenen Ansprüchen zu erzeugen.
 
-\begin{Bild}{Eine Vereinigung zweier Würfel in OpenSCAD (Screenshot der Verfasser)}
-	\includegraphics{Bilder/OpenSCAD_Union}
+\begin{Bild}{Eine Differenzmenge zwischen einem Würfel und einem Zylinder in OpenSCAD (Screenshot der Verfasser)}
+	\includegraphics[width= 290px]{Bilder/OpenSCAD_Example}
 \end{Bild}
 
 Neben solchen einfachen Objekten wird außerdem die Möglichkeit geboten, komplexere Objekte wie Polygone (\icode{polygon()}) zu erstellen.
@@ -95,25 +97,25 @@ Die Anweisungen, welche OpenSCAD zum Modellieren verwendet, werden in einfachen 
 Die Einfachheit dieser Textdateien erlaubt es, die erhaltenen Anweisungen ohne Umwandlungen in .scad-Dateien zu speichern, welche von OpenSCAD eingelesen, eingesehen und bearbeitet werden können. \\
 
 %Drucken
-Die Modelle, die so mit OpenSCAD erstellt wurden, können anschließend mit einem 3D-Drucker ausgedruckt werden.
+Die Modelle, die mit OpenSCAD erstellt wurden, können anschließend mit einem 3D-Drucker ausgedruckt werden.
 Dazu werden die Modelle in Dateien des .stl-Formats umgewandelt.
 Die Konvertierung geschieht entweder über die Benutzeroberfläche von OpenSCAD oder mittels einer Kommandozeilenanweisung.
 
 \section{3D-Drucker MakerBot Replicator\texttrademark\ 2}
 %Erklärung 3D-Drucker
-Der vorliegende 3D-Drucker ist das Modell Replicator\texttrademark\ 2 der Firma MakerBot.
-Dieser Drucker verfügt über eine höhenverstellbare Grundplatte, auf der das Filament\footnote{Filament bezeichnet das Material, welches der 3D-Drucker zum Drucken verwendet.} aufgetragen und das finale Objekt gedruckt wird.
+Der vorliegende 3D-Drucker ist vom Modell Replicator\texttrademark\ 2 der Firma MakerBot.
+Dieser Drucker verfügt über eine höhenverstellbare Grundfläche, auf der das Filament\footnote{Filament bezeichnet das Material, welches der 3D-Drucker zum Drucken verwendet.} aufgetragen und das finale Objekt gedruckt wird.
 Ein sogenannter \q{Extruder} erhitzt dazu das zu druckende Filament und trägt dieses auf die Grundplatte auf. 
 Mithilfe dieser zwei Hauptbestandteile wird schichtweise Filament aufgetragen, welches aushärtet und so das Objekt bildet. \\
-Die Höhe der Grundplatte wird während des Druckvorganges automatisch vom Drucker variiert und nach Abschluss des Drucks wieder auf den Ausgangszustand zurückgesetzt.
+Die Höhe der Grundfläche wird während des Druckvorganges automatisch vom Drucker variiert und nach Abschluss des Drucks wieder auf den Ausgangszustand zurückgesetzt.
 Um die Beweglichkeit des Extruders zu garantieren, ist dieser auf drei Achsen befestigt, sodass Motoren ihn auf diesen Achsen verschieben können. \\
 Abhängig vom Filament bzw. der Temperatur, bei der dieses aufgetragen wird, der Bewegungsgeschwindigkeit des Extruders und der Filamentstärke, die der Extruder aufträgt, lässt sich die gewünschte Druckqualität anpassen.
-Eine niedrige Qualität ist dabei in den meisten Fällen mit einer erheblich kürzeren Druckzeit verbunden. \\
+Eine niedrige Qualität ist dabei mit einer erheblich kürzeren Druckzeit verbunden. \\
 Die Druckzeit wird außerdem von der eingestellten Ausfüllung von geschlossenen Objekten und dem Hinzufügen von Druckhilfen beeinflusst.
 So kann man Objekte beispielsweise nicht komplett mit Filament füllen lassen, sondern mit einem Bienenwabenmuster durchsetzen, sodass nur ein geringer Teil des Objektes ausgefüllt, aber dennoch Stabilität gewährleistet wird.
 Indem so also ein stark verringerter Betrag an Filament aufgetragen werden muss, wird auch die Druckzeit drastisch reduziert. \\
 Zu dem eigentlichen Druckergebnis wird unter jedes gedruckte Element eine dünne Schicht gedruckt, welcher leicht von der Grundplatte und vom gedruckten Modell zu trennen ist und so eine Beschädigung beim Entfernen des Objekts vom Drucker verhindert.
 Außerdem werden bei Überhängen zusätzliche Stützen gedruckt, um ein Absacken des noch nicht ausgehärteten Filaments zu verhindern.  \\
-Beim Drucken von Objekten ist neben Anpassungen zur Kontrolle der Druckqualität und Druckzeit außerdem zu beachten, dass die Grundplatte nur auf einer begrenzten Fläche bedruckbar ist.
-Entsprechend dieser vorgegebenen Maße sollten also alle Objekte in ihrer Größe angepasst werden.
+Beim Drucken von Objekten ist neben Anpassungen zur Kontrolle der Druckqualität und Druckzeit außerdem zu beachten, dass die Grundfläche eine begrenzten Fläche besitzt.
+Entsprechend dieser vorgegebenen Maße sollten alle Objekte in ihrer Größe angepasst werden.
 % [28.5 x 15.3 x 15.5 cm]

@@ -1,9 +1,10 @@
 \chapter{Vorgehen zur Problemlösung}
+Die Anwendung wandelt eine .dxf Grundrissdatei in .scad und .stl Dateien um, die zum Drucken benutzt werden können.
+Dafür sind mehrere Zwischenschritte nötig.
 \section{Einlesen des Grundrisses}
-
+Den Beginn der Verarbeitung markiert die Grundrissdatei, in welcher sämtliche Werte, die im weiteren Verlauf des Programmes relevant werden, enthalten sind.
 \subsection{Funktionsweise der Bibliothek \textit{kabeja}}
-Den Beginn der Verarbeitung markiert hierbei die Grundrissdatei, in welcher sämtliche Werte, welche im weiteren Verlauf des Programmes relevant werden, enthalten sind.
-Das Einlesen der Daten eines Grundrisses, wie in Abb. 5, erfolgt mit der Java-Bibliothek „kabeja“. 
+Das Einlesen der Daten eines Grundrisses, wie in Abb. 5 zu sehen, erfolgt mit der Java-Bibliothek „kabeja“. 
 Diese ermöglicht es, aus .dxf-Dateien alle DXF-Objekte eines bestimmten Typs zu erhalten, deren Werte in einer Liste zu speichern und später zu verarbeiten. \\
 
 \begin{code}[DXF File Parser]
@@ -23,19 +24,19 @@ public static ArrayList<Line> getAutocadFile(String filePath) throws ParseExcept
 Aus der .dxf-Datei deren Pfad der Klasse \q{DXFReader} übergeben wird, werden alle DXF-Objekte, die mit dem Typen \icode{DXFLine} übereinstimmen, in einer Liste zurückgegeben. 
 Die Koordinaten der Start- und Endpunkte der DXFLines  in dieser Liste werden anschließend in eine Liste von Linien übertragen, welche unter anderem bei der Umwandlung des Graphen in die DCEL Verwendung findet.
 
-\subsection{Funktionsweise der GUI}
-Die GUI setzt sich zusammen aus einem \icode{JFrame}, in dem zwei \icode{JTextField}, ein \icode{FileChooserButton}, ein \icode{StartButton} und ein \icode{ShowResultButton} platziert sind.
+\subsection{Funktionsweise der Benutzeroberfläche}
+Die Benutzeroberfläche(GUI) setzt sich zusammen aus einem \icode{JFrame}, in dem zwei \icode{JTextField}, ein \icode{FileChooserButton}, ein \icode{StartButton} und ein \icode{ShowResultButton} platziert sind.
 
 \begin{Bild}{Ausgangszustand der GUI (Screenshot der Verfasser)}
 	\includegraphics[width = 120mm]{Bilder/GUI/GUI_Startup}
 \end{Bild}
 
 Der Nutzer kann im Ausgangszustand über den \icode{FileChooserButton} einen \icode{JFileChooser}-Dialog öffnen, mit dem er die Datei, die er umwandeln möchte, auswählen kann.
-Sobald er dann eine Datei ausgewählt hat, wird der Dateipfad zu dieser Datei zusätzlich im \icode{JTextField angezeigt.}
+Sobald er dann eine Datei ausgewählt hat, wird der Dateipfad zu dieser Datei zusätzlich im \icode{JTextField} angezeigt.
 In diesem \icode{JFileChooser} ist außerdem ein \icode{FileFilter} implementiert, der dem Nutzer lediglich .dxf-Dateien anzeigt.
 Alternativ zum \icode{JFileChooser}-Dialog kann der Nutzer auch direkt in das links positionierte \icode{JTextField} den Dateipfad eingeben.
-Im \icode{JTextField} unterhalb gibt der Nutzer dann den Ordnernamen ein, in dem die umgewandelten Dateien ausgegeben werden. \\
-Nachdem der Nutzer eine Datei ausgewählt und einen Namen für den Ergebnisordner hat, wird nun der \icode{StartButton} aktiviert und er kann den Konvertierungsprozess starten.
+Im \icode{JTextField} darunter gibt der Nutzer dann den Ordnernamen ein, in dem die umgewandelten Dateien ausgegeben werden. \\
+Nachdem der Nutzer eine Datei ausgewählt und einen Namen für den Ergebnisordner eingegeben hat, wird nun der \icode{StartButton} aktiviert und er hat die Möglichkeit den Konvertierungsprozess starten.
 
 \begin{Bild}{GUI mit aktiviertem \icode{StartButton} (Screenshot der Verfasser)}
 	\includegraphics[width = 120mm]{Bilder/GUI/GUI_Convert_Ready}
