@@ -1,4 +1,4 @@
-\documentclass[a4paper, 12pt]{report}
+\documentclass[a4paper, 12pt]{scrreprt}
 
 %======ALLJEMEINE PAKETE===================
 \usepackage[a4paper,left=40mm,top=25mm,bottom=20mm, right=30mm]{geometry} % korrekturränder
@@ -33,7 +33,8 @@
 \usepackage{paralist}
 \usepackage{tabularx}
 \usepackage{tabu}
-\usepackage{tocloft}
+%\usepackage{tocloft}
+\usepackage[nottoc,numbib]{tocbibind}
 
 \usepackage{lastpage} %Liest Seitenanzahl
 
@@ -89,7 +90,7 @@
 \fancyhf{}
 \renewcommand{\headrulewidth}{0.4pt}% Default \headrulewidth is 0.4pt
 \renewcommand{\footrulewidth}{0.4pt}% Default \footrulewidth is 0pt
-\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}} % for chapters
+%\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}} % for chapters
 \rhead{\docAuthor}
 \lhead{Besondere Lernleistung}
 %\cfoot{Seite \thepage{} von \pageref{LastPage}}
@@ -99,7 +100,7 @@
 \renewcommand{\lstlistingname}{Codeauschnitt}
 \newcommand*{\thead}[1]{\multicolumn{1}{|c|}{\bfseries #1}}
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
-\newcolumntype{Z}{>{\raggedright\arraybackslash}X}
+\newcolumntype{Z}{>{\raggedleft\arraybackslash}X}
 \lstnewenvironment{code}[1][]
 {
 	\lstset{
@@ -139,6 +140,10 @@
 	\refstepcounter{bildnr}
 }
 %========================COMMANDS============
+\renewcommand{\listoffigures}{\begingroup
+	\tocsection
+	\tocfile{\listfigurename}{lof}
+	\endgroup}
 \newcommand{\q}[1]{\glqq#1\grqq} % Zitat mit Anführungszeichen
 \newcommand{\icode}[1]{\texttt {#1}} %inline Code
 %\newcommand{\todo}[#1]{\newline\huge \color{red}#1 \color{black}\normalsize}
@@ -161,7 +166,7 @@
 \hyphenation{AutoCAD}
 \hyphenation{OpenSCAD}
 \hyphenation{Vor-gäng-er}
-
+\hyphenation{base-Plate-Pin-Circle-Height}
 %=======FANCY FOOTER FOR LISTOFFIGURES====
 \fancypagestyle{plain}{	
 	\fancyfoot{}
@@ -192,11 +197,11 @@
 	\include{Kapitel/0055Ausgabe}
 	
 	\include{Kapitel/006Ausblick}
-	\phantomsection
-	\addcontentsline{toc}{chapter}{Internetquellenverzeichnis}
+%	\phantomsection
+%	\addcontentsline{toc}{chapter}{Internetquellenverzeichnis}
 	\include{Kapitel/007Quellenverzeichnis}
-	\phantomsection
-	\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+%	\phantomsection
+%	\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
 	\listoffigures
 	\include{Kapitel/0090Betreuerdank}
 	\include{Kapitel/009Selbstaendigkeit}

@@ -1,14 +1,12 @@
 \chapter{Wissenschaftliche Grundlagen}
 \section{Planare Graphen}
 Zur einfacheren Handhabung wird der Grundriss in einen planaren Graphen umgewandelt. 
-Ein planarer, auch plättbarer Graph ist ein Graph der in einer Ebene mithilfe von Punkten bzw. Knoten und Kanten dargestellt werden kann, ohne dass sich zwei oder mehr Kanten schneiden (vgl. Quelle \cite{planarGraph}). 
+Ein planarer, auch plättbarer Graph, ist ein Graph, der in einer Ebene mithilfe von Knoten und Kanten dargestellt werden kann, ohne dass sich zwei oder mehr Kanten schneiden (vgl. Quelle \cite{planarGraph}). 
 Jede Fläche des Graphen wird dabei durch mindestens drei verschiedene Kanten beschrieben, die den Rand der Fläche darstellen. 
-Die Fläche um den Graphen herum, welche scheinbar unbegrenzt groß ist, wird äußeres Gebiet genannt.
-\begin{Bild}{Schema eines planaren Graphen (Abbildung der Verfasser)}
-	\includegraphics[width = 100px, height = 100px]{Bilder/Graph_Scheme}
+Die Fläche um den Graphen herum, welche unbegrenzt groß ist, wird äußeres Gebiet genannt.
+\begin{Bild}{Schema eines planaren Graphen(Abbildung der Verfasser)}
+	\includegraphics[width = 250px]{Bilder/planarerGraph-11}
 \end{Bild}
-In Abbildung~\thebildnr\ wird ein solcher planarer Graph dargestellt.
-Der linke obere Knoten ist hier mit (1) bezeichnet, die rechte Kante mit (2) und die innere Fläche mit (3).
 
 \section{Doubly connected edge list}
 Um planare Graphen ohne Informationsverlust zu speichern wird in der Informatik eine sogenannte \q{Doubly connected edge list} (DCEL) genutzt.
@@ -52,18 +50,15 @@ Folgende Tabellen verdeutlichen die Referenzen der Bestandteilen einer DCEL in A
 	\hline
 \end{tabularx}
 
-\section{Convex Hull}
-Für die Berechnung der Fläche einer DCEL wird eine Menge von Punkten benötigt, die die konvexe Hülle der DCEL beschreiben.
-Die konvexe Hülle einer Punktmenge ist dabei die kleinste Menge von Punkten, in der alle Punkte der DCEL enthalten sind.
-Bezogen auf ein Polygon ist die konvexe Hülle folglich ein weiteres Polygon, welches so wenig Punkte wie möglich beinhaltet, damit alle Punkte des Ursprungspolygons darin liegen.
+\section{Oriented Minimum Bounding Box}
+Die Oriented Minimum Bounding Box(OMBB) bzw. das orientierte minimale Begrenzungsrechteck einer Fläche ist das Rechteck, welches das komplette Polygon umschließt und dabei den kleinstmöglichen Flächeninhalt besitzt.
+Sie wird über den \q{Convex Hull} (konvexe Hülle) eines Polygons berechnet.
+Der \q{Convex Hull} ist die kleinste konvexe Menge, in der die Punkte der Fläche enthalten sind.
+Mindestens eine Seite des minimalen Begrenzungsrechtecks ist kollinear zu einer Seite der konvexen Hülle.
 
 \begin{Bild}{Beispiel einer konvexen Hülle}
-	\includegraphics[]{Bilder/convex_hull}
+	\includegraphics[width = 150px]{Bilder/convex_hull}
 \end{Bild}
-
-\section{Oriented Minimum Bounding Box}
-Die Oriented Minimum Bounding(OMBB) Box bzw. das orientierte minimale Begrenzungsrechteck eines Polygons ist das Rechteck, welches das komplette Polygon umschließt und dabei den kleinstmöglichen Flächeninhalt besitzt.
-
 \begin{Bild}{Eine mögliche Bounding Box (l.) im Vergleich zur OMBB (r.)}
 	\includegraphics[width = \textwidth]{Bilder/aabb_vs_ombb}
 \end{Bild}
@@ -83,8 +78,7 @@ Ein Beispiel für einen solchen Grundriss ist in Abbildung~\thebildnr\ zu sehen.
 
 \section{OpenSCAD}
 OpenSCAD ist eine kostenlos verfügbare CAD-Modellierungssoftware, welche aus einer textbasierten Beschreibungssprache 3D-Modelle erzeugt (vgl. Quelle \cite{OpenScad}).
-OpenSCAD bietet dabei verschiedene Vorteile während des Modellierungsvorganges.
-Hierzu gehören beispielsweise das farbige Hervorheben oder die Modularisierung zusammenhängender Objekte. \\
+OpenSCAD bietet dabei verschiedene Vorteile während des Modellierungsvorganges, beispielsweise das farbige Hervorheben oder die Modularisierung zusammenhängender Objekte. \\
 
 %Modellierung
 Die Modellierung von einfachen Basisobjekten in OpenSCAD erfolgt durch das Verwenden von Anweisungen wie \icode{cube()}, \icode{sphere()} oder \icode{cylinder()} und Parametern in Klammern.
@@ -95,7 +89,7 @@ Diese Basisobjekte können anschließend durch Mengenoperationen wie Vereinigung
 \end{Bild}
 
 Neben solchen einfachen Objekten wird außerdem die Möglichkeit geboten, komplexere Objekte wie Polygone (\icode{polygon()}) zu erstellen.
-Diese können dann ausgehend von einem zweidimensionalen Polygon in Prismen umgewandelt werden (\icode{linear\_extrude()}), welche vor allem das Umwandeln von komplexen Formen in Objekte erleichtert. \\
+Diese können dann ausgehend von einem zweidimensionalen Polygon in Prismen umgewandelt werden (\icode{linear\_extrude()}). \\
 
 Die Anweisungen, welche OpenSCAD zum Modellieren verwendet, werden in einfachen Textdateien im .scad-Format gespeichert.
 Die Einfachheit dieser Textdateien erlaubt es, die aus dem zu entwickelnden Programm erhaltenen Anweisungen in .scad-Dateien zu speichern, welche von OpenSCAD eingelesen, eingesehen und bearbeitet werden können. \\
