@@ -21,18 +21,18 @@ Das Einzige, was die Strukturen Wand- und Eckteil, sowie Grundplatte in diesem A
 Da die Anordnung ein zweidimensionales Problem ist, wird die Höhe der Objekte nicht berücksichtigt.
 
 \subsubsection{Wände}
-Die Wandelemente werden durch eine Kante dargestellt und so modifiziert, dass sie in die Eckpfeiler gesteckt werden kann.
+Die Wandelemente werden durch eine Kante dargestellt und so modifiziert, dass sie in die Eckpfeiler gesteckt werden können.
 Die Wände sind durch den notwendigen Abstand zwischen den Objekten immer kürzer als die zugehörige Kante. 
 Die Breite ermittelt sich durch die definierte \icode{wallWidth} der übergebenen \icode{Params}--Klasse.
 
 \subsubsection{Eckpfeiler}
-Für die Größenberechnung der Eckpfeiler wird der längste Pin, welcher an dem jeweiligen Objekt anliegt, festgestellt.
-Die Länge dieses Pins stellt dann die Seitenlänge eines Quadrats dar, welche die Ausmaße des Eckpfeilers angibt.
+Für die Größenberechnung der Eckpfeiler wird der längste Eckpin, welcher an dem jeweiligen Objekt anliegt, festgestellt.
+Die Länge dieses Eckpins stellt dann die Seitenlänge eines Quadrats dar, welche die Ausmaße des Eckpfeilers angibt.
 
 \subsubsection{Grundplatten}
 Um die optimale Größe der Grundplatten zu berechnen, muss die OMBB der Grundplatte berechnet werden.
 % meinst du mit dieser die ombb oder die grundplatte?
-Dafür wird die OMBB der Grundfläche ermittelt und anschließend vergrößert, damit Modifikationen, die an der dieser durchgeführt wird, berücksichtigt werden.
+Dafür wird die OMBB der Grundfläche ermittelt und anschließend vergrößert, damit Modifikationen, die an der dieser durchgeführt werden, berücksichtigt werden.
 
 \paragraph{Bestimmung der Konvexen Hülle}
 % Verweis!
