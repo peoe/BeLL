@@ -50,17 +50,16 @@ Diese Quader sind in Richtung der vom Knoten ausgehenden Kanten rotiert, sodass 
 	\includegraphics[height=150px]{Bilder/CornerPin2D-07.png}
 \end{Bild}
 
-Die Summe aller Objekte des Typs \icode{CornerPin} repräsentieren den untere Abschnitt des Eckpfeilers, welcher die Fixierung der Grundplatten mit diesem gewährleistet.
-Ein einzelner Eckpin besteht aus einem Zylinder, einer Ausstülpung an dessen Seite und einem Zylindersegment.
+Die Summe aller Objekte des Typs \icode{CornerPin} repräsentieren den unteren Abschnitt des Eckpfeilers, welcher die Fixierung der Grundplatten mit diesem gewährleistet.
+Ein einzelner Eckpin besteht aus einem Zylinder, einer Ausstülpung an dessen Seite und einem Zylindersegment. \\
 Das Grundgerüst wird durch den Basiszylinder des Eckpfeilers festgelegt, welcher auch beim Eckzylinder vorkommt.
-Für die Ausstülpung gilt, dass sie aus einem Quader mit angrenzendem Zylinder aufgebaut ist.
+Für die Ausstülpung (siehe Abbildung \thebildnr, grün) gilt, dass sie aus einem Quader mit angrenzendem Zylinder aufgebaut ist.
 Die Länge des Quaders ist dabei abhängig von dem Winkel zwischen den beiden Wänden, welche die Grundplatte an dem Eckpfeiler begrenzen.
-Er wird stets so lang berechnet, dass die Ausstülpung (siehe Abbildung \thebildnr, grün) einen definierten Abstand von den Wänden einnimmt (siehe \ref{params} \q{pinDistance}).
-Für die untere Abgrenzung des Pinkopfes (siehe Abbildung \thebildnr, hellblau) berechnet die Anwendung eine Schnittmenge zwischen der angrenzenden Fläche und einem flachen Zylinder.\\
+Er wird stets so lang berechnet, dass die Ausstülpung einen definierten Abstand von den Wänden einnimmt (siehe \ref{params} \q{pinDistance}).
+Für die untere Abgrenzung des Pinkopfes (siehe Abbildung \thebildnr, hellblau) berechnet die Anwendung eine Schnittmenge zwischen der angrenzenden Fläche und einem flachen Zylinder. \\
 Falls ein Eckpin für das äußere Gebiet berechnet werden soll, wird anstatt der oben beschriebenen Elementen eine Differenzmenge zwischen der Umrandungsfläche des Grundrisses und dem flachen Zylinder gebildet.
-Dies resultiert in ein Zylindersegment, wie es in Abbildung \thebildnr (rot) zu sehen ist.
-Ein Eckpfeiler hat dadurch einen stabilisierten unteren Abschnitt, auch außerhalb des Grundrisses.
-
+Dies resultiert in einem Zylindersegment, wie es in Abbildung \thebildnr (rot) zu sehen ist.
+Jeder Eckpfeiler hat dadurch einen stabilisierten unteren Abschnitt, auch außerhalb des Grundrisses.
 
 \subsection{Wandstücke}
 Eine Wand verkörpert eine Kante der DCEL.
@@ -86,7 +85,6 @@ Sie ist aufgebaut aus einem geradem Prisma mit einer Polygon-Grundfläche, welch
 \end{Bild}
 
 Für die Berechnung des 3D-Objekts, wird an jedem Knoten der Fläche wird ein Eckpin gebildet und von dem polygonalen Prisma abgezogen, sodass genannte Einkerbungen durch eine Differenzmenge entstehen. 
-
 Jede Grundplatte, die an das äußere Gebiet angrenzt wird zudem an dieser Seite um die halbe Wanddicke vergrößert, damit ein abgeschlossener Eindruck des gesamten 3D-Modells entsteht (siehe Abbildung \thebildnrnext).
 
 \begin{Bild}{Vergrößerung der äußeren Grundplatten (Abbildung der Verfasser)}
