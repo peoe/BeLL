@@ -1,4 +1,4 @@
-\documentclass[a4paper, 12pt]{scrreprt}
+\documentclass[a4paper, 12pt]{report}
 
 %======ALLJEMEINE PAKETE===================
 \usepackage[a4paper,left=40mm,top=25mm,bottom=20mm, right=30mm]{geometry} % korrekturränder
@@ -35,6 +35,7 @@
 \usepackage{tabu}
 \usepackage{tocloft}
 \usepackage[nottoc,numbib]{tocbibind}
+\usepackage{makecell}
 
 \usepackage{lastpage} %Liest Seitenanzahl
 
@@ -98,13 +99,17 @@
 
 %========================CODEDARSTELLUNG=========================
 \renewcommand{\lstlistingname}{Codeauschnitt}
-\newcommand*{\thead}[1]{\multicolumn{1}{|c|}{\bfseries #1}}
+%\newcommand*{\thead}[1]{\multicolumn{1}{|c|}{\bfseries #1}}
+\renewcommand\theadalign{cc}
+\renewcommand\theadfont{\bfseries}
+
+%\renewcommand\theadgape{\Gape[4pt]}
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 \newcolumntype{Z}{>{\raggedleft\arraybackslash}X}
 \lstnewenvironment{code}[1][]
 {
 	\lstset{
-		caption = #1,
+		caption = {#1},
 		basicstyle = \footnotesize\ttfamily,
 		language = Java,
 		breaklines = true,
@@ -155,6 +160,7 @@
 \newcommand{\rectangle}{{%
 		\ooalign{$\sqsubset\mkern3mu$\cr$\mkern3mu\sqsupset$\cr}%
 }}
+\renewcommand\theadalign{tl}
 
 %\newcommand\todo[1]{\refstepcounter{todo}\marginpar{\color{red}{#1}}\addcontentsline{tod}{subsection}{#1~\thetodo}}
 
