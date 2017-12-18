@@ -33,7 +33,7 @@
 \usepackage{paralist}
 \usepackage{tabularx}
 \usepackage{tabu}
-\usepackage{tocloft}
+\usepackage[titles]{tocloft}
 \usepackage[nottoc,numbib]{tocbibind}
 \usepackage{makecell}
 
@@ -149,10 +149,13 @@
 	\refstepcounter{bildnrnext}
 }
 %========================COMMANDS============
-\renewcommand{\listoffigures}{\begingroup
-	\tocsection
+\renewcommand*{\listoffigures}{%
+	\begingroup
+	\tocchapter
 	\tocfile{\listfigurename}{lof}
-	\endgroup}
+	\endgroup
+}
+
 \newcommand{\q}[1]{\glqq#1\grqq} % Zitat mit Anführungszeichen
 \newcommand{\icode}[1]{\texttt {#1}} %inline Code
 %\newcommand{\todo}[#1]{\newline\huge \color{red}#1 \color{black}\normalsize}
@@ -192,6 +195,7 @@
 	
 	\include{Kapitel/001Titelseite}
 	\include{Kapitel/002Vorwort}
+	\include{Kapitel/0090Betreuerdank}
 	\setcounter{page}{1}
 	\cfoot{Seite \thepage{} von \theseitennr}
 	\tableofcontents
@@ -212,7 +216,7 @@
 %	\phantomsection
 %	\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
 	\listoffigures
-	\include{Kapitel/0090Betreuerdank}
+	\newpage
 	\include{Kapitel/009Selbstaendigkeit}
 	\include{Kapitel/010Arbeitsteilung}
 	
