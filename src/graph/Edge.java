@@ -190,6 +190,7 @@ public class Edge {
 
 	/**
 	 * Comparator used for ArrayList sorting
+	 * sorts after Math.atan2(y,x) angle of Edge Vector
 	 */
 	public static Comparator<Edge> EdgeAngleComparator = new Comparator<Edge>() {
 

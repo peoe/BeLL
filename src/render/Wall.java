@@ -75,6 +75,7 @@ public class Wall implements ScadObject {
 	
 	/**
 	 * Comparator used for ArrayList sorting
+	 * sorts after Wall length
 	 */
 	public static Comparator<Wall> WallLengthComparator = new Comparator<Wall>() {
 

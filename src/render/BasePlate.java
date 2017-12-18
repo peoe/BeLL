@@ -214,6 +214,7 @@ public class BasePlate implements ScadObject {
 
 	/**
 	 * Comparator used for ArrayList sorting
+	 * sorts after OMBB area
 	 */
 	public static Comparator<BasePlate> BasePlateOMBBComparator = new Comparator<BasePlate>() {
 

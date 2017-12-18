@@ -173,6 +173,7 @@ public class Corner implements ScadObject {
 
 	/**
 	 * Comparator used for ArrayList sorting
+	 * sorts after Corner width
 	 */
 	public static Comparator<Corner> CornerWidthComparator = new Comparator<Corner>() {
 
