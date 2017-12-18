@@ -34,12 +34,12 @@ Auch hier gibt es noch keine abgespeicherten Zusammenhänge zwischen den einzeln
 	}
 \end{code}
 
-Basierend auf dieser Grundlage müssen alle folgenden Kalkulationen der \icode{Graph}-Klasse durchgeführt werden.
+Basierend auf der Kanten- und Knotenliste werden alle folgenden Kalkulationen der \icode{Graph}-Klasse durchgeführt.
 
 \subsection{Zwillingskantengenerierung}
-Durch Vertauschen der Start- und Endknoten wird nun für jede existente Kante eine entgegengesetzt-laufende komplementäre \q{Zwillingskante} gebildet.
+Durch Vertauschen der Start- und Endknoten wird für jede existente Kante eine entgegengesetzt-laufende komplementäre \q{Zwillingskante} gebildet.
 In der Anwendung wird so die Liste der Kanten um ihre Größe erweitert.
-Direkt nach dem Hinzufügen der Zwillingskante wird jeweils eine Referenz erstellt, welche beide Zwillinge miteinander verknüpft. 
+Direkt nach dem Hinzufügen der Zwillingskante wird jeweils eine Referenz erstellt, welche beide Zwillinge miteinander verknüpft.
 Durch die Zwillingskanten werden nachfolgende Operationen in der DCEL vereinfacht, da jede Fläche nun von einer eindeutigen Menge an Kanten begrenzt ist und ein Umlaufsinn dieser festgestellt werden kann.
 
 \subsection{Nachfolger- und Vorgängerermittlung}
@@ -76,14 +76,14 @@ Durch das Vorliegen der DCEL Kanten können alle Flächen des Graphen erschlosse
 Dabei wird bei dem Element $E_0$ der Kantenliste begonnen und solange der Nachfolger über die Verknüpfung ermittelt, bis die Ursprungskante wieder erreicht wurde.
 Die ermittelte Fläche $F_0$ besitzt als anliegende Kante die Kante $E_0$.
 Alle in der Fläche enthaltenen Kanten werden bei der fortlaufenden Rechnung ignoriert, sodass alle anderen Flächen $F$ analog errechnet werden können.
-Das äußere Gebiet des planaren Graphen, also in der DCEL der Umriss, kann durch den Drehsinn der Kanten dieser Fläche festgestellt werden, denn dieser ist als einziger mathematisch negativ.
-In der Anwendung wird dafür die Gaußsche Trapezformel verwendet, welche bei einem umgekehrten Drehsinn einen negativen Flächeninhalt ausgibt.
+Das äußere Gebiet des planaren Graphen, in der DCEL die Umrandungsfläche, kann durch den Drehsinn der Kanten dieser Fläche festgestellt werden, welcher als Einziger mathematisch negativ ist.
+In der Anwendung wird die Gaußsche Trapezformel verwendet, welche bei einem umgekehrten Drehsinn einen negativen Flächeninhalt ausgibt und das äußere Gebiet erkennbar macht.
 
 \begin{Bild}{Flächenberechnung. Dargestellt: Anliegende Kante (Cyan), Kanten (grün) und Fläche (gelb) (Abbildung der Verfasser)}
 	\includegraphics[width = 90mm]{Bilder/FlaecheBerechnung}
 \end{Bild}
 
 \subsection{Vervollständigung der Knoten}
-Die letzte nötige Referenz ist die einer anliegenden Kante eines Knotens.
+Die letzte nötige Referenz ist die der anliegenden Kante eines Knotens.
 Dafür wird für die Knoten $N$ eine Kante ermittelt, die ihren Ursprung in dem jeweiligen Knoten hat.
-Die DCEL ist mit diesem Schritt fertiggestellt und bildet die Grundlage für alle folgenden dreidimensionalen Berechnungen.\label{key}
+Die DCEL ist mit diesem Schritt fertiggestellt und bildet die Grundlage für alle nachfolgenden dreidimensionalen Berechnungen.\label{key}
