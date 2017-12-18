@@ -1,11 +1,24 @@
 \chapter{Ausblick}
-Im aktuellen Entwicklungsstand ist es nur möglich, alle Bauteile einzeln auszudrucken. 
-Dies erhöht jedoch den Filamentverbrauch des 3D-Druckers um ein Vielfaches, weshalb eine Kombination mehrerer Bauteile für einen Druckvorgang zwecks der Reduktion des verwendeten Filaments für den Druck unterstützende Elemente als sinnvoll anzusehen ist. 
-Dafür bietet sich beispielsweise ein gemeinsamer Druck von Wandteilen oder Eckpfeilern anbieten, da diese Objekte weitestgehend ähnliche Ausmaße besitzen und somit eine recht effektive Kombination möglich ist.
-Außerdem liegen momentan lediglich Bauteile vor, welche nur auf einer Druckplatte fester Größe gedruckt werden können. 
-Sollte das zu druckende Objekt größer als die Druckplatte sein, muss es zum Drucken skaliert werden, was jedoch unbedingt vermieden werden soll, da dadurch die Verhältnisse der Stecker zueinander verändert werden und so ein sachgemäßer Aufbau verhindert wird. 
-Um diesen Umstand zu verhindern, soll es in der weiteren Entwicklung möglich sein, überdimensionierte Bauteile weiter in kleinere Untereinheiten zu teilen und so eine Wahrung des Maßstabs zu garantieren. 
-Hierfür muss jedoch ein weiteres Stecksystem, sowie weitere Logik zur Umsetzung und Umwandlung der alten Bauteile konzipiert und implementiert werden.
-Als ferne Zukunftskonzeption, die an den Rahmen der Besonderen Lernleistung anschließt, lässt sich die Umsetzung von 3D-Modellen festmachen. 
-Hierzu zählen kompliziertere Wände mit Schrägen, Fenstern oder Verstrebungen und Dachgestelle, welche als Abschluss auf dem Modell angebracht werden können. 
-Die Komplexität der Aufgabenstellung wird dadurch aber um ein Vielfaches gesteigert, weshalb diese Problematik kein Bestandteil der Besonderen Lernleistung sein wird.
+Die Anwendung ermöglicht eine vollautomatische Umwandlung eines Grundrisses in einzelne Bauteile, aus denen das Modell zusammen gesetzt werden kann.
+Entsprechend der ursprünglichen Aufgabe sind damit alle Kriterien erfüllt.
+Das Drucken der ausgegebenen Dateien liegt jedoch beim Nutzer, da dies noch nicht vollautomatisch geschehen kann. \\
+
+Als Erweiterungsmöglichkeiten der Anwendung sticht besonders die Aufteilung der Bauteile hervor.
+Eine solche Teilung ist notwendig, falls die einzelnen Elemente über die Begrenzungen der Grundplatte des 3D-Druckers hinausragen sollten. \\
+
+Dafür ist jedoch eine Anpassung der Parameter notwendig.
+Die Möglichkeit, den Nutzer die gewünschten Werte eingeben zu lassen, sowie eine Überarbeitung der Benutzeroberfläche sind somit weitere mögliche Ansatzpunkte. \\
+
+Den Hauptteil der Laufzeit nimmt zudem die Umwandlung der .scad-Dateien in das .stl-Format in Anspruch.
+Eine Optimierung und weitere Vereinfachung der Konvertierung ist somit äußerst wünschenswert.
+
+%Im aktuellen Entwicklungsstand ist es nur möglich, alle Bauteile einzeln auszudrucken. 
+%Dies erhöht jedoch den Filamentverbrauch des 3D-Druckers um ein Vielfaches, weshalb eine Kombination mehrerer Bauteile für einen Druckvorgang zwecks der Reduktion des verwendeten Filaments für den Druck unterstützende Elemente als sinnvoll anzusehen ist. 
+%Dafür bietet sich beispielsweise ein gemeinsamer Druck von Wandteilen oder Eckpfeilern anbieten, da diese Objekte weitestgehend ähnliche Ausmaße besitzen und somit eine recht effektive Kombination möglich ist.
+%Außerdem liegen momentan lediglich Bauteile vor, welche nur auf einer Druckplatte fester Größe gedruckt werden können. 
+%Sollte das zu druckende Objekt größer als die Druckplatte sein, muss es zum Drucken skaliert werden, was jedoch unbedingt vermieden werden soll, da dadurch die Verhältnisse der Stecker zueinander verändert werden und so ein sachgemäßer Aufbau verhindert wird. 
+%Um diesen Umstand zu verhindern, soll es in der weiteren Entwicklung möglich sein, überdimensionierte Bauteile weiter in kleinere Untereinheiten zu teilen und so eine Wahrung des Maßstabs zu garantieren. 
+%Hierfür muss jedoch ein weiteres Stecksystem, sowie weitere Logik zur Umsetzung und Umwandlung der alten Bauteile konzipiert und implementiert werden.
+%Als ferne Zukunftskonzeption, die an den Rahmen der Besonderen Lernleistung anschließt, lässt sich die Umsetzung von 3D-Modellen festmachen. 
+%Hierzu zählen kompliziertere Wände mit Schrägen, Fenstern oder Verstrebungen und Dachgestelle, welche als Abschluss auf dem Modell angebracht werden können. 
+%Die Komplexität der Aufgabenstellung wird dadurch aber um ein Vielfaches gesteigert, weshalb diese Problematik kein Bestandteil der Besonderen Lernleistung sein wird.
