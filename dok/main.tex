@@ -165,6 +165,15 @@
 }}
 \renewcommand\theadalign{tl}
 
+\makeatletter
+\renewcommand\listoffigures{%
+	\chapter{\listfigurename}%
+	\@mkboth{\MakeUppercase\listfigurename}%
+	{\MakeUppercase\listfigurename}%
+	\@starttoc{lof}%
+}
+\makeatother
+
 %\newcommand\todo[1]{\refstepcounter{todo}\marginpar{\color{red}{#1}}\addcontentsline{tod}{subsection}{#1~\thetodo}}
 
 %====================SCHRIFTART ARIAL======================
