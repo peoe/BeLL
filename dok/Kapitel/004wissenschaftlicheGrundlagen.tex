@@ -1,8 +1,8 @@
 \chapter{Wissenschaftliche Grundlagen}
 \section{Planare Graphen}
-Der Grundriss wird mithilfe eines planaren Graphen dargestellt. 
+Der Grundriss wird mithilfe eines planaren Graphen beschrieben.               
 Ein planarer, auch plättbarer Graph, ist ein Graph, der in einer Ebene mithilfe von Knoten und Kanten dargestellt werden kann, ohne dass sich zwei oder mehr Kanten schneiden (vgl. Quelle \cite{planarGraph}). 
-Jede Fläche des Graphen wird durch mindestens drei verschiedene Kanten beschrieben, die den Rand der Fläche darstellen. 
+Jede Fläche des Graphen wird durch mindestens drei verschiedene Kanten beschrieben, die den Rand der Fläche markieren. 
 Die Fläche um den Graphen herum, welche unbegrenzt groß ist, wird äußeres Gebiet genannt.
 \begin{Bild}{Schema eines planaren Graphen(Abbildung der Verfasser)}
 	\includegraphics[width = 250px]{Bilder/planarerGraph-11}
@@ -10,11 +10,11 @@ Die Fläche um den Graphen herum, welche unbegrenzt groß ist, wird äußeres Ge
 
 \section{Doubly Connected Edge List}
 Um planare Graphen ohne Informationsverlust zu speichern wird in der Informatik eine \q{Doubly Connected Edge List} (DCEL) genutzt.
-In einer DCEL erhält jede Kante, die aus einem Anfangsknoten und Endknoten besteht, jeweils eine Vorgänger-, Nachfolger-, Zwillingskante und die angrenzende Fläche. 
+In einer DCEL wird jeder Kante, die aus einem Anfangsknoten und Endknoten besteht, jeweils eine Vorgänger-, Nachfolger-, Zwillingskante und die angrenzende Fläche zugewiesen. 
 Durch die Darstellung einer Linie des Grundrisses durch zwei zueinander entgegengesetzt laufenden Kanten wird gewährt, dass keine zwei Flächen an einer Kante anliegen.\\
 Zudem wird für einen Knoten der DCEL eine ausgehende Kante und für eine Fläche eine anliegende Kante gespeichert (vgl. Quelle \cite{dcel} und \cite{dcelwiki}). \\
 Die Kanten der Flächen verlaufen im mathematisch positiven Drehsinn.
-Als einzige Ausnahme gilt das äußere Gebiet, welches einen umgekehrten Drehsinn besitzt.
+Als einzige Ausnahme gilt das äußere Gebiet, welches einen mathematisch negativen Drehsinn besitzt.
 
 \begin{Bild}{Schema einer DCEL (Abbildung der Verfasser)}
 	\includegraphics[width=250px]{Bilder/DCEL-10}
@@ -81,7 +81,6 @@ Ein Beispiel für einen solchen Grundriss ist in Abbildung~\thebildnr\ zu sehen.
 \section{OpenSCAD}
 OpenSCAD ist eine kostenlos verfügbare CAD-Modellierungssoftware, welche aus einer textbasierten Beschreibungssprache 3D-Modelle erzeugt (vgl. Quelle \cite{OpenScad}).
 OpenSCAD bietet dabei verschiedene Vorteile während des Modellierungsvorganges, beispielsweise das farbige Hervorheben oder die Modularisierung zusammenhängender Objekte. \\
-
 %Modellierung
 Die Modellierung von einfachen Basisobjekten in OpenSCAD erfolgt durch das Verwenden von Anweisungen wie \icode{cube()}, \icode{sphere()} oder \icode{cylinder()} und Parametern in Klammern.
 Diese Basisobjekte können anschließend durch Mengenoperationen wie Vereinigungen (\icode{union()}), Differenzen (\icode{difference()}) oder Schnittmengen (\icode{intersection()}) und Transformationen wie Skalierungen (\icode{scale()}), Rotationen (\icode{rotate()}) oder Translationen (\icode{translate()}) miteinander verknüpft und kombiniert werden, um neue Objekte nach eigenen Ansprüchen zu erzeugen.
@@ -92,10 +91,8 @@ Diese Basisobjekte können anschließend durch Mengenoperationen wie Vereinigung
 
 Neben solchen einfachen Objekten wird außerdem die Möglichkeit geboten, komplexere Objekte wie Polygone (\icode{polygon()}) zu erstellen.
 Diese können dann ausgehend von einem zweidimensionalen Polygon in Prismen umgewandelt werden (\icode{linear\_extrude()}). \\
-
 Die Anweisungen, welche OpenSCAD zum Modellieren verwendet, werden in einfachen Textdateien im .scad-Format gespeichert.
 Die Einfachheit dieser Textdateien erlaubt es, die erhaltenen Anweisungen ohne Umwandlungen in .scad-Dateien zu speichern, welche von OpenSCAD eingelesen, eingesehen und bearbeitet werden können. \\
-
 %Drucken
 Die Modelle, die mit OpenSCAD erstellt wurden, können anschließend mit einem 3D-Drucker ausgedruckt werden.
 Dazu werden die Modelle in Dateien des .stl-Formats umgewandelt.
@@ -105,17 +102,17 @@ Die Konvertierung geschieht entweder über die Benutzeroberfläche von OpenSCAD 
 %Erklärung 3D-Drucker
 Der vorliegende 3D-Drucker ist vom Modell Replicator\texttrademark\ 2 der Firma MakerBot.
 Dieser Drucker verfügt über eine höhenverstellbare Grundfläche, auf der das Filament\footnote{Filament bezeichnet das Material, welches der 3D-Drucker zum Drucken verwendet.} aufgetragen und das finale Objekt gedruckt wird.
-Ein sogenannter \q{Extruder} erhitzt dazu das zu druckende Filament und trägt dieses auf die Grundplatte auf. 
+Der Extruder erhitzt dazu das zu druckende Filament und trägt dieses auf die Grundfläche auf. 
 Mithilfe dieser zwei Hauptbestandteile wird schichtweise Filament aufgetragen, welches aushärtet und so das Objekt bildet. \\
 Die Höhe der Grundfläche wird während des Druckvorganges automatisch vom Drucker variiert und nach Abschluss des Drucks wieder auf den Ausgangszustand zurückgesetzt.
 Um die Beweglichkeit des Extruders zu garantieren, ist dieser auf drei Achsen befestigt, sodass Motoren ihn auf diesen Achsen verschieben können. \\
 Abhängig vom Filament bzw. der Temperatur, bei der dieses aufgetragen wird, der Bewegungsgeschwindigkeit des Extruders und der Filamentstärke, die der Extruder aufträgt, lässt sich die gewünschte Druckqualität anpassen.
-Eine niedrige Qualität ist dabei mit einer erheblich kürzeren Druckzeit verbunden. \\
+Eine niedrige Qualität ist dabei mit einer kürzeren Druckzeit verbunden. \\
 Die Druckzeit wird außerdem von der eingestellten Ausfüllung von geschlossenen Objekten und dem Hinzufügen von Druckhilfen beeinflusst.
 So kann man Objekte beispielsweise nicht komplett mit Filament füllen lassen, sondern mit einem Bienenwabenmuster durchsetzen, sodass nur ein geringer Teil des Objektes ausgefüllt, aber dennoch Stabilität gewährleistet wird.
 Indem so also ein stark verringerter Betrag an Filament aufgetragen werden muss, wird auch die Druckzeit drastisch reduziert. \\
 Zu dem eigentlichen Druckergebnis wird unter jedes gedruckte Element eine dünne Schicht gedruckt, welcher leicht von der Grundplatte und vom gedruckten Modell zu trennen ist und so eine Beschädigung beim Entfernen des Objekts vom Drucker verhindert.
-Außerdem werden bei Überhängen zusätzliche Stützen gedruckt, um ein Absacken des noch nicht ausgehärteten Filaments zu verhindern.  \\
-Beim Drucken von Objekten ist neben Anpassungen zur Kontrolle der Druckqualität und Druckzeit außerdem zu beachten, dass die Grundfläche eine begrenzten Fläche besitzt.
+Außerdem werden bei Überhängen zusätzliche Stützen (\q{Supports}) gedruckt, um ein Absacken des noch nicht ausgehärteten Filaments zu verhindern.  \\
+Beim Drucken von Objekten ist neben Anpassungen zur Kontrolle der Druckqualität und Druckzeit zu beachten, dass die Grundfläche begrenzt ist.
 Entsprechend dieser vorgegebenen Maße sollten alle Objekte in ihrer Größe angepasst werden.
 % [28.5 x 15.3 x 15.5 cm]
