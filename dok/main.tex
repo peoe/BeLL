@@ -11,7 +11,7 @@
 }
 \usepackage{fancyhdr} % Header/Footer
 \usepackage{setspace} % Line spacing
-\usepackage{color} % FAARBEN
+\usepackage[dvipsnames]{xcolor} % FAARBEN
 \usepackage{graphicx} %Bilder
 \usepackage{titlesec} 
 \usepackage[ngerman]{babel} % gutes Deutsch
@@ -36,6 +36,7 @@
 \usepackage[titles]{tocloft}
 \usepackage[nottoc,numbib]{tocbibind}
 \usepackage{makecell}
+\usepackage{lscape}
 
 \usepackage{lastpage} %Liest Seitenanzahl
 
@@ -99,13 +100,17 @@
 
 %========================CODEDARSTELLUNG=========================
 \renewcommand{\lstlistingname}{Codeauschnitt}
-%\newcommand*{\thead}[1]{\multicolumn{1}{|c|}{\bfseries #1}}
+\newcommand*{\ttablehead}[1]{\multicolumn{1}{|c|}{\textbf{ #1}}}
 \renewcommand\theadalign{cc}
 \renewcommand\theadfont{\bfseries}
-
-%\renewcommand\theadgape{\Gape[4pt]}
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 \newcolumntype{Z}{>{\raggedleft\arraybackslash}X}
+
+\newcolumntype{A}{>{\hsize=.3\hsize}X}
+\newcolumntype{B}{>{\hsize=.5\hsize}X}
+\newcolumntype{C}{>{\hsize=.2\hsize}Z}
+%\renewcommand\theadgape{\Gape[4pt]}
+
 \lstnewenvironment{code}[1][]
 {
 	\lstset{
@@ -113,7 +118,7 @@
 		basicstyle = \footnotesize\ttfamily,
 		language = Java,
 		breaklines = true,
-		commentstyle = \color{green},
+		commentstyle = \color{OliveGreen},
 		frame = single,
 		numbers = left,
 		columns=fullflexible,
@@ -128,7 +133,7 @@
 
 %=========BILDER==============
 \newcounter{seitennr} 
-\setcounter{seitennr}{40} %needs to be changed before publishing
+\setcounter{seitennr}{39} %needs to be changed before publishing
 \def\theseitennr{\arabic{seitennr}}
 \newcounter{bildnr} 
 \def\thebildnr{\arabic{bildnr}}
@@ -163,7 +168,6 @@
 \newcommand{\rectangle}{{%
 		\ooalign{$\sqsubset\mkern3mu$\cr$\mkern3mu\sqsupset$\cr}%
 }}
-\renewcommand\theadalign{tl}
 
 %fixes lof heading
 \makeatletter
@@ -227,8 +231,8 @@
 %	\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
 	\listoffigures
 	\newpage
-	\include{Kapitel/009Selbstaendigkeit}
 	\include{Kapitel/010Arbeitsteilung}
+	\include{Kapitel/009Selbstaendigkeit}
 	
 	
 %	\printglossary[style=long]
