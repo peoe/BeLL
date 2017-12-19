@@ -1,10 +1,13 @@
 \section{Ausgabe der Resultate}
-%TEXT?
+Nachdem die Berechnungen des Modells abgeschlossen ist, müssen die Ergebnisse nun ausgegeben werden.
+Für die Ausgabe der Dateien wird ein Ordner in dem Verzeichnis erstellt, in dem auch das Programm ausgeführt wird.
+
 \subsection{Erstellung des Ausgabeordners}
-Alle ausgegebenen Dateien des Programms werden in einem Ordner zusammengefasst.
-Dieser Ordner wird im gleichen Verzeichnis erstellt, in dem auch das Programm ausgeführt wird. \\
-Als Name des Verzeichnisses wird der Name genutzt, den der Nutzer in der GUI eingegeben hat.
-Im Unterordner \q{scad} dieses Ordners finden sich dann sämtliche .scad-Dateien, im Unterordner \q{stl} alle .stl-Dateien.
+Als Name des Ordners wird der Name genutzt, den der Nutzer in der GUI eingegeben hat.
+Im Unterordner \q{scad} dieses Ordners finden sich dann sämtliche .scad-Dateien, im Unterordner \q{stl} alle .stl-Dateien. \\
+Zum Erstellen der Unterordner wird die Funktion \icode{createDirs()} verwendet (vgl. Codeausschnitt~6).
+Diese legt mittels der Anweisung \icode{Files.createDirectories()} die Unterverzeichnisse an.
+Sollte der übergeordnete Ausgabeordner noch nicht vorhanden sein, wird er durch die Anweisung direkt mit angelegt. \\
  
 \begin{code}[Erstellung der Unterordner]
 	private static void createDirs(String folderName) {
@@ -19,14 +22,12 @@ Im Unterordner \q{scad} dieses Ordners finden sich dann sämtliche .scad-Dateien
 
 \subsection{STL Konvertierung}
 Um die ermittelten .scad-Dateien im .stl-Format auszugeben, wird die Kommandozeilenfunktionalität von OpenSCAD verwendet.
-Die verwendete Anweisung setzt sich aus dem Pfad zur \icode{openscad.exe}, dem Parameter \icode{-o} und zwei weiteren Parametern zusammen. 
-Die beiden weiteren Parameter stehen zum einen für den Namen der Ausgabedatei und zum anderen für den Namen der Eingabedatei.
-Eine vollständige Anweisung könnte wie folgt aussehen: \icode{C:\textbackslash \textbackslash Program Files\textbackslash OpenSCAD\textbackslash openscad.exe -o \textbackslash stl\textbackslash walls1.stl \textbackslash scad\textbackslash walls1.scad} \\
 Hierzu werden zunächst alle Dateien im \q{scad}-Unterordner mit der Endung .scad durch die Klasse \icode{SCADFinder} ermittelt und in einem Feld ausgegeben.
+Dies geschieht mittels der Funktion \icode{findFiles()} (vgl. Codeausschnitt~7), welche durch einen \icode{FileFilter} alle Dateien mit gewünschter Endung zurückgibt. \\
 
 \begin{code}[Ausgabe aller .scad-Dateien aus einem Ordner]
 	public static File[] findFiles(String folderName){
-		File dir = new File(".\\" + folderName + "\\scad\\");
+		File dir = new File(".\\"+folderName+"\\scad\\");
 		
 		return dir.listFiles(new FilenameFilter() { 
 			public boolean accept(File dir, String filename)
@@ -35,7 +36,11 @@ Hierzu werden zunächst alle Dateien im \q{scad}-Unterordner mit der Endung .sca
 	}
 \end{code}
 
-Diese Dateinamen verwendet die Klasse \icode{STLConverter}, um mittels eines \icode{ProcessBuilder} die Kommandozeilenanweisungen auszuführen und die .stl-Dateien im \q{stl}-Unterordner zu erstellen.
+Mit den Namen dieser Dateien als Argumente, kann im Anschluss die Umwandlung ins .stl-Format stattfinden.
+Die verwendete Konsolenanweisung setzt sich aus dem Pfad zur \icode{openscad.exe}, dem Parameter \icode{-o} und zwei weiteren Parametern zusammen. 
+Die beiden weiteren Parameter stehen zum einen für den Namen der Ausgabedatei und zum anderen für den Namen der Eingabedatei. \\
+Eine vollständige Anweisung könnte wie folgt aussehen: \icode{C:\textbackslash \textbackslash Program Files\textbackslash OpenSCAD\textbackslash openscad.exe -o \textbackslash stl\textbackslash walls1.stl \textbackslash scad\textbackslash walls1.scad} .
+Diese Anweisungen verwendet die Klasse \icode{STLConverter} mittels eines \icode{ProcessBuilder}, um die .stl-Dateien im \q{stl}-Unterordner zu erstellen (vgl. Codeausschnitt~8). \\
 
 \begin{code}[Ausführung der Kommandozeilenanweisungen]
 	public static void convert (String fileName, String folderName) throws InterruptedException {
