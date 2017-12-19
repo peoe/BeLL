@@ -15,7 +15,20 @@ Dieser Prozess wird solange fortgeführt, bis die Länge der Druckfläche übers
 Dann wird eine neue Gruppierung von Objekten bzw. \icode{Union} erstellt, in welcher der Algorithmus weiterläuft.
 Das Resultat zeigt eine Liste von Objekten, die eine platzeffiziente Anordnung dieser repräsentiert.
 Die Vereinigungen von Grundplatten werden zusätzlich um 180$^\circ$ gedreht, damit keine Überhänge in der Datei vorkommen, was zu einer Verlängerung der Druckzeit führen würde.\\
-Jedes einzelne Element in der Liste kann mit einem Durchgang gedruckt werden.
+Jedes einzelne Element in der Liste kann mit einem Durchgang gedruckt werden(vgl. Abb.~ \thebildnrnext, 23 und 24).
+
+\begin{Bild}{platzeffiziente Platzierung von Wänden (Screenshot der Verfasser)}
+	\includegraphics[width = 110mm]{Bilder/WallPlacement}
+\end{Bild}
+
+\begin{Bild}{platzeffiziente Anordnung von Eckpfeilern auf der Grundfläche (rot) (Abbildung der Verfasser)}
+	\includegraphics[width = 110mm]{Bilder/PlacementCorners-12}
+	\label{corner}
+\end{Bild}
+
+\begin{Bild}{platzeffiziente Anordnung von Grundplatten auf der Grundfläche (rot) (Abbildung der Verfasser)}
+	\includegraphics[width = 110mm]{Bilder/PlacementBasePlate-13}
+\end{Bild}
 
 \subsection{Ermittlung der Größen}
 Das Einzige, was die Strukturen Wand- und Eckteil, sowie Grundplatte in dem beschriebenen Algorithmus voneinander unterscheidet, ist die Größe, welche unterschiedlich bestimmt wird.
