@@ -83,7 +83,7 @@ public class CornerPin implements ScadObject {
 	 */
 	private ScadObject getPin() {
 		// calculate necessary distance for a 4mm gap between wall and Pin
-		double d = calculateD();
+		double d = calculateD() + params.getCornerRadius();
 		double totalHeight = (params.getBasePlateHeight() - params.getBasePlatePinCircleHeight()) / 2
 				+ 0.5 * params.getBasePlatePinCircleHeight();
 
@@ -130,7 +130,7 @@ public class CornerPin implements ScadObject {
 
 		// adds a pin if incident face isn't the infinite face( = negative area)
 		if (faceArea > 0) {
-			pinLength = calculateD();
+			pinLength = calculateD() + params.getCornerRadius();
 
 			unionArrayList
 					.add(new Rotate(getPin(), cornerEdge.toVector().bisectorOfAngleTo(prevEdge.toVector()), 0, 0, 1));
@@ -138,7 +138,7 @@ public class CornerPin implements ScadObject {
 			// adds head of pin to the length (2*r = d)
 			pinLength += 2 * params.getPinPRadius();
 		} else {
-			pinLength = params.getPinMinLength();
+			pinLength = params.getPinMinLength() + params.getCornerRadius();
 		}
 
 		// generation of base tile -> intersection between complete circular
@@ -159,7 +159,7 @@ public class CornerPin implements ScadObject {
 		}
 
 		if (getEpsilon() != 0.0) {
-			unionArrayList.add(getBaseTileLow(params.getPinMinLength()));
+			unionArrayList.add(getBaseTileLow(params.getPinMinLength() + params.getCornerRadius()));
 		}
 
 		// adds the cylinder of the cornerTile
