@@ -56,7 +56,7 @@ public class Params {
 		super();
 		this.epsilon = epsilon;
 		this.cornerRadius = cornerRadius;
-		this.pinMinLength = pinMinLength + cornerRadius;
+		this.pinMinLength = pinMinLength;
 		this.pinPWidth = pinPWidth;
 		this.pinPRadius = pinPRadius;
 		this.pinDistance = pinDistance;
