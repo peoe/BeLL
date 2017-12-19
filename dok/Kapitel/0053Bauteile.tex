@@ -15,7 +15,7 @@ Weiterführend sind diese so modifiziert, dass sie ein oben beschriebenes 3D-Kon
 \subsection{OpenSCAD Java Interface}
 Für die erleichterte Erstellung von OpenScad Objekten wurde ein Java Interface \icode{ScadObject} erstellt, welches alle für das Projekt wichtigen OpenSCAD Operationen enthält.
 Die Methode \icode{toString()} stellt in den Klassen des Interfaces die Übergabe des OpenSCAD Befehlsstrings dar.
-So kann man z.B. mit der Klasse \icode{Cube} einen Quader mit gegebener Länge, Höhe und Breite erstellen, der dann wie folgt mit \icode{Cube.toString()} in einen String konvertiert wird: \icode{cube([Länge, Breite, Höhe]);} (siehe Abb.~\thebildnrnext). \\
+So kann man z.B. mit der Klasse \icode{Cube} einen Quader mit gegebener Länge, Höhe und Breite erstellen, der dann wie folgt mit \icode{Cube.toString()} in einen String konvertiert wird: \icode{cube([Länge, Breite, Höhe])} (siehe Abb.~\thebildnrnext). \\
 Die Klassen, welche verschiedene modifikative Operationen darstellen, wie z.B. \icode{Rotate} oder \icode{Difference}, lassen sich verschachteln.
 Dadurch kann mit wenig Aufwand ein komplexes OpenSCAD-Objekt erstellt werden. \\
 
@@ -64,7 +64,7 @@ Jeder Eckpfeiler hat dadurch einen stabilisierten unteren Abschnitt, auch außer
 Eine Wand verkörpert eine Kante der DCEL.
 Für die Erstellung dieser wird ein rotierter Quader mit der Länge der entsprechenden Kante benutzt.
 Jeweils ein Eckzylinder wird anschließend an den Start- bzw. Endknoten des Quaders verschoben, sodass zwischen diesem und den beiden Eckzylindern eine Differenzmenge gebildet werden kann.
-Das Resultat ist eine Wand, welche abschließend in einen Eckpfeiler eingesetzt werden kann (siehe Abb.~\thebildnrnext und Abb.~18). \\
+Das Resultat ist eine Wand, welche abschließend in einen Eckpfeiler eingesetzt werden kann (siehe Abb.~\thebildnrnext\ und Abb.~18). \\
 
 \begin{Bild}{Querschnitt einer Wand (Abbildung der Verfasser)}
 	\includegraphics[width = 110mm]{Bilder/Wand2D-04}
