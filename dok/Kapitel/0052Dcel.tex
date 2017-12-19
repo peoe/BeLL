@@ -60,9 +60,9 @@ Mithilfe der geordneten Kanten $E$ lassen sich unter Beachtung des mathematisch 
 \end{Bild}
 
 Falls $i-1$ bzw. $i+1$ die Indices der Menge $E$ mit $n$ Elementen überschreiten, wird anstattdessen $E_n$ bzw. $E_0$ gewählt. \\
-Der aufgeführte Algorithmus wird für alle Knoten $N$ der DCEL fortgeführt, sodass alle Referenzen zwischen den Kanten fertiggestellt werden.  \\
+Der aufgeführte Algorithmus wird für alle Knoten $N$ der DCEL fortgeführt, sodass alle Referenzen zwischen den Kanten fertiggestellt werden (Vgl. Codeauschnitt 4).  \\%ABSOLUT, WEIL KEIN BOCK
 
-\begin{code}[Zuweisung der Beziehungen im Programm]
+\begin{code}[Zuweisung der Beziehungen zwischen den Kanten im Programm]
 	for (ArrayList<Edge> e : nodeEdges) {
 		for (int i = 0; i < e.size(); i++) {
 			e.get(i).setPrev(e.get((i + 1) \% e.size()).getTwin());
@@ -79,7 +79,7 @@ Alle in der Fläche enthaltenen Kanten werden bei der fortlaufenden Rechnung ign
 Das äußere Gebiet des planaren Graphen, in der DCEL die Umrandungsfläche, kann durch den Drehsinn der Kanten dieser Fläche festgestellt werden, welcher als einziger mathematisch negativ ist.
 In der Anwendung wird die Gaußsche Trapezformel verwendet, welche bei einem umgekehrten Drehsinn einen negativen Flächeninhalt ausgibt und demzufolge das äußere Gebiet markiert.
 
-\begin{Bild}{Flächenberechnung. Dargestellt: Anliegende Kante (Cyan), Kanten (grün) und Fläche (gelb) (Abbildung der Verfasser)}
+\begin{Bild}{Flächenberechnung. Dargestellt: Anliegende Kante (cyan), Kanten (grün) und Fläche (gelb) (Abbildung der Verfasser)}
 	\includegraphics[width = 90mm]{Bilder/FlaecheBerechnung}
 \end{Bild}
 

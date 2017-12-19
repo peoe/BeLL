@@ -1,5 +1,5 @@
 \chapter{Vorgehen zur Problemlösung}
-Die Anwendung wandelt eine .dxf Grundrissdatei in .scad und .stl Dateien um, die zum Drucken benutzt werden können.
+Die Anwendung konvertiert eine .dxf Grundrissdatei in .scad und .stl Dateien, die zum Drucken benutzt werden können.
 Dafür sind mehrere Zwischenschritte nötig.
 \section{Einlesen des Grundrisses}
 Den Beginn der Verarbeitung markiert die Grundrissdatei, in welcher sämtliche Werte, die im weiteren Verlauf des Programmes relevant werden, enthalten sind.
@@ -25,7 +25,7 @@ Aus der .dxf-Datei deren Pfad der Klasse \q{DXFReader} übergeben wird, werden a
 Die Koordinaten der Start- und Endpunkte der DXFLines  in dieser Liste werden anschließend in eine Liste von Linien übertragen, welche unter anderem bei der Umwandlung des Graphen in die DCEL Verwendung findet.
 
 \subsection{Funktionsweise der Benutzeroberfläche}
-Die Benutzeroberfläche(GUI) setzt sich zusammen aus einem \icode{JFrame}, in dem zwei \icode{JTextField}, ein \icode{FileChooserButton}, ein \icode{StartButton} und ein \icode{ShowResultButton} platziert sind.
+Die Benutzeroberfläche (GUI) setzt sich zusammen aus einem \icode{JFrame}, in dem zwei \icode{JTextField}, ein \icode{FileChooserButton}, ein \icode{StartButton} und ein \icode{ShowResultButton} platziert sind.
 
 \begin{Bild}{Ausgangszustand der GUI (Screenshot der Verfasser)}
 	\includegraphics[width = 120mm]{Bilder/GUI/GUI_Startup}
