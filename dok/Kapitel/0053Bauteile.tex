@@ -15,10 +15,9 @@ Weiterführend sind diese so modifiziert, dass sie ein oben beschriebenes 3D-Kon
 \subsection{OpenSCAD Java Interface}
 Für die erleichterte Erstellung von OpenScad Objekten wurde ein Java Interface \icode{ScadObject} erstellt, welches alle für das Projekt wichtigen OpenSCAD Operationen enthält.
 Die Methode \icode{toString()} stellt in den Klassen des Interfaces die Übergabe des OpenSCAD Befehlsstrings dar.
-So kann man z.B. mit der Klasse \icode{Cube} einen Quader mit gegebener Länge, Höhe und Breite erstellen, der dann wie folgt mit \icode{Cube.toString()} in einen String konvertiert wird:
-\\\icode{cube([Länge, Breite, Höhe]);}\\
+So kann man z.B. mit der Klasse \icode{Cube} einen Quader mit gegebener Länge, Höhe und Breite erstellen, der dann wie folgt mit \icode{Cube.toString()} in einen String konvertiert wird: \icode{cube([Länge, Breite, Höhe]);} (siehe Abb.~\thebildnrnext). \\
 Die Klassen, welche verschiedene modifikative Operationen darstellen, wie z.B. \icode{Rotate} oder \icode{Difference}, lassen sich verschachteln.
-Dadurch kann mit wenig Aufwand ein komplexes OpenSCAD-Objekt erstellt werden.
+Dadurch kann mit wenig Aufwand ein komplexes OpenSCAD-Objekt erstellt werden. \\
 
 \begin{Bild}{Resultat der Eingabe \icode{new Cube(5, 4, 3).toString()} (Screenshot der Verfasser)}
 	\includegraphics[height = 200px]{Bilder/Quader}
@@ -28,7 +27,7 @@ Dadurch kann mit wenig Aufwand ein komplexes OpenSCAD-Objekt erstellt werden.
 Die Eckpfeiler des Modells symbolisieren die Knoten des Grundrisses.
 Sie sind das Schlüsselelement des implementierten Stecksystems, welches für Stabilität und Variabilität sorgt.
 Damit anliegende Wände und Grundplatten in einen Eckpfeiler greifen können, sind zwei verschiedene Arten von Steckern entworfen worden.
-Diese sind an zwei voneinander unabhängigen Abschnitten \q{CornerPin} und \q{CornerCylinder} angebracht, welche zusammengefügt das gesamte 3D-Objekt verkörpern.
+Diese sind an zwei voneinander unabhängigen Abschnitten \q{CornerPin} und \q{CornerCylinder} angebracht, welche zusammengefügt das gesamte 3D-Objekt verkörpern (siehe Abb.~\thebildnrnext). \\
 
 \begin{Bild}{Ein Eckpfeiler (Screenshot der Verfasser)}
 	\includegraphics[height=200px]{Bilder/Untereinheit_Ecke}
@@ -36,8 +35,8 @@ Diese sind an zwei voneinander unabhängigen Abschnitten \q{CornerPin} und \q{Co
 
 \subsubsection{Eckzylinder}
 Der Eckzylinder im Code \icode{CornerCylinder} stellt den oberen Teil des Eckpfeilers dar.
-Dieser besteht aus einem zylindrischen Grundbauteil mit Vertiefungen, welche entstehen, indem Schnittmengen zwischen dem Basiszylinder und Quadern durchgeführt werden.
-Diese Quader sind in Richtung der vom Knoten ausgehenden Kanten rotiert, sodass in diese die angrenzenden Wände eingeschoben werden können.
+Dieser besteht aus einem zylindrischen Grundbauteil mit Vertiefungen, welche entstehen, indem Schnittmengen zwischen dem Basiszylinder und Quadern durchgeführt werden (siehe Abb.~\thebildnrnext).
+Diese Quader sind in Richtung der vom Knoten ausgehenden Kanten rotiert, sodass in diese die angrenzenden Wände eingeschoben werden können. \\
 
 \begin{Bild}{Querschnitt eines Eckzylinders mit zwei angrenzenden Wänden (Abbildung der Verfasser)}
 	\includegraphics[height=150px]{Bilder/CornerCylinder2D-06.png}
@@ -46,7 +45,6 @@ Diese Quader sind in Richtung der vom Knoten ausgehenden Kanten rotiert, sodass 
 %\todoinline{Abbildungen?}
 \subsubsection{Eckpin}
 \label{Eckpin}
-
 \begin{Bild}{Draufsicht auf den unteren Abschnitt (Eckpin) eines Eckpfeilers mit zwei anliegenden Flächen (Abbildung der Verfasser)}
 	\includegraphics[height=150px]{Bilder/CornerPin2D-07.png}
 \end{Bild}
@@ -54,19 +52,19 @@ Diese Quader sind in Richtung der vom Knoten ausgehenden Kanten rotiert, sodass 
 Die Summe aller Objekte des Typs \icode{CornerPin} repräsentieren den unteren Abschnitt des Eckpfeilers, welcher die Fixierung der Grundplatten mit diesem gewährleistet.
 Ein einzelner Eckpin besteht aus einem Zylinder, einer Ausstülpung an dessen Seite und einem Zylindersegment. \\
 Das Grundgerüst wird durch den Basiszylinder des Eckpfeilers festgelegt, welcher auch beim Eckzylinder vorkommt.
-Für die Ausstülpung (siehe Abbildung \thebildnr, grün) gilt, dass sie aus einem Quader mit angrenzendem Zylinder aufgebaut ist.
+Für die Ausstülpung (siehe Abb.~\thebildnr, grün) gilt, dass sie aus einem Quader mit angrenzendem Zylinder aufgebaut ist.
 Die Länge des Quaders ist dabei abhängig von dem Winkel zwischen den beiden Wänden, welche die Grundplatte an dem Eckpfeiler begrenzen.
 Der Quader wird stets so lang berechnet, dass die Ausstülpung einen definierten Abstand von den Wänden einnimmt (siehe \ref{params} \q{pinDistance}).
-Für die untere Abgrenzung des Pinkopfes (siehe Abbildung \thebildnr, hellblau) berechnet die Anwendung eine Schnittmenge zwischen der angrenzenden Fläche und einem flachen Zylinder.\\
+Für die untere Abgrenzung des Pinkopfes (siehe Abb.~\thebildnr, hellblau) berechnet die Anwendung eine Schnittmenge zwischen der angrenzenden Fläche und einem flachen Zylinder.\\
 Falls ein Eckpin für das äußere Gebiet berechnet werden soll, wird stattdessen eine Differenzmenge zwischen der Umrandungsfläche des Grundrisses und dem flachen Zylinder gebildet.
-Dies resultiert in einem Zylindersegment, wie es in Abbildung {\thebildnr}  (rot) zu sehen ist.
+Dies resultiert in einem Zylindersegment, wie es in Abb.~{\thebildnr}  (rot) zu sehen ist.
 Jeder Eckpfeiler hat dadurch einen stabilisierten unteren Abschnitt, auch außerhalb des Grundrisses.
 
 \subsection{Wandstücke}
 Eine Wand verkörpert eine Kante der DCEL.
 Für die Erstellung dieser wird ein rotierter Quader mit der Länge der entsprechenden Kante benutzt.
 Jeweils ein Eckzylinder wird anschließend an den Start- bzw. Endknoten des Quaders verschoben, sodass zwischen diesem und den beiden Eckzylindern eine Differenzmenge gebildet werden kann.
-Das Resultat ist eine Wand, welche abschließend in einen Eckpfeiler eingesetzt werden kann. 
+Das Resultat ist eine Wand, welche abschließend in einen Eckpfeiler eingesetzt werden kann (siehe Abb.~\thebildnrnext und Abb.~18). \\
 
 \begin{Bild}{Querschnitt einer Wand (Abbildung der Verfasser)}
 	\includegraphics[width = 110mm]{Bilder/Wand2D-04}
@@ -80,14 +78,14 @@ Das Resultat ist eine Wand, welche abschließend in einen Eckpfeiler eingesetzt 
 \subsection{Grundplatten}
 \label{gr}
 Eine Grundplatte wird anhand einer Fläche des Grundrisses konstruiert.
-Sie ist aufgebaut aus einem geradem Prisma mit einer Polygon-Grundfläche, welches eingestülpte Steckmechanismen an der Unterseite besitzt.
+Sie ist aufgebaut aus einem geradem Prisma mit einer Polygon-Grundfläche, welches eingestülpte Steckmechanismen an der Unterseite besitzt (siehe Abb.~\thebildnrnext). \\
 
 \begin{Bild}{Stecker einer Grundplatte (Screenshot der Verfasser)}
 	\includegraphics[height=200px]{Bilder/Untereinheit_GP}
 \end{Bild}
 
 Für die Berechnung des 3D-Objekts, wird an jedem Knoten der Fläche ein Eckpin gebildet und von dem polygonalen Prisma abgezogen, sodass genannte Einkerbungen durch eine Differenzmenge entstehen.
-Jede Grundplatte, die an das äußere Gebiet angrenzt, wird zudem an der außen liegenden Seite um die halbe Wanddicke vergrößert, damit ein abgeschlossener Eindruck des gesamten 3D-Modells entsteht (siehe Abbildung \thebildnrnext).
+Jede Grundplatte, die an das äußere Gebiet angrenzt, wird zudem an der außen liegenden Seite um die halbe Wanddicke vergrößert, damit ein abgeschlossener Eindruck des gesamten 3D-Modells entsteht (siehe Abb.~\thebildnrnext). \\
 
 \begin{Bild}{Vergrößerung der äußeren Grundplatten (Abbildung der Verfasser)}
 	\includegraphics[width=120mm]{Bilder/GrundplatteVergroesserung-08}
@@ -98,7 +96,7 @@ Jede Grundplatte, die an das äußere Gebiet angrenzt, wird zudem an der außen 
 Die \icode{Params}-Klasse dient als Speicher für alle nötigen Konstanten, welche für die Umrechnung des Grundrisses in das 3D-Modell notwendig sind.
 Jedes dreidimensionale Objekt benötigt eine Instanz einer solchen Klasse, um den OpenSCAD Code zu generieren.
 In der Anwendung werden von einer Instanz der \icode{ScadProcessor}-Klasse die angegebenen Parameter an alle Elemente eines Grundrisses weitergegeben, damit verhindert wird, dass unterschiedliche Komponenten desselben Grundrisses verschiedene Konstanten zur Verfügung gestellt bekommen.
-Sie werden bei Beginn des Programms in der \icode{Main}-Klasse gesetzt und können über eine \icode{Params}-Objekt aufgerufen werden. \\
+Sie werden bei Beginn des Programms in der \icode{Main}-Klasse gesetzt (vgl. Codeausschnitt~5) und können über eine \icode{Params}-Objekt aufgerufen werden. \\
 
 \begin{code}[Konstruktor der \icode{Params}-Klasse, in welchem alle Parameter festgelegt werden.]
 	public Params(double epsilon, ...){
@@ -122,17 +120,17 @@ In folgenden Teilen des 3D-Modells tritt Epsilon auf:
 	\item Die Höhe einer Wand wird um {\Large$\epsilon$} verringert, damit die Oberseite des gesamten 3D-Objekts eine glatte Oberfläche besitzt.
 \end{compactenum}
 
-Das im Programm definierte Epsilon wurde mittels einem Experiment (siehe Abbildung \thebildnrnext) ermittelt.
+Das im Programm definierte Epsilon wurde mittels einem Experiment (siehe Abb.~\thebildnrnext) ermittelt.
 Dafür wurde ein Stecker und Einstülpungen gedruckt, die um ein verschiedenes {\Large$\epsilon$} vergrößert wurden, sodass getestet werden konnte, welches Epsilon für den MakerBot Replicator\texttrademark\ 2 am geeignetsten ist.
-Ausgewertet wurde daraus ein Wert von 0.25mm. \\
-Der {\Large$\epsilon$}-Parameter ist deswegen ein druckerspezifischer Parameter.
+Ausgewertet wurde daraus ein Wert von 0.25mm.
+Der {\Large$\epsilon$}-Parameter ist deswegen ein druckerspezifischer Parameter. \\
 
 \begin{Bild}{Versuch zur Ermittlung eines passenden Epsilon-Wertes (Abbildung der Verfasser)}
 		\includegraphics[width=120mm]{Bilder/EpsilonTest_cut-09}
 \end{Bild}
 
 \subsubsection{Weitere Konstanten}
-Die restlichen Parameter werden in der folgenden Tabelle gelistet. \\
+Die restlichen Parameter werden in der folgenden Tabelle gelistet. \\\\
 %\vspace{12mm}
 \begin{tabularx}{\textwidth}{|A|B|C|}
 	\hline
