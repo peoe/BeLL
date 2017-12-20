@@ -64,7 +64,7 @@ public class ScadProcessor {
 		Vector rotatedNode;
 
 		double xMin, yMin, usedWidth = 0.0, usedLength = 0.0;
-		double faceEnlarge = 4 * params.getEpsilon() + params.getWallWidth();
+		double faceEnlarge = 4 * params.getEpsilon() + params.getWallWidth()/2;
 
 		int fileIndex = -1;
 
@@ -85,12 +85,12 @@ public class ScadProcessor {
 					}
 				}
 
-				if (params.getMaxPrintWidth() - usedWidth - b.getWidth() + 2 * faceEnlarge < 0) {
+				if (params.getMaxPrintWidth() - usedWidth - b.getWidth() + faceEnlarge < 0) {
 					usedWidth = faceEnlarge;
-					usedLength += basePlates.get(basePlates.indexOf(b) - 1).getWidth();
+					usedLength += basePlates.get(basePlates.indexOf(b) - 1).getWidth() + 2 * faceEnlarge;
 				}
 
-				if ((usedLength + b.getLength()) > params.getMaxPrintHeight() || files.size() == 0) {
+				if ((usedLength + b.getLength() + faceEnlarge) > params.getMaxPrintHeight() || files.size() == 0) {
 					files.add(new Union());
 					fileIndex++;
 					usedLength = faceEnlarge;
