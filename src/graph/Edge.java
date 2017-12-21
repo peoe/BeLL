@@ -2,8 +2,6 @@ package graph;
 
 import java.util.Comparator;
 
-import render.Wall;
-
 public class Edge {
 
 	// twin, previous and next Edge of the Edge

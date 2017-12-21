@@ -2,7 +2,6 @@ package render;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import graph.*;
 import render.objects.Rotate;
